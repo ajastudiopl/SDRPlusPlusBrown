@@ -150,6 +150,14 @@ bundle_install_binary() {
         local DEP_NAME=$(basename $DEP)
         echo -n " - $DEP_NAME "
 
+        # System libraries and frameworks must keep their absolute install names.
+        case "$DEP" in
+            /System/Library/*|/usr/lib/*)
+                echo "skipping"
+                continue
+                ;;
+        esac
+
         # Skip if this dep is blacklisted
         local NOT_TO_BE_INSTALLED=$(bundle_is_not_to_be_installed $DEP_NAME)
         if [ "$NOT_TO_BE_INSTALLED" = "1" ]; then
@@ -203,7 +211,11 @@ bundle_create_icns() {
     sips -z 256 256   $1 --out $2.iconset/icon_256x256.png
     sips -z 512 512   $1 --out $2.iconset/icon_256x256@2x.png
     sips -z 512 512   $1 --out $2.iconset/icon_512x512.png
-    iconutil -c icns $2.iconset
+    sips -z 1024 1024 $1 --out $2.iconset/icon_512x512@2x.png
+    if ! iconutil -c icns $2.iconset; then
+        echo "Warning: iconutil could not create $2.icns; using the PNG app icon."
+        cp $1 $2.png
+    fi
     rm -R $2.iconset
 }
 

@@ -1,0 +1,31 @@
+{
+	"InstallScripts" : 
+	[
+		"/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/cmake_install.cmake",
+		"/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/core/cmake_install.cmake",
+		"/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/core/libcorrect/cmake_install.cmake",
+		"/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/core/libcorrect/src/cmake_install.cmake",
+		"/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/core/libcorrect/src/convolutional/cmake_install.cmake",
+		"/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/core/libcorrect/src/reed-solomon/cmake_install.cmake",
+		"/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/core/libcorrect/util/cmake_install.cmake",
+		"/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/core/libcorrect/tests/cmake_install.cmake",
+		"/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/core/libcorrect/tools/cmake_install.cmake",
+		"/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/source_modules/file_source/cmake_install.cmake",
+		"/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/source_modules/hermes_source/cmake_install.cmake",
+		"/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/source_modules/network_source/cmake_install.cmake",
+		"/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/source_modules/rfspace_source/cmake_install.cmake",
+		"/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/source_modules/rtl_tcp_source/cmake_install.cmake",
+		"/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/source_modules/sdrpp_server_source/cmake_install.cmake",
+		"/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/source_modules/spectran_http_source/cmake_install.cmake",
+		"/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/source_modules/spyserver_source/cmake_install.cmake",
+		"/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/source_modules/hl2_source/cmake_install.cmake",
+		"/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/source_modules/kiwisdr_source/cmake_install.cmake",
+		"/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/sink_modules/macos_coreaudio_sink/cmake_install.cmake",
+		"/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/sink_modules/network_sink/cmake_install.cmake",
+		"/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/sink_modules/null_audio_sink/cmake_install.cmake",
+		"/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/decoder_modules/radio/cmake_install.cmake",
+		"/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/misc_modules/websdr_view/cmake_install.cmake",
+		"/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/misc_modules/reports_monitor/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

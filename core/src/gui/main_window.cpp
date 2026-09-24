@@ -546,6 +546,7 @@ void MainWindow::draw() {
     auto ctm = currentTimeNanos();
     ImGui::WaterfallVFO* vfo;
     this->preDraw(&vfo);
+    handleDemodulatorShortcuts();
     ImGui::Begin("Main", NULL, WINDOW_FLAGS);
     ImVec4 textCol = ImGui::GetStyleColorVec4(ImGuiCol_Text);
     // To Bar
@@ -908,6 +909,46 @@ void MainWindow::draw() {
     }
 
     lastDrawTime = (currentTimeNanos() - ctm) / 1000;
+}
+
+void MainWindow::handleDemodulatorShortcuts() {
+    ImGuiIO& io = ImGui::GetIO();
+    if (io.WantTextInput || io.KeyCtrl || io.KeyAlt || io.KeySuper || gui::waterfall.selectedVFO.empty()) {
+        return;
+    }
+    if (!core::modComManager.interfaceExists(gui::waterfall.selectedVFO) || core::modComManager.getModuleName(gui::waterfall.selectedVFO) != "radio") {
+        return;
+    }
+
+    int mode = -1;
+    if (ImGui::IsKeyPressed(ImGuiKey_A, false) && !io.KeyShift) {
+        mode = RADIO_IFACE_MODE_AM;
+    }
+    else if (ImGui::IsKeyPressed(ImGuiKey_F, false) && io.KeyShift) {
+        mode = RADIO_IFACE_MODE_WFM;
+    }
+    else if (ImGui::IsKeyPressed(ImGuiKey_N, false) && !io.KeyShift) {
+        mode = RADIO_IFACE_MODE_NFM;
+    }
+    else if (ImGui::IsKeyPressed(ImGuiKey_D, false) && !io.KeyShift) {
+        mode = RADIO_IFACE_MODE_DSB;
+    }
+    else if (ImGui::IsKeyPressed(ImGuiKey_U, false) && io.KeyShift) {
+        mode = RADIO_IFACE_MODE_USB;
+    }
+    else if (ImGui::IsKeyPressed(ImGuiKey_L, false) && !io.KeyShift) {
+        mode = RADIO_IFACE_MODE_LSB;
+    }
+    else if (ImGui::IsKeyPressed(ImGuiKey_C, false) && !io.KeyShift) {
+        mode = RADIO_IFACE_MODE_CW;
+    }
+    else if (ImGui::IsKeyPressed(ImGuiKey_R, false) && !io.KeyShift) {
+        mode = RADIO_IFACE_MODE_RAW;
+    }
+
+    if (mode >= 0) {
+        core::modComManager.callInterface(gui::waterfall.selectedVFO, RADIO_IFACE_CMD_SET_MODE, &mode, NULL);
+    }
 }
 
 void MainWindow::setPlayState(bool _playing) {

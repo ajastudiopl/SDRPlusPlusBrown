@@ -1,0 +1,2821 @@
+
+---
+events:
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineSystem.cmake:12 (find_program)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_UNAME"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "uname"
+    candidate_directories:
+      - "/Users/macbook/.local/bin/"
+      - "/Users/macbook/.codeium/windsurf/bin/"
+      - "/usr/local/bin/"
+      - "/System/Cryptexes/App/usr/bin/"
+      - "/usr/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/"
+      - "/Library/Apple/usr/bin/"
+      - "/opt/homebrew/bin/"
+      - "/Users/macbook/.codex/tmp/arg0/codex-arg02D9yu5/"
+      - "/Users/macbook/.vscode/extensions/openai.chatgpt-26.908.40401-darwin-arm64/bin/macos-aarch64/"
+    searched_directories:
+      - "/Users/macbook/.local/bin/uname"
+      - "/Users/macbook/.codeium/windsurf/bin/uname"
+      - "/usr/local/bin/uname"
+      - "/System/Cryptexes/App/usr/bin/uname"
+    found: "/usr/bin/uname"
+    search_context:
+      ENV{PATH}:
+        - "/Users/macbook/.local/bin"
+        - "/Users/macbook/.codeium/windsurf/bin"
+        - "/usr/local/bin"
+        - "/System/Cryptexes/App/usr/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
+        - "/Library/Apple/usr/bin"
+        - "/opt/homebrew/bin"
+        - "/Users/macbook/.codex/tmp/arg0/codex-arg02D9yu5"
+        - "/Users/macbook/.local/bin"
+        - "/Users/macbook/.codeium/windsurf/bin"
+        - "/Users/macbook/.vscode/extensions/openai.chatgpt-26.908.40401-darwin-arm64/bin/macos-aarch64"
+      CMAKE_INSTALL_PREFIX: "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/root_dev/inst"
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineSystem.cmake:218 (message)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      The system is: Darwin - 24.6.0 - arm64
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCompiler.cmake:73 (find_program)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCCompiler.cmake:64 (_cmake_find_compiler)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_C_COMPILER"
+    description: "C compiler"
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "cc"
+      - "gcc"
+      - "cl"
+      - "bcc"
+      - "xlc"
+      - "icx"
+      - "clang"
+    candidate_directories:
+      - "/Users/macbook/.local/bin/"
+      - "/Users/macbook/.codeium/windsurf/bin/"
+      - "/usr/local/bin/"
+      - "/System/Cryptexes/App/usr/bin/"
+      - "/usr/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/"
+      - "/Library/Apple/usr/bin/"
+      - "/opt/homebrew/bin/"
+      - "/Users/macbook/.codex/tmp/arg0/codex-arg02D9yu5/"
+      - "/Users/macbook/.vscode/extensions/openai.chatgpt-26.908.40401-darwin-arm64/bin/macos-aarch64/"
+    searched_directories:
+      - "/Users/macbook/.local/bin/cc"
+      - "/Users/macbook/.codeium/windsurf/bin/cc"
+      - "/usr/local/bin/cc"
+      - "/System/Cryptexes/App/usr/bin/cc"
+    found: "/usr/bin/cc"
+    search_context:
+      ENV{PATH}:
+        - "/Users/macbook/.local/bin"
+        - "/Users/macbook/.codeium/windsurf/bin"
+        - "/usr/local/bin"
+        - "/System/Cryptexes/App/usr/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
+        - "/Library/Apple/usr/bin"
+        - "/opt/homebrew/bin"
+        - "/Users/macbook/.codex/tmp/arg0/codex-arg02D9yu5"
+        - "/Users/macbook/.local/bin"
+        - "/Users/macbook/.codeium/windsurf/bin"
+        - "/Users/macbook/.vscode/extensions/openai.chatgpt-26.908.40401-darwin-arm64/bin/macos-aarch64"
+      CMAKE_INSTALL_PREFIX: "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/root_dev/inst"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCompilerId.cmake:501 (find_file)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCompilerId.cmake:538 (CMAKE_DETERMINE_COMPILER_ID_WRITE)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCompilerId.cmake:8 (CMAKE_DETERMINE_COMPILER_ID_BUILD)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCCompiler.cmake:122 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "file"
+    variable: "src_in"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "CMakeCCompilerId.c.in"
+    candidate_directories:
+      - "/opt/homebrew/share/cmake/Modules/"
+    found: "/opt/homebrew/share/cmake/Modules/CMakeCCompilerId.c.in"
+    search_context:
+      ENV{PATH}:
+        - "/Users/macbook/.local/bin"
+        - "/Users/macbook/.codeium/windsurf/bin"
+        - "/usr/local/bin"
+        - "/System/Cryptexes/App/usr/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
+        - "/Library/Apple/usr/bin"
+        - "/opt/homebrew/bin"
+        - "/Users/macbook/.codex/tmp/arg0/codex-arg02D9yu5"
+        - "/Users/macbook/.local/bin"
+        - "/Users/macbook/.codeium/windsurf/bin"
+        - "/Users/macbook/.vscode/extensions/openai.chatgpt-26.908.40401-darwin-arm64/bin/macos-aarch64"
+      CMAKE_INSTALL_PREFIX: "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/root_dev/inst"
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCCompiler.cmake:122 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+      Compiler: /usr/bin/cc 
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      0
+      
+      
+      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out"
+      
+      The C compiler identification is AppleClang, found in:
+        /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles/4.4.3/CompilerIdC/a.out
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCompilerId.cmake:323 (message)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCCompiler.cmake:122 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Detecting C compiler apple sysroot: "/usr/bin/cc" "-E" "apple-sdk.c"
+        # 1 "apple-sdk.c"
+        # 1 "<built-in>" 1
+        # 1 "<built-in>" 3
+        # 466 "<built-in>" 3
+        # 1 "<command line>" 1
+        # 1 "<built-in>" 2
+        # 1 "apple-sdk.c" 2
+        # 1 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/AvailabilityMacros.h" 1 3 4
+        # 89 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/AvailabilityMacros.h" 3 4
+        # 1 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/AvailabilityVersions.h" 1 3 4
+        # 90 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/AvailabilityMacros.h" 2 3 4
+        # 1 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/TargetConditionals.h" 1 3 4
+        # 91 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/AvailabilityMacros.h" 2 3 4
+        # 207 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/AvailabilityMacros.h" 3 4
+        # 1 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/Availability.h" 1 3 4
+        # 196 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/Availability.h" 3 4
+        # 1 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/AvailabilityVersions.h" 1 3 4
+        # 197 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/Availability.h" 2 3 4
+        # 1 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/AvailabilityInternal.h" 1 3 4
+        # 33 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/AvailabilityInternal.h" 3 4
+        # 1 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/AvailabilityVersions.h" 1 3 4
+        # 34 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/AvailabilityInternal.h" 2 3 4
+        # 198 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/Availability.h" 2 3 4
+        # 1 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/AvailabilityInternalLegacy.h" 1 3 4
+        # 34 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/AvailabilityInternalLegacy.h" 3 4
+        # 1 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/AvailabilityInternal.h" 1 3 4
+        # 35 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/AvailabilityInternalLegacy.h" 2 3 4
+        # 199 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/Availability.h" 2 3 4
+        # 208 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/AvailabilityMacros.h" 2 3 4
+        # 2 "apple-sdk.c" 2
+        
+        
+      Found apple sysroot: /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/CMakeFindBinUtils.cmake:247 (find_program)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCCompiler.cmake:200 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_AR"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "ar"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/Users/macbook/.local/bin/"
+      - "/Users/macbook/.codeium/windsurf/bin/"
+      - "/usr/local/bin/"
+      - "/System/Cryptexes/App/usr/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/"
+      - "/Library/Apple/usr/bin/"
+      - "/opt/homebrew/bin/"
+      - "/Users/macbook/.codex/tmp/arg0/codex-arg02D9yu5/"
+      - "/Users/macbook/.vscode/extensions/openai.chatgpt-26.908.40401-darwin-arm64/bin/macos-aarch64/"
+    found: "/usr/bin/ar"
+    search_context:
+      ENV{PATH}:
+        - "/Users/macbook/.local/bin"
+        - "/Users/macbook/.codeium/windsurf/bin"
+        - "/usr/local/bin"
+        - "/System/Cryptexes/App/usr/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
+        - "/Library/Apple/usr/bin"
+        - "/opt/homebrew/bin"
+        - "/Users/macbook/.codex/tmp/arg0/codex-arg02D9yu5"
+        - "/Users/macbook/.local/bin"
+        - "/Users/macbook/.codeium/windsurf/bin"
+        - "/Users/macbook/.vscode/extensions/openai.chatgpt-26.908.40401-darwin-arm64/bin/macos-aarch64"
+      CMAKE_INSTALL_PREFIX: "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/root_dev/inst"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/CMakeFindBinUtils.cmake:247 (find_program)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCCompiler.cmake:200 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_RANLIB"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "ranlib"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/Users/macbook/.local/bin/"
+      - "/Users/macbook/.codeium/windsurf/bin/"
+      - "/usr/local/bin/"
+      - "/System/Cryptexes/App/usr/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/"
+      - "/Library/Apple/usr/bin/"
+      - "/opt/homebrew/bin/"
+      - "/Users/macbook/.codex/tmp/arg0/codex-arg02D9yu5/"
+      - "/Users/macbook/.vscode/extensions/openai.chatgpt-26.908.40401-darwin-arm64/bin/macos-aarch64/"
+    found: "/usr/bin/ranlib"
+    search_context:
+      ENV{PATH}:
+        - "/Users/macbook/.local/bin"
+        - "/Users/macbook/.codeium/windsurf/bin"
+        - "/usr/local/bin"
+        - "/System/Cryptexes/App/usr/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
+        - "/Library/Apple/usr/bin"
+        - "/opt/homebrew/bin"
+        - "/Users/macbook/.codex/tmp/arg0/codex-arg02D9yu5"
+        - "/Users/macbook/.local/bin"
+        - "/Users/macbook/.codeium/windsurf/bin"
+        - "/Users/macbook/.vscode/extensions/openai.chatgpt-26.908.40401-darwin-arm64/bin/macos-aarch64"
+      CMAKE_INSTALL_PREFIX: "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/root_dev/inst"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/CMakeFindBinUtils.cmake:247 (find_program)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCCompiler.cmake:200 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_STRIP"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "strip"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/Users/macbook/.local/bin/"
+      - "/Users/macbook/.codeium/windsurf/bin/"
+      - "/usr/local/bin/"
+      - "/System/Cryptexes/App/usr/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/"
+      - "/Library/Apple/usr/bin/"
+      - "/opt/homebrew/bin/"
+      - "/Users/macbook/.codex/tmp/arg0/codex-arg02D9yu5/"
+      - "/Users/macbook/.vscode/extensions/openai.chatgpt-26.908.40401-darwin-arm64/bin/macos-aarch64/"
+    found: "/usr/bin/strip"
+    search_context:
+      ENV{PATH}:
+        - "/Users/macbook/.local/bin"
+        - "/Users/macbook/.codeium/windsurf/bin"
+        - "/usr/local/bin"
+        - "/System/Cryptexes/App/usr/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
+        - "/Library/Apple/usr/bin"
+        - "/opt/homebrew/bin"
+        - "/Users/macbook/.codex/tmp/arg0/codex-arg02D9yu5"
+        - "/Users/macbook/.local/bin"
+        - "/Users/macbook/.codeium/windsurf/bin"
+        - "/Users/macbook/.vscode/extensions/openai.chatgpt-26.908.40401-darwin-arm64/bin/macos-aarch64"
+      CMAKE_INSTALL_PREFIX: "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/root_dev/inst"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/CMakeFindBinUtils.cmake:247 (find_program)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCCompiler.cmake:200 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_LINKER"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "ld"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/Users/macbook/.local/bin/"
+      - "/Users/macbook/.codeium/windsurf/bin/"
+      - "/usr/local/bin/"
+      - "/System/Cryptexes/App/usr/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/"
+      - "/Library/Apple/usr/bin/"
+      - "/opt/homebrew/bin/"
+      - "/Users/macbook/.codex/tmp/arg0/codex-arg02D9yu5/"
+      - "/Users/macbook/.vscode/extensions/openai.chatgpt-26.908.40401-darwin-arm64/bin/macos-aarch64/"
+    found: "/usr/bin/ld"
+    search_context:
+      ENV{PATH}:
+        - "/Users/macbook/.local/bin"
+        - "/Users/macbook/.codeium/windsurf/bin"
+        - "/usr/local/bin"
+        - "/System/Cryptexes/App/usr/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
+        - "/Library/Apple/usr/bin"
+        - "/opt/homebrew/bin"
+        - "/Users/macbook/.codex/tmp/arg0/codex-arg02D9yu5"
+        - "/Users/macbook/.local/bin"
+        - "/Users/macbook/.codeium/windsurf/bin"
+        - "/Users/macbook/.vscode/extensions/openai.chatgpt-26.908.40401-darwin-arm64/bin/macos-aarch64"
+      CMAKE_INSTALL_PREFIX: "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/root_dev/inst"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/CMakeFindBinUtils.cmake:247 (find_program)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCCompiler.cmake:200 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_NM"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "nm"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/Users/macbook/.local/bin/"
+      - "/Users/macbook/.codeium/windsurf/bin/"
+      - "/usr/local/bin/"
+      - "/System/Cryptexes/App/usr/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/"
+      - "/Library/Apple/usr/bin/"
+      - "/opt/homebrew/bin/"
+      - "/Users/macbook/.codex/tmp/arg0/codex-arg02D9yu5/"
+      - "/Users/macbook/.vscode/extensions/openai.chatgpt-26.908.40401-darwin-arm64/bin/macos-aarch64/"
+    found: "/usr/bin/nm"
+    search_context:
+      ENV{PATH}:
+        - "/Users/macbook/.local/bin"
+        - "/Users/macbook/.codeium/windsurf/bin"
+        - "/usr/local/bin"
+        - "/System/Cryptexes/App/usr/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
+        - "/Library/Apple/usr/bin"
+        - "/opt/homebrew/bin"
+        - "/Users/macbook/.codex/tmp/arg0/codex-arg02D9yu5"
+        - "/Users/macbook/.local/bin"
+        - "/Users/macbook/.codeium/windsurf/bin"
+        - "/Users/macbook/.vscode/extensions/openai.chatgpt-26.908.40401-darwin-arm64/bin/macos-aarch64"
+      CMAKE_INSTALL_PREFIX: "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/root_dev/inst"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/CMakeFindBinUtils.cmake:247 (find_program)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCCompiler.cmake:200 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_OBJDUMP"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "objdump"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/Users/macbook/.local/bin/"
+      - "/Users/macbook/.codeium/windsurf/bin/"
+      - "/usr/local/bin/"
+      - "/System/Cryptexes/App/usr/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/"
+      - "/Library/Apple/usr/bin/"
+      - "/opt/homebrew/bin/"
+      - "/Users/macbook/.codex/tmp/arg0/codex-arg02D9yu5/"
+      - "/Users/macbook/.vscode/extensions/openai.chatgpt-26.908.40401-darwin-arm64/bin/macos-aarch64/"
+    found: "/usr/bin/objdump"
+    search_context:
+      ENV{PATH}:
+        - "/Users/macbook/.local/bin"
+        - "/Users/macbook/.codeium/windsurf/bin"
+        - "/usr/local/bin"
+        - "/System/Cryptexes/App/usr/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
+        - "/Library/Apple/usr/bin"
+        - "/opt/homebrew/bin"
+        - "/Users/macbook/.codex/tmp/arg0/codex-arg02D9yu5"
+        - "/Users/macbook/.local/bin"
+        - "/Users/macbook/.codeium/windsurf/bin"
+        - "/Users/macbook/.vscode/extensions/openai.chatgpt-26.908.40401-darwin-arm64/bin/macos-aarch64"
+      CMAKE_INSTALL_PREFIX: "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/root_dev/inst"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/CMakeFindBinUtils.cmake:247 (find_program)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCCompiler.cmake:200 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_OBJCOPY"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "objcopy"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/Users/macbook/.local/bin/"
+      - "/Users/macbook/.codeium/windsurf/bin/"
+      - "/usr/local/bin/"
+      - "/System/Cryptexes/App/usr/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/"
+      - "/Library/Apple/usr/bin/"
+      - "/opt/homebrew/bin/"
+      - "/Users/macbook/.codex/tmp/arg0/codex-arg02D9yu5/"
+      - "/Users/macbook/.vscode/extensions/openai.chatgpt-26.908.40401-darwin-arm64/bin/macos-aarch64/"
+    searched_directories:
+      - "/usr/bin/objcopy"
+      - "/Users/macbook/.local/bin/objcopy"
+      - "/Users/macbook/.codeium/windsurf/bin/objcopy"
+      - "/usr/local/bin/objcopy"
+      - "/System/Cryptexes/App/usr/bin/objcopy"
+      - "/bin/objcopy"
+      - "/usr/sbin/objcopy"
+      - "/sbin/objcopy"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/objcopy"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/objcopy"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/objcopy"
+      - "/Library/Apple/usr/bin/objcopy"
+      - "/opt/homebrew/bin/objcopy"
+      - "/Users/macbook/.codex/tmp/arg0/codex-arg02D9yu5/objcopy"
+      - "/Users/macbook/.vscode/extensions/openai.chatgpt-26.908.40401-darwin-arm64/bin/macos-aarch64/objcopy"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "/Users/macbook/.local/bin"
+        - "/Users/macbook/.codeium/windsurf/bin"
+        - "/usr/local/bin"
+        - "/System/Cryptexes/App/usr/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
+        - "/Library/Apple/usr/bin"
+        - "/opt/homebrew/bin"
+        - "/Users/macbook/.codex/tmp/arg0/codex-arg02D9yu5"
+        - "/Users/macbook/.local/bin"
+        - "/Users/macbook/.codeium/windsurf/bin"
+        - "/Users/macbook/.vscode/extensions/openai.chatgpt-26.908.40401-darwin-arm64/bin/macos-aarch64"
+      CMAKE_INSTALL_PREFIX: "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/root_dev/inst"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/CMakeFindBinUtils.cmake:247 (find_program)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCCompiler.cmake:200 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_READELF"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "readelf"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/Users/macbook/.local/bin/"
+      - "/Users/macbook/.codeium/windsurf/bin/"
+      - "/usr/local/bin/"
+      - "/System/Cryptexes/App/usr/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/"
+      - "/Library/Apple/usr/bin/"
+      - "/opt/homebrew/bin/"
+      - "/Users/macbook/.codex/tmp/arg0/codex-arg02D9yu5/"
+      - "/Users/macbook/.vscode/extensions/openai.chatgpt-26.908.40401-darwin-arm64/bin/macos-aarch64/"
+    searched_directories:
+      - "/usr/bin/readelf"
+      - "/Users/macbook/.local/bin/readelf"
+      - "/Users/macbook/.codeium/windsurf/bin/readelf"
+      - "/usr/local/bin/readelf"
+      - "/System/Cryptexes/App/usr/bin/readelf"
+      - "/bin/readelf"
+      - "/usr/sbin/readelf"
+      - "/sbin/readelf"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/readelf"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/readelf"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/readelf"
+      - "/Library/Apple/usr/bin/readelf"
+      - "/opt/homebrew/bin/readelf"
+      - "/Users/macbook/.codex/tmp/arg0/codex-arg02D9yu5/readelf"
+      - "/Users/macbook/.vscode/extensions/openai.chatgpt-26.908.40401-darwin-arm64/bin/macos-aarch64/readelf"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "/Users/macbook/.local/bin"
+        - "/Users/macbook/.codeium/windsurf/bin"
+        - "/usr/local/bin"
+        - "/System/Cryptexes/App/usr/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
+        - "/Library/Apple/usr/bin"
+        - "/opt/homebrew/bin"
+        - "/Users/macbook/.codex/tmp/arg0/codex-arg02D9yu5"
+        - "/Users/macbook/.local/bin"
+        - "/Users/macbook/.codeium/windsurf/bin"
+        - "/Users/macbook/.vscode/extensions/openai.chatgpt-26.908.40401-darwin-arm64/bin/macos-aarch64"
+      CMAKE_INSTALL_PREFIX: "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/root_dev/inst"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/CMakeFindBinUtils.cmake:247 (find_program)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCCompiler.cmake:200 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_DLLTOOL"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "dlltool"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/Users/macbook/.local/bin/"
+      - "/Users/macbook/.codeium/windsurf/bin/"
+      - "/usr/local/bin/"
+      - "/System/Cryptexes/App/usr/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/"
+      - "/Library/Apple/usr/bin/"
+      - "/opt/homebrew/bin/"
+      - "/Users/macbook/.codex/tmp/arg0/codex-arg02D9yu5/"
+      - "/Users/macbook/.vscode/extensions/openai.chatgpt-26.908.40401-darwin-arm64/bin/macos-aarch64/"
+    searched_directories:
+      - "/usr/bin/dlltool"
+      - "/Users/macbook/.local/bin/dlltool"
+      - "/Users/macbook/.codeium/windsurf/bin/dlltool"
+      - "/usr/local/bin/dlltool"
+      - "/System/Cryptexes/App/usr/bin/dlltool"
+      - "/bin/dlltool"
+      - "/usr/sbin/dlltool"
+      - "/sbin/dlltool"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/dlltool"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/dlltool"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/dlltool"
+      - "/Library/Apple/usr/bin/dlltool"
+      - "/opt/homebrew/bin/dlltool"
+      - "/Users/macbook/.codex/tmp/arg0/codex-arg02D9yu5/dlltool"
+      - "/Users/macbook/.vscode/extensions/openai.chatgpt-26.908.40401-darwin-arm64/bin/macos-aarch64/dlltool"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "/Users/macbook/.local/bin"
+        - "/Users/macbook/.codeium/windsurf/bin"
+        - "/usr/local/bin"
+        - "/System/Cryptexes/App/usr/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
+        - "/Library/Apple/usr/bin"
+        - "/opt/homebrew/bin"
+        - "/Users/macbook/.codex/tmp/arg0/codex-arg02D9yu5"
+        - "/Users/macbook/.local/bin"
+        - "/Users/macbook/.codeium/windsurf/bin"
+        - "/Users/macbook/.vscode/extensions/openai.chatgpt-26.908.40401-darwin-arm64/bin/macos-aarch64"
+      CMAKE_INSTALL_PREFIX: "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/root_dev/inst"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/CMakeFindBinUtils.cmake:247 (find_program)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCCompiler.cmake:200 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_ADDR2LINE"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "addr2line"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/Users/macbook/.local/bin/"
+      - "/Users/macbook/.codeium/windsurf/bin/"
+      - "/usr/local/bin/"
+      - "/System/Cryptexes/App/usr/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/"
+      - "/Library/Apple/usr/bin/"
+      - "/opt/homebrew/bin/"
+      - "/Users/macbook/.codex/tmp/arg0/codex-arg02D9yu5/"
+      - "/Users/macbook/.vscode/extensions/openai.chatgpt-26.908.40401-darwin-arm64/bin/macos-aarch64/"
+    searched_directories:
+      - "/usr/bin/addr2line"
+      - "/Users/macbook/.local/bin/addr2line"
+      - "/Users/macbook/.codeium/windsurf/bin/addr2line"
+      - "/usr/local/bin/addr2line"
+      - "/System/Cryptexes/App/usr/bin/addr2line"
+      - "/bin/addr2line"
+      - "/usr/sbin/addr2line"
+      - "/sbin/addr2line"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/addr2line"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/addr2line"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/addr2line"
+      - "/Library/Apple/usr/bin/addr2line"
+      - "/opt/homebrew/bin/addr2line"
+      - "/Users/macbook/.codex/tmp/arg0/codex-arg02D9yu5/addr2line"
+      - "/Users/macbook/.vscode/extensions/openai.chatgpt-26.908.40401-darwin-arm64/bin/macos-aarch64/addr2line"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "/Users/macbook/.local/bin"
+        - "/Users/macbook/.codeium/windsurf/bin"
+        - "/usr/local/bin"
+        - "/System/Cryptexes/App/usr/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
+        - "/Library/Apple/usr/bin"
+        - "/opt/homebrew/bin"
+        - "/Users/macbook/.codex/tmp/arg0/codex-arg02D9yu5"
+        - "/Users/macbook/.local/bin"
+        - "/Users/macbook/.codeium/windsurf/bin"
+        - "/Users/macbook/.vscode/extensions/openai.chatgpt-26.908.40401-darwin-arm64/bin/macos-aarch64"
+      CMAKE_INSTALL_PREFIX: "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/root_dev/inst"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/CMakeFindBinUtils.cmake:247 (find_program)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCCompiler.cmake:200 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_TAPI"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "tapi"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/Users/macbook/.local/bin/"
+      - "/Users/macbook/.codeium/windsurf/bin/"
+      - "/usr/local/bin/"
+      - "/System/Cryptexes/App/usr/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/"
+      - "/Library/Apple/usr/bin/"
+      - "/opt/homebrew/bin/"
+      - "/Users/macbook/.codex/tmp/arg0/codex-arg02D9yu5/"
+      - "/Users/macbook/.vscode/extensions/openai.chatgpt-26.908.40401-darwin-arm64/bin/macos-aarch64/"
+    searched_directories:
+      - "/usr/bin/tapi"
+      - "/Users/macbook/.local/bin/tapi"
+      - "/Users/macbook/.codeium/windsurf/bin/tapi"
+      - "/usr/local/bin/tapi"
+      - "/System/Cryptexes/App/usr/bin/tapi"
+      - "/bin/tapi"
+      - "/usr/sbin/tapi"
+      - "/sbin/tapi"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/tapi"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/tapi"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/tapi"
+      - "/Library/Apple/usr/bin/tapi"
+      - "/opt/homebrew/bin/tapi"
+      - "/Users/macbook/.codex/tmp/arg0/codex-arg02D9yu5/tapi"
+      - "/Users/macbook/.vscode/extensions/openai.chatgpt-26.908.40401-darwin-arm64/bin/macos-aarch64/tapi"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "/Users/macbook/.local/bin"
+        - "/Users/macbook/.codeium/windsurf/bin"
+        - "/usr/local/bin"
+        - "/System/Cryptexes/App/usr/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
+        - "/Library/Apple/usr/bin"
+        - "/opt/homebrew/bin"
+        - "/Users/macbook/.codex/tmp/arg0/codex-arg02D9yu5"
+        - "/Users/macbook/.local/bin"
+        - "/Users/macbook/.codeium/windsurf/bin"
+        - "/Users/macbook/.vscode/extensions/openai.chatgpt-26.908.40401-darwin-arm64/bin/macos-aarch64"
+      CMAKE_INSTALL_PREFIX: "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/root_dev/inst"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCompiler.cmake:54 (find_program)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:69 (_cmake_find_compiler)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_CXX_COMPILER"
+    description: "CXX compiler"
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "c++"
+      - "g++"
+      - "cl"
+      - "bcc"
+      - "icpx"
+      - "icx"
+      - "clang++"
+    candidate_directories:
+      - "/usr/bin/"
+    found: "/usr/bin/c++"
+    search_context:
+      ENV{PATH}:
+        - "/Users/macbook/.local/bin"
+        - "/Users/macbook/.codeium/windsurf/bin"
+        - "/usr/local/bin"
+        - "/System/Cryptexes/App/usr/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
+        - "/Library/Apple/usr/bin"
+        - "/opt/homebrew/bin"
+        - "/Users/macbook/.codex/tmp/arg0/codex-arg02D9yu5"
+        - "/Users/macbook/.local/bin"
+        - "/Users/macbook/.codeium/windsurf/bin"
+        - "/Users/macbook/.vscode/extensions/openai.chatgpt-26.908.40401-darwin-arm64/bin/macos-aarch64"
+      CMAKE_INSTALL_PREFIX: "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/root_dev/inst"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCompilerId.cmake:501 (find_file)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCompilerId.cmake:538 (CMAKE_DETERMINE_COMPILER_ID_WRITE)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCompilerId.cmake:8 (CMAKE_DETERMINE_COMPILER_ID_BUILD)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:125 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "file"
+    variable: "src_in"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "CMakeCXXCompilerId.cpp.in"
+    candidate_directories:
+      - "/opt/homebrew/share/cmake/Modules/"
+    found: "/opt/homebrew/share/cmake/Modules/CMakeCXXCompilerId.cpp.in"
+    search_context:
+      ENV{PATH}:
+        - "/Users/macbook/.local/bin"
+        - "/Users/macbook/.codeium/windsurf/bin"
+        - "/usr/local/bin"
+        - "/System/Cryptexes/App/usr/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
+        - "/Library/Apple/usr/bin"
+        - "/opt/homebrew/bin"
+        - "/Users/macbook/.codex/tmp/arg0/codex-arg02D9yu5"
+        - "/Users/macbook/.local/bin"
+        - "/Users/macbook/.codeium/windsurf/bin"
+        - "/Users/macbook/.vscode/extensions/openai.chatgpt-26.908.40401-darwin-arm64/bin/macos-aarch64"
+      CMAKE_INSTALL_PREFIX: "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/root_dev/inst"
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:125 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+      Compiler: /usr/bin/c++ 
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      0
+      
+      
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.out"
+      
+      The CXX compiler identification is AppleClang, found in:
+        /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles/4.4.3/CompilerIdCXX/a.out
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCompilerId.cmake:323 (message)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:125 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Detecting CXX compiler apple sysroot: "/usr/bin/c++" "-E" "apple-sdk.cpp"
+        # 1 "apple-sdk.cpp"
+        # 1 "<built-in>" 1
+        # 1 "<built-in>" 3
+        # 514 "<built-in>" 3
+        # 1 "<command line>" 1
+        # 1 "<built-in>" 2
+        # 1 "apple-sdk.cpp" 2
+        # 1 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/AvailabilityMacros.h" 1 3 4
+        # 89 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/AvailabilityMacros.h" 3 4
+        # 1 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/AvailabilityVersions.h" 1 3 4
+        # 90 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/AvailabilityMacros.h" 2 3 4
+        # 1 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/TargetConditionals.h" 1 3 4
+        # 91 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/AvailabilityMacros.h" 2 3 4
+        # 207 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/AvailabilityMacros.h" 3 4
+        # 1 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/Availability.h" 1 3 4
+        # 196 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/Availability.h" 3 4
+        # 1 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/AvailabilityVersions.h" 1 3 4
+        # 197 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/Availability.h" 2 3 4
+        # 1 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/AvailabilityInternal.h" 1 3 4
+        # 33 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/AvailabilityInternal.h" 3 4
+        # 1 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/AvailabilityVersions.h" 1 3 4
+        # 34 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/AvailabilityInternal.h" 2 3 4
+        # 198 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/Availability.h" 2 3 4
+        # 1 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/AvailabilityInternalLegacy.h" 1 3 4
+        # 34 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/AvailabilityInternalLegacy.h" 3 4
+        # 1 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/AvailabilityInternal.h" 1 3 4
+        # 35 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/AvailabilityInternalLegacy.h" 2 3 4
+        # 199 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/Availability.h" 2 3 4
+        # 208 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/AvailabilityMacros.h" 2 3 4
+        # 2 "apple-sdk.cpp" 2
+        
+        
+      Found apple sysroot: /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/Platform/Darwin.cmake:66 (find_program)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeSystemSpecificInformation.cmake:32 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_INSTALL_NAME_TOOL"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "install_name_tool"
+    candidate_directories:
+      - "/Users/macbook/.local/bin/"
+      - "/Users/macbook/.codeium/windsurf/bin/"
+      - "/usr/local/bin/"
+      - "/System/Cryptexes/App/usr/bin/"
+      - "/usr/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/"
+      - "/Library/Apple/usr/bin/"
+      - "/opt/homebrew/bin/"
+      - "/Users/macbook/.codex/tmp/arg0/codex-arg02D9yu5/"
+      - "/Users/macbook/.vscode/extensions/openai.chatgpt-26.908.40401-darwin-arm64/bin/macos-aarch64/"
+    searched_directories:
+      - "/Users/macbook/.local/bin/install_name_tool"
+      - "/Users/macbook/.codeium/windsurf/bin/install_name_tool"
+      - "/usr/local/bin/install_name_tool"
+      - "/System/Cryptexes/App/usr/bin/install_name_tool"
+    found: "/usr/bin/install_name_tool"
+    search_context:
+      ENV{PATH}:
+        - "/Users/macbook/.local/bin"
+        - "/Users/macbook/.codeium/windsurf/bin"
+        - "/usr/local/bin"
+        - "/System/Cryptexes/App/usr/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
+        - "/Library/Apple/usr/bin"
+        - "/opt/homebrew/bin"
+        - "/Users/macbook/.codex/tmp/arg0/codex-arg02D9yu5"
+        - "/Users/macbook/.local/bin"
+        - "/Users/macbook/.codeium/windsurf/bin"
+        - "/Users/macbook/.vscode/extensions/openai.chatgpt-26.908.40401-darwin-arm64/bin/macos-aarch64"
+      CMAKE_INSTALL_PREFIX: "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/root_dev/inst"
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:123 (try_compile)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    checks:
+      - "Detecting C compiler ABI info"
+    directories:
+      source: "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles/CMakeScratch/TryCompile-mCMlaN"
+      binary: "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles/CMakeScratch/TryCompile-mCMlaN"
+    cmakeVariables:
+      CMAKE_CXX_STDLIB_MODULES_JSON: ""
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_OSX_ARCHITECTURES: "arm64"
+      CMAKE_OSX_DEPLOYMENT_TARGET: ""
+      CMAKE_OSX_SYSROOT: ""
+    buildResult:
+      variable: "CMAKE_C_ABI_COMPILED"
+      cached: false
+      stdout: |
+        Change Dir: '/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles/CMakeScratch/TryCompile-mCMlaN'
+        
+        Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /Library/Developer/CommandLineTools/usr/bin/make -f Makefile cmTC_ef761/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_ef761.dir/build.make CMakeFiles/cmTC_ef761.dir/build
+        Building C object CMakeFiles/cmTC_ef761.dir/CMakeCCompilerABI.c.o
+        /usr/bin/cc   -arch arm64   -v -Wl,-v -MD -MT CMakeFiles/cmTC_ef761.dir/CMakeCCompilerABI.c.o -MF CMakeFiles/cmTC_ef761.dir/CMakeCCompilerABI.c.o.d -o CMakeFiles/cmTC_ef761.dir/CMakeCCompilerABI.c.o -c /opt/homebrew/share/cmake/Modules/CMakeCCompilerABI.c
+        Apple clang version 17.0.0 (clang-1700.6.4.2)
+        Target: arm64-apple-darwin24.6.0
+        Thread model: posix
+        InstalledDir: /Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
+        clang: warning: -Wl,-v: 'linker' input unused [-Wunused-command-line-argument]
+         "/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang" -cc1 -triple arm64-apple-macosx15.0.0 -Wundef-prefix=TARGET_OS_ -Wdeprecated-objc-isa-usage -Werror=deprecated-objc-isa-usage -Werror=implicit-function-declaration -emit-obj -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCCompilerABI.c -mrelocation-model pic -pic-level 2 -mframe-pointer=non-leaf -fno-strict-return -ffp-contract=on -fno-rounding-math -funwind-tables=1 -fobjc-msgsend-selector-stubs -target-sdk-version=26.2 -fvisibility-inlines-hidden-static-local-var -fdefine-target-os-macros -fno-assume-unique-vtables -fno-modulemap-allow-subdirectory-search -target-cpu apple-m1 -target-feature +zcm -target-feature +zcz -target-feature +v8.5a -target-feature +aes -target-feature +altnzcv -target-feature +ccdp -target-feature +complxnum -target-feature +crc -target-feature +dotprod -target-feature +fp-armv8 -target-feature +fp16fml -target-feature +fptoint -target-feature +fullfp16 -target-feature +jsconv -target-feature +lse -target-feature +neon -target-feature +pauth -target-feature +perfmon -target-feature +predres -target-feature +ras -target-feature +rcpc -target-feature +rdm -target-feature +sb -target-feature +sha2 -target-feature +sha3 -target-feature +specrestrict -target-feature +ssbs -target-abi darwinpcs -debugger-tuning=lldb -fdebug-compilation-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles/CMakeScratch/TryCompile-mCMlaN -target-linker-version 1230.1 -v -fcoverage-compilation-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles/CMakeScratch/TryCompile-mCMlaN -resource-dir "/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17" -dependency-file CMakeFiles/cmTC_ef761.dir/CMakeCCompilerABI.c.o.d -skip-unused-modulemap-deps -MT CMakeFiles/cmTC_ef761.dir/CMakeCCompilerABI.c.o -sys-header-deps -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk -I/usr/local/include -internal-isystem /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/local/include -internal-isystem "/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include" -internal-externc-isystem /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include -internal-externc-isystem "/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include" -internal-iframework /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks -internal-iframework /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/SubFrameworks -internal-iframework /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/Library/Frameworks -Wno-reorder-init-list -Wno-implicit-int-float-conversion -Wno-c99-designator -Wno-final-dtor-non-final-class -Wno-extra-semi-stmt -Wno-misleading-indentation -Wno-quoted-include-in-framework-header -Wno-implicit-fallthrough -Wno-enum-enum-conversion -Wno-enum-float-conversion -Wno-elaborated-enum-base -ferror-limit 19 -stack-protector 1 -fstack-check -mdarwin-stkchk-strong-link -fblocks -fencode-extended-block-signature -fregister-global-dtors-with-atexit -fgnuc-version=4.2.1 -fskip-odr-check-in-gmf -fmax-type-align=16 -fcommon -clang-vendor-feature=+disableNonDependentMemberExprInCurrentInstantiation -fno-odr-hash-protocols -clang-vendor-feature=+enableAggressiveVLAFolding -clang-vendor-feature=+revert09abecef7bbf -clang-vendor-feature=+thisNoAlignAttr -clang-vendor-feature=+thisNoNullAttr -clang-vendor-feature=+disableAtImportPrivateFrameworkInImplementationError -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o CMakeFiles/cmTC_ef761.dir/CMakeCCompilerABI.c.o -x c /opt/homebrew/share/cmake/Modules/CMakeCCompilerABI.c
+        clang -cc1 version 17.0.0 (clang-1700.6.4.2) default target arm64-apple-darwin24.6.0
+        ignoring nonexistent directory "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/local/include"
+        ignoring nonexistent directory "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/Library/Frameworks"
+        #include "..." search starts here:
+        #include <...> search starts here:
+         /usr/local/include
+         /Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include
+         /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include
+         /Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include
+         /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks (framework directory)
+         /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/SubFrameworks (framework directory)
+        End of search list.
+        Linking C executable cmTC_ef761
+        /opt/homebrew/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ef761.dir/link.txt --verbose=1
+        Apple clang version 17.0.0 (clang-1700.6.4.2)
+        Target: arm64-apple-darwin24.6.0
+        Thread model: posix
+        InstalledDir: /Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
+         "/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld" -demangle -lto_library "/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libLTO.dylib" -dynamic -arch arm64 -platform_version macos 15.0.0 26.2 -syslibroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk -mllvm -enable-linkonceodr-outlining -o cmTC_ef761 -L/usr/local/lib -v CMakeFiles/cmTC_ef761.dir/CMakeCCompilerABI.c.o -lSystem "/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/lib/darwin/libclang_rt.osx.a"
+        @(#)PROGRAM:ld PROJECT:ld-1230.1
+        BUILD 10:14:01 Jan  9 2026
+        configured to support archs: armv6 armv7 armv7s arm64 arm64e arm64_32 i386 x86_64 x86_64h armv6m armv7k armv7m armv7em armv8m.main armv8.1m.main
+        will use ld-classic for: armv6 armv7 armv7s i386 armv6m armv7k armv7m armv7em
+        LTO support using: LLVM version 17.0.0 (static support for 29, runtime is 29)
+        TAPI support using: Apple TAPI version 17.0.0 (tapi-1700.3.8)
+        Library search paths:
+        	/usr/local/lib
+        	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib
+        	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib/swift
+        Framework search paths:
+        	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks
+        /usr/bin/cc  -arch arm64  -v -Wl,-v CMakeFiles/cmTC_ef761.dir/CMakeCCompilerABI.c.o -o cmTC_ef761
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:160 (message)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Effective list of requested architectures (possibly empty)  : "arm64"
+      Effective list of architectures found in the ABI info binary: "arm64"
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:255 (message)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Parsed C implicit include dir info: rv=done
+        found start of include info
+        found start of implicit include info
+          add: [/usr/local/include]
+          add: [/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include]
+          add: [/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include]
+          add: [/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include]
+        end of search list found
+        collapse include dir [/usr/local/include] ==> [/usr/local/include]
+        collapse include dir [/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include] ==> [/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include]
+        collapse include dir [/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include] ==> [/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include]
+        collapse include dir [/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include] ==> [/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include]
+        implicit include dirs: [/usr/local/include;/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include;/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include;/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include]
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:291 (message)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Parsed C implicit link information:
+        link line regex: [^( *|.*[/\\])(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        linker tool regex: [^[ 	]*(->|"|[0-9]+>[ 	-]*Build:[ 	0-9]+ ms[ 	]*)?[ 	]*(([^"]*[/\\])?(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)))("|,| |$)]
+        ignore line: [Change Dir: '/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles/CMakeScratch/TryCompile-mCMlaN']
+        ignore line: []
+        ignore line: [Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /Library/Developer/CommandLineTools/usr/bin/make -f Makefile cmTC_ef761/fast]
+        ignore line: [/Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_ef761.dir/build.make CMakeFiles/cmTC_ef761.dir/build]
+        ignore line: [Building C object CMakeFiles/cmTC_ef761.dir/CMakeCCompilerABI.c.o]
+        ignore line: [/usr/bin/cc   -arch arm64   -v -Wl -v -MD -MT CMakeFiles/cmTC_ef761.dir/CMakeCCompilerABI.c.o -MF CMakeFiles/cmTC_ef761.dir/CMakeCCompilerABI.c.o.d -o CMakeFiles/cmTC_ef761.dir/CMakeCCompilerABI.c.o -c /opt/homebrew/share/cmake/Modules/CMakeCCompilerABI.c]
+        ignore line: [Apple clang version 17.0.0 (clang-1700.6.4.2)]
+        ignore line: [Target: arm64-apple-darwin24.6.0]
+        ignore line: [Thread model: posix]
+        ignore line: [InstalledDir: /Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin]
+        ignore line: [clang: warning: -Wl -v: 'linker' input unused [-Wunused-command-line-argument]]
+        ignore line: [ "/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang" -cc1 -triple arm64-apple-macosx15.0.0 -Wundef-prefix=TARGET_OS_ -Wdeprecated-objc-isa-usage -Werror=deprecated-objc-isa-usage -Werror=implicit-function-declaration -emit-obj -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCCompilerABI.c -mrelocation-model pic -pic-level 2 -mframe-pointer=non-leaf -fno-strict-return -ffp-contract=on -fno-rounding-math -funwind-tables=1 -fobjc-msgsend-selector-stubs -target-sdk-version=26.2 -fvisibility-inlines-hidden-static-local-var -fdefine-target-os-macros -fno-assume-unique-vtables -fno-modulemap-allow-subdirectory-search -target-cpu apple-m1 -target-feature +zcm -target-feature +zcz -target-feature +v8.5a -target-feature +aes -target-feature +altnzcv -target-feature +ccdp -target-feature +complxnum -target-feature +crc -target-feature +dotprod -target-feature +fp-armv8 -target-feature +fp16fml -target-feature +fptoint -target-feature +fullfp16 -target-feature +jsconv -target-feature +lse -target-feature +neon -target-feature +pauth -target-feature +perfmon -target-feature +predres -target-feature +ras -target-feature +rcpc -target-feature +rdm -target-feature +sb -target-feature +sha2 -target-feature +sha3 -target-feature +specrestrict -target-feature +ssbs -target-abi darwinpcs -debugger-tuning=lldb -fdebug-compilation-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles/CMakeScratch/TryCompile-mCMlaN -target-linker-version 1230.1 -v -fcoverage-compilation-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles/CMakeScratch/TryCompile-mCMlaN -resource-dir "/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17" -dependency-file CMakeFiles/cmTC_ef761.dir/CMakeCCompilerABI.c.o.d -skip-unused-modulemap-deps -MT CMakeFiles/cmTC_ef761.dir/CMakeCCompilerABI.c.o -sys-header-deps -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk -I/usr/local/include -internal-isystem /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/local/include -internal-isystem "/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include" -internal-externc-isystem /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include -internal-externc-isystem "/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include" -internal-iframework /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks -internal-iframework /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/SubFrameworks -internal-iframework /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/Library/Frameworks -Wno-reorder-init-list -Wno-implicit-int-float-conversion -Wno-c99-designator -Wno-final-dtor-non-final-class -Wno-extra-semi-stmt -Wno-misleading-indentation -Wno-quoted-include-in-framework-header -Wno-implicit-fallthrough -Wno-enum-enum-conversion -Wno-enum-float-conversion -Wno-elaborated-enum-base -ferror-limit 19 -stack-protector 1 -fstack-check -mdarwin-stkchk-strong-link -fblocks -fencode-extended-block-signature -fregister-global-dtors-with-atexit -fgnuc-version=4.2.1 -fskip-odr-check-in-gmf -fmax-type-align=16 -fcommon -clang-vendor-feature=+disableNonDependentMemberExprInCurrentInstantiation -fno-odr-hash-protocols -clang-vendor-feature=+enableAggressiveVLAFolding -clang-vendor-feature=+revert09abecef7bbf -clang-vendor-feature=+thisNoAlignAttr -clang-vendor-feature=+thisNoNullAttr -clang-vendor-feature=+disableAtImportPrivateFrameworkInImplementationError -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o CMakeFiles/cmTC_ef761.dir/CMakeCCompilerABI.c.o -x c /opt/homebrew/share/cmake/Modules/CMakeCCompilerABI.c]
+        ignore line: [clang -cc1 version 17.0.0 (clang-1700.6.4.2) default target arm64-apple-darwin24.6.0]
+        ignore line: [ignoring nonexistent directory "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/local/include"]
+        ignore line: [ignoring nonexistent directory "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/Library/Frameworks"]
+        ignore line: [#include "..." search starts here:]
+        ignore line: [#include <...> search starts here:]
+        ignore line: [ /usr/local/include]
+        ignore line: [ /Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include]
+        ignore line: [ /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include]
+        ignore line: [ /Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include]
+        ignore line: [ /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks (framework directory)]
+        ignore line: [ /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/SubFrameworks (framework directory)]
+        ignore line: [End of search list.]
+        ignore line: [Linking C executable cmTC_ef761]
+        ignore line: [/opt/homebrew/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ef761.dir/link.txt --verbose=1]
+        ignore line: [Apple clang version 17.0.0 (clang-1700.6.4.2)]
+        ignore line: [Target: arm64-apple-darwin24.6.0]
+        ignore line: [Thread model: posix]
+        ignore line: [InstalledDir: /Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin]
+        link line: [ "/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld" -demangle -lto_library "/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libLTO.dylib" -dynamic -arch arm64 -platform_version macos 15.0.0 26.2 -syslibroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk -mllvm -enable-linkonceodr-outlining -o cmTC_ef761 -L/usr/local/lib -v CMakeFiles/cmTC_ef761.dir/CMakeCCompilerABI.c.o -lSystem "/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/lib/darwin/libclang_rt.osx.a"] ==> linker [/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld]
+        link line: [ "/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld" -demangle -lto_library "/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libLTO.dylib" -dynamic -arch arm64 -platform_version macos 15.0.0 26.2 -syslibroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk -mllvm -enable-linkonceodr-outlining -o cmTC_ef761 -L/usr/local/lib -v CMakeFiles/cmTC_ef761.dir/CMakeCCompilerABI.c.o -lSystem "/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/lib/darwin/libclang_rt.osx.a"]
+          arg [/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld] ==> ignore
+          arg [-demangle] ==> ignore
+          arg [-lto_library] ==> ignore, skip following value
+          arg [/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libLTO.dylib] ==> skip value of -lto_library
+          arg [-dynamic] ==> ignore
+          arg [-arch] ==> ignore
+          arg [arm64] ==> ignore
+          arg [-platform_version] ==> ignore
+          arg [macos] ==> ignore
+          arg [15.0.0] ==> ignore
+          arg [26.2] ==> ignore
+          arg [-syslibroot] ==> ignore
+          arg [/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk] ==> ignore
+          arg [-mllvm] ==> ignore
+          arg [-enable-linkonceodr-outlining] ==> ignore
+          arg [-o] ==> ignore
+          arg [cmTC_ef761] ==> ignore
+          arg [-L/usr/local/lib] ==> dir [/usr/local/lib]
+          arg [-v] ==> ignore
+          arg [CMakeFiles/cmTC_ef761.dir/CMakeCCompilerABI.c.o] ==> ignore
+          arg [-lSystem] ==> lib [System]
+          arg [/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/lib/darwin/libclang_rt.osx.a] ==> lib [/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/lib/darwin/libclang_rt.osx.a]
+        linker tool for 'C': /Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld 
+        Library search paths: [;/usr/local/lib;/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib;/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib/swift]
+        Framework search paths: [;/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks]
+        remove lib [System]
+        remove lib [/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/lib/darwin/libclang_rt.osx.a]
+        collapse library dir [/usr/local/lib] ==> [/usr/local/lib]
+        collapse library dir [/usr/local/lib] ==> [/usr/local/lib]
+        collapse library dir [/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib] ==> [/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib]
+        collapse library dir [/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib/swift] ==> [/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib/swift]
+        collapse framework dir [/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks] ==> [/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks]
+        implicit libs: []
+        implicit objs: []
+        implicit dirs: [/usr/local/lib;/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib;/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib/swift]
+        implicit fwks: [/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks]
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/Internal/CMakeDetermineLinkerId.cmake:41 (message)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:337 (cmake_determine_linker_id)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Running the C compiler's linker: "/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld" "-v"
+      @(#)PROGRAM:ld PROJECT:ld-1230.1
+      BUILD 10:14:01 Jan  9 2026
+      configured to support archs: armv6 armv7 armv7s arm64 arm64e arm64_32 i386 x86_64 x86_64h armv6m armv7k armv7m armv7em armv8m.main armv8.1m.main
+      will use ld-classic for: armv6 armv7 armv7s i386 armv6m armv7k armv7m armv7em
+      LTO support using: LLVM version 17.0.0 (static support for 29, runtime is 29)
+      TAPI support using: Apple TAPI version 17.0.0 (tapi-1700.3.8)
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:123 (try_compile)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    checks:
+      - "Detecting CXX compiler ABI info"
+    directories:
+      source: "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles/CMakeScratch/TryCompile-gMHUdV"
+      binary: "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles/CMakeScratch/TryCompile-gMHUdV"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_CXX_SCAN_FOR_MODULES: "OFF"
+      CMAKE_CXX_STDLIB_MODULES_JSON: ""
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_OSX_ARCHITECTURES: "arm64"
+      CMAKE_OSX_DEPLOYMENT_TARGET: ""
+      CMAKE_OSX_SYSROOT: ""
+    buildResult:
+      variable: "CMAKE_CXX_ABI_COMPILED"
+      cached: false
+      stdout: |
+        Change Dir: '/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles/CMakeScratch/TryCompile-gMHUdV'
+        
+        Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /Library/Developer/CommandLineTools/usr/bin/make -f Makefile cmTC_8529c/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_8529c.dir/build.make CMakeFiles/cmTC_8529c.dir/build
+        Building CXX object CMakeFiles/cmTC_8529c.dir/CMakeCXXCompilerABI.cpp.o
+        /usr/bin/c++   -arch arm64   -v -Wl,-v -MD -MT CMakeFiles/cmTC_8529c.dir/CMakeCXXCompilerABI.cpp.o -MF CMakeFiles/cmTC_8529c.dir/CMakeCXXCompilerABI.cpp.o.d -o CMakeFiles/cmTC_8529c.dir/CMakeCXXCompilerABI.cpp.o -c /opt/homebrew/share/cmake/Modules/CMakeCXXCompilerABI.cpp
+        Apple clang version 17.0.0 (clang-1700.6.4.2)
+        Target: arm64-apple-darwin24.6.0
+        Thread model: posix
+        InstalledDir: /Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
+        clang++: warning: -Wl,-v: 'linker' input unused [-Wunused-command-line-argument]
+        ignoring nonexistent directory "/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"
+         "/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang" -cc1 -triple arm64-apple-macosx15.0.0 -Wundef-prefix=TARGET_OS_ -Wdeprecated-objc-isa-usage -Werror=deprecated-objc-isa-usage -Werror=implicit-function-declaration -emit-obj -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCXXCompilerABI.cpp -mrelocation-model pic -pic-level 2 -mframe-pointer=non-leaf -fno-strict-return -ffp-contract=on -fno-rounding-math -funwind-tables=1 -fobjc-msgsend-selector-stubs -target-sdk-version=26.2 -fvisibility-inlines-hidden-static-local-var -fdefine-target-os-macros -fno-assume-unique-vtables -fno-modulemap-allow-subdirectory-search -target-cpu apple-m1 -target-feature +zcm -target-feature +zcz -target-feature +v8.5a -target-feature +aes -target-feature +altnzcv -target-feature +ccdp -target-feature +complxnum -target-feature +crc -target-feature +dotprod -target-feature +fp-armv8 -target-feature +fp16fml -target-feature +fptoint -target-feature +fullfp16 -target-feature +jsconv -target-feature +lse -target-feature +neon -target-feature +pauth -target-feature +perfmon -target-feature +predres -target-feature +ras -target-feature +rcpc -target-feature +rdm -target-feature +sb -target-feature +sha2 -target-feature +sha3 -target-feature +specrestrict -target-feature +ssbs -target-abi darwinpcs -debugger-tuning=lldb -fdebug-compilation-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles/CMakeScratch/TryCompile-gMHUdV -target-linker-version 1230.1 -v -fcoverage-compilation-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles/CMakeScratch/TryCompile-gMHUdV -resource-dir "/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17" -dependency-file CMakeFiles/cmTC_8529c.dir/CMakeCXXCompilerABI.cpp.o.d -skip-unused-modulemap-deps -MT CMakeFiles/cmTC_8529c.dir/CMakeCXXCompilerABI.cpp.o -sys-header-deps -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk -I/usr/local/include -internal-isystem /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1 -internal-isystem /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/local/include -internal-isystem "/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include" -internal-externc-isystem /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include -internal-externc-isystem "/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include" -internal-iframework /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks -internal-iframework /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/SubFrameworks -internal-iframework /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/Library/Frameworks -Wno-reorder-init-list -Wno-implicit-int-float-conversion -Wno-c99-designator -Wno-final-dtor-non-final-class -Wno-extra-semi-stmt -Wno-misleading-indentation -Wno-quoted-include-in-framework-header -Wno-implicit-fallthrough -Wno-enum-enum-conversion -Wno-enum-float-conversion -Wno-elaborated-enum-base -fdeprecated-macro -ferror-limit 19 -stack-protector 1 -fstack-check -mdarwin-stkchk-strong-link -fblocks -fencode-extended-block-signature -fregister-global-dtors-with-atexit -fgnuc-version=4.2.1 -fno-cxx-modules -fskip-odr-check-in-gmf -fcxx-exceptions -fexceptions -fmax-type-align=16 -fcommon -clang-vendor-feature=+disableNonDependentMemberExprInCurrentInstantiation -fno-odr-hash-protocols -clang-vendor-feature=+enableAggressiveVLAFolding -clang-vendor-feature=+revert09abecef7bbf -clang-vendor-feature=+thisNoAlignAttr -clang-vendor-feature=+thisNoNullAttr -clang-vendor-feature=+disableAtImportPrivateFrameworkInImplementationError -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o CMakeFiles/cmTC_8529c.dir/CMakeCXXCompilerABI.cpp.o -x c++ /opt/homebrew/share/cmake/Modules/CMakeCXXCompilerABI.cpp
+        clang -cc1 version 17.0.0 (clang-1700.6.4.2) default target arm64-apple-darwin24.6.0
+        ignoring nonexistent directory "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/local/include"
+        ignoring nonexistent directory "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/Library/Frameworks"
+        #include "..." search starts here:
+        #include <...> search starts here:
+         /usr/local/include
+         /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1
+         /Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include
+         /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include
+         /Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include
+         /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks (framework directory)
+         /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/SubFrameworks (framework directory)
+        End of search list.
+        Linking CXX executable cmTC_8529c
+        /opt/homebrew/bin/cmake -E cmake_link_script CMakeFiles/cmTC_8529c.dir/link.txt --verbose=1
+        Apple clang version 17.0.0 (clang-1700.6.4.2)
+        Target: arm64-apple-darwin24.6.0
+        Thread model: posix
+        InstalledDir: /Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
+         "/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld" -demangle -lto_library "/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libLTO.dylib" -dynamic -arch arm64 -platform_version macos 15.0.0 26.2 -syslibroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk -mllvm -enable-linkonceodr-outlining -o cmTC_8529c -L/usr/local/lib -v CMakeFiles/cmTC_8529c.dir/CMakeCXXCompilerABI.cpp.o -lc++ -lSystem "/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/lib/darwin/libclang_rt.osx.a"
+        @(#)PROGRAM:ld PROJECT:ld-1230.1
+        BUILD 10:14:01 Jan  9 2026
+        configured to support archs: armv6 armv7 armv7s arm64 arm64e arm64_32 i386 x86_64 x86_64h armv6m armv7k armv7m armv7em armv8m.main armv8.1m.main
+        will use ld-classic for: armv6 armv7 armv7s i386 armv6m armv7k armv7m armv7em
+        LTO support using: LLVM version 17.0.0 (static support for 29, runtime is 29)
+        TAPI support using: Apple TAPI version 17.0.0 (tapi-1700.3.8)
+        Library search paths:
+        	/usr/local/lib
+        	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib
+        	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib/swift
+        Framework search paths:
+        	/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks
+        /usr/bin/c++  -arch arm64  -v -Wl,-v CMakeFiles/cmTC_8529c.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_8529c
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:160 (message)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Effective list of requested architectures (possibly empty)  : "arm64"
+      Effective list of architectures found in the ABI info binary: "arm64"
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:255 (message)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Parsed CXX implicit include dir info: rv=done
+        found start of include info
+        found start of implicit include info
+          add: [/usr/local/include]
+          add: [/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1]
+          add: [/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include]
+          add: [/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include]
+          add: [/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include]
+        end of search list found
+        collapse include dir [/usr/local/include] ==> [/usr/local/include]
+        collapse include dir [/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1] ==> [/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1]
+        collapse include dir [/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include] ==> [/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include]
+        collapse include dir [/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include] ==> [/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include]
+        collapse include dir [/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include] ==> [/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include]
+        implicit include dirs: [/usr/local/include;/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1;/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include;/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include;/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include]
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:291 (message)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Parsed CXX implicit link information:
+        link line regex: [^( *|.*[/\\])(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        linker tool regex: [^[ 	]*(->|"|[0-9]+>[ 	-]*Build:[ 	0-9]+ ms[ 	]*)?[ 	]*(([^"]*[/\\])?(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)))("|,| |$)]
+        ignore line: [Change Dir: '/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles/CMakeScratch/TryCompile-gMHUdV']
+        ignore line: []
+        ignore line: [Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /Library/Developer/CommandLineTools/usr/bin/make -f Makefile cmTC_8529c/fast]
+        ignore line: [/Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_8529c.dir/build.make CMakeFiles/cmTC_8529c.dir/build]
+        ignore line: [Building CXX object CMakeFiles/cmTC_8529c.dir/CMakeCXXCompilerABI.cpp.o]
+        ignore line: [/usr/bin/c++   -arch arm64   -v -Wl -v -MD -MT CMakeFiles/cmTC_8529c.dir/CMakeCXXCompilerABI.cpp.o -MF CMakeFiles/cmTC_8529c.dir/CMakeCXXCompilerABI.cpp.o.d -o CMakeFiles/cmTC_8529c.dir/CMakeCXXCompilerABI.cpp.o -c /opt/homebrew/share/cmake/Modules/CMakeCXXCompilerABI.cpp]
+        ignore line: [Apple clang version 17.0.0 (clang-1700.6.4.2)]
+        ignore line: [Target: arm64-apple-darwin24.6.0]
+        ignore line: [Thread model: posix]
+        ignore line: [InstalledDir: /Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin]
+        ignore line: [clang++: warning: -Wl -v: 'linker' input unused [-Wunused-command-line-argument]]
+        ignore line: [ignoring nonexistent directory "/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"]
+        ignore line: [ "/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang" -cc1 -triple arm64-apple-macosx15.0.0 -Wundef-prefix=TARGET_OS_ -Wdeprecated-objc-isa-usage -Werror=deprecated-objc-isa-usage -Werror=implicit-function-declaration -emit-obj -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCXXCompilerABI.cpp -mrelocation-model pic -pic-level 2 -mframe-pointer=non-leaf -fno-strict-return -ffp-contract=on -fno-rounding-math -funwind-tables=1 -fobjc-msgsend-selector-stubs -target-sdk-version=26.2 -fvisibility-inlines-hidden-static-local-var -fdefine-target-os-macros -fno-assume-unique-vtables -fno-modulemap-allow-subdirectory-search -target-cpu apple-m1 -target-feature +zcm -target-feature +zcz -target-feature +v8.5a -target-feature +aes -target-feature +altnzcv -target-feature +ccdp -target-feature +complxnum -target-feature +crc -target-feature +dotprod -target-feature +fp-armv8 -target-feature +fp16fml -target-feature +fptoint -target-feature +fullfp16 -target-feature +jsconv -target-feature +lse -target-feature +neon -target-feature +pauth -target-feature +perfmon -target-feature +predres -target-feature +ras -target-feature +rcpc -target-feature +rdm -target-feature +sb -target-feature +sha2 -target-feature +sha3 -target-feature +specrestrict -target-feature +ssbs -target-abi darwinpcs -debugger-tuning=lldb -fdebug-compilation-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles/CMakeScratch/TryCompile-gMHUdV -target-linker-version 1230.1 -v -fcoverage-compilation-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles/CMakeScratch/TryCompile-gMHUdV -resource-dir "/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17" -dependency-file CMakeFiles/cmTC_8529c.dir/CMakeCXXCompilerABI.cpp.o.d -skip-unused-modulemap-deps -MT CMakeFiles/cmTC_8529c.dir/CMakeCXXCompilerABI.cpp.o -sys-header-deps -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk -I/usr/local/include -internal-isystem /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1 -internal-isystem /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/local/include -internal-isystem "/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include" -internal-externc-isystem /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include -internal-externc-isystem "/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include" -internal-iframework /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks -internal-iframework /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/SubFrameworks -internal-iframework /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/Library/Frameworks -Wno-reorder-init-list -Wno-implicit-int-float-conversion -Wno-c99-designator -Wno-final-dtor-non-final-class -Wno-extra-semi-stmt -Wno-misleading-indentation -Wno-quoted-include-in-framework-header -Wno-implicit-fallthrough -Wno-enum-enum-conversion -Wno-enum-float-conversion -Wno-elaborated-enum-base -fdeprecated-macro -ferror-limit 19 -stack-protector 1 -fstack-check -mdarwin-stkchk-strong-link -fblocks -fencode-extended-block-signature -fregister-global-dtors-with-atexit -fgnuc-version=4.2.1 -fno-cxx-modules -fskip-odr-check-in-gmf -fcxx-exceptions -fexceptions -fmax-type-align=16 -fcommon -clang-vendor-feature=+disableNonDependentMemberExprInCurrentInstantiation -fno-odr-hash-protocols -clang-vendor-feature=+enableAggressiveVLAFolding -clang-vendor-feature=+revert09abecef7bbf -clang-vendor-feature=+thisNoAlignAttr -clang-vendor-feature=+thisNoNullAttr -clang-vendor-feature=+disableAtImportPrivateFrameworkInImplementationError -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o CMakeFiles/cmTC_8529c.dir/CMakeCXXCompilerABI.cpp.o -x c++ /opt/homebrew/share/cmake/Modules/CMakeCXXCompilerABI.cpp]
+        ignore line: [clang -cc1 version 17.0.0 (clang-1700.6.4.2) default target arm64-apple-darwin24.6.0]
+        ignore line: [ignoring nonexistent directory "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/local/include"]
+        ignore line: [ignoring nonexistent directory "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/Library/Frameworks"]
+        ignore line: [#include "..." search starts here:]
+        ignore line: [#include <...> search starts here:]
+        ignore line: [ /usr/local/include]
+        ignore line: [ /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1]
+        ignore line: [ /Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include]
+        ignore line: [ /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include]
+        ignore line: [ /Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include]
+        ignore line: [ /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks (framework directory)]
+        ignore line: [ /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/SubFrameworks (framework directory)]
+        ignore line: [End of search list.]
+        ignore line: [Linking CXX executable cmTC_8529c]
+        ignore line: [/opt/homebrew/bin/cmake -E cmake_link_script CMakeFiles/cmTC_8529c.dir/link.txt --verbose=1]
+        ignore line: [Apple clang version 17.0.0 (clang-1700.6.4.2)]
+        ignore line: [Target: arm64-apple-darwin24.6.0]
+        ignore line: [Thread model: posix]
+        ignore line: [InstalledDir: /Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin]
+        link line: [ "/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld" -demangle -lto_library "/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libLTO.dylib" -dynamic -arch arm64 -platform_version macos 15.0.0 26.2 -syslibroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk -mllvm -enable-linkonceodr-outlining -o cmTC_8529c -L/usr/local/lib -v CMakeFiles/cmTC_8529c.dir/CMakeCXXCompilerABI.cpp.o -lc++ -lSystem "/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/lib/darwin/libclang_rt.osx.a"] ==> linker [/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld]
+        link line: [ "/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld" -demangle -lto_library "/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libLTO.dylib" -dynamic -arch arm64 -platform_version macos 15.0.0 26.2 -syslibroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk -mllvm -enable-linkonceodr-outlining -o cmTC_8529c -L/usr/local/lib -v CMakeFiles/cmTC_8529c.dir/CMakeCXXCompilerABI.cpp.o -lc++ -lSystem "/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/lib/darwin/libclang_rt.osx.a"]
+          arg [/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld] ==> ignore
+          arg [-demangle] ==> ignore
+          arg [-lto_library] ==> ignore, skip following value
+          arg [/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libLTO.dylib] ==> skip value of -lto_library
+          arg [-dynamic] ==> ignore
+          arg [-arch] ==> ignore
+          arg [arm64] ==> ignore
+          arg [-platform_version] ==> ignore
+          arg [macos] ==> ignore
+          arg [15.0.0] ==> ignore
+          arg [26.2] ==> ignore
+          arg [-syslibroot] ==> ignore
+          arg [/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk] ==> ignore
+          arg [-mllvm] ==> ignore
+          arg [-enable-linkonceodr-outlining] ==> ignore
+          arg [-o] ==> ignore
+          arg [cmTC_8529c] ==> ignore
+          arg [-L/usr/local/lib] ==> dir [/usr/local/lib]
+          arg [-v] ==> ignore
+          arg [CMakeFiles/cmTC_8529c.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+          arg [-lc++] ==> lib [c++]
+          arg [-lSystem] ==> lib [System]
+          arg [/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/lib/darwin/libclang_rt.osx.a] ==> lib [/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/lib/darwin/libclang_rt.osx.a]
+        linker tool for 'CXX': /Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld 
+        Library search paths: [;/usr/local/lib;/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib;/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib/swift]
+        Framework search paths: [;/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks]
+        remove lib [System]
+        remove lib [/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/lib/darwin/libclang_rt.osx.a]
+        collapse library dir [/usr/local/lib] ==> [/usr/local/lib]
+        collapse library dir [/usr/local/lib] ==> [/usr/local/lib]
+        collapse library dir [/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib] ==> [/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib]
+        collapse library dir [/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib/swift] ==> [/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib/swift]
+        collapse framework dir [/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks] ==> [/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks]
+        implicit libs: [c++]
+        implicit objs: []
+        implicit dirs: [/usr/local/lib;/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib;/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib/swift]
+        implicit fwks: [/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks]
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/Internal/CMakeDetermineLinkerId.cmake:41 (message)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:337 (cmake_determine_linker_id)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Running the CXX compiler's linker: "/Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld" "-v"
+      @(#)PROGRAM:ld PROJECT:ld-1230.1
+      BUILD 10:14:01 Jan  9 2026
+      configured to support archs: armv6 armv7 armv7s arm64 arm64e arm64_32 i386 x86_64 x86_64h armv6m armv7k armv7m armv7em armv8m.main armv8.1m.main
+      will use ld-classic for: armv6 armv7 armv7s i386 armv6m armv7k armv7m armv7em
+      LTO support using: LLVM version 17.0.0 (static support for 29, runtime is 29)
+      TAPI support using: Apple TAPI version 17.0.0 (tapi-1700.3.8)
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/Internal/CheckSourceCompiles.cmake:81 (try_compile)"
+      - "/opt/homebrew/share/cmake/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "/opt/homebrew/share/cmake/Modules/CheckCCompilerFlag.cmake:105 (cmake_check_compiler_flag)"
+      - "core/libcorrect/CMakeLists.txt:15 (check_c_compiler_flag)"
+    checks:
+      - "Performing Test COMPILER_SUPPORTS_WPEDANTIC"
+    directories:
+      source: "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles/CMakeScratch/TryCompile-SUu0LN"
+      binary: "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles/CMakeScratch/TryCompile-SUu0LN"
+    cmakeVariables:
+      CMAKE_CXX_STDLIB_MODULES_JSON: ""
+      CMAKE_C_FLAGS: " -fPIC -std=c99 -Wall"
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_OSX_ARCHITECTURES: "arm64"
+      CMAKE_OSX_DEPLOYMENT_TARGET: ""
+      CMAKE_OSX_SYSROOT: ""
+    buildResult:
+      variable: "COMPILER_SUPPORTS_WPEDANTIC"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles/CMakeScratch/TryCompile-SUu0LN'
+        
+        Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /Library/Developer/CommandLineTools/usr/bin/make -f Makefile cmTC_02eca/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_02eca.dir/build.make CMakeFiles/cmTC_02eca.dir/build
+        Building C object CMakeFiles/cmTC_02eca.dir/src.c.o
+        /usr/bin/cc -DCOMPILER_SUPPORTS_WPEDANTIC  -fPIC -std=c99 -Wall  -arch arm64   -Wpedantic -MD -MT CMakeFiles/cmTC_02eca.dir/src.c.o -MF CMakeFiles/cmTC_02eca.dir/src.c.o.d -o CMakeFiles/cmTC_02eca.dir/src.c.o -c /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles/CMakeScratch/TryCompile-SUu0LN/src.c
+        Linking C executable cmTC_02eca
+        /opt/homebrew/bin/cmake -E cmake_link_script CMakeFiles/cmTC_02eca.dir/link.txt --verbose=1
+        /usr/bin/cc  -fPIC -std=c99 -Wall  -arch arm64 CMakeFiles/cmTC_02eca.dir/src.c.o -o cmTC_02eca
+        
+      exitCode: 0
+  -
+    kind: "find-v1"
+    backtrace:
+      - "core/libcorrect/CMakeLists.txt:40 (find_library)"
+    mode: "library"
+    variable: "FEC"
+    description: "Path to a library."
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "fec"
+    candidate_directories:
+      - "/Users/macbook/.local/bin/"
+      - "/Users/macbook/.codeium/windsurf/bin/"
+      - "/usr/local/bin/"
+      - "/System/Cryptexes/App/usr/bin/"
+      - "/usr/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/Library/Apple/usr/bin/"
+      - "/opt/homebrew/bin/"
+      - "/Users/macbook/.codex/tmp/arg0/codex-arg02D9yu5/"
+      - "/Users/macbook/.vscode/extensions/openai.chatgpt-26.908.40401-darwin-arm64/bin/macos-aarch64/"
+      - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib/"
+      - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/"
+      - "/opt/homebrew/lib/"
+      - "/opt/homebrew/"
+      - "/usr/local/lib/"
+      - "/usr/local/"
+      - "/usr/lib/"
+      - "/usr/"
+      - "/opt/"
+      - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/"
+      - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks/"
+      - "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/"
+      - "/Library/Frameworks/"
+      - "/System/Library/Frameworks/"
+    searched_directories:
+      - "/Users/macbook/.local/bin/"
+      - "/Users/macbook/.codeium/windsurf/bin/"
+      - "/usr/local/bin/"
+      - "/System/Cryptexes/App/usr/bin/"
+      - "/usr/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/Library/Apple/usr/bin/"
+      - "/opt/homebrew/bin/"
+      - "/Users/macbook/.codex/tmp/arg0/codex-arg02D9yu5/"
+      - "/Users/macbook/.vscode/extensions/openai.chatgpt-26.908.40401-darwin-arm64/bin/macos-aarch64/"
+      - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib/"
+      - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/"
+      - "/opt/homebrew/lib/"
+      - "/opt/homebrew/"
+      - "/usr/local/lib/"
+      - "/usr/local/"
+      - "/usr/lib/"
+      - "/usr/"
+      - "/opt/"
+      - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/"
+      - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks/"
+      - "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/"
+      - "/Library/Frameworks/"
+      - "/System/Library/Frameworks/"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "/Users/macbook/.local/bin"
+        - "/Users/macbook/.codeium/windsurf/bin"
+        - "/usr/local/bin"
+        - "/System/Cryptexes/App/usr/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
+        - "/Library/Apple/usr/bin"
+        - "/opt/homebrew/bin"
+        - "/Users/macbook/.codex/tmp/arg0/codex-arg02D9yu5"
+        - "/Users/macbook/.local/bin"
+        - "/Users/macbook/.codeium/windsurf/bin"
+        - "/Users/macbook/.vscode/extensions/openai.chatgpt-26.908.40401-darwin-arm64/bin/macos-aarch64"
+      CMAKE_INSTALL_PREFIX: "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/root_dev/inst"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr"
+        - "/opt/homebrew"
+        - "/usr/local"
+        - "/usr"
+        - "/"
+        - "/opt/homebrew"
+        - "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/root_dev/inst"
+        - "/usr/X11R6"
+        - "/usr/pkg"
+        - "/opt"
+        - "/sw"
+        - "/opt/local"
+      CMAKE_SYSTEM_LIBRARY_PATH:
+        - "/usr/lib/X11"
+      CMAKE_SYSTEM_FRAMEWORK_PATH:
+        - "~/Library/Frameworks"
+        - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/Library/Frameworks"
+        - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/Network/Library/Frameworks"
+        - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks"
+        - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks"
+        - "/Applications/Xcode.app/Contents/Developer/Library/Frameworks"
+        - "/Library/Frameworks"
+        - "/Network/Library/Frameworks"
+        - "/System/Library/Frameworks"
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/CheckLibraryExists.cmake:142 (try_compile)"
+      - "core/libcorrect/CMakeLists.txt:41 (CHECK_LIBRARY_EXISTS)"
+    checks:
+      - "Looking for dotprod in FEC"
+    directories:
+      source: "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles/CMakeScratch/TryCompile-S0Z5V0"
+      binary: "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles/CMakeScratch/TryCompile-S0Z5V0"
+    cmakeVariables:
+      CMAKE_CXX_STDLIB_MODULES_JSON: ""
+      CMAKE_C_FLAGS: " -fPIC -std=c99 -Wall -Wpedantic -O2"
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_OSX_ARCHITECTURES: "arm64"
+      CMAKE_OSX_DEPLOYMENT_TARGET: ""
+      CMAKE_OSX_SYSROOT: ""
+    buildResult:
+      variable: "HAVE_LIBFEC"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles/CMakeScratch/TryCompile-S0Z5V0'
+        
+        Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /Library/Developer/CommandLineTools/usr/bin/make -f Makefile cmTC_87515/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_87515.dir/build.make CMakeFiles/cmTC_87515.dir/build
+        Building C object CMakeFiles/cmTC_87515.dir/CheckFunctionExists.c.o
+        /usr/bin/cc -DCHECK_FUNCTION_EXISTS=dotprod  -fPIC -std=c99 -Wall -Wpedantic -O2  -arch arm64 -MD -MT CMakeFiles/cmTC_87515.dir/CheckFunctionExists.c.o -MF CMakeFiles/cmTC_87515.dir/CheckFunctionExists.c.o.d -o CMakeFiles/cmTC_87515.dir/CheckFunctionExists.c.o -c /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles/CMakeScratch/TryCompile-S0Z5V0/CheckFunctionExists.c
+        Linking C executable cmTC_87515
+        /opt/homebrew/bin/cmake -E cmake_link_script CMakeFiles/cmTC_87515.dir/link.txt --verbose=1
+        ld: library 'FEC' not found
+        clang: error: linker command failed with exit code 1 (use -v to see invocation)
+        /usr/bin/cc  -fPIC -std=c99 -Wall -Wpedantic -O2  -arch arm64 CMakeFiles/cmTC_87515.dir/CheckFunctionExists.c.o -o cmTC_87515  -lFEC
+        make[1]: *** [cmTC_87515] Error 1
+        make: *** [cmTC_87515/fast] Error 2
+        
+      exitCode: 2
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/Internal/CheckSourceCompiles.cmake:81 (try_compile)"
+      - "/opt/homebrew/share/cmake/Modules/CheckCSourceCompiles.cmake:103 (cmake_check_source_compiles)"
+      - "core/libcorrect/CMakeLists.txt:47 (check_c_source_compiles)"
+    checks:
+      - "Performing Test HAVE_SSE"
+    directories:
+      source: "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles/CMakeScratch/TryCompile-mL5DvX"
+      binary: "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles/CMakeScratch/TryCompile-mL5DvX"
+    cmakeVariables:
+      CMAKE_CXX_STDLIB_MODULES_JSON: ""
+      CMAKE_C_FLAGS: " -fPIC -std=c99 -Wall -Wpedantic -O2"
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_OSX_ARCHITECTURES: "arm64"
+      CMAKE_OSX_DEPLOYMENT_TARGET: ""
+      CMAKE_OSX_SYSROOT: ""
+    buildResult:
+      variable: "HAVE_SSE"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles/CMakeScratch/TryCompile-mL5DvX'
+        
+        Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /Library/Developer/CommandLineTools/usr/bin/make -f Makefile cmTC_556be/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_556be.dir/build.make CMakeFiles/cmTC_556be.dir/build
+        Building C object CMakeFiles/cmTC_556be.dir/src.c.o
+        /usr/bin/cc -DHAVE_SSE  -fPIC -std=c99 -Wall -Wpedantic -O2  -arch arm64   -march=native -MD -MT CMakeFiles/cmTC_556be.dir/src.c.o -MF CMakeFiles/cmTC_556be.dir/src.c.o.d -o CMakeFiles/cmTC_556be.dir/src.c.o -c /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles/CMakeScratch/TryCompile-mL5DvX/src.c
+        In file included from /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles/CMakeScratch/TryCompile-mL5DvX/src.c:2:
+        In file included from /Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include/x86intrin.h:15:
+        /Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include/immintrin.h:14:2: error: "This header is only meant to be used on x86 and x64 architecture"
+           14 | #error "This header is only meant to be used on x86 and x64 architecture"
+              |  ^
+        In file included from /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles/CMakeScratch/TryCompile-mL5DvX/src.c:2:
+        In file included from /Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include/x86intrin.h:15:
+        In file included from /Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include/immintrin.h:17:
+        In file included from /Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include/x86gprintrin.h:14:
+        /Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include/hresetintrin.h:42:27: error: invalid input constraint 'a' in asm
+           42 |   __asm__ ("hreset $0" :: "a"(__eax));
+              |                           ^
+        In file included from /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles/CMakeScratch/TryCompile-mL5DvX/src.c:2:
+        In file included from /Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include/x86intrin.h:15:
+        In file included from /Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include/immintrin.h:20:
+        /Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include/mmintrin.h:14:2: error: "This header is only meant to be used on x86 and x64 architecture"
+           14 | #error "This header is only meant to be used on x86 and x64 architecture"
+              |  ^
+        /Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include/mmintrin.h:56:12: error: invalid conversion between vector type '__m64' (vector of 1 'long long' value) and integer type 'int' of different size
+           56 |     return (__m64)__builtin_ia32_vec_init_v2si(__i, 0);
+              |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        /Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include/mmintrin.h:130:12: error: invalid conversion between vector type '__m64' (vector of 1 'long long' value) and integer type 'int' of different size
+          130 |     return (__m64)__builtin_ia32_packsswb((__v4hi)__m1, (__v4hi)__m2);
+              |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        /Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include/mmintrin.h:155:12: error: invalid conversion between vector type '__m64' (vector of 1 'long long' value) and integer type 'int' of different size
+          155 |     return (__m64)__builtin_ia32_packssdw((__v2si)__m1, (__v2si)__m2);
+              |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        /Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include/mmintrin.h:180:12: error: invalid conversion between vector type '__m64' (vector of 1 'long long' value) and integer type 'int' of different size
+          180 |     return (__m64)__builtin_ia32_packuswb((__v4hi)__m1, (__v4hi)__m2);
+              |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        /Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include/mmintrin.h:207:12: error: invalid conversion between vector type '__m64' (vector of 1 'long long' value) and integer type 'int' of different size
+          207 |     return (__m64)__builtin_ia32_punpckhbw((__v8qi)__m1, (__v8qi)__m2);
+              |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        /Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include/mmintrin.h:230:12: error: invalid conversion between vector type '__m64' (vector of 1 'long long' value) and integer type 'int' of different size
+          230 |     return (__m64)__builtin_ia32_punpckhwd((__v4hi)__m1, (__v4hi)__m2);
+              |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        /Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include/mmintrin.h:251:12: error: invalid conversion between vector type '__m64' (vector of 1 'long long' value) and integer type 'int' of different size
+          251 |     return (__m64)__builtin_ia32_punpckhdq((__v2si)__m1, (__v2si)__m2);
+              |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        /Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include/mmintrin.h:278:12: error: invalid conversion between vector type '__m64' (vector of 1 'long long' value) and integer type 'int' of different size
+          278 |     return (__m64)__builtin_ia32_punpcklbw((__v8qi)__m1, (__v8qi)__m2);
+              |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        /Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include/mmintrin.h:301:12: error: invalid conversion between vector type '__m64' (vector of 1 'long long' value) and integer type 'int' of different size
+          301 |     return (__m64)__builtin_ia32_punpcklwd((__v4hi)__m1, (__v4hi)__m2);
+              |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        /Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include/mmintrin.h:322:12: error: invalid conversion between vector type '__m64' (vector of 1 'long long' value) and integer type 'int' of different size
+          322 |     return (__m64)__builtin_ia32_punpckldq((__v2si)__m1, (__v2si)__m2);
+              |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        /Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include/mmintrin.h:343:12: error: invalid conversion between vector type '__m64' (vector of 1 'long long' value) and integer type 'int' of different size
+          343 |     return (__m64)__builtin_ia32_paddb((__v8qi)__m1, (__v8qi)__m2);
+              |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        /Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include/mmintrin.h:364:12: error: invalid conversion between vector type '__m64' (vector of 1 'long long' value) and integer type 'int' of different size
+          364 |     return (__m64)__builtin_ia32_paddw((__v4hi)__m1, (__v4hi)__m2);
+              |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        /Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include/mmintrin.h:385:12: error: invalid conversion between vector type '__m64' (vector of 1 'long long' value) and integer type 'int' of different size
+          385 |     return (__m64)__builtin_ia32_paddd((__v2si)__m1, (__v2si)__m2);
+              |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        /Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include/mmintrin.h:409:12: error: invalid conversion between vector type '__m64' (vector of 1 'long long' value) and integer type 'int' of different size
+          409 |     return (__m64)__builtin_ia32_paddsb((__v8qi)__m1, (__v8qi)__m2);
+              |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        /Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include/mmintrin.h:433:12: error: invalid conversion between vector type '__m64' (vector of 1 'long long' value) and integer type 'int' of different size
+          433 |     return (__m64)__builtin_ia32_paddsw((__v4hi)__m1, (__v4hi)__m2);
+              |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        /Volumes/Extreme SSD/Xcode-offload/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include/mmintrin.h:456:12: error: invalid conversion between vector type '__m64' (vector of 1 'long long' value) and integer type 'int' of different size
+          456 |     return (__m64)__builtin_ia32_paddusb((__v8qi)__m1, (__v8qi)__m2);
+              |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        fatal error: too many errors emitted, stopping now [-ferror-limit=]
+        20 errors generated.
+        make[1]: *** [CMakeFiles/cmTC_556be.dir/src.c.o] Error 1
+        make: *** [cmTC_556be/fast] Error 2
+        
+      exitCode: 2
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/FindPkgConfig.cmake:517 (find_program)"
+      - "core/CMakeLists.txt:83 (find_package)"
+    mode: "program"
+    variable: "PKG_CONFIG_EXECUTABLE"
+    description: "pkg-config executable"
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "pkg-config"
+      - "pkgconf"
+    candidate_directories:
+      - "/Users/macbook/.local/bin/"
+      - "/Users/macbook/.codeium/windsurf/bin/"
+      - "/usr/local/bin/"
+      - "/System/Cryptexes/App/usr/bin/"
+      - "/usr/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/"
+      - "/Library/Apple/usr/bin/"
+      - "/opt/homebrew/bin/"
+      - "/Users/macbook/.codex/tmp/arg0/codex-arg02D9yu5/"
+      - "/Users/macbook/.vscode/extensions/openai.chatgpt-26.908.40401-darwin-arm64/bin/macos-aarch64/"
+      - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/bin/"
+      - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/sbin/"
+      - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/"
+      - "/opt/homebrew/bin/"
+      - "/opt/homebrew/sbin/"
+      - "/opt/homebrew/"
+      - "/usr/local/bin/"
+      - "/usr/local/sbin/"
+      - "/usr/local/"
+      - "/usr/bin/"
+      - "/usr/sbin/"
+      - "/usr/"
+      - "/bin/"
+      - "/sbin/"
+      - "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/root_dev/inst/bin/"
+      - "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/root_dev/inst/sbin/"
+      - "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/root_dev/inst/"
+      - "/usr/X11R6/bin/"
+      - "/usr/X11R6/sbin/"
+      - "/usr/X11R6/"
+      - "/usr/pkg/bin/"
+      - "/usr/pkg/sbin/"
+      - "/usr/pkg/"
+      - "/opt/bin/"
+      - "/opt/sbin/"
+      - "/opt/"
+      - "/sw/bin/"
+      - "/sw/sbin/"
+      - "/sw/"
+      - "/opt/local/bin/"
+      - "/opt/local/sbin/"
+      - "/opt/local/"
+      - "/Users/macbook/Applications/"
+      - "/Applications/"
+      - "/Applications/Xcode.app/Contents/Applications/"
+      - "/Applications/Xcode.app/Contents/Developer/Applications/"
+    searched_directories:
+      - "/Users/macbook/.local/bin/pkg-config"
+      - "/Users/macbook/.local/bin/pkgconf"
+      - "/Users/macbook/.codeium/windsurf/bin/pkg-config"
+      - "/Users/macbook/.codeium/windsurf/bin/pkgconf"
+      - "/usr/local/bin/pkg-config"
+      - "/usr/local/bin/pkgconf"
+      - "/System/Cryptexes/App/usr/bin/pkg-config"
+      - "/System/Cryptexes/App/usr/bin/pkgconf"
+      - "/usr/bin/pkg-config"
+      - "/usr/bin/pkgconf"
+      - "/bin/pkg-config"
+      - "/bin/pkgconf"
+      - "/usr/sbin/pkg-config"
+      - "/usr/sbin/pkgconf"
+      - "/sbin/pkg-config"
+      - "/sbin/pkgconf"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/pkg-config"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/pkgconf"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/pkg-config"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/pkgconf"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/pkg-config"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/pkgconf"
+      - "/Library/Apple/usr/bin/pkg-config"
+      - "/Library/Apple/usr/bin/pkgconf"
+    found: "/opt/homebrew/bin/pkg-config"
+    search_context:
+      ENV{PATH}:
+        - "/Users/macbook/.local/bin"
+        - "/Users/macbook/.codeium/windsurf/bin"
+        - "/usr/local/bin"
+        - "/System/Cryptexes/App/usr/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
+        - "/Library/Apple/usr/bin"
+        - "/opt/homebrew/bin"
+        - "/Users/macbook/.codex/tmp/arg0/codex-arg02D9yu5"
+        - "/Users/macbook/.local/bin"
+        - "/Users/macbook/.codeium/windsurf/bin"
+        - "/Users/macbook/.vscode/extensions/openai.chatgpt-26.908.40401-darwin-arm64/bin/macos-aarch64"
+      CMAKE_INSTALL_PREFIX: "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/root_dev/inst"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr"
+        - "/opt/homebrew"
+        - "/usr/local"
+        - "/usr"
+        - "/"
+        - "/opt/homebrew"
+        - "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/root_dev/inst"
+        - "/usr/X11R6"
+        - "/usr/pkg"
+        - "/opt"
+        - "/sw"
+        - "/opt/local"
+      CMAKE_SYSTEM_APPBUNDLE_PATH:
+        - "/Users/macbook/Applications"
+        - "/Applications"
+        - "/Applications/Xcode.app/Contents/Applications"
+        - "/Applications/Xcode.app/Contents/Developer/Applications"
+...
+
+---
+events:
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/FindPkgConfig.cmake:761 (find_library)"
+      - "/opt/homebrew/share/cmake/Modules/FindPkgConfig.cmake:811 (_pkg_find_libs)"
+      - "/opt/homebrew/share/cmake/Modules/FindPkgConfig.cmake:1149 (_pkg_recalculate)"
+      - "/opt/homebrew/share/cmake/Modules/FindPkgConfig.cmake:1166 (_pkg_check_modules_internal)"
+      - "core/CMakeLists.txt:84 (pkg_check_modules)"
+    mode: "library"
+    variable: "pkgcfg_lib_GLFW3_glfw"
+    description: "Path to a library."
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "glfw"
+    candidate_directories:
+      - "/opt/homebrew/Cellar/glfw/3.5.1/lib/"
+    found: "/opt/homebrew/Cellar/glfw/3.5.1/lib/libglfw.dylib"
+    search_context:
+      ENV{PATH}:
+        - "/Users/macbook/.local/bin"
+        - "/Users/macbook/.codeium/windsurf/bin"
+        - "/usr/local/bin"
+        - "/System/Cryptexes/App/usr/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
+        - "/Library/Apple/usr/bin"
+        - "/opt/homebrew/bin"
+        - "/Users/macbook/.codex/tmp/arg0/codex-arg02D9yu5"
+        - "/Users/macbook/.local/bin"
+        - "/Users/macbook/.codeium/windsurf/bin"
+        - "/Users/macbook/.vscode/extensions/openai.chatgpt-26.908.40401-darwin-arm64/bin/macos-aarch64"
+      CMAKE_INSTALL_PREFIX: "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/root_dev/inst"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr"
+        - "/opt/homebrew"
+        - "/usr/local"
+        - "/usr"
+        - "/"
+        - "/opt/homebrew"
+        - "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/root_dev/inst"
+        - "/usr/X11R6"
+        - "/usr/pkg"
+        - "/opt"
+        - "/sw"
+        - "/opt/local"
+      CMAKE_SYSTEM_LIBRARY_PATH:
+        - "/usr/lib/X11"
+      CMAKE_SYSTEM_FRAMEWORK_PATH:
+        - "~/Library/Frameworks"
+        - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/Library/Frameworks"
+        - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/Network/Library/Frameworks"
+        - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks"
+        - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks"
+        - "/Applications/Xcode.app/Contents/Developer/Library/Frameworks"
+        - "/Library/Frameworks"
+        - "/Network/Library/Frameworks"
+        - "/System/Library/Frameworks"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/FindOpenGL.cmake:356 (find_library)"
+      - "core/CMakeLists.txt:156 (find_package)"
+    mode: "library"
+    variable: "OPENGL_gl_LIBRARY"
+    description: "OpenGL GL library"
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "OpenGL"
+      - "GL"
+    candidate_directories:
+      - "/Users/macbook/.local/bin/"
+      - "/Users/macbook/.codeium/windsurf/bin/"
+      - "/usr/local/bin/"
+      - "/System/Cryptexes/App/usr/bin/"
+      - "/usr/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/Library/Apple/usr/bin/"
+      - "/opt/homebrew/bin/"
+      - "/Users/macbook/.codex/tmp/arg0/codex-arg02D9yu5/"
+      - "/Users/macbook/.vscode/extensions/openai.chatgpt-26.908.40401-darwin-arm64/bin/macos-aarch64/"
+      - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib/"
+      - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/"
+      - "/opt/homebrew/lib/"
+      - "/opt/homebrew/"
+      - "/usr/local/lib/"
+      - "/usr/local/"
+      - "/usr/lib/"
+      - "/usr/"
+      - "/opt/"
+      - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/"
+      - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks/"
+      - "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/"
+      - "/Library/Frameworks/"
+      - "/System/Library/Frameworks/"
+    found: "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/OpenGL.framework"
+    search_context:
+      ENV{PATH}:
+        - "/Users/macbook/.local/bin"
+        - "/Users/macbook/.codeium/windsurf/bin"
+        - "/usr/local/bin"
+        - "/System/Cryptexes/App/usr/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
+        - "/Library/Apple/usr/bin"
+        - "/opt/homebrew/bin"
+        - "/Users/macbook/.codex/tmp/arg0/codex-arg02D9yu5"
+        - "/Users/macbook/.local/bin"
+        - "/Users/macbook/.codeium/windsurf/bin"
+        - "/Users/macbook/.vscode/extensions/openai.chatgpt-26.908.40401-darwin-arm64/bin/macos-aarch64"
+      CMAKE_INSTALL_PREFIX: "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/root_dev/inst"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr"
+        - "/opt/homebrew"
+        - "/usr/local"
+        - "/usr"
+        - "/"
+        - "/opt/homebrew"
+        - "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/root_dev/inst"
+        - "/usr/X11R6"
+        - "/usr/pkg"
+        - "/opt"
+        - "/sw"
+        - "/opt/local"
+      CMAKE_SYSTEM_LIBRARY_PATH:
+        - "/usr/lib/X11"
+      CMAKE_SYSTEM_FRAMEWORK_PATH:
+        - "~/Library/Frameworks"
+        - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/Library/Frameworks"
+        - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/Network/Library/Frameworks"
+        - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks"
+        - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks"
+        - "/Applications/Xcode.app/Contents/Developer/Library/Frameworks"
+        - "/Library/Frameworks"
+        - "/Network/Library/Frameworks"
+        - "/System/Library/Frameworks"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/FindOpenGL.cmake:358 (find_library)"
+      - "core/CMakeLists.txt:156 (find_package)"
+    mode: "library"
+    variable: "OPENGL_glu_LIBRARY"
+    description: "OpenGL GLU library"
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "OpenGL"
+      - "GLU"
+    candidate_directories:
+      - "/Users/macbook/.local/bin/"
+      - "/Users/macbook/.codeium/windsurf/bin/"
+      - "/usr/local/bin/"
+      - "/System/Cryptexes/App/usr/bin/"
+      - "/usr/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/Library/Apple/usr/bin/"
+      - "/opt/homebrew/bin/"
+      - "/Users/macbook/.codex/tmp/arg0/codex-arg02D9yu5/"
+      - "/Users/macbook/.vscode/extensions/openai.chatgpt-26.908.40401-darwin-arm64/bin/macos-aarch64/"
+      - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib/"
+      - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/"
+      - "/opt/homebrew/lib/"
+      - "/opt/homebrew/"
+      - "/usr/local/lib/"
+      - "/usr/local/"
+      - "/usr/lib/"
+      - "/usr/"
+      - "/opt/"
+      - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/"
+      - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks/"
+      - "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/"
+      - "/Library/Frameworks/"
+      - "/System/Library/Frameworks/"
+    found: "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/OpenGL.framework"
+    search_context:
+      ENV{PATH}:
+        - "/Users/macbook/.local/bin"
+        - "/Users/macbook/.codeium/windsurf/bin"
+        - "/usr/local/bin"
+        - "/System/Cryptexes/App/usr/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
+        - "/Library/Apple/usr/bin"
+        - "/opt/homebrew/bin"
+        - "/Users/macbook/.codex/tmp/arg0/codex-arg02D9yu5"
+        - "/Users/macbook/.local/bin"
+        - "/Users/macbook/.codeium/windsurf/bin"
+        - "/Users/macbook/.vscode/extensions/openai.chatgpt-26.908.40401-darwin-arm64/bin/macos-aarch64"
+      CMAKE_INSTALL_PREFIX: "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/root_dev/inst"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr"
+        - "/opt/homebrew"
+        - "/usr/local"
+        - "/usr"
+        - "/"
+        - "/opt/homebrew"
+        - "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/root_dev/inst"
+        - "/usr/X11R6"
+        - "/usr/pkg"
+        - "/opt"
+        - "/sw"
+        - "/opt/local"
+      CMAKE_SYSTEM_LIBRARY_PATH:
+        - "/usr/lib/X11"
+      CMAKE_SYSTEM_FRAMEWORK_PATH:
+        - "~/Library/Frameworks"
+        - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/Library/Frameworks"
+        - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/Network/Library/Frameworks"
+        - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks"
+        - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks"
+        - "/Applications/Xcode.app/Contents/Developer/Library/Frameworks"
+        - "/Library/Frameworks"
+        - "/Network/Library/Frameworks"
+        - "/System/Library/Frameworks"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/FindOpenGL.cmake:360 (find_path)"
+      - "core/CMakeLists.txt:156 (find_package)"
+    mode: "path"
+    variable: "OPENGL_INCLUDE_DIR"
+    description: "Include for OpenGL"
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "OpenGL/gl.h"
+      - "GL/gl.h"
+    candidate_directories:
+      - "/Users/macbook/.local/bin/"
+      - "/Users/macbook/.codeium/windsurf/bin/"
+      - "/usr/local/bin/"
+      - "/System/Cryptexes/App/usr/bin/"
+      - "/usr/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/"
+      - "/Library/Apple/usr/bin/"
+      - "/opt/homebrew/bin/"
+      - "/Users/macbook/.codex/tmp/arg0/codex-arg02D9yu5/"
+      - "/Users/macbook/.vscode/extensions/openai.chatgpt-26.908.40401-darwin-arm64/bin/macos-aarch64/"
+      - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/"
+      - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/"
+      - "/opt/homebrew/include/"
+      - "/opt/homebrew/"
+      - "/usr/local/include/"
+      - "/usr/local/"
+      - "/usr/include/"
+      - "/usr/"
+      - "/include/"
+      - "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/root_dev/inst/include/"
+      - "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/root_dev/inst/"
+      - "/usr/X11R6/include/"
+      - "/usr/X11R6/"
+      - "/usr/pkg/include/"
+      - "/usr/pkg/"
+      - "/opt/include/"
+      - "/opt/"
+      - "/sw/include/"
+      - "/sw/"
+      - "/opt/local/include/"
+      - "/opt/local/"
+      - "/usr/include/X11/"
+      - "/Users/macbook/Library/Frameworks/"
+      - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/Library/Frameworks/"
+      - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/Network/Library/Frameworks/"
+      - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/"
+      - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks/"
+      - "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/"
+      - "/Library/Frameworks/"
+      - "/Network/Library/Frameworks/"
+      - "/System/Library/Frameworks/"
+    searched_directories:
+      - "/Users/macbook/.local/bin/OpenGL.framework/Headers/gl.h"
+      - "/Users/macbook/.codeium/windsurf/bin/OpenGL.framework/Headers/gl.h"
+      - "/usr/local/bin/OpenGL.framework/Headers/gl.h"
+      - "/System/Cryptexes/App/usr/bin/OpenGL.framework/Headers/gl.h"
+      - "/usr/bin/OpenGL.framework/Headers/gl.h"
+      - "/bin/OpenGL.framework/Headers/gl.h"
+      - "/usr/sbin/OpenGL.framework/Headers/gl.h"
+      - "/sbin/OpenGL.framework/Headers/gl.h"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/OpenGL.framework/Headers/gl.h"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/OpenGL.framework/Headers/gl.h"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/OpenGL.framework/Headers/gl.h"
+      - "/Library/Apple/usr/bin/OpenGL.framework/Headers/gl.h"
+      - "/opt/homebrew/bin/OpenGL.framework/Headers/gl.h"
+      - "/Users/macbook/.codex/tmp/arg0/codex-arg02D9yu5/OpenGL.framework/Headers/gl.h"
+      - "/Users/macbook/.vscode/extensions/openai.chatgpt-26.908.40401-darwin-arm64/bin/macos-aarch64/OpenGL.framework/Headers/gl.h"
+      - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/OpenGL.framework/Headers/gl.h"
+      - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/OpenGL.framework/Headers/gl.h"
+      - "/opt/homebrew/include/OpenGL.framework/Headers/gl.h"
+      - "/opt/homebrew/OpenGL.framework/Headers/gl.h"
+      - "/usr/local/include/OpenGL.framework/Headers/gl.h"
+      - "/usr/local/OpenGL.framework/Headers/gl.h"
+      - "/usr/include/OpenGL.framework/Headers/gl.h"
+      - "/usr/OpenGL.framework/Headers/gl.h"
+      - "/include/OpenGL.framework/Headers/gl.h"
+      - "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/root_dev/inst/include/OpenGL.framework/Headers/gl.h"
+      - "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/root_dev/inst/OpenGL.framework/Headers/gl.h"
+      - "/usr/X11R6/include/OpenGL.framework/Headers/gl.h"
+      - "/usr/X11R6/OpenGL.framework/Headers/gl.h"
+      - "/usr/pkg/include/OpenGL.framework/Headers/gl.h"
+      - "/usr/pkg/OpenGL.framework/Headers/gl.h"
+      - "/opt/include/OpenGL.framework/Headers/gl.h"
+      - "/opt/OpenGL.framework/Headers/gl.h"
+      - "/sw/include/OpenGL.framework/Headers/gl.h"
+      - "/sw/OpenGL.framework/Headers/gl.h"
+      - "/opt/local/include/OpenGL.framework/Headers/gl.h"
+      - "/opt/local/OpenGL.framework/Headers/gl.h"
+      - "/usr/include/X11/OpenGL.framework/Headers/gl.h"
+      - "/Users/macbook/Library/Frameworks/OpenGL.framework/Headers/gl.h"
+      - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/Library/Frameworks/OpenGL.framework/Headers/gl.h"
+      - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/Network/Library/Frameworks/OpenGL.framework/Headers/gl.h"
+    found: "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/OpenGL.framework"
+    search_context:
+      ENV{PATH}:
+        - "/Users/macbook/.local/bin"
+        - "/Users/macbook/.codeium/windsurf/bin"
+        - "/usr/local/bin"
+        - "/System/Cryptexes/App/usr/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
+        - "/Library/Apple/usr/bin"
+        - "/opt/homebrew/bin"
+        - "/Users/macbook/.codex/tmp/arg0/codex-arg02D9yu5"
+        - "/Users/macbook/.local/bin"
+        - "/Users/macbook/.codeium/windsurf/bin"
+        - "/Users/macbook/.vscode/extensions/openai.chatgpt-26.908.40401-darwin-arm64/bin/macos-aarch64"
+      CMAKE_INSTALL_PREFIX: "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/root_dev/inst"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr"
+        - "/opt/homebrew"
+        - "/usr/local"
+        - "/usr"
+        - "/"
+        - "/opt/homebrew"
+        - "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/root_dev/inst"
+        - "/usr/X11R6"
+        - "/usr/pkg"
+        - "/opt"
+        - "/sw"
+        - "/opt/local"
+      CMAKE_SYSTEM_INCLUDE_PATH:
+        - "/usr/include/X11"
+      CMAKE_SYSTEM_FRAMEWORK_PATH:
+        - "~/Library/Frameworks"
+        - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/Library/Frameworks"
+        - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/Network/Library/Frameworks"
+        - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks"
+        - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks"
+        - "/Applications/Xcode.app/Contents/Developer/Library/Frameworks"
+        - "/Library/Frameworks"
+        - "/Network/Library/Frameworks"
+        - "/System/Library/Frameworks"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/FindOpenGL.cmake:362 (find_path)"
+      - "core/CMakeLists.txt:156 (find_package)"
+    mode: "path"
+    variable: "OPENGL_GLU_INCLUDE_DIR"
+    description: "Include for the OpenGL GLU library"
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "OpenGL/glu.h"
+      - "GL/glu.h"
+    candidate_directories:
+      - "/Users/macbook/.local/bin/"
+      - "/Users/macbook/.codeium/windsurf/bin/"
+      - "/usr/local/bin/"
+      - "/System/Cryptexes/App/usr/bin/"
+      - "/usr/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/"
+      - "/Library/Apple/usr/bin/"
+      - "/opt/homebrew/bin/"
+      - "/Users/macbook/.codex/tmp/arg0/codex-arg02D9yu5/"
+      - "/Users/macbook/.vscode/extensions/openai.chatgpt-26.908.40401-darwin-arm64/bin/macos-aarch64/"
+      - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/"
+      - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/"
+      - "/opt/homebrew/include/"
+      - "/opt/homebrew/"
+      - "/usr/local/include/"
+      - "/usr/local/"
+      - "/usr/include/"
+      - "/usr/"
+      - "/include/"
+      - "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/root_dev/inst/include/"
+      - "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/root_dev/inst/"
+      - "/usr/X11R6/include/"
+      - "/usr/X11R6/"
+      - "/usr/pkg/include/"
+      - "/usr/pkg/"
+      - "/opt/include/"
+      - "/opt/"
+      - "/sw/include/"
+      - "/sw/"
+      - "/opt/local/include/"
+      - "/opt/local/"
+      - "/usr/include/X11/"
+      - "/Users/macbook/Library/Frameworks/"
+      - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/Library/Frameworks/"
+      - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/Network/Library/Frameworks/"
+      - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/"
+      - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks/"
+      - "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/"
+      - "/Library/Frameworks/"
+      - "/Network/Library/Frameworks/"
+      - "/System/Library/Frameworks/"
+    searched_directories:
+      - "/Users/macbook/.local/bin/OpenGL.framework/Headers/glu.h"
+      - "/Users/macbook/.codeium/windsurf/bin/OpenGL.framework/Headers/glu.h"
+      - "/usr/local/bin/OpenGL.framework/Headers/glu.h"
+      - "/System/Cryptexes/App/usr/bin/OpenGL.framework/Headers/glu.h"
+      - "/usr/bin/OpenGL.framework/Headers/glu.h"
+      - "/bin/OpenGL.framework/Headers/glu.h"
+      - "/usr/sbin/OpenGL.framework/Headers/glu.h"
+      - "/sbin/OpenGL.framework/Headers/glu.h"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/OpenGL.framework/Headers/glu.h"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/OpenGL.framework/Headers/glu.h"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/OpenGL.framework/Headers/glu.h"
+      - "/Library/Apple/usr/bin/OpenGL.framework/Headers/glu.h"
+      - "/opt/homebrew/bin/OpenGL.framework/Headers/glu.h"
+      - "/Users/macbook/.codex/tmp/arg0/codex-arg02D9yu5/OpenGL.framework/Headers/glu.h"
+      - "/Users/macbook/.vscode/extensions/openai.chatgpt-26.908.40401-darwin-arm64/bin/macos-aarch64/OpenGL.framework/Headers/glu.h"
+      - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/OpenGL.framework/Headers/glu.h"
+      - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/OpenGL.framework/Headers/glu.h"
+      - "/opt/homebrew/include/OpenGL.framework/Headers/glu.h"
+      - "/opt/homebrew/OpenGL.framework/Headers/glu.h"
+      - "/usr/local/include/OpenGL.framework/Headers/glu.h"
+      - "/usr/local/OpenGL.framework/Headers/glu.h"
+      - "/usr/include/OpenGL.framework/Headers/glu.h"
+      - "/usr/OpenGL.framework/Headers/glu.h"
+      - "/include/OpenGL.framework/Headers/glu.h"
+      - "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/root_dev/inst/include/OpenGL.framework/Headers/glu.h"
+      - "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/root_dev/inst/OpenGL.framework/Headers/glu.h"
+      - "/usr/X11R6/include/OpenGL.framework/Headers/glu.h"
+      - "/usr/X11R6/OpenGL.framework/Headers/glu.h"
+      - "/usr/pkg/include/OpenGL.framework/Headers/glu.h"
+      - "/usr/pkg/OpenGL.framework/Headers/glu.h"
+      - "/opt/include/OpenGL.framework/Headers/glu.h"
+      - "/opt/OpenGL.framework/Headers/glu.h"
+      - "/sw/include/OpenGL.framework/Headers/glu.h"
+      - "/sw/OpenGL.framework/Headers/glu.h"
+      - "/opt/local/include/OpenGL.framework/Headers/glu.h"
+      - "/opt/local/OpenGL.framework/Headers/glu.h"
+      - "/usr/include/X11/OpenGL.framework/Headers/glu.h"
+      - "/Users/macbook/Library/Frameworks/OpenGL.framework/Headers/glu.h"
+      - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/Library/Frameworks/OpenGL.framework/Headers/glu.h"
+      - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/Network/Library/Frameworks/OpenGL.framework/Headers/glu.h"
+    found: "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/OpenGL.framework"
+    search_context:
+      ENV{PATH}:
+        - "/Users/macbook/.local/bin"
+        - "/Users/macbook/.codeium/windsurf/bin"
+        - "/usr/local/bin"
+        - "/System/Cryptexes/App/usr/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
+        - "/Library/Apple/usr/bin"
+        - "/opt/homebrew/bin"
+        - "/Users/macbook/.codex/tmp/arg0/codex-arg02D9yu5"
+        - "/Users/macbook/.local/bin"
+        - "/Users/macbook/.codeium/windsurf/bin"
+        - "/Users/macbook/.vscode/extensions/openai.chatgpt-26.908.40401-darwin-arm64/bin/macos-aarch64"
+      CMAKE_INSTALL_PREFIX: "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/root_dev/inst"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr"
+        - "/opt/homebrew"
+        - "/usr/local"
+        - "/usr"
+        - "/"
+        - "/opt/homebrew"
+        - "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/root_dev/inst"
+        - "/usr/X11R6"
+        - "/usr/pkg"
+        - "/opt"
+        - "/sw"
+        - "/opt/local"
+      CMAKE_SYSTEM_INCLUDE_PATH:
+        - "/usr/include/X11"
+      CMAKE_SYSTEM_FRAMEWORK_PATH:
+        - "~/Library/Frameworks"
+        - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/Library/Frameworks"
+        - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/Network/Library/Frameworks"
+        - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks"
+        - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks"
+        - "/Applications/Xcode.app/Contents/Developer/Library/Frameworks"
+        - "/Library/Frameworks"
+        - "/Network/Library/Frameworks"
+        - "/System/Library/Frameworks"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/FindPkgConfig.cmake:761 (find_library)"
+      - "/opt/homebrew/share/cmake/Modules/FindPkgConfig.cmake:811 (_pkg_find_libs)"
+      - "/opt/homebrew/share/cmake/Modules/FindPkgConfig.cmake:1149 (_pkg_recalculate)"
+      - "/opt/homebrew/share/cmake/Modules/FindPkgConfig.cmake:1166 (_pkg_check_modules_internal)"
+      - "core/CMakeLists.txt:160 (pkg_check_modules)"
+    mode: "library"
+    variable: "pkgcfg_lib_FFTW3_fftw3f"
+    description: "Path to a library."
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "fftw3f"
+    candidate_directories:
+      - "/opt/homebrew/Cellar/fftw/3.3.11/lib/"
+    found: "/opt/homebrew/Cellar/fftw/3.3.11/lib/libfftw3f.dylib"
+    search_context:
+      ENV{PATH}:
+        - "/Users/macbook/.local/bin"
+        - "/Users/macbook/.codeium/windsurf/bin"
+        - "/usr/local/bin"
+        - "/System/Cryptexes/App/usr/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
+        - "/Library/Apple/usr/bin"
+        - "/opt/homebrew/bin"
+        - "/Users/macbook/.codex/tmp/arg0/codex-arg02D9yu5"
+        - "/Users/macbook/.local/bin"
+        - "/Users/macbook/.codeium/windsurf/bin"
+        - "/Users/macbook/.vscode/extensions/openai.chatgpt-26.908.40401-darwin-arm64/bin/macos-aarch64"
+      CMAKE_INSTALL_PREFIX: "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/root_dev/inst"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr"
+        - "/opt/homebrew"
+        - "/usr/local"
+        - "/usr"
+        - "/"
+        - "/opt/homebrew"
+        - "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/root_dev/inst"
+        - "/usr/X11R6"
+        - "/usr/pkg"
+        - "/opt"
+        - "/sw"
+        - "/opt/local"
+      CMAKE_SYSTEM_LIBRARY_PATH:
+        - "/usr/lib/X11"
+      CMAKE_SYSTEM_FRAMEWORK_PATH:
+        - "~/Library/Frameworks"
+        - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/Library/Frameworks"
+        - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/Network/Library/Frameworks"
+        - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks"
+        - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks"
+        - "/Applications/Xcode.app/Contents/Developer/Library/Frameworks"
+        - "/Library/Frameworks"
+        - "/Network/Library/Frameworks"
+        - "/System/Library/Frameworks"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/FindPkgConfig.cmake:761 (find_library)"
+      - "/opt/homebrew/share/cmake/Modules/FindPkgConfig.cmake:811 (_pkg_find_libs)"
+      - "/opt/homebrew/share/cmake/Modules/FindPkgConfig.cmake:1149 (_pkg_recalculate)"
+      - "/opt/homebrew/share/cmake/Modules/FindPkgConfig.cmake:1166 (_pkg_check_modules_internal)"
+      - "core/CMakeLists.txt:164 (pkg_check_modules)"
+    mode: "library"
+    variable: "pkgcfg_lib_FFTW3_fftw3"
+    description: "Path to a library."
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "fftw3"
+    candidate_directories:
+      - "/opt/homebrew/Cellar/fftw/3.3.11/lib/"
+    found: "/opt/homebrew/Cellar/fftw/3.3.11/lib/libfftw3.dylib"
+    search_context:
+      ENV{PATH}:
+        - "/Users/macbook/.local/bin"
+        - "/Users/macbook/.codeium/windsurf/bin"
+        - "/usr/local/bin"
+        - "/System/Cryptexes/App/usr/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
+        - "/Library/Apple/usr/bin"
+        - "/opt/homebrew/bin"
+        - "/Users/macbook/.codex/tmp/arg0/codex-arg02D9yu5"
+        - "/Users/macbook/.local/bin"
+        - "/Users/macbook/.codeium/windsurf/bin"
+        - "/Users/macbook/.vscode/extensions/openai.chatgpt-26.908.40401-darwin-arm64/bin/macos-aarch64"
+      CMAKE_INSTALL_PREFIX: "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/root_dev/inst"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr"
+        - "/opt/homebrew"
+        - "/usr/local"
+        - "/usr"
+        - "/"
+        - "/opt/homebrew"
+        - "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/root_dev/inst"
+        - "/usr/X11R6"
+        - "/usr/pkg"
+        - "/opt"
+        - "/sw"
+        - "/opt/local"
+      CMAKE_SYSTEM_LIBRARY_PATH:
+        - "/usr/lib/X11"
+      CMAKE_SYSTEM_FRAMEWORK_PATH:
+        - "~/Library/Frameworks"
+        - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/Library/Frameworks"
+        - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/Network/Library/Frameworks"
+        - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks"
+        - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks"
+        - "/Applications/Xcode.app/Contents/Developer/Library/Frameworks"
+        - "/Library/Frameworks"
+        - "/Network/Library/Frameworks"
+        - "/System/Library/Frameworks"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/FindPkgConfig.cmake:761 (find_library)"
+      - "/opt/homebrew/share/cmake/Modules/FindPkgConfig.cmake:811 (_pkg_find_libs)"
+      - "/opt/homebrew/share/cmake/Modules/FindPkgConfig.cmake:1149 (_pkg_recalculate)"
+      - "/opt/homebrew/share/cmake/Modules/FindPkgConfig.cmake:1166 (_pkg_check_modules_internal)"
+      - "core/CMakeLists.txt:169 (pkg_check_modules)"
+    mode: "library"
+    variable: "pkgcfg_lib_VOLK_volk"
+    description: "Path to a library."
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "volk"
+    candidate_directories:
+      - "/opt/homebrew/Cellar/volk/3.3.0_2/lib/"
+    found: "/opt/homebrew/Cellar/volk/3.3.0_2/lib/libvolk.dylib"
+    search_context:
+      ENV{PATH}:
+        - "/Users/macbook/.local/bin"
+        - "/Users/macbook/.codeium/windsurf/bin"
+        - "/usr/local/bin"
+        - "/System/Cryptexes/App/usr/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
+        - "/Library/Apple/usr/bin"
+        - "/opt/homebrew/bin"
+        - "/Users/macbook/.codex/tmp/arg0/codex-arg02D9yu5"
+        - "/Users/macbook/.local/bin"
+        - "/Users/macbook/.codeium/windsurf/bin"
+        - "/Users/macbook/.vscode/extensions/openai.chatgpt-26.908.40401-darwin-arm64/bin/macos-aarch64"
+      CMAKE_INSTALL_PREFIX: "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/root_dev/inst"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr"
+        - "/opt/homebrew"
+        - "/usr/local"
+        - "/usr"
+        - "/"
+        - "/opt/homebrew"
+        - "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/root_dev/inst"
+        - "/usr/X11R6"
+        - "/usr/pkg"
+        - "/opt"
+        - "/sw"
+        - "/opt/local"
+      CMAKE_SYSTEM_LIBRARY_PATH:
+        - "/usr/lib/X11"
+      CMAKE_SYSTEM_FRAMEWORK_PATH:
+        - "~/Library/Frameworks"
+        - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/Library/Frameworks"
+        - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/Network/Library/Frameworks"
+        - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks"
+        - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks"
+        - "/Applications/Xcode.app/Contents/Developer/Library/Frameworks"
+        - "/Library/Frameworks"
+        - "/Network/Library/Frameworks"
+        - "/System/Library/Frameworks"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/FindPkgConfig.cmake:761 (find_library)"
+      - "/opt/homebrew/share/cmake/Modules/FindPkgConfig.cmake:811 (_pkg_find_libs)"
+      - "/opt/homebrew/share/cmake/Modules/FindPkgConfig.cmake:1149 (_pkg_recalculate)"
+      - "/opt/homebrew/share/cmake/Modules/FindPkgConfig.cmake:1166 (_pkg_check_modules_internal)"
+      - "core/CMakeLists.txt:171 (pkg_check_modules)"
+    mode: "library"
+    variable: "pkgcfg_lib_LIBZSTD_zstd"
+    description: "Path to a library."
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "zstd"
+    candidate_directories:
+      - "/opt/homebrew/opt/zstd/lib/"
+    found: "/opt/homebrew/opt/zstd/lib/libzstd.dylib"
+    search_context:
+      ENV{PATH}:
+        - "/Users/macbook/.local/bin"
+        - "/Users/macbook/.codeium/windsurf/bin"
+        - "/usr/local/bin"
+        - "/System/Cryptexes/App/usr/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
+        - "/Library/Apple/usr/bin"
+        - "/opt/homebrew/bin"
+        - "/Users/macbook/.codex/tmp/arg0/codex-arg02D9yu5"
+        - "/Users/macbook/.local/bin"
+        - "/Users/macbook/.codeium/windsurf/bin"
+        - "/Users/macbook/.vscode/extensions/openai.chatgpt-26.908.40401-darwin-arm64/bin/macos-aarch64"
+      CMAKE_INSTALL_PREFIX: "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/root_dev/inst"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr"
+        - "/opt/homebrew"
+        - "/usr/local"
+        - "/usr"
+        - "/"
+        - "/opt/homebrew"
+        - "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/root_dev/inst"
+        - "/usr/X11R6"
+        - "/usr/pkg"
+        - "/opt"
+        - "/sw"
+        - "/opt/local"
+      CMAKE_SYSTEM_LIBRARY_PATH:
+        - "/usr/lib/X11"
+      CMAKE_SYSTEM_FRAMEWORK_PATH:
+        - "~/Library/Frameworks"
+        - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/Library/Frameworks"
+        - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/Network/Library/Frameworks"
+        - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks"
+        - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks"
+        - "/Applications/Xcode.app/Contents/Developer/Library/Frameworks"
+        - "/Library/Frameworks"
+        - "/Network/Library/Frameworks"
+        - "/System/Library/Frameworks"
+...

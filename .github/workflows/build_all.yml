@@ -378,17 +378,17 @@ jobs:
 
         - name: Create Archive
           working-directory: ${{runner.workspace}}
-          run: cd $GITHUB_WORKSPACE && sh make_macos_bundle.sh ${{runner.workspace}}/build ./SDR++Brown.app && zip -r ${{runner.workspace}}/sdrpp_macos_intel.zip SDR++Brown.app
+          run: cd $GITHUB_WORKSPACE && sh make_macos_bundle.sh ${{runner.workspace}}/build ./SDR++Brown.app && hdiutil create -volname "SDR++ Brown" -srcfolder SDR++Brown.app -ov -format UDZO ${{runner.workspace}}/sdrpp_macos_intel.dmg
 
         - name: Save Archive
           uses: actions/upload-artifact@v4
           with:
             name: sdrpp_macos_intel
-            path: ${{runner.workspace}}/sdrpp_macos_intel.zip
+            path: ${{runner.workspace}}/sdrpp_macos_intel.dmg
 
         - name: Update Nightly
           if: github.ref == 'refs/heads/master'
-          run: gh release upload rolling ${{runner.workspace}}/sdrpp_macos_intel.zip -R ${{github.repository}} --clobber
+          run: gh release upload rolling ${{runner.workspace}}/sdrpp_macos_intel.dmg -R ${{github.repository}} --clobber
 
 
 
@@ -512,17 +512,17 @@ jobs:
 
         - name: Create Archive
           working-directory: ${{runner.workspace}}
-          run: cd $GITHUB_WORKSPACE && sh make_macos_bundle.sh ${{runner.workspace}}/build ./SDR++Brown.app && zip -r ${{runner.workspace}}/sdrpp_macos_arm.zip SDR++Brown.app
+          run: cd $GITHUB_WORKSPACE && sh make_macos_bundle.sh ${{runner.workspace}}/build ./SDR++Brown.app && hdiutil create -volname "SDR++ Brown" -srcfolder SDR++Brown.app -ov -format UDZO ${{runner.workspace}}/sdrpp_macos_arm.dmg
 
         - name: Save Archive
           uses: actions/upload-artifact@v4
           with:
             name: sdrpp_macos_arm
-            path: ${{runner.workspace}}/sdrpp_macos_arm.zip
+            path: ${{runner.workspace}}/sdrpp_macos_arm.dmg
 
         - name: Update Nightly
           if: github.ref == 'refs/heads/master'
-          run: gh release upload rolling ${{runner.workspace}}/sdrpp_macos_arm.zip -R ${{github.repository}} --clobber
+          run: gh release upload rolling ${{runner.workspace}}/sdrpp_macos_arm.dmg -R ${{github.repository}} --clobber
 
 
 

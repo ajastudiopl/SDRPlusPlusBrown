@@ -112,6 +112,7 @@ protected:
 
     void updateWaterfallZoomBandwidth(float bw);
     void handleWaterfallInput(ImGui::WaterfallVFO* vfo);
+    void handleDemodulatorShortcuts();
 
     struct ButtomWindow {
         std::string name;
