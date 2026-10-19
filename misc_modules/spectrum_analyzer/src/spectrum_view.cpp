@@ -111,6 +111,23 @@ namespace spectrum {
         return lut;
     }
 
+    void SpectrumView::drawRangeOverlays(ImDrawList* dl, ImVec2 p0, ImVec2 p1, FrequencyView& view) {
+        float w = p1.x - p0.x;
+        if (selectMode && selPhase >= 1) {
+            double a = std::min(selA, selB), b = std::max(selA, selB);
+            float xa = (float)view.freqToX(a, p0.x, w), xb = (float)view.freqToX(b, p0.x, w);
+            dl->AddRectFilled(ImVec2(std::max(xa, p0.x), p0.y), ImVec2(std::min(std::max(xb, xa + 2.0f), p1.x), p1.y), IM_COL32(60, 130, 255, 60));
+            dl->AddLine(ImVec2(xa, p0.y), ImVec2(xa, p1.y), IM_COL32(90, 160, 255, 255), 2.0f);
+            if (selPhase == 2 || b > a) { dl->AddLine(ImVec2(xb, p0.y), ImVec2(xb, p1.y), IM_COL32(90, 160, 255, 255), 2.0f); }
+        }
+        if (std::isfinite(previewStartHz) && std::isfinite(previewStopHz)) {
+            float xa = (float)view.freqToX(previewStartHz, p0.x, w), xb = (float)view.freqToX(previewStopHz, p0.x, w);
+            dl->AddRectFilled(ImVec2(std::max(xa, p0.x), p0.y), ImVec2(std::min(xb, p1.x), p1.y), IM_COL32(120, 230, 255, 30));
+            dashedVLine(dl, xa, p0.y, p1.y, IM_COL32(120, 230, 255, 230), 5.0f * style::uiScale);
+            dashedVLine(dl, xb, p0.y, p1.y, IM_COL32(120, 230, 255, 230), 5.0f * style::uiScale);
+        }
+    }
+
     void SpectrumView::drawFreqGrid(ImDrawList* dl, ImVec2 p0, ImVec2 size, FrequencyView& view, bool labels) {
         int lines = std::max(2, (int)(size.x / (110.0f * style::uiScale)));
         double step = niceStep(view.viewSpan(), lines);
@@ -146,18 +163,43 @@ namespace spectrum {
         if (hovered && io.MouseWheel != 0.0f) {
             view.zoom(std::pow(1.25, (double)io.MouseWheel), mouseHz);
         }
-        if (hovered && ImGui::IsMouseClicked(ImGuiMouseButton_Left)) { pressDragged = false; }
+        if (hovered && ImGui::IsMouseClicked(ImGuiMouseButton_Left)) {
+            pressDragged = false;
+            if (selectMode) {
+                // A press starts a new selection unless it is the second tap of one.
+                selPressStarted = (selPhase != 1);
+                if (selPressStarted) {
+                    selA = selB = mouseHz;
+                    selPhase = 1;
+                }
+            }
+        }
         if (active && ImGui::IsMouseDragging(ImGuiMouseButton_Left, 3.0f * style::uiScale)) {
             dragging = true;
             pressDragged = true;
-            view.pan(-(double)io.MouseDelta.x / (double)size.x * view.viewSpan());
+            if (selectMode) { selB = mouseHz; }
+            else { view.pan(-(double)io.MouseDelta.x / (double)size.x * view.viewSpan()); }
         }
-        if (hovered && ImGui::IsMouseReleased(ImGuiMouseButton_Left) && !pressDragged) {
-            hasTap = true;
-            tapHz = mouseHz;
+        if (hovered && ImGui::IsMouseReleased(ImGuiMouseButton_Left)) {
+            if (selectMode) {
+                if (pressDragged) {
+                    selB = mouseHz;
+                    selPhase = 2;
+                }
+                else if (!selPressStarted) {
+                    selB = mouseHz;
+                    selPhase = 2;
+                }
+                if (selPhase == 2 && selB < selA) { std::swap(selA, selB); }
+                if (selPhase == 2 && selB - selA < 1e3) { selPhase = 1; }
+            }
+            else if (!pressDragged) {
+                hasTap = true;
+                tapHz = mouseHz;
+            }
         }
         if (!ImGui::IsMouseDown(ImGuiMouseButton_Left)) { dragging = false; }
-        if (hovered && ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left)) {
+        if (hovered && !selectMode && ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left)) {
             ev.tune = true;
             ev.tuneHz = mouseHz;
         }
@@ -390,6 +432,7 @@ namespace spectrum {
             dl->AddText(ImVec2(p0.x + (size.x - ts.x) / 2, plotTop + (plotH - ts.y) / 2), COL_TEXT, t);
         }
 
+        drawRangeOverlays(dl, ImVec2(p0.x, plotTop), p1, view);
         bool hovered = handleInteraction("##sa_spectrum", p0, size, view, ev, &markers);
         hoverHz = hovered ? view.xToFreq(ImGui::GetIO().MousePos.x, p0.x, size.x) : std::numeric_limits<double>::quiet_NaN();
         if (hovered && !dragging) {
@@ -550,6 +593,7 @@ namespace spectrum {
         if (overlay.displayPaused) { labelBox(dl, ImVec2(p0.x + 6, p0.y + 4), "WATERFALL PAUSED", COL_WARN); }
         if (overlay.synthetic) { labelBox(dl, ImVec2(p0.x + 6, p1.y - ImGui::GetTextLineHeight() - 4), "DEMO", COL_DEMO); }
 
+        drawRangeOverlays(dl, p0, p1, view);
         bool hovered = handleInteraction("##sa_waterfall", p0, size, view, ev, nullptr);
         if (hovered && !dragging && h > 0) {
             ImVec2 mp = ImGui::GetIO().MousePos;

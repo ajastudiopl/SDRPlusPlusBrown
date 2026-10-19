@@ -54,6 +54,16 @@ namespace spectrum {
         bool hasTap = false;
         double tapHz = 0;
 
+        // Range selection mode: drag across the plot, or tap start then stop.
+        bool selectMode = false;
+        int selPhase = 0;           // 0 none, 1 start set, 2 range complete
+        double selA = 0, selB = 0;
+        void clearSelection() { selPhase = 0; }
+
+        // Range being edited (dashed lines), NaN = none.
+        double previewStartHz = std::numeric_limits<double>::quiet_NaN();
+        double previewStopHz = std::numeric_limits<double>::quiet_NaN();
+
     private:
         bool handleInteraction(const char* id, ImVec2 p0, ImVec2 size, FrequencyView& view, ViewEvents& ev,
                                const std::vector<Marker>* markers);
@@ -87,6 +97,8 @@ namespace spectrum {
         // interaction
         bool dragging = false;
         bool pressDragged = false;
+        bool selPressStarted = false;
+        void drawRangeOverlays(ImDrawList* dl, ImVec2 p0, ImVec2 p1, FrequencyView& view);
         float dragLastX = 0;
         double contextHz = 0;
         int contextMarker = -1;

@@ -12,6 +12,7 @@
 #include "../src/engine/sweep_controller.h"
 #include "../src/engine/synthetic_tuner.h"
 #include "../src/engine/view_model.h"
+#include "../src/engine/band_plan.h"
 #include <cstdio>
 #include <fstream>
 #include <sstream>
@@ -1267,6 +1268,53 @@ TEST(auto_parameters_follow_device) {
     ne.framesPerCapture = 100;
     applyNativeAutoParams(ns, ne, caps, 40e6);
     CHECK(ne.framesPerCapture == 15);
+}
+
+TEST(view_navigates_beyond_measured_range) {
+    FrequencyView v;
+    v.setFullRange(144e6, 146e6, true);
+    v.setNavigationLimits(0, 7250e6);
+    v.zoom(0.01, 145e6); // zoom out far beyond the measured 2 MHz
+    CHECK(v.viewSpan() > 100e6);
+    v.pan(1000e6);
+    CHECK(v.viewStart() > 146e6); // completely outside the measured range
+    int b0, b1;
+    v.columnBins(10, 100, 2000, b0, b1);
+    CHECK(b0 == b1);              // no data drawn there
+    v.pan(-1e12);
+    CHECK_NEAR(v.viewStart(), 0, 1e-3);
+    v.reset();
+    CHECK_NEAR(v.viewStart(), 144e6, 1e-3);
+    CHECK_NEAR(v.viewStop(), 146e6, 1e-3);
+    v.setNavigationLimits(0, 0); // unset: back to the measured range only
+    v.pan(1e9);
+    CHECK_NEAR(v.viewStop(), 146e6, 1e-3);
+}
+
+TEST(band_plan_and_drag_editing) {
+    const auto& bands = bandPlan();
+    CHECK(bands.size() > 30);
+    bool has40 = false;
+    for (auto& b : bands) {
+        CHECK(b.stopHz > b.startHz);
+        bool known = false;
+        for (auto g : bandGroups()) { known = known || std::string(g) == b.group; }
+        CHECK(known);
+        if (std::string(b.name) == "40 m") { has40 = std::fabs(b.startHz - 7.0e6) < 1 && std::fabs(b.stopHz - 7.2e6) < 1; }
+    }
+    CHECK(has40);
+    CHECK_NEAR(dragSpeedHzPerPx(0), 1e3, 1e-6);
+    CHECK_NEAR(dragSpeedHzPerPx(-60), 1e4, 1e-3);
+    CHECK_NEAR(dragSpeedHzPerPx(180), 1e6, 1e-1);
+    CHECK(dragSpeedHzPerPx(5000) <= 1e9 + 1);
+    CHECK_NEAR(dragOffsetHz(0), 0, 1e-9);
+    CHECK(dragOffsetHz(-300) < 0);
+    CHECK_NEAR(dragOffsetHz(300), -dragOffsetHz(-300), 1e-6);
+    CHECK(dragOffsetHz(60) > 0.2e6 && dragOffsetHz(60) < 0.27e6);
+    CHECK(dragOffsetHz(180) > 20e6 && dragOffsetHz(180) < 30e6);
+    CHECK(dragOffsetHz(240) > 200e6);
+    CHECK_NEAR(dragSnapHz(145123456.0, 2500.0), 145123000.0, 1e-3);
+    CHECK_NEAR(dragSnapHz(145123456.0, 2.5e6), 145000000.0, 1e-3);
 }
 
 int main(int argc, char** argv) {

@@ -24,6 +24,7 @@
 
 #include "core_fft_engine.h"
 #include "core_receiver_tuner.h"
+#include "engine/band_plan.h"
 #include "engine/export.h"
 #include "engine/generic_backend.h"
 #include "engine/native_backend.h"
@@ -211,6 +212,13 @@ private:
         if (ui.contains("restoreReceiver")) { restoreReceiver = ui["restoreReceiver"]; }
         if (ui.contains("resumeReceiver")) { resumeReceiver = ui["resumeReceiver"]; }
         if (ui.contains("exportDir")) { exportDir = ui["exportDir"]; }
+        if (ui.contains("recentRanges") && ui["recentRanges"].is_array()) {
+            for (auto& r : ui["recentRanges"]) {
+                if (r.is_array() && r.size() == 2 && r[0].is_number() && r[1].is_number() && r[1].get<double>() > r[0].get<double>()) {
+                    recentRanges.push_back({ r[0].get<double>(), r[1].get<double>() });
+                }
+            }
+        }
         // Layout v2: bigger waterfall and auto waterfall levels by default
         int layoutVersion = ui.contains("layoutVersion") ? ui["layoutVersion"].get<int>() : 0;
         if (layoutVersion < 2) { settings.waterfall.autoLevels = true; }
@@ -235,6 +243,9 @@ private:
         config.conf["presets"] = presets;
         config.conf["device"] = selectedDeviceKey;
         config.conf["ui"]["layoutVersion"] = 3;
+        json rr = json::array();
+        for (auto& r : recentRanges) { rr.push_back({ r.startHz, r.stopHz }); }
+        config.conf["ui"]["recentRanges"] = rr;
         config.conf["ui"]["unit"] = (int)unit;
         config.conf["ui"]["muteAudio"] = muteAudio;
         config.conf["ui"]["restoreReceiver"] = restoreReceiver;
@@ -635,6 +646,7 @@ private:
         rangeError = validateRange(editRange, currentLimits(k));
         if (!rangeError.empty()) { return; }
         settings.range = editRange;
+        rememberRange(editRange);
         saveConfig();
         restartIfRunning();
     }
@@ -790,6 +802,186 @@ private:
         if (!rangeError.empty()) { ImGui::TextColored(ImVec4(1, 0.4f, 0.3f, 1), "%s", rangeError.c_str()); }
     }
 
+    // Frequency value: tap = type it, hold and drag up/down = change it
+    // (faster the further the finger moves from where it pressed).
+    bool dragFreqField(const char* id, double& hz, float width) {
+        float scale = style::uiScale;
+        ImGuiIO& io = ImGui::GetIO();
+        bool changed = false;
+        ImGui::PushID(id);
+        if (textEditId == id) {
+            double v = toUnit(hz, unit);
+            ImGui::SetNextItemWidth(width);
+            if (textEditFocus) {
+                ImGui::SetKeyboardFocusHere();
+                textEditFocus = false;
+            }
+            const char* fmt = unit == FreqUnit::KHZ ? "%.3f" : (unit == FreqUnit::MHZ ? "%.6f" : "%.9f");
+            if (ImGui::InputDouble("##txt", &v, 0, 0, fmt, ImGuiInputTextFlags_AutoSelectAll)) {
+                hz = std::max(0.0, fromUnit(v, unit));
+                changed = true;
+            }
+            if (ImGui::IsItemDeactivated()) { textEditId.clear(); }
+        }
+        else {
+            std::string label = formatFrequency(hz, 6);
+            ImGui::Button(label.c_str(), ImVec2(width, 0));
+            if (ImGui::IsItemActivated()) {
+                dragField = id;
+                dragPressY = io.MousePos.y;
+                dragPressTime = ImGui::GetTime();
+                dragValue = hz;
+                dragMoved = false;
+            }
+            // The gesture is tracked by us until the finger lifts, even when it
+            // leaves the button (ImGui drops the item's active state then).
+            if (dragField == id) {
+                if (io.MouseDown[0]) {
+                    // Position based: the change depends on how far the finger is from
+                    // the press point (up = higher), not on per-frame deltas.
+                    float dist = (dragPressY - io.MousePos.y) / scale;
+                    if (std::fabs(dist) > 6.0f) { dragMoved = true; }
+                    if (dragMoved) {
+                        double speed = dragSpeedHzPerPx(dist);
+                        double v = std::clamp(dragValue + dragOffsetHz(dist), freqView.navStart(), freqView.navStop());
+                        double snapped = dragSnapHz(v, speed);
+                        if (snapped != hz) {
+                            hz = snapped;
+                            changed = true;
+                        }
+                        double step = std::pow(10.0, std::floor(std::log10(speed)));
+                        ImGui::SetTooltip("%s\nstep %s", formatFrequency(hz, 6).c_str(), formatFrequency(step, 0).c_str());
+                    }
+                }
+                else {
+                    if (!dragMoved && ImGui::GetTime() - dragPressTime < 0.35) {
+                        textEditId = id;
+                        textEditFocus = true;
+                    }
+                    dragField.clear();
+                }
+            }
+        }
+        ImGui::PopID();
+        return changed;
+    }
+
+    void applyRangeAndScan() {
+        applyRange();
+        if (rangeError.empty() && !controller.active()) { startSweep(false); }
+    }
+
+    void rememberRange(const FrequencyRange& r) {
+        recentRanges.erase(std::remove_if(recentRanges.begin(), recentRanges.end(), [&](const FrequencyRange& x) {
+            return std::fabs(x.startHz - r.startHz) < 1 && std::fabs(x.stopHz - r.stopHz) < 1;
+        }), recentRanges.end());
+        recentRanges.insert(recentRanges.begin(), r);
+        if (recentRanges.size() > 6) { recentRanges.resize(6); }
+    }
+
+    void drawRangePopup() {
+        float scale = style::uiScale;
+        rangePopupOpen = ImGui::BeginPopup("##sa_range_popup");
+        if (!rangePopupOpen) { return; }
+        float fw = 170.0f * scale;
+        ImGui::TextDisabled("Hold and drag up/down to change, tap to type");
+        ImGui::AlignTextToFramePadding();
+        ImGui::TextUnformatted("Start");
+        ImGui::SameLine(60.0f * scale);
+        dragFreqField("start", editRange.startHz, fw);
+        ImGui::AlignTextToFramePadding();
+        ImGui::TextUnformatted("Stop");
+        ImGui::SameLine(60.0f * scale);
+        dragFreqField("stop", editRange.stopHz, fw);
+        if (editRange.stopHz <= editRange.startHz) { ImGui::TextColored(ImVec4(1, 0.45f, 0.35f, 1), "Stop must be above start"); }
+        else { ImGui::TextDisabled("span %s", formatFrequency(editRange.spanHz(), 3).c_str()); }
+        view.previewStartHz = editRange.startHz;
+        view.previewStopHz = editRange.stopHz;
+
+        if (ImGui::Button("Scan##sa_rp_scan")) {
+            applyRangeAndScan();
+            ImGui::CloseCurrentPopup();
+        }
+        ImGui::SameLine();
+        if (ImGui::Button("Scan visible##sa_rp_vis")) {
+            editRange = { std::max(0.0, freqView.viewStart()), freqView.viewStop() };
+            applyRangeAndScan();
+            ImGui::CloseCurrentPopup();
+        }
+        ImGui::SameLine();
+        if (ImGui::Button("Save preset##sa_rp_save")) {
+            Preset p;
+            p.settings = settings;
+            p.settings.range = editRange;
+            p.name = formatFrequency(editRange.startHz, 3) + " - " + formatFrequency(editRange.stopHz, 3);
+            auto it = std::find_if(userPresets.begin(), userPresets.end(), [&](const Preset& x) { return x.name == p.name; });
+            if (it != userPresets.end()) { *it = p; }
+            else { userPresets.push_back(p); }
+            saveConfig();
+        }
+        if (!rangeError.empty()) { ImGui::TextColored(ImVec4(1, 0.45f, 0.35f, 1), "%s", rangeError.c_str()); }
+        if (!recentRanges.empty()) {
+            ImGui::Separator();
+            ImGui::TextDisabled("Recent");
+            for (int i = 0; i < (int)recentRanges.size(); i++) {
+                std::string l = formatFrequency(recentRanges[i].startHz, 3) + " - " + formatFrequency(recentRanges[i].stopHz, 3) + "##rr" + std::to_string(i);
+                if (ImGui::Selectable(l.c_str())) {
+                    editRange = recentRanges[i];
+                    applyRangeAndScan();
+                    ImGui::CloseCurrentPopup();
+                }
+            }
+        }
+        ImGui::EndPopup();
+    }
+
+    void drawBandsPopup() {
+        if (!ImGui::BeginPopup("##sa_bands_popup")) { return; }
+        float scale = style::uiScale;
+        bool native = capsValid && currentDevice() && currentDevice()->kind == Kind::NATIVE;
+        for (auto group : bandGroups()) {
+            ImGui::TextDisabled("%s", group);
+            float x0 = ImGui::GetCursorPosX();
+            float maxX = x0 + 520.0f * scale;
+            bool first = true;
+            for (auto& b : bandPlan()) {
+                if (std::string(b.group) != group) { continue; }
+                float bw = ImGui::CalcTextSize(b.name).x + ImGui::GetStyle().FramePadding.x * 2;
+                if (!first) {
+                    ImGui::SameLine();
+                    if (ImGui::GetCursorPosX() + bw > maxX) { ImGui::NewLine(); }
+                }
+                first = false;
+                bool outOfSpec = native && (b.startHz < caps.specMinFreqHz || b.stopHz > caps.specMaxFreqHz);
+                if (outOfSpec) { ImGui::PushStyleColor(ImGuiCol_Text, ImGui::GetStyleColorVec4(ImGuiCol_TextDisabled)); }
+                bool selected = std::fabs(settings.range.startHz - b.startHz) < 1 && std::fabs(settings.range.stopHz - b.stopHz) < 1;
+                if (selected) { ImGui::PushStyleColor(ImGuiCol_Button, ImGui::GetStyleColorVec4(ImGuiCol_ButtonActive)); }
+                if (ImGui::Button(b.name)) {
+                    editRange = { b.startHz, b.stopHz };
+                    applyRangeAndScan();
+                    freqView.setFullRange(b.startHz, b.stopHz, true);
+                    ImGui::CloseCurrentPopup();
+                }
+                if (selected) { ImGui::PopStyleColor(); }
+                if (outOfSpec) {
+                    ImGui::PopStyleColor();
+                    if (ImGui::IsItemHovered()) { ImGui::SetTooltip("Outside the range specified for this device"); }
+                }
+            }
+        }
+        if (!userPresets.empty()) {
+            ImGui::TextDisabled("My presets");
+            for (auto& p : userPresets) {
+                if (ImGui::Selectable((p.name + "##bp").c_str())) {
+                    loadPreset(p, false);
+                    if (!controller.active()) { startSweep(false); }
+                    ImGui::CloseCurrentPopup();
+                }
+            }
+        }
+        ImGui::EndPopup();
+    }
+
     void drawPresetCombo(float width) {
         ImGui::SetNextItemWidth(width);
         if (ImGui::BeginCombo("##sa_presets", "Presets...")) {
@@ -832,19 +1024,54 @@ private:
         ImGui::SameLine();
         {
             EngineStats st = engine.stats();
-            float frac = st.segmentsPerSweep > 0 ? (float)st.segmentsReceived / (float)st.segmentsPerSweep : 0.0f;
-            char buf[160];
-            if (state == SweepState::SWEEPING || state == SweepState::PAUSED) {
-                snprintf(buf, sizeof(buf), "%s - %s  %.1f sw/s", formatFrequency(settings.range.startHz, 3).c_str(), formatFrequency(settings.range.stopHz, 3).c_str(), st.sweepsPerSec);
+            // Range chip: tap opens the quick range panel
+            std::string chip = formatFrequency(settings.range.startHz, 3) + " - " + formatFrequency(settings.range.stopHz, 3) + "##sa_rchip";
+            if (ImGui::Button(chip.c_str())) {
+                editRange = settings.range;
+                ImGui::OpenPopup("##sa_range_popup");
+            }
+            if (state == SweepState::SWEEPING) {
+                float frac = st.segmentsPerSweep > 0 ? (float)st.segmentsReceived / (float)st.segmentsPerSweep : 0.0f;
+                ImGui::SameLine();
+                ImGui::TextDisabled("%.1f sw/s", st.sweepsPerSec);
+                ImGui::SameLine();
+                ImGui::ProgressBar(frac, ImVec2(50.0f * scale, ImGui::GetTextLineHeight() * 0.5f), "");
+            }
+            drawRangePopup();
+        }
+        ImGui::SameLine();
+        if (ImGui::Button("Bands##sa_bands")) { ImGui::OpenPopup("##sa_bands_popup"); }
+        drawBandsPopup();
+        ImGui::SameLine();
+        if (view.selectMode) {
+            ImVec4 on = ImGui::GetStyleColorVec4(ImGuiCol_ButtonActive);
+            ImGui::PushStyleColor(ImGuiCol_Button, on);
+            if (ImGui::Button("Select##sa_selmode")) {
+                view.selectMode = false;
+                view.clearSelection();
+            }
+            ImGui::PopStyleColor();
+            ImGui::SameLine();
+            if (view.selPhase == 2) {
+                // Round to a step matching the zoom (about one pixel)
+                double pxHz = freqView.viewSpan() / std::max(ImGui::GetContentRegionAvail().x, 100.0f);
+                double a = dragSnapHz(view.selA, pxHz), b = dragSnapHz(view.selB, pxHz);
+                char lblBuf[96];
+                snprintf(lblBuf, sizeof(lblBuf), "Scan %.6g-%.6g MHz##sa_selscan", a / 1e6, b / 1e6);
+                if (ImGui::Button(lblBuf)) {
+                    editRange = { a, b };
+                    applyRangeAndScan();
+                    view.selectMode = false;
+                    view.clearSelection();
+                }
             }
             else {
-                snprintf(buf, sizeof(buf), "%s - %s", formatFrequency(settings.range.startHz, 3).c_str(), formatFrequency(settings.range.stopHz, 3).c_str());
+                ImGui::TextDisabled(view.selPhase == 1 ? "tap the end" : "drag or tap start");
             }
-            ImGui::TextDisabled("%s", buf);
-            if (state == SweepState::SWEEPING) {
-                ImGui::SameLine();
-                ImGui::ProgressBar(frac, ImVec2(60.0f * scale, ImGui::GetTextLineHeight() * 0.5f), "");
-            }
+        }
+        else if (ImGui::Button("Select##sa_selmode")) {
+            view.selectMode = true;
+            view.clearSelection();
         }
         ImGui::SameLine();
         if (ImGui::Button(" - ##sa_zout")) { freqView.zoom(0.5, (freqView.viewStart() + freqView.viewStop()) / 2); }
@@ -873,6 +1100,9 @@ private:
 
         ImVec2 avail = ImGui::GetContentRegionAvail();
         float splitterH = 6.0f * scale;
+        if (!rangePopupOpen) {
+            view.previewStartHz = view.previewStopHz = std::numeric_limits<double>::quiet_NaN();
+        }
         float specH = std::floor((avail.y - splitterH) * settings.display.spectrumHeightFrac);
         float wfH = avail.y - splitterH - specH;
 
@@ -946,6 +1176,10 @@ private:
         PlanSummary plan = engine.planSummary();
         if (plan.valid && (snap.hasFrame || controller.active())) { freqView.setFullRange(plan.range.startHz, plan.range.stopHz, false); }
         else { freqView.setFullRange(settings.range.startHz, settings.range.stopHz, false); }
+        // The view can be moved over the whole device range to pick a new range.
+        const DeviceEntry* navDev = currentDevice();
+        if (navDev && navDev->kind == Kind::NATIVE && capsValid) { freqView.setNavigationLimits(caps.minFreqHz, caps.maxFreqHz); }
+        else { freqView.setNavigationLimits(0, 6e9); }
 
         // Settings are in the left menu ("Spectrum Analyzer" entry), like every other module.
         ImGui::BeginChild("##sa_plots", ImVec2(0, 0), false, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
@@ -1561,6 +1795,15 @@ private:
     std::string notice;
     std::string rangeError;
     bool acqDirty = false;
+    std::vector<FrequencyRange> recentRanges;
+    bool rangePopupOpen = false;
+    std::string textEditId;
+    bool textEditFocus = false;
+    float dragPressY = 0;
+    double dragPressTime = 0;
+    double dragValue = 0;
+    bool dragMoved = false;
+    std::string dragField;
 
     Kind runKind = Kind::NONE;
     DeviceEntry runDevice;

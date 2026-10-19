@@ -155,6 +155,29 @@ Stany: *Idle, Starting, Sweeping, Paused, Stopping, Error, Device Disconnected*.
   *Device Disconnected*, urządzenie jest zwalniane; po ponownym podłączeniu
   *Refresh* i *Start*.
 
+## Szybki wybór zakresu (bez menu)
+
+W linii statusu zakładki:
+
+* **Chip zakresu** (np. „144.000 MHz - 146.000 MHz”): otwiera panel z polami
+  Start i Stop. Krótkie stuknięcie = wpisanie z klawiatury. **Przytrzymanie i
+  przeciąganie w górę/dół** zmienia wartość: im dalej palec od miejsca
+  przytrzymania, tym szybciej (1 kHz/px przy samym punkcie, 10× szybciej co
+  60 px; około 0,2 MHz / 2,6 MHz / 26 MHz / 260 MHz przy 60/120/180/240 px).
+  Podpowiedź pokazuje wartość i krok, granice są rysowane na widmie na żywo.
+  Dalej: *Scan*, *Scan visible* (zakres = to, co aktualnie widać), *Save preset*
+  i lista ostatnich zakresów.
+* **Bands**: lista najważniejszych pasm (krótkofalarskie HF 160–10 m i całe HF,
+  6 m / 4 m / 2 m / 70 cm / 23 cm, radiofonia LW/MW/SW/FM/DAB+, Airband,
+  morskie VHF, CB, PMR446, LPD433, ISM 868, ADS-B, satelity 137 MHz,
+  ISM 2,4 GHz) oraz presety użytkownika. Jedno stuknięcie ustawia zakres i
+  od razu skanuje. Pasma poza zakresem specyfikacji urządzenia są wyszarzone.
+* **Select**: przeciągnij palcem po widmie albo stuknij początek i koniec;
+  przycisk „Scan …” skanuje zaznaczony zakres.
+* Widok można przesuwać i oddalać w całym zakresie urządzenia (HackRF
+  0–7250 MHz, inne źródła 0–6 GHz), także poza aktualnie skanowanym
+  fragmentem; tam widmo jest puste. *Fit* wraca do skanowanego zakresu.
+
 ## Interakcja
 
 * Najechanie: częstotliwość, poziom (current/avg/max), poziom kursora, wiek pomiaru.

@@ -17,6 +17,10 @@ namespace spectrum {
     class FrequencyView {
     public:
         void setFullRange(double startHz, double stopHz, bool resetView);
+        // Range the view may be panned / zoomed within (device range). Unset = measured range only.
+        void setNavigationLimits(double minHz, double maxHz);
+        double navStart() const;
+        double navStop() const;
         void reset();
         // factor > 1 zooms in around anchorHz
         void zoom(double factor, double anchorHz);
@@ -41,6 +45,7 @@ namespace spectrum {
         void clampView();
         double fStart = 0, fStop = 1;
         double vStart = 0, vStop = 1;
+        double navMin = 0, navMax = 0;
     };
 
     // "Nice" grid step (1/2/5 * 10^n) so that span/step is about targetLines.
@@ -51,6 +56,15 @@ namespace spectrum {
 
     // Index of the marker closest to freqHz within toleranceHz, -1 if none.
     int nearestMarker(const std::vector<Marker>& markers, double freqHz, double toleranceHz);
+
+    // Hold-and-drag editing of a frequency: Hz per pixel grows 10x for every
+    // 60 px (unscaled) between the finger and the press point, starting at 1 kHz/px.
+    double dragSpeedHzPerPx(double distancePx);
+    // Total change for a finger `distancePx` away from the press point
+    // (integral of dragSpeedHzPerPx), signed like distancePx.
+    double dragOffsetHz(double distancePx);
+    // Rounds to a step matching the current drag speed (power of ten).
+    double dragSnapHz(double hz, double speedHzPerPx);
 
     // Level of a trace at a frequency (display grid lookup), NaN outside / not measured.
     float traceValueAt(const std::vector<float>& trace, double startHz, double stopHz, double freqHz);

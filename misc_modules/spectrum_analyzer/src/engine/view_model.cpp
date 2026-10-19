@@ -33,6 +33,20 @@ namespace spectrum {
         else { clampView(); }
     }
 
+    void FrequencyView::setNavigationLimits(double minHz, double maxHz) {
+        if (maxHz > minHz) {
+            navMin = minHz;
+            navMax = maxHz;
+        }
+        else {
+            navMin = navMax = 0;
+        }
+        clampView();
+    }
+
+    double FrequencyView::navStart() const { return (navMax > navMin) ? std::min(navMin, fStart) : fStart; }
+    double FrequencyView::navStop() const { return (navMax > navMin) ? std::max(navMax, fStop) : fStop; }
+
     void FrequencyView::reset() {
         vStart = fStart;
         vStop = fStop;
@@ -43,9 +57,11 @@ namespace spectrum {
     }
 
     void FrequencyView::clampView() {
-        double fullSpan = fStop - fStart;
+        // The view may leave the measured range (to pick a new one) but not the navigation limits.
+        double a = navStart(), b = navStop();
+        double fullSpan = b - a;
         double span = std::clamp(vStop - vStart, std::min(minSpanHz, fullSpan), fullSpan);
-        double s = std::clamp(vStart, fStart, fStop - span);
+        double s = std::clamp(vStart, a, b - span);
         vStart = s;
         vStop = s + span;
     }
@@ -56,7 +72,7 @@ namespace spectrum {
         double newSpan = span / factor;
         double rel = (span > 0) ? (anchorHz - vStart) / span : 0.5;
         rel = std::clamp(rel, 0.0, 1.0);
-        double fullSpan = fStop - fStart;
+        double fullSpan = navStop() - navStart();
         newSpan = std::clamp(newSpan, std::min(minSpanHz, fullSpan), fullSpan);
         vStart = anchorHz - rel * newSpan;
         vStop = vStart + newSpan;
@@ -90,6 +106,11 @@ namespace spectrum {
         double binW = fullSpan / (double)bins;
         double fa = vStart + (vStop - vStart) * (double)column / (double)columns;
         double fb = vStart + (vStop - vStart) * (double)(column + 1) / (double)columns;
+        if (fb <= fStart || fa >= fStop) {
+            // Column outside the measured range: no data.
+            b0 = b1 = 0;
+            return;
+        }
         b0 = (int)std::floor((fa - fStart) / binW);
         b1 = (int)std::ceil((fb - fStart) / binW);
         b0 = std::clamp(b0, 0, bins);
@@ -137,5 +158,29 @@ namespace spectrum {
         int i = (int)((freqHz - startHz) / (stopHz - startHz) * (double)trace.size());
         i = std::clamp(i, 0, (int)trace.size() - 1);
         return trace[i];
+    }
+
+    namespace {
+        // 10x faster for every 60 px (unscaled) from the press point; at most 1 GHz/px.
+        const double DRAG_DECADE_PX = 60.0;
+        const double DRAG_MAX_PX = 360.0;
+    }
+
+    double dragSpeedHzPerPx(double distancePx) {
+        double d = std::min(std::fabs(distancePx), DRAG_MAX_PX);
+        return 1e3 * std::pow(10.0, d / DRAG_DECADE_PX);
+    }
+
+    double dragOffsetHz(double distancePx) {
+        double d = std::min(std::fabs(distancePx), DRAG_MAX_PX);
+        double k = DRAG_DECADE_PX / std::log(10.0);
+        double off = 1e3 * k * (std::pow(10.0, d / DRAG_DECADE_PX) - 1.0);
+        return distancePx < 0 ? -off : off;
+    }
+
+    double dragSnapHz(double hz, double speedHzPerPx) {
+        if (!(speedHzPerPx > 0)) { return hz; }
+        double step = std::pow(10.0, std::floor(std::log10(speedHzPerPx)));
+        return std::round(hz / step) * step;
     }
 }
