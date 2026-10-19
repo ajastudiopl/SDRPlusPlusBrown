@@ -54,6 +54,14 @@ public:
     void drawBottomWindows(int dy);
     bool hasBottomWindow(std::string name);
 
+    // Full size views shown as tabs next to the receiver (e.g. the Spectrum Analyzer).
+    // The receiver view is selected with an empty name. The state lives in
+    // main_window.cpp so the class layout (and module ABI) does not change.
+    void registerMainView(std::string name, std::function<void()> drawFunc);
+    void unregisterMainView(std::string name);
+    void selectMainView(std::string name);
+    std::string getSelectedMainView();
+
     bool logWindow = false;
     bool showMenu = true;
 
@@ -125,6 +133,9 @@ protected:
     };
 
     std::vector<ButtomWindow> bottomWindows;
+
+    bool mainViewShown();
+    void drawMainViewTabs();
 
     void drawDebugMenu();
 

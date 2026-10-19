@@ -307,4 +307,14 @@ namespace spectrum {
         wfRowComplete = true;
         ver++;
     }
+
+    void SweepEngine::resizeWaterfall(int rows) {
+        std::lock_guard<std::mutex> lck(mtx);
+        cfg.waterfallRows = std::clamp(rows, 16, 4096);
+        history.configure(std::max((int)wfRow.size(), 1), cfg.waterfallRows);
+        std::fill(wfRow.begin(), wfRow.end(), nanValue());
+        wfRowSweeps = 0;
+        wfRowComplete = true;
+        ver++;
+    }
 }

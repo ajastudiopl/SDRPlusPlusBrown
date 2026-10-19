@@ -103,6 +103,12 @@ namespace spectrum {
         void resetAverage();
         void resetMaxHold();
         void clearWaterfall();
+        // Changes the history length (clears the history), safe while sweeping.
+        void resizeWaterfall(int rows);
+        int fftSize() const { return proc.fftSize(); }
+        int framesPerCapture() const { return cfg.framesPerCapture; }
+        Detector detector() const { return cfg.detector; }
+        WindowType window() const { return cfg.window; }
 
     private:
         void publishFrame(const SweepFrame& f);

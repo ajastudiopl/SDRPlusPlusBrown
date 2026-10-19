@@ -698,6 +698,8 @@ int sdrpp_main(int argc, char* argv[]) {
     defConfig["moduleInstances"]["VHF Digital Modes"]["enabled"] = true;
     defConfig["moduleInstances"]["TETRA Demodulator"]["module"] = "ch_tetra_demodulator";
     defConfig["moduleInstances"]["TETRA Demodulator"]["enabled"] = false;
+    defConfig["moduleInstances"]["Spectrum Analyzer"]["module"] = "spectrum_analyzer";
+    defConfig["moduleInstances"]["Spectrum Analyzer"]["enabled"] = true;
     // defConfig["moduleInstances"]["Rigctl Client"] = "rigctl_client";
     // TODO: Enable rigctl_client when ready
     // defConfig["moduleInstances"]["Scanner"] = "scanner";
@@ -815,6 +817,7 @@ int sdrpp_main(int argc, char* argv[]) {
     core::configManager.conf["modules"][modCount++] = "ch_extravhf_decoder.so";
     core::configManager.conf["modules"][modCount++] = "ch_tetra_demodulator.so";
     core::configManager.conf["modules"][modCount++] = "reports_monitor.so";
+    core::configManager.conf["modules"][modCount++] = "spectrum_analyzer.so";
 #endif
 
     // Fix missing elements in config
@@ -833,6 +836,19 @@ int sdrpp_main(int argc, char* argv[]) {
         newMod["module"] = mod;
         newMod["enabled"] = true;
         core::configManager.conf["moduleInstances"][_name] = newMod;
+    }
+
+    // Configs created before the Spectrum Analyzer existed get its instance once
+    if (!core::configManager.conf.contains("spectrumAnalyzerAdded")) {
+        bool found = false;
+        for (auto [_name, inst] : core::configManager.conf["moduleInstances"].items()) {
+            if (inst.is_object() && inst.contains("module") && inst["module"] == "spectrum_analyzer") { found = true; }
+        }
+        if (!found && !core::configManager.conf["moduleInstances"].contains("Spectrum Analyzer")) {
+            core::configManager.conf["moduleInstances"]["Spectrum Analyzer"]["module"] = "spectrum_analyzer";
+            core::configManager.conf["moduleInstances"]["Spectrum Analyzer"]["enabled"] = true;
+        }
+        core::configManager.conf["spectrumAnalyzerAdded"] = true;
     }
 
     // Load UI scaling

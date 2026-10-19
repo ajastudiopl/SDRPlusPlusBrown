@@ -84,6 +84,7 @@ option(OPT_BUILD_RIGCTL_CLIENT "Rigctl client to make SDR++ act as a panadapter"
 option(OPT_BUILD_RIGCTL_SERVER "Rigctl backend for controlling SDR++ with software like gpredict" ON)
 option(OPT_BUILD_TCI_SERVER "TCI backend for controlling SDR++ with sunsdr and similar software" ON)
 option(OPT_BUILD_SCANNER "Frequency scanner" ON)
+option(OPT_BUILD_SPECTRUM_ANALYZER "Wideband sweep spectrum analyzer (no dependencies required)" ON)
 option(OPT_BUILD_SCHEDULER "Build the scheduler" OFF)
 option(OPT_BUILD_NOISE_REDUCTION_LOGMMSE "Build LOGMMSE noise reduction" ON)
 
@@ -429,6 +430,10 @@ endif (OPT_BUILD_SCANNER)
 if (OPT_BUILD_SCHEDULER)
 add_subdirectory("misc_modules/scheduler")
 endif (OPT_BUILD_SCHEDULER)
+
+if (OPT_BUILD_SPECTRUM_ANALYZER)
+add_subdirectory("misc_modules/spectrum_analyzer")
+endif (OPT_BUILD_SPECTRUM_ANALYZER)
 
 if (OPT_BUILD_NOISE_REDUCTION_LOGMMSE)
 add_subdirectory("misc_modules/noise_reduction_logmmse")

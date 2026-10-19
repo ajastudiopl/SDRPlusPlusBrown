@@ -116,6 +116,18 @@ void MainWindow::handleAndroidMenuScroll() {
 #endif
 
 
+// Main views (tabs next to the receiver), see MainWindow::registerMainView()
+namespace {
+    struct MainView {
+        std::string name;
+        std::function<void()> drawFunc;
+    };
+
+    std::vector<MainView> mainViews;
+    std::string selectedMainView;
+    int mainViewTabSync = 0;
+}
+
 void MainWindow::init() {
     LoadingScreen::show("Initializing UI");
     gui::waterfall.init();
@@ -793,12 +805,16 @@ void MainWindow::draw() {
     // Process menu keybinds
     displaymenu::checkKeybinds();
 
+    // A main view other than the receiver also takes the waterfall controls column
+    bool viewShown = mainViewShown();
+    float controlsWidth = viewShown ? 1.0f : (60.0f * style::uiScale);
+
     // Left Column
     if (showMenu) {
         ImGui::Columns(3, "WindowColumns", false);
         ImGui::SetColumnWidth(0, menuWidth);
-        ImGui::SetColumnWidth(1, std::max<int>(winSize.x - menuWidth - (60.0f * style::uiScale), 100.0f * style::uiScale));
-        ImGui::SetColumnWidth(2, 60.0f * style::uiScale);
+        ImGui::SetColumnWidth(1, std::max<int>(winSize.x - menuWidth - controlsWidth, 100.0f * style::uiScale));
+        ImGui::SetColumnWidth(2, controlsWidth);
 
         ImGui::BeginChild("Left Column");
 #ifdef __ANDROID__
@@ -839,8 +855,8 @@ void MainWindow::draw() {
         // When hiding the menu bar
         ImGui::Columns(3, "WindowColumns", false);
         ImGui::SetColumnWidth(0, 8 * style::uiScale);
-        ImGui::SetColumnWidth(1, winSize.x - ((8 + 60) * style::uiScale));
-        ImGui::SetColumnWidth(2, 60.0f * style::uiScale);
+        ImGui::SetColumnWidth(1, winSize.x - (8 * style::uiScale) - controlsWidth);
+        ImGui::SetColumnWidth(2, controlsWidth);
     }
 
     // Right Column
@@ -855,14 +871,26 @@ void MainWindow::draw() {
     if (!bottomWindows.empty()) {
         wfSize.y -= bottomWindows[0].size.y;
     }
-    ImGui::BeginChild("Waterfall", wfSize);
+    drawMainViewTabs();
+    if (viewShown) {
+        std::function<void()> viewDraw;
+        for (auto& v : mainViews) {
+            if (v.name == selectedMainView) { viewDraw = v.drawFunc; }
+        }
+        ImGui::BeginChild("MainView", wfSize, false, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
+        if (viewDraw) { viewDraw(); }
+        ImGui::EndChild();
+    }
+    else {
+        ImGui::BeginChild("Waterfall", wfSize);
 
-    gui::waterfall.draw();
-    onWaterfallDrawn.emit(GImGui);
+        gui::waterfall.draw();
+        onWaterfallDrawn.emit(GImGui);
 
-    ImGui::EndChild();
+        ImGui::EndChild();
 
-    this->handleWaterfallInput(vfo);
+        this->handleWaterfallInput(vfo);
+    }
 
     ImGui::NextColumn();
     ImGui::BeginChild("WaterfallControls");
@@ -989,6 +1017,9 @@ void MainWindow::draw() {
 
 void MainWindow::handleDemodulatorShortcuts() {
     ImGuiIO& io = ImGui::GetIO();
+    if (mainViewShown()) {
+        return;
+    }
     if (io.WantTextInput || io.KeyCtrl || io.KeyAlt || io.KeySuper || gui::waterfall.selectedVFO.empty()) {
         return;
     }
@@ -1305,6 +1336,74 @@ void MainWindow::drawBottomWindows(int dy) {
         }
     }
 }
+
+void MainWindow::registerMainView(std::string name, std::function<void()> drawFunc) {
+    for (auto& v : mainViews) {
+        if (v.name == name) {
+            v.drawFunc = drawFunc;
+            return;
+        }
+    }
+    mainViews.push_back(MainView{ name, drawFunc });
+}
+
+void MainWindow::unregisterMainView(std::string name) {
+    mainViews.erase(std::remove_if(mainViews.begin(), mainViews.end(), [&](const MainView& v) { return v.name == name; }), mainViews.end());
+    if (selectedMainView == name) {
+        selectMainView("");
+    }
+}
+
+void MainWindow::selectMainView(std::string name) {
+    if (name == selectedMainView) { return; }
+    selectedMainView = name;
+    mainViewTabSync = 2;
+}
+
+std::string MainWindow::getSelectedMainView() {
+    return selectedMainView;
+}
+
+bool MainWindow::mainViewShown() {
+    if (selectedMainView.empty()) { return false; }
+    for (auto& v : mainViews) {
+        if (v.name == selectedMainView) { return true; }
+    }
+    return false;
+}
+
+void MainWindow::drawMainViewTabs() {
+    if (mainViews.empty()) { return; }
+    // After a programmatic selection the tab bar needs a couple of frames to
+    // follow; ignore what it reports in the meantime.
+    bool sync = mainViewTabSync > 0;
+    std::string clicked = selectedMainView;
+    ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(10.0f * style::uiScale, 4.0f * style::uiScale));
+    if (ImGui::BeginTabBar("##sdrpp_main_views", ImGuiTabBarFlags_FittingPolicyScroll)) {
+        ImGuiTabItemFlags flags = (sync && selectedMainView.empty()) ? ImGuiTabItemFlags_SetSelected : 0;
+        if (ImGui::BeginTabItem("Receiver", NULL, flags)) {
+            clicked = "";
+            ImGui::EndTabItem();
+        }
+        for (auto& v : mainViews) {
+            flags = (sync && selectedMainView == v.name) ? ImGuiTabItemFlags_SetSelected : 0;
+            if (ImGui::BeginTabItem(v.name.c_str(), NULL, flags)) {
+                clicked = v.name;
+                ImGui::EndTabItem();
+            }
+        }
+        ImGui::EndTabBar();
+    }
+    ImGui::PopStyleVar();
+    if (sync) {
+        mainViewTabSync--;
+    }
+    else if (clicked != selectedMainView) {
+        selectMainView(clicked);
+        mainViewTabSync = 0;
+    }
+}
+
 void MainWindow::addBottomWindow(std::string name, std::function<void()> drawFunc) {
     int foundIndex = -1;
     for (int i = 0; i < bottomWindows.size(); i++) {
