@@ -11,22 +11,33 @@ namespace thememenu {
     std::vector<std::string> themeNames;
     std::string themeNamesTxt;
 
+    // The style is stored unscaled: init() applies ScaleAllSizes(uiScale) after loading.
+    // imgui_style_v1.bin stored already-scaled sizes, which grew on every start, so only
+    // its colours are still used.
     void saveStyle() {
-        std::string path = std::string(core::getRoot()) + "/imgui_style_v1.bin";
+        std::string path = std::string(core::getRoot()) + "/imgui_style_v2.bin";
         std::ofstream file(path, std::ios::binary);
         if (file) {
             ImGuiStyle style = ImGui::GetStyle();
+            if (style::uiScale > 0) { style.ScaleAllSizes(1.0f / style::uiScale); }
             file.write((char*)&style, sizeof(ImGuiStyle));
         }
     }
 
     void loadStyle() {
-        std::string path = std::string(core::getRoot()) + "/imgui_style_v1.bin";
-        std::ifstream file(path, std::ios::binary);
+        std::string root = core::getRoot();
+        std::ifstream file(root + "/imgui_style_v2.bin", std::ios::binary);
         if (file) {
             ImGuiStyle style;
-            file.read((char*)&style, sizeof(ImGuiStyle));
-            ImGui::GetStyle() = style;
+            if (file.read((char*)&style, sizeof(ImGuiStyle))) { ImGui::GetStyle() = style; }
+            return;
+        }
+        std::ifstream oldFile(root + "/imgui_style_v1.bin", std::ios::binary);
+        if (oldFile) {
+            ImGuiStyle style;
+            if (oldFile.read((char*)&style, sizeof(ImGuiStyle))) {
+                memcpy(ImGui::GetStyle().Colors, style.Colors, sizeof(style.Colors));
+            }
         }
     }
 
