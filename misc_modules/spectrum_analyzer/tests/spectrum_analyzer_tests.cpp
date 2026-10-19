@@ -1261,7 +1261,7 @@ TEST(auto_parameters_follow_device) {
     EngineSettings ne;
     ne.displayBins = 16384;
     applyNativeAutoParams(ns, ne, caps, 40e6);
-    CHECK(ne.fftSize == 4096); // limited by the 8188-sample HackRF block
+    CHECK(ne.fftSize == 4096); // limited by the 8184-sample HackRF block
     ns.autoParams = false;
     ne.fftSize = 512;
     ne.framesPerCapture = 100;

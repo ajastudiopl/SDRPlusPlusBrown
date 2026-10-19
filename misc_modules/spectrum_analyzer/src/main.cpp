@@ -1073,7 +1073,7 @@ private:
                     ch = true;
                 }
             }
-            if (isNative && settings.sweep.fftSize > 4096 && !settings.sweep.autoParams) { ImGui::TextDisabled("HackRF native: FFT limited to 4096 (one 8188-sample block)."); }
+            if (isNative && settings.sweep.fftSize > 4096 && !settings.sweep.autoParams) { ImGui::TextDisabled("HackRF native: FFT limited to 4096 (one 8184-sample block)."); }
             int win = (int)settings.sweep.window;
             ImGui::LeftLabel("Window");
             ImGui::FillWidth();
