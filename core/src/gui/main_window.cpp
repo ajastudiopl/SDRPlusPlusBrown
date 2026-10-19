@@ -127,6 +127,10 @@ namespace {
     std::vector<MainView> mainViews;
     std::string selectedMainView;
 
+    // Squelch level hint shown after Shift+0 / Shift+9
+    double squelchHintUntil = 0;
+    float squelchHintLevel = 0;
+
     // Portrait layout state
     bool portraitSlidersOpen = false;
     bool upperLineSkipFreq = false;
@@ -1103,6 +1107,18 @@ void MainWindow::draw() {
 
 void MainWindow::handleDemodulatorShortcuts() {
     ImGuiIO& io = ImGui::GetIO();
+    if (ImGui::GetTime() < squelchHintUntil) {
+        // Single on-screen hint instead of a toast per key repeat
+        char txt[48];
+        snprintf(txt, sizeof(txt), "Squelch %.0f dB", squelchHintLevel);
+        ImGui::PushFont(style::bigFont);
+        ImVec2 ts = ImGui::CalcTextSize(txt);
+        ImVec2 pos((io.DisplaySize.x - ts.x) * 0.5f, io.DisplaySize.y * 0.3f);
+        ImDrawList* dl = ImGui::GetForegroundDrawList();
+        dl->AddRectFilled(ImVec2(pos.x - 16, pos.y - 8), ImVec2(pos.x + ts.x + 16, pos.y + ts.y + 8), IM_COL32(0, 0, 0, 190), 6.0f);
+        dl->AddText(pos, IM_COL32(255, 255, 255, 255), txt);
+        ImGui::PopFont();
+    }
     if (mainViewShown()) {
         return;
     }
@@ -1113,29 +1129,46 @@ void MainWindow::handleDemodulatorShortcuts() {
         return;
     }
 
+    // Shift+0 / Shift+9: squelch up / down (1 dB, repeats while held)
+    if (io.KeyShift && (ImGui::IsKeyPressed(ImGuiKey_0, true) || ImGui::IsKeyPressed(ImGuiKey_9, true))) {
+        float level = -100.0f;
+        core::modComManager.callInterface(gui::waterfall.selectedVFO, RADIO_IFACE_CMD_GET_SQUELCH_LEVEL, NULL, &level);
+        level = std::clamp(level + (ImGui::IsKeyPressed(ImGuiKey_0, true) ? 1.0f : -1.0f), -100.0f, 0.0f);
+        bool enabled = true;
+        core::modComManager.callInterface(gui::waterfall.selectedVFO, RADIO_IFACE_CMD_SET_SQUELCH_ENABLED, &enabled, NULL);
+        core::modComManager.callInterface(gui::waterfall.selectedVFO, RADIO_IFACE_CMD_SET_SQUELCH_LEVEL, &level, NULL);
+        squelchHintLevel = level;
+        squelchHintUntil = ImGui::GetTime() + 1.5;
+        return;
+    }
+
+    // One key per mode, no Shift: A AM, F/W WFM, N NFM, D DSB, U USB, L LSB, C CW, R RAW
     int mode = -1;
-    if (ImGui::IsKeyPressed(ImGuiKey_A, false) && !io.KeyShift) {
+    if (io.KeyShift) {
+        return;
+    }
+    if (ImGui::IsKeyPressed(ImGuiKey_A, false)) {
         mode = RADIO_IFACE_MODE_AM;
     }
-    else if (ImGui::IsKeyPressed(ImGuiKey_F, false) && io.KeyShift) {
+    else if (ImGui::IsKeyPressed(ImGuiKey_F, false) || ImGui::IsKeyPressed(ImGuiKey_W, false)) {
         mode = RADIO_IFACE_MODE_WFM;
     }
-    else if (ImGui::IsKeyPressed(ImGuiKey_N, false) && !io.KeyShift) {
+    else if (ImGui::IsKeyPressed(ImGuiKey_N, false)) {
         mode = RADIO_IFACE_MODE_NFM;
     }
-    else if (ImGui::IsKeyPressed(ImGuiKey_D, false) && !io.KeyShift) {
+    else if (ImGui::IsKeyPressed(ImGuiKey_D, false)) {
         mode = RADIO_IFACE_MODE_DSB;
     }
-    else if (ImGui::IsKeyPressed(ImGuiKey_U, false) && io.KeyShift) {
+    else if (ImGui::IsKeyPressed(ImGuiKey_U, false)) {
         mode = RADIO_IFACE_MODE_USB;
     }
-    else if (ImGui::IsKeyPressed(ImGuiKey_L, false) && !io.KeyShift) {
+    else if (ImGui::IsKeyPressed(ImGuiKey_L, false)) {
         mode = RADIO_IFACE_MODE_LSB;
     }
-    else if (ImGui::IsKeyPressed(ImGuiKey_C, false) && !io.KeyShift) {
+    else if (ImGui::IsKeyPressed(ImGuiKey_C, false)) {
         mode = RADIO_IFACE_MODE_CW;
     }
-    else if (ImGui::IsKeyPressed(ImGuiKey_R, false) && !io.KeyShift) {
+    else if (ImGui::IsKeyPressed(ImGuiKey_R, false)) {
         mode = RADIO_IFACE_MODE_RAW;
     }
 
