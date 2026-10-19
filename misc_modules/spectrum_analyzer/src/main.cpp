@@ -212,11 +212,10 @@ private:
         if (ui.contains("resumeReceiver")) { resumeReceiver = ui["resumeReceiver"]; }
         if (ui.contains("exportDir")) { exportDir = ui["exportDir"]; }
         // Layout v2: bigger waterfall and auto waterfall levels by default
-        if (!ui.contains("layoutVersion") || ui["layoutVersion"].get<int>() < 2) {
-            settings.display.spectrumHeightFrac = 0.3f;
-            settings.waterfall.autoLevels = true;
-            ui["layoutVersion"] = 2;
-        }
+        int layoutVersion = ui.contains("layoutVersion") ? ui["layoutVersion"].get<int>() : 0;
+        if (layoutVersion < 2) { settings.waterfall.autoLevels = true; }
+        // Layout v3: spectrum 40 % / waterfall 60 %
+        if (layoutVersion < 3) { settings.display.spectrumHeightFrac = 0.4f; }
         if (config.conf["settleBySource"].is_object()) {
             for (auto& [k, v] : config.conf["settleBySource"].items()) {
                 if (v.is_number()) { settleBySource[k] = v.get<double>(); }
@@ -235,7 +234,7 @@ private:
         for (auto& p : userPresets) { presets[p.name] = settingsToJson(p.settings); }
         config.conf["presets"] = presets;
         config.conf["device"] = selectedDeviceKey;
-        config.conf["ui"]["layoutVersion"] = 2;
+        config.conf["ui"]["layoutVersion"] = 3;
         config.conf["ui"]["unit"] = (int)unit;
         config.conf["ui"]["muteAudio"] = muteAudio;
         config.conf["ui"]["restoreReceiver"] = restoreReceiver;

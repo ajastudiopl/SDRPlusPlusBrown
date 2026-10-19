@@ -37,7 +37,7 @@ namespace spectrum {
         bool showPartial = true;         // sweep in progress, drawn dimmed and labelled
         bool showPeaks = true;
         bool showMarkers = true;
-        float spectrumHeightFrac = 0.3f;
+        float spectrumHeightFrac = 0.4f;
         DisplaySettings proc;
     };
 

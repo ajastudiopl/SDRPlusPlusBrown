@@ -27,6 +27,7 @@ namespace spectrum {
         const ImU32 COL_WARN = IM_COL32(255, 90, 80, 255);
         const ImU32 COL_NODATA = IM_COL32(28, 24, 30, 255);
         const float WF_MIN_LINE_PX = 2.0f;
+        const int MAX_PEAK_LABELS = 5;
 
         std::string axisLabel(double hz, double step) {
             char buf[48];
@@ -121,7 +122,7 @@ namespace spectrum {
             dl->AddLine(ImVec2(x, p0.y), ImVec2(x, p0.y + size.y), labels ? COL_GRID : COL_GRID_FAINT);
             if (labels) {
                 std::string l = axisLabel(f, step);
-                dl->AddText(ImVec2(x + 3, p0.y + size.y - lineH - 1), COL_TEXT, l.c_str());
+                labelBox(dl, ImVec2(x + 3, p0.y + size.y - lineH - 1), l.c_str(), COL_TEXT);
             }
         }
         if (labels) {
@@ -217,23 +218,30 @@ namespace spectrum {
         }
         const float minDb = cfg.minDb;
         const float maxDb = std::max(cfg.maxDb, cfg.minDb + 1.0f);
+        // A status band at the top holds all overlay texts, so they never cover the traces.
+        const float bandH = lineH + 6.0f;
+        const float plotTop = p0.y + bandH;
+        const float plotH = std::max(size.y - bandH, 8.0f);
         auto yOf = [&](float db) {
             float t = (maxDb - db) / (maxDb - minDb);
-            return p0.y + std::clamp(t, 0.0f, 1.0f) * size.y;
+            return plotTop + std::clamp(t, 0.0f, 1.0f) * plotH;
         };
+        dl->AddRectFilled(p0, ImVec2(p1.x, plotTop), IM_COL32(6, 7, 10, 255));
 
         dl->PushClipRect(p0, p1, true);
 
         if (cfg.showGrid) {
-            double dbStep = niceStep(maxDb - minDb, std::max(2, (int)(size.y / (36.0f * style::uiScale))));
+            double dbStep = niceStep(maxDb - minDb, std::max(2, (int)(plotH / (40.0f * style::uiScale))));
             for (double db = std::ceil(minDb / dbStep) * dbStep; db <= maxDb; db += dbStep) {
                 float y = yOf((float)db);
                 dl->AddLine(ImVec2(p0.x, y), ImVec2(p1.x, y), COL_GRID);
+                // Labels stay clear of the frequency axis at the bottom
+                if (y > p1.y - 2.2f * lineH || y < plotTop + 2) { continue; }
                 char buf[16];
                 snprintf(buf, sizeof(buf), "%.0f", db);
-                dl->AddText(ImVec2(p0.x + 3, y + 1), COL_TEXT, buf);
+                labelBox(dl, ImVec2(p0.x + 3, y + 1), buf, COL_TEXT);
             }
-            drawFreqGrid(dl, p0, size, view, true);
+            drawFreqGrid(dl, ImVec2(p0.x, plotTop), ImVec2(size.x, plotH), view, true);
         }
 
         const int width = (int)size.x;
@@ -278,7 +286,7 @@ namespace spectrum {
         // Position of the sweep in progress
         if (overlay.sweeping && snap.stats.sweepActive && snap.stats.currentLoHz > 0) {
             float x = (float)view.freqToX(snap.stats.currentLoHz, p0.x, size.x);
-            if (x >= p0.x && x <= p1.x) { dashedVLine(dl, x, p0.y, p1.y, COL_PARTIAL, 4.0f * style::uiScale); }
+            if (x >= p0.x && x <= p1.x) { dashedVLine(dl, x, plotTop, p1.y, COL_PARTIAL, 4.0f * style::uiScale); }
         }
 
         if (cfg.showNoiseFloor && std::isfinite(snap.noiseFloorDb)) {
@@ -287,25 +295,44 @@ namespace spectrum {
             char buf[32];
             snprintf(buf, sizeof(buf), "NF %.1f dB", snap.noiseFloorDb);
             ImVec2 ts = ImGui::CalcTextSize(buf);
-            labelBox(dl, ImVec2(p0.x + 40.0f * style::uiScale, std::max(y - ts.y - 2, p0.y + 1)), buf, COL_NOISE);
+            labelBox(dl, ImVec2(p1.x - ts.x - 6, std::clamp(y - ts.y - 3, plotTop + 2, p1.y - 2.2f * lineH)), buf, COL_NOISE);
         }
 
+        // Placed label rectangles, used to keep labels from overlapping.
+        std::vector<ImVec4> placed;
+        auto overlaps = [&](float x0, float y0, float x1, float y1) {
+            float gap = 8.0f * style::uiScale;
+            for (auto& r : placed) {
+                if (x0 < r.z + gap && x1 + gap > r.x && y0 < r.w && y1 > r.y) { return true; }
+            }
+            return false;
+        };
+
         if (cfg.showPeaks) {
-            float lastLabelX = -1e9f;
+            float s = 4.0f * style::uiScale;
+            std::vector<const DetectedPeak*> visible;
             for (auto& pk : snap.peaks) {
                 if (pk.freqHz < view.viewStart() || pk.freqHz > view.viewStop()) { continue; }
+                visible.push_back(&pk);
                 float x = (float)view.freqToX(pk.freqHz, p0.x, size.x);
                 float y = yOf(pk.levelDb) - 3.0f;
-                float s = 4.0f * style::uiScale;
                 dl->AddTriangleFilled(ImVec2(x, y), ImVec2(x - s, y - 2 * s), ImVec2(x + s, y - 2 * s), COL_PEAK);
-                if (x - lastLabelX > 90.0f * style::uiScale) {
-                    std::string l = formatFrequency(pk.freqHz, 3);
-                    float tw = ImGui::CalcTextSize(l.c_str()).x;
-                    float lx = std::clamp(x - tw / 2, p0.x + 36.0f * style::uiScale, p1.x - tw - 2);
-                    float ly = std::max(y - 2 * s - lineH - 1, p0.y + 1);
-                    dl->AddText(ImVec2(lx, ly), COL_PEAK, l.c_str());
-                    lastLabelX = x;
-                }
+            }
+            // Labels only for the strongest signals that have room.
+            std::sort(visible.begin(), visible.end(), [](const DetectedPeak* a, const DetectedPeak* b) { return a->levelDb > b->levelDb; });
+            int labelled = 0;
+            for (auto* pk : visible) {
+                if (labelled >= MAX_PEAK_LABELS) { break; }
+                float x = (float)view.freqToX(pk->freqHz, p0.x, size.x);
+                float y = yOf(pk->levelDb) - 3.0f;
+                std::string l = formatFrequency(pk->freqHz, 3);
+                ImVec2 ts = ImGui::CalcTextSize(l.c_str());
+                float lx = std::clamp(x - ts.x / 2, p0.x + 36.0f * style::uiScale, p1.x - ts.x - 4);
+                float ly = std::max(y - 2 * s - ts.y - 2, plotTop + 2);
+                if (overlaps(lx - 2, ly - 1, lx + ts.x + 2, ly + ts.y + 1)) { continue; }
+                labelBox(dl, ImVec2(lx, ly), l.c_str(), COL_PEAK);
+                placed.push_back(ImVec4(lx - 2, ly - 1, lx + ts.x + 2, ly + ts.y + 1));
+                labelled++;
             }
         }
 
@@ -314,7 +341,7 @@ namespace spectrum {
                 const Marker& m = markers[i];
                 if (m.freqHz < view.viewStart() || m.freqHz > view.viewStop()) { continue; }
                 float x = (float)view.freqToX(m.freqHz, p0.x, size.x);
-                dl->AddLine(ImVec2(x, p0.y), ImVec2(x, p1.y), COL_MARKER, 1.0f);
+                dl->AddLine(ImVec2(x, plotTop), ImVec2(x, p1.y), COL_MARKER, 1.0f);
                 float lvl = traceValueAt(snap.current, snap.startHz, snap.stopHz, m.freqHz);
                 char buf[160];
                 if (std::isfinite(lvl)) {
@@ -323,45 +350,44 @@ namespace spectrum {
                 else {
                     snprintf(buf, sizeof(buf), "%s%s%s", m.name.c_str(), m.name.empty() ? "" : " ", formatFrequency(m.freqHz, 3).c_str());
                 }
-                labelBox(dl, ImVec2(x + 3, p0.y + 3 + (float)(i % 3) * (lineH + 2)), buf, COL_MARKER);
+                ImVec2 ts = ImGui::CalcTextSize(buf);
+                float lx = std::min(x + 3, p1.x - ts.x - 4);
+                float ly = plotTop + 3;
+                while (overlaps(lx - 2, ly - 1, lx + ts.x + 2, ly + ts.y + 1) && ly < p1.y - 3 * lineH) { ly += lineH + 3; }
+                labelBox(dl, ImVec2(lx, ly), buf, COL_MARKER);
+                placed.push_back(ImVec4(lx - 2, ly - 1, lx + ts.x + 2, ly + ts.y + 1));
             }
         }
 
         if (hasTap && tapHz >= view.viewStart() && tapHz <= view.viewStop()) {
             float x = (float)view.freqToX(tapHz, p0.x, size.x);
-            dashedVLine(dl, x, p0.y, p1.y, IM_COL32(120, 230, 255, 200), 3.0f * style::uiScale);
+            dashedVLine(dl, x, plotTop, p1.y, IM_COL32(120, 230, 255, 200), 3.0f * style::uiScale);
         }
 
-        // Status overlays
-        float oy = p0.y + 3;
-        float ox = p0.x + 40.0f * style::uiScale;
-        if (overlay.synthetic) {
-            labelBox(dl, ImVec2(ox, oy), "DEMO - SYNTHETIC SIGNALS, NOT A MEASUREMENT", COL_DEMO);
-            oy += lineH + 3;
-        }
-        if (!overlay.headline.empty()) {
-            labelBox(dl, ImVec2(ox, oy), overlay.headline.c_str(), overlay.headlineColor);
-            oy += lineH + 3;
-        }
+        // Status band (one line above the plot)
+        float bx = p0.x + 4;
+        float by = p0.y + 3;
+        auto bandText = [&](const char* t, ImU32 col) {
+            dl->AddText(ImVec2(bx, by), col, t);
+            bx += ImGui::CalcTextSize(t).x + 14.0f * style::uiScale;
+        };
+        if (overlay.synthetic) { bandText("DEMO (synthetic, not a measurement)", COL_DEMO); }
+        if (!overlay.headline.empty()) { bandText(overlay.headline.c_str(), overlay.headlineColor); }
+        if (overlay.paused) { bandText("PAUSED", COL_WARN); }
         if (snap.hasFrame && !snap.lastComplete) {
             char buf[96];
-            snprintf(buf, sizeof(buf), "LAST SWEEP INCOMPLETE: %d of %d segments missing", snap.lastSegmentsExpected - snap.lastSegmentsReceived, snap.lastSegmentsExpected);
-            labelBox(dl, ImVec2(ox, oy), buf, COL_WARN);
-            oy += lineH + 3;
+            snprintf(buf, sizeof(buf), "INCOMPLETE SWEEP: %d/%d segments missing", snap.lastSegmentsExpected - snap.lastSegmentsReceived, snap.lastSegmentsExpected);
+            bandText(buf, COL_WARN);
+        }
+        if (overlay.sweeping && !snap.partial.empty() && cfg.showPartial) {
+            const char* t = "grey: sweep in progress";
+            ImVec2 ts = ImGui::CalcTextSize(t);
+            if (p1.x - ts.x - 4 > bx) { dl->AddText(ImVec2(p1.x - ts.x - 4, by), COL_PARTIAL, t); }
         }
         if (!snap.hasFrame) {
             const char* t = overlay.sweeping ? "Waiting for the first complete sweep..." : "No measurement. Press Start.";
             ImVec2 ts = ImGui::CalcTextSize(t);
-            dl->AddText(ImVec2(p0.x + (size.x - ts.x) / 2, p0.y + (size.y - ts.y) / 2), COL_TEXT, t);
-        }
-        if (overlay.sweeping && !snap.partial.empty() && cfg.showPartial) {
-            const char* t = "grey = sweep in progress (partial)";
-            ImVec2 ts = ImGui::CalcTextSize(t);
-            dl->AddText(ImVec2(p1.x - ts.x - 4, p0.y + 3), COL_PARTIAL, t);
-        }
-        if (overlay.paused) {
-            labelBox(dl, ImVec2(ox, oy), "PAUSED", COL_WARN);
-            oy += lineH + 3;
+            dl->AddText(ImVec2(p0.x + (size.x - ts.x) / 2, plotTop + (plotH - ts.y) / 2), COL_TEXT, t);
         }
 
         bool hovered = handleInteraction("##sa_spectrum", p0, size, view, ev, &markers);
