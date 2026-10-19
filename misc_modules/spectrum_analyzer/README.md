@@ -157,6 +157,9 @@ Stany: *Idle, Starting, Sweeping, Paused, Stopping, Error, Device Disconnected*.
 * Dwuklik: przestrojenie odbiornika na wskazaną częstotliwość (sweep jest
   zatrzymywany, urządzenie oddawane odbiornikowi, przełączenie na zakładkę Receiver).
 * Prawy klik: menu (Tune, Add/Remove marker, ustaw Start/Stop sweepu, zoom, Fit).
+* Ekrany dotykowe (Android): stuknięcie zaznacza częstotliwość (przerywana linia),
+  a przyciski **Tune** / **Mark** na pasku narzędzi działają na zaznaczeniu;
+  przeciąganie palcem przesuwa widok, dwukrotne stuknięcie stroi odbiornik.
 * Markery: nazwa, częstotliwość, aktualny poziom; dodawanie z menu, z listy
   sygnałów lub ręcznie; zapisywane w konfiguracji.
 * Podział wykres/wodospad można przeciągać.
