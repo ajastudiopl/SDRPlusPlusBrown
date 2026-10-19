@@ -20,7 +20,7 @@
             android:name=".MainActivity"
             android:launchMode="singleTask"
             android:icon="@mipmap/ic_launcher"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:theme="@style/SdrppTheme"
             android:configChanges="orientation|keyboardHidden|screenSize">
             <meta-data android:name="android.app.lib_name" android:value="sdrpp_core" />
 

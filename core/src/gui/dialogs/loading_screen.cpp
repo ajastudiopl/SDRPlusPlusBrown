@@ -17,6 +17,8 @@ namespace LoadingScreen {
     void show(std::string msg) {
         backend::beginFrame();
 
+        // Black splash background
+        ImGui::PushStyleColor(ImGuiCol_WindowBg, ImVec4(0.0f, 0.0f, 0.0f, 1.0f));
         ImGui::Begin("Main", NULL, WINDOW_FLAGS);
 
 
@@ -46,6 +48,7 @@ namespace LoadingScreen {
         ImGui::PopStyleColor(1);
 
         ImGui::End();
+        ImGui::PopStyleColor(1);
 
         backend::render(false);
     }

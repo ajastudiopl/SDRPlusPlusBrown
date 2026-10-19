@@ -866,6 +866,15 @@ private:
         return changed;
     }
 
+    // Scans the range marked in Select mode and leaves the mode.
+    void scanSelection() {
+        double pxHz = freqView.viewSpan() / 1000.0;
+        editRange = { dragSnapHz(view.selA, pxHz), dragSnapHz(view.selB, pxHz) };
+        applyRangeAndScan();
+        view.selectMode = false;
+        view.clearSelection();
+    }
+
     void applyRangeAndScan() {
         applyRange();
         if (rangeError.empty() && !controller.active()) { startSweep(false); }
@@ -1018,8 +1027,13 @@ private:
         ImGui::PushStyleVar(ImGuiStyleVar_ScrollbarSize, 4.0f * scale);
         ImGui::BeginChild("##sa_status_line", ImVec2(0, ImGui::GetFrameHeight() + 8.0f * scale), false, ImGuiWindowFlags_HorizontalScrollbar);
         SweepState state = controller.state();
-        if (!controller.active()) {
-            if (ImGui::Button("Start##sa_vstart")) { startSweep(false); }
+        // A completed selection in Select mode is what Start scans.
+        bool selReady = view.selectMode && view.selPhase == 2;
+        if (!controller.active() || selReady) {
+            if (ImGui::Button(selReady ? "Start selection##sa_vstart" : "Start##sa_vstart")) {
+                if (selReady) { scanSelection(); }
+                else { startSweep(false); }
+            }
         }
         else if (ImGui::Button("Stop##sa_vstop")) { stopSweep(); }
         ImGui::SameLine();
@@ -1056,17 +1070,12 @@ private:
             ImGui::PopStyleColor();
             ImGui::SameLine();
             if (view.selPhase == 2) {
-                // Round to a step matching the zoom (about one pixel)
-                double pxHz = freqView.viewSpan() / std::max(ImGui::GetContentRegionAvail().x, 100.0f);
+                // Round to a step matching the zoom (same as scanSelection())
+                double pxHz = freqView.viewSpan() / 1000.0;
                 double a = dragSnapHz(view.selA, pxHz), b = dragSnapHz(view.selB, pxHz);
                 char lblBuf[96];
                 snprintf(lblBuf, sizeof(lblBuf), "Scan %.6g-%.6g MHz##sa_selscan", a / 1e6, b / 1e6);
-                if (ImGui::Button(lblBuf)) {
-                    editRange = { a, b };
-                    applyRangeAndScan();
-                    view.selectMode = false;
-                    view.clearSelection();
-                }
+                if (ImGui::Button(lblBuf)) { scanSelection(); }
             }
             else {
                 ImGui::TextDisabled(view.selPhase == 1 ? "tap the end" : "drag or tap start");

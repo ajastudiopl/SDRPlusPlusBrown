@@ -165,6 +165,7 @@ namespace spectrum {
         }
         if (hovered && ImGui::IsMouseClicked(ImGuiMouseButton_Left)) {
             pressDragged = false;
+            pressInside = true;
             if (selectMode) {
                 // A press starts a new selection unless it is the second tap of one.
                 selPressStarted = (selPhase != 1);
@@ -177,13 +178,23 @@ namespace spectrum {
         if (active && ImGui::IsMouseDragging(ImGuiMouseButton_Left, 3.0f * style::uiScale)) {
             dragging = true;
             pressDragged = true;
-            if (selectMode) { selB = mouseHz; }
+            if (selectMode) {
+                // Holding the finger near an edge keeps scrolling the view, so the
+                // selection can extend beyond what is visible.
+                float edge = std::min(60.0f * style::uiScale, size.x * 0.12f);
+                float x = io.MousePos.x;
+                double depth = 0;
+                if (x < p0.x + edge) { depth = -std::min(1.0f, (p0.x + edge - x) / edge); }
+                else if (x > p0.x + size.x - edge) { depth = std::min(1.0f, (x - (p0.x + size.x - edge)) / edge); }
+                if (depth != 0) { view.pan(depth * view.viewSpan() * 0.8 * (double)io.DeltaTime); }
+                selB = view.xToFreq(std::clamp(x, p0.x, p0.x + size.x), p0.x, size.x);
+            }
             else { view.pan(-(double)io.MouseDelta.x / (double)size.x * view.viewSpan()); }
         }
-        if (hovered && ImGui::IsMouseReleased(ImGuiMouseButton_Left)) {
+        if ((hovered || (pressInside && pressDragged)) && ImGui::IsMouseReleased(ImGuiMouseButton_Left)) {
             if (selectMode) {
                 if (pressDragged) {
-                    selB = mouseHz;
+                    selB = view.xToFreq(std::clamp(io.MousePos.x, p0.x, p0.x + size.x), p0.x, size.x);
                     selPhase = 2;
                 }
                 else if (!selPressStarted) {
@@ -198,7 +209,10 @@ namespace spectrum {
                 tapHz = mouseHz;
             }
         }
-        if (!ImGui::IsMouseDown(ImGuiMouseButton_Left)) { dragging = false; }
+        if (!ImGui::IsMouseDown(ImGuiMouseButton_Left)) {
+            dragging = false;
+            pressInside = false;
+        }
         if (hovered && !selectMode && ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left)) {
             ev.tune = true;
             ev.tuneHz = mouseHz;

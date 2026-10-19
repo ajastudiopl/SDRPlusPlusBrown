@@ -98,6 +98,7 @@ namespace spectrum {
         bool dragging = false;
         bool pressDragged = false;
         bool selPressStarted = false;
+        bool pressInside = false;
         void drawRangeOverlays(ImDrawList* dl, ImVec2 p0, ImVec2 p1, FrequencyView& view);
         float dragLastX = 0;
         double contextHz = 0;
