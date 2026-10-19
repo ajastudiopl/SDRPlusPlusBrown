@@ -391,7 +391,8 @@ namespace ImGui {
         if (mousePos.x != lastMousePos.x || mousePos.y != lastMousePos.y) { mouseMoved = true; }
         lastMousePos = mousePos;
         float vfoDragThreshold = 4.0f * style::uiScale;
-        bool vfoDragStarted = vfoSelect && ((drag.x * drag.x) + (drag.y * drag.y) >= (vfoDragThreshold * vfoDragThreshold));
+        bool vfoDragStarted = (vfoSelect || mouseInFFT || mouseInWaterfall) && ((drag.x * drag.x) + (drag.y * drag.y) >= (vfoDragThreshold * vfoDragThreshold));
+        bool edgeScrolling = false;
 
         std::string hoveredVFOName = "";
         for (auto const& [name, _vfo] : vfos) {
@@ -593,16 +594,18 @@ namespace ImGui {
             float edgeStrength = 0.0f;
             double direction = 0.0;
 
-            if (mousePos.x >= fftAreaMin.x && mousePos.x <= fftAreaMin.x + edgeZone) {
-                edgeStrength = 1.0f - ((mousePos.x - fftAreaMin.x) / edgeZone);
+            // A finger overshooting the FFT area (onto the dB scale or side panel) scrolls at full speed
+            if (mousePos.x <= fftAreaMin.x + edgeZone) {
+                edgeStrength = std::clamp<float>(1.0f - ((mousePos.x - fftAreaMin.x) / edgeZone), 0.0f, 1.0f);
                 direction = -1.0;
             }
-            else if (mousePos.x <= fftAreaMax.x && mousePos.x >= fftAreaMax.x - edgeZone) {
-                edgeStrength = 1.0f - ((fftAreaMax.x - mousePos.x) / edgeZone);
+            else if (mousePos.x >= fftAreaMax.x - edgeZone) {
+                edgeStrength = std::clamp<float>(1.0f - ((fftAreaMax.x - mousePos.x) / edgeZone), 0.0f, 1.0f);
                 direction = 1.0;
             }
 
             if (edgeStrength > 0.0f) {
+                edgeScrolling = true;
                 float deltaTime = std::clamp<float>(ImGui::GetIO().DeltaTime, 0.0f, 0.05f);
                 double offsetDelta = direction * viewBandwidth * edgeStrength * edgeStrength * deltaTime;
                 shiftViewOffset(offsetDelta);
@@ -614,6 +617,7 @@ namespace ImGui {
             (mouseMoved || hoveredVFOName == "" || vfoDragStarted)) {
             if (selVfo != NULL) {
                 int refCenter = mousePos.x - fftAreaMin.x;
+                if (edgeScrolling) { refCenter = std::clamp<int>(refCenter, 0, dataWidth - 1); }
                 if (refCenter >= 0 && refCenter < dataWidth) {
                     double off = ((((double)refCenter / ((double)dataWidth / 2.0)) - 1.0) * (viewBandwidth / 2.0)) + viewOffset;
                     off += centerFreq;
