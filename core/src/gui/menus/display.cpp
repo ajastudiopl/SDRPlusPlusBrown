@@ -18,7 +18,7 @@ namespace displaymenu {
     bool showMicHistogram = false;
     bool fullWaterfallUpdate = true;
     bool showBattery = true;
-    int screenOrientation = 0; // Android: 0 landscape (default, as before), 1 auto (sensor), 2 portrait
+    int screenOrientation = 1; // Android: 0 landscape, 1 auto (sensor, default), 2 portrait
     bool showClock = true;
     bool detectSignals = false;
 
