@@ -29,6 +29,18 @@ namespace spectrum {
         std::lock_guard<std::mutex> lck(mtx);
         currentPlan = plan;
         cfg = s;
+        summary.valid = true;
+        summary.range = plan.range;
+        summary.segments = (int)plan.segments.size();
+        summary.stepHz = plan.stepHz;
+        summary.sampleRateHz = plan.sampleRateHz;
+        summary.usableBandwidthHz = plan.usableBandwidthHz;
+        summary.dcCoveredByOverlap = plan.dcCoveredByOverlap;
+        summary.native = plan.native;
+        summary.warnings = plan.warnings;
+        summary.fftSize = s.fftSize;
+        summary.window = s.window;
+        summary.detector = s.detector;
         assembler.configure(plan.range.startHz, plan.range.stopHz, bins, s.detector, (int)plan.segments.size());
         display.reset(bins);
         display.setSettings(s.display);
@@ -316,5 +328,10 @@ namespace spectrum {
         wfRowSweeps = 0;
         wfRowComplete = true;
         ver++;
+    }
+
+    PlanSummary SweepEngine::planSummary() {
+        std::lock_guard<std::mutex> lck(mtx);
+        return summary;
     }
 }

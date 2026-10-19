@@ -44,6 +44,22 @@ namespace spectrum {
         int64_t lastFrameTimeNs = 0;
     };
 
+    // Thread-safe summary of the active plan for the UI / exports.
+    struct PlanSummary {
+        bool valid = false;
+        FrequencyRange range;
+        int segments = 0;
+        double stepHz = 0;
+        double sampleRateHz = 0;
+        double usableBandwidthHz = 0;
+        bool dcCoveredByOverlap = true;
+        bool native = false;
+        std::vector<std::string> warnings;
+        int fftSize = 0;
+        WindowType window = WindowType::BLACKMAN_HARRIS;
+        Detector detector = Detector::PEAK;
+    };
+
     struct EngineSnapshot {
         uint64_t version = 0;
         double startHz = 0;
@@ -97,7 +113,9 @@ namespace spectrum {
         bool snapshot(EngineSnapshot& out, bool includePartial, bool includePersistence);
         bool lastFrame(SweepFrame& out);
         EngineStats stats();
-        const SweepPlan& plan() const { return currentPlan; } // immutable while running
+        // Acquisition thread only (the plan changes in configure()).
+        const SweepPlan& plan() const { return currentPlan; }
+        PlanSummary planSummary();
         WaterfallHistory& waterfall() { return history; }
         double rbwHz() const { return proc.rbwHz(); }
         void resetAverage();
@@ -105,10 +123,6 @@ namespace spectrum {
         void clearWaterfall();
         // Changes the history length (clears the history), safe while sweeping.
         void resizeWaterfall(int rows);
-        int fftSize() const { return proc.fftSize(); }
-        int framesPerCapture() const { return cfg.framesPerCapture; }
-        Detector detector() const { return cfg.detector; }
-        WindowType window() const { return cfg.window; }
 
     private:
         void publishFrame(const SweepFrame& f);
@@ -123,6 +137,7 @@ namespace spectrum {
         std::vector<int> segLoIndex;
 
         std::mutex mtx; // protects everything below
+        PlanSummary summary;
         SpectrumAssembler assembler;
         DisplayProcessor display;
         WaterfallHistory history;

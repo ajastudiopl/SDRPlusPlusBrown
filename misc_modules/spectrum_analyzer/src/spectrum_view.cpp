@@ -143,9 +143,15 @@ namespace spectrum {
         if (hovered && io.MouseWheel != 0.0f) {
             view.zoom(std::pow(1.25, (double)io.MouseWheel), mouseHz);
         }
+        if (hovered && ImGui::IsMouseClicked(ImGuiMouseButton_Left)) { pressDragged = false; }
         if (active && ImGui::IsMouseDragging(ImGuiMouseButton_Left, 3.0f * style::uiScale)) {
             dragging = true;
+            pressDragged = true;
             view.pan(-(double)io.MouseDelta.x / (double)size.x * view.viewSpan());
+        }
+        if (hovered && ImGui::IsMouseReleased(ImGuiMouseButton_Left) && !pressDragged) {
+            hasTap = true;
+            tapHz = mouseHz;
         }
         if (!ImGui::IsMouseDown(ImGuiMouseButton_Left)) { dragging = false; }
         if (hovered && ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left)) {
@@ -318,6 +324,11 @@ namespace spectrum {
                 }
                 labelBox(dl, ImVec2(x + 3, p0.y + 3 + (float)(i % 3) * (lineH + 2)), buf, COL_MARKER);
             }
+        }
+
+        if (hasTap && tapHz >= view.viewStart() && tapHz <= view.viewStop()) {
+            float x = (float)view.freqToX(tapHz, p0.x, size.x);
+            dashedVLine(dl, x, p0.y, p1.y, IM_COL32(120, 230, 255, 200), 3.0f * style::uiScale);
         }
 
         // Status overlays

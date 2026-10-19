@@ -199,7 +199,7 @@ namespace spectrum {
         }
         w.brightness = std::clamp(w.brightness, -1.0f, 1.0f);
         w.contrast = std::clamp(w.contrast, 0.2f, 5.0f);
-        w.historyRows = std::clamp(w.historyRows, 16, 4096);
+        w.historyRows = std::clamp(w.historyRows, 16, 2048); // texture height limit on mobile GPUs
         w.sweepsPerLine = std::clamp(w.sweepsPerLine, 1, 100);
         s.peaks.maxPeaks = std::clamp(s.peaks.maxPeaks, 1, 500);
         s.peaks.minSpacingHz = std::max(0.0, s.peaks.minSpacingHz);

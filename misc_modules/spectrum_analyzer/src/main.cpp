@@ -163,7 +163,10 @@ public:
     // are queued and executed on the UI thread in tick().
     std::string handleDebugCommand(const std::string& cmd, const std::string& args) override {
         json r;
-        if (cmd == "status") { return statusJson().dump(); }
+        if (cmd == "status") {
+            std::lock_guard<std::mutex> lck(statusMtx);
+            return cachedStatus.empty() ? std::string("{\"state\": \"starting\"}") : cachedStatus;
+        }
         if (cmd == "devices") {
             std::lock_guard<std::mutex> lck(devMtx);
             r["devices"] = json::array();
@@ -498,6 +501,15 @@ private:
         controller.update();
         runQueuedCommands();
 
+        // Status for the HTTP debug server, built here on the UI thread.
+        int64_t now = nowNs();
+        if (now - lastStatusNs > 100000000) {
+            lastStatusNs = now;
+            std::string st = statusJson().dump();
+            std::lock_guard<std::mutex> lck(statusMtx);
+            cachedStatus = st;
+        }
+
         bool nativeActive = controller.active() && runKind == Kind::NATIVE && runProvider;
         bool shouldLock = nativeActive && sigpath::sourceManager.getSelectedName() == runProvider->receiverSourceName();
         if (shouldLock && !gui::mainWindow.playButtonLocked) {
@@ -630,15 +642,15 @@ private:
         m.deviceId = runDevice.kind == Kind::NATIVE ? runDevice.deviceId : runDevice.sourceName;
         m.backend = runKind == Kind::NATIVE ? "HackRF native sweep" : (runKind == Kind::GENERIC ? "Generic stepped sweep" : "Demo (synthetic)");
         m.synthetic = runKind == Kind::DEMO;
-        const SweepPlan& plan = engine.plan();
+        PlanSummary plan = engine.planSummary();
         m.sampleRateHz = plan.sampleRateHz;
-        m.fftSize = engine.fftSize();
-        m.window = windowName(engine.window());
-        m.detector = engine.detector() == Detector::PEAK ? "peak" : "average";
+        m.fftSize = plan.fftSize;
+        m.window = windowName(plan.window);
+        m.detector = plan.detector == Detector::PEAK ? "peak" : "average";
         EngineStats st = engine.stats();
         m.rbwHz = st.rbwHz;
         m.fftBinHz = st.fftBinHz;
-        m.segments = (int)plan.segments.size();
+        m.segments = plan.segments;
         m.stepHz = plan.stepHz;
         m.usableBandwidthHz = plan.usableBandwidthHz;
         std::string g;
@@ -856,7 +868,18 @@ private:
         ImGui::SameLine();
         if (ImGui::Button("Snapshot##sa_snap")) { exportSnapshot(); }
         ImGui::SameLine();
+        // Touch friendly actions on the last tapped frequency (no right click on touch screens)
+        if (!view.hasTap) { style::beginDisabled(); }
+        if (ImGui::Button("Tune##sa_tap_tune")) { requestTune(view.tapHz); }
+        ImGui::SameLine();
+        if (ImGui::Button("Mark##sa_tap_mark")) {
+            markers.push_back({ "", view.tapHz });
+            saveConfig();
+        }
+        if (!view.hasTap) { style::endDisabled(); }
+        ImGui::SameLine();
         if (std::isfinite(view.hoverHz)) { ImGui::TextDisabled("%s", formatFrequency(view.hoverHz).c_str()); }
+        else if (view.hasTap) { ImGui::TextDisabled("Selected %s", formatFrequency(view.tapHz).c_str()); }
         else { ImGui::TextDisabled("View %s - %s", formatFrequency(freqView.viewStart(), 3).c_str(), formatFrequency(freqView.viewStop(), 3).c_str()); }
 
         ImVec2 avail = ImGui::GetContentRegionAvail();
@@ -922,7 +945,8 @@ private:
             snapVersion = snap.version;
             snapHadPartial = wantPartial;
         }
-        if (snap.hasFrame || controller.active()) { freqView.setFullRange(engine.plan().range.startHz, engine.plan().range.stopHz, false); }
+        PlanSummary plan = engine.planSummary();
+        if (plan.valid && (snap.hasFrame || controller.active())) { freqView.setFullRange(plan.range.startHz, plan.range.stopHz, false); }
         else { freqView.setFullRange(settings.range.startHz, settings.range.stopHz, false); }
 
         drawTopPanel();
@@ -1061,7 +1085,8 @@ private:
                 ch = true;
             }
             if (settings.sweep.autoParams) {
-                if (active) { ImGui::TextDisabled("FFT size: auto (active %d)", engine.fftSize()); }
+                SweepState fs = controller.state();
+                if (fs == SweepState::SWEEPING || fs == SweepState::PAUSED) { ImGui::TextDisabled("FFT size: auto (active %d)", engine.planSummary().fftSize); }
                 else { ImGui::TextDisabled("FFT size, overlap, step: chosen at start"); }
             }
             else {
@@ -1164,12 +1189,13 @@ private:
                 acqDirty = true;
                 saveConfig();
             }
-            if (active) {
-                const SweepPlan& plan = engine.plan();
+            SweepState runState = controller.state();
+            if (runState == SweepState::SWEEPING || runState == SweepState::PAUSED) {
+                PlanSummary plan = engine.planSummary();
                 EngineStats st = engine.stats();
                 ImGui::Separator();
-                ImGui::TextDisabled("Active plan: %d segments, step %s", (int)plan.segments.size(), formatFrequency(plan.stepHz, 3).c_str());
-                ImGui::TextDisabled("FFT %d, bin %s, RBW %s", engine.fftSize(), formatFrequency(st.fftBinHz, 1).c_str(), formatFrequency(st.rbwHz, 1).c_str());
+                ImGui::TextDisabled("Active plan: %d segments, step %s", plan.segments, formatFrequency(plan.stepHz, 3).c_str());
+                ImGui::TextDisabled("FFT %d, bin %s, RBW %s", plan.fftSize, formatFrequency(st.fftBinHz, 1).c_str(), formatFrequency(st.rbwHz, 1).c_str());
                 ImGui::TextDisabled("Display bin %s", formatFrequency(st.displayBinHz, 1).c_str());
                 if (!plan.dcCoveredByOverlap) { ImGui::TextColored(ImVec4(1, 0.8f, 0.3f, 1), "DC regions not covered by overlap"); }
                 for (auto& wmsg : plan.warnings) { ImGui::TextWrapped("%s", wmsg.c_str()); }
@@ -1487,9 +1513,12 @@ private:
             if (dev) {
                 ImGui::TextWrapped("%s", dev->label.c_str());
                 if (dev->kind == Kind::NATIVE) {
-                    sweep::Ownership own = dev->provider->getOwnership(dev->deviceId);
-                    const char* ownTxt = own == sweep::Ownership::FREE ? "free" : (own == sweep::Ownership::RECEIVER ? "used by the receiver" : (own == sweep::Ownership::SWEEP ? "used by the analyzer" : "unavailable"));
-                    ImGui::Text("Device: %s", ownTxt);
+                    if (nowNs() - ownershipCheckNs > 1000000000) {
+                        ownershipCheckNs = nowNs();
+                        sweep::Ownership own = dev->provider->getOwnership(dev->deviceId);
+                        ownershipText = own == sweep::Ownership::FREE ? "free" : (own == sweep::Ownership::RECEIVER ? "used by the receiver" : (own == sweep::Ownership::SWEEP ? "used by the analyzer" : "unavailable"));
+                    }
+                    ImGui::Text("Device: %s", ownershipText.c_str());
                     if (capsValid) {
                         ImGui::TextDisabled("libhackrf %s", caps.libraryVersion.c_str());
                         if (caps.firmwareKnown) { ImGui::TextDisabled("Firmware %s, board %s", caps.firmwareVersion.c_str(), caps.boardName.c_str()); }
@@ -1573,6 +1602,11 @@ private:
 
     std::mutex queueMtx;
     std::vector<std::pair<std::string, std::string>> commandQueue;
+    std::mutex statusMtx;
+    std::string cachedStatus;
+    int64_t lastStatusNs = 0;
+    std::string ownershipText;
+    int64_t ownershipCheckNs = 0;
 
     EventHandler<ImGuiContext*> wfDrawnHandler;
     EventHandler<std::string> sourceChangedHandler;

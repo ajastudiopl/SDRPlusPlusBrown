@@ -50,6 +50,9 @@ namespace spectrum {
 
         // Last hovered frequency (for status display), NaN when not hovering.
         double hoverHz = std::numeric_limits<double>::quiet_NaN();
+        // Frequency selected by a tap / click without dragging (touch screens).
+        bool hasTap = false;
+        double tapHz = 0;
 
     private:
         bool handleInteraction(const char* id, ImVec2 p0, ImVec2 size, FrequencyView& view, ViewEvents& ev,
@@ -80,6 +83,7 @@ namespace spectrum {
 
         // interaction
         bool dragging = false;
+        bool pressDragged = false;
         float dragLastX = 0;
         double contextHz = 0;
         int contextMarker = -1;

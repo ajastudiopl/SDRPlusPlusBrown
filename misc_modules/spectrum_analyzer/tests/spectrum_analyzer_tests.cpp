@@ -786,7 +786,7 @@ TEST(settings_json_roundtrip_and_validation) {
     CHECK(b.sweep.window == WindowType::BLACKMAN_HARRIS);
     CHECK(b.range.stopHz > b.range.startHz);
     CHECK(b.display.maxDb > b.display.minDb);
-    CHECK(b.waterfall.historyRows == 4096);
+    CHECK(b.waterfall.historyRows == 2048);
     settingsFromJson(nlohmann::json::array(), b); // not an object: ignored
 }
 
