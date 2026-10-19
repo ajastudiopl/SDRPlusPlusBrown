@@ -2,6 +2,10 @@
 
 Newest entries are at the top.
 
+2026.10.19
+
+* SDR++ by AJA: Spectrum Analyzer tab ("Looking Glass"). Wideband sweep with HackRF native sweep (firmware sweep mode through hackrf_source) or a stepped sweep through any receiver source, continuous wideband spectrum and waterfall, markers, peak detection, presets, CSV/JSON/PNG export. See misc_modules/spectrum_analyzer/README.md.
+
 2024.12.31
 
 * Experimental voice control - not for production use - will fail because free API key. 
