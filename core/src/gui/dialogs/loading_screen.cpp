@@ -23,13 +23,18 @@ namespace LoadingScreen {
         ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(20.0f, 20.0f));
         ImGui::OpenPopup("Credits");
         ImGui::PushStyleColor(ImGuiCol_ModalWindowDimBg, ImVec4(0.0f, 0.0f, 0.0f, 0.0f));
+        ImGui::SetNextWindowPos(ImGui::GetMainViewport()->GetCenter(), ImGuiCond_Always, ImVec2(0.5f, 0.5f));
         ImGui::BeginPopupModal("Credits", NULL, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoBackground);
 
         ImGui::PushFont(style::hugeFont);
-        ImGui::TextUnformatted("SDR++ by AJA");
+        ImGui::TextUnformatted("SDR++");
         ImGui::PopFont();
         ImGui::SameLine();
         ImGui::Image(icons::LOGO, imageSize);
+        // hugeFont only has glyphs for "SDR+ ", so the suffix uses bigFont
+        ImGui::PushFont(style::bigFont);
+        ImGui::TextUnformatted("by AJA");
+        ImGui::PopFont();
 
         ImVec2 origPos = ImGui::GetCursorPos();
         ImGui::SetCursorPosY(origPos.y + 50);
