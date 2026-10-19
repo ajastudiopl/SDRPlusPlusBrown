@@ -902,3 +902,27 @@ jobs:
 
         - name: Run check_clang_format
           run: cd $GITHUB_WORKSPACE && chmod +x ./check_clang_format.sh && ./check_clang_format.sh || true
+
+    test_spectrum_analyzer:
+        runs-on: ubuntu-22.04
+
+        steps:
+        - uses: actions/checkout@v4
+
+        - name: Install dependencies
+          run: sudo apt update -y && sudo apt install -y cmake ninja-build pkg-config libfftw3-dev clang
+
+        - name: Build Spectrum Analyzer tests (gcc, FFTW)
+          run: cmake -S $GITHUB_WORKSPACE/misc_modules/spectrum_analyzer/tests -B ${{runner.workspace}}/sa-tests -G Ninja -DCMAKE_BUILD_TYPE=Release && cmake --build ${{runner.workspace}}/sa-tests
+
+        - name: Run Spectrum Analyzer tests
+          run: ${{runner.workspace}}/sa-tests/spectrum_analyzer_tests
+
+        # GCC's ThreadSanitizer is not used: its libtsan misreports condition_variable waits (pthread_cond_clockwait)
+        - name: Build Spectrum Analyzer tests (clang, ASan + UBSan)
+          run: CXX=clang++ cmake -S $GITHUB_WORKSPACE/misc_modules/spectrum_analyzer/tests -B ${{runner.workspace}}/sa-tests-asan -G Ninja -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS="-fsanitize=address,undefined -fno-sanitize-recover=undefined -fno-omit-frame-pointer" && cmake --build ${{runner.workspace}}/sa-tests-asan
+
+        - name: Run Spectrum Analyzer tests (ASan + UBSan)
+          env:
+            ASAN_OPTIONS: detect_leaks=1
+          run: ${{runner.workspace}}/sa-tests-asan/spectrum_analyzer_tests
