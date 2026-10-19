@@ -26,6 +26,7 @@ namespace spectrum {
         const ImU32 COL_DEMO = IM_COL32(255, 150, 40, 255);
         const ImU32 COL_WARN = IM_COL32(255, 90, 80, 255);
         const ImU32 COL_NODATA = IM_COL32(28, 24, 30, 255);
+        const float WF_MIN_LINE_PX = 2.0f;
 
         std::string axisLabel(double hz, double step) {
             char buf[48];
@@ -475,18 +476,26 @@ namespace spectrum {
             shownTotal = texUploaded;
 
             if (tex && h > 0) {
-                float rowPx = size.y / (float)h;
+                // Each sweep gets at least WF_MIN_LINE_PX pixels so new lines are clearly
+                // visible; only the newest lines that fit are drawn (newest at the top).
+                float rowPx = std::max(size.y / (float)h, WF_MIN_LINE_PX * style::uiScale);
+                int fit = std::max(1, (int)std::floor(size.y / rowPx));
+                int shown = (int)std::min<uint64_t>(std::min<uint64_t>(shownTotal, (uint64_t)h), (uint64_t)fit);
                 int head = (int)(shownTotal % (uint64_t)h);
-                if (head > 0) {
-                    dl->AddImage((ImTextureID)(intptr_t)tex, p0, ImVec2(p1.x, p0.y + head * rowPx), ImVec2(0, (float)head / h), ImVec2(1, 0));
+                int partA = std::min(head, shown);
+                if (partA > 0) {
+                    dl->AddImage((ImTextureID)(intptr_t)tex, p0, ImVec2(p1.x, p0.y + partA * rowPx), ImVec2(0, (float)head / h), ImVec2(1, (float)(head - partA) / h));
                 }
-                if (shownTotal >= (uint64_t)h) {
-                    dl->AddImage((ImTextureID)(intptr_t)tex, ImVec2(p0.x, p0.y + head * rowPx), p1, ImVec2(0, 1), ImVec2(1, (float)head / h));
+                int partB = shown - partA;
+                if (partB > 0) {
+                    float y0 = p0.y + partA * rowPx;
+                    dl->AddImage((ImTextureID)(intptr_t)tex, ImVec2(p0.x, y0), ImVec2(p1.x, y0 + partB * rowPx), ImVec2(0, 1), ImVec2(1, (float)(h - partB) / h));
                 }
+                wfRowPx = rowPx;
+                wfShown = shown;
                 // Rows built from incomplete sweeps get a red mark on the left edge.
                 uint64_t lag = hist.totalPushed() - shownTotal;
-                int rows = (int)std::min<uint64_t>(shownTotal, (uint64_t)h);
-                for (int age = 0; age < rows; age++) {
+                for (int age = 0; age < shown; age++) {
                     int histAge = (int)(lag + age);
                     if (histAge >= hist.rows()) { break; }
                     WaterfallRowInfo info;
@@ -509,11 +518,11 @@ namespace spectrum {
             ImVec2 mp = ImGui::GetIO().MousePos;
             dl->AddLine(ImVec2(mp.x, p0.y), ImVec2(mp.x, p1.y), COL_CURSOR);
             double f = view.xToFreq(mp.x, p0.x, size.x);
-            int age = (int)((mp.y - p0.y) / (size.y / (float)h));
+            int age = (int)((mp.y - p0.y) / std::max(wfRowPx, 0.01f));
             auto lck = hist.lock();
             uint64_t lag = hist.totalPushed() - shownTotal;
             WaterfallRowInfo info;
-            const uint8_t* row = (age < (int)std::min<uint64_t>(shownTotal, (uint64_t)h)) ? hist.rowByAge((int)(lag + age), &info) : nullptr;
+            const uint8_t* row = (age < wfShown) ? hist.rowByAge((int)(lag + age), &info) : nullptr;
             ImGui::BeginTooltip();
             ImGui::Text("%s", formatFrequency(f).c_str());
             if (row) {

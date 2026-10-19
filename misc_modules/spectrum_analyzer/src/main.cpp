@@ -206,12 +206,17 @@ private:
         }
         selectedDeviceKey = config.conf["device"];
         json& ui = config.conf["ui"];
-        if (ui.contains("showSettings")) { showSettings = ui["showSettings"]; }
         if (ui.contains("unit")) { unit = (FreqUnit)std::clamp<int>(ui["unit"].get<int>(), 0, 2); }
         if (ui.contains("muteAudio")) { muteAudio = ui["muteAudio"]; }
         if (ui.contains("restoreReceiver")) { restoreReceiver = ui["restoreReceiver"]; }
         if (ui.contains("resumeReceiver")) { resumeReceiver = ui["resumeReceiver"]; }
         if (ui.contains("exportDir")) { exportDir = ui["exportDir"]; }
+        // Layout v2: bigger waterfall and auto waterfall levels by default
+        if (!ui.contains("layoutVersion") || ui["layoutVersion"].get<int>() < 2) {
+            settings.display.spectrumHeightFrac = 0.3f;
+            settings.waterfall.autoLevels = true;
+            ui["layoutVersion"] = 2;
+        }
         if (config.conf["settleBySource"].is_object()) {
             for (auto& [k, v] : config.conf["settleBySource"].items()) {
                 if (v.is_number()) { settleBySource[k] = v.get<double>(); }
@@ -230,7 +235,7 @@ private:
         for (auto& p : userPresets) { presets[p.name] = settingsToJson(p.settings); }
         config.conf["presets"] = presets;
         config.conf["device"] = selectedDeviceKey;
-        config.conf["ui"]["showSettings"] = showSettings;
+        config.conf["ui"]["layoutVersion"] = 2;
         config.conf["ui"]["unit"] = (int)unit;
         config.conf["ui"]["muteAudio"] = muteAudio;
         config.conf["ui"]["restoreReceiver"] = restoreReceiver;
@@ -698,15 +703,13 @@ private:
     static void menuHandler(void* ctx) {
         SpectrumAnalyzerModule* _this = (SpectrumAnalyzerModule*)ctx;
         _this->tick();
-        SweepState s = _this->controller.state();
-        ImGui::Text("Status: %s", sweepStateName(s));
         bool shown = gui::mainWindow.getSelectedMainView() == VIEW_NAME;
-        if (ImGui::Button(shown ? "Back to receiver##sa_menu_open" : "Open Spectrum Analyzer##sa_menu_open", ImVec2(ImGui::GetContentRegionAvail().x, 0))) {
+        if (ImGui::Button(shown ? "Back to receiver##sa_menu_open" : "Show Spectrum Analyzer##sa_menu_open", ImVec2(ImGui::GetContentRegionAvail().x, 0))) {
             gui::mainWindow.selectMainView(shown ? "" : VIEW_NAME);
         }
-        if (_this->controller.active()) {
-            if (ImGui::Button("Stop sweep##sa_menu_stop", ImVec2(ImGui::GetContentRegionAvail().x, 0))) { _this->stopSweep(); }
-        }
+        _this->drawControls();
+        _this->drawSettings();
+        _this->drawPopups();
     }
 
     ImVec4 stateColor(SweepState s) {
@@ -730,98 +733,62 @@ private:
         return false;
     }
 
-    void drawTopPanel() {
-        float scale = style::uiScale;
-        float avail = ImGui::GetContentRegionAvail().x;
-        bool narrow = avail < 760.0f * scale;
+    void startStopButtons(float width) {
         bool active = controller.active();
         SweepState state = controller.state();
+        float half = (width - ImGui::GetStyle().ItemSpacing.x) / 2.0f;
+        if (!active) {
+            if (ImGui::Button("Start##sa_start", ImVec2(half, 0))) { startSweep(false); }
+        }
+        else {
+            if (state == SweepState::STOPPING) { style::beginDisabled(); }
+            if (ImGui::Button("Stop##sa_stop", ImVec2(half, 0))) { stopSweep(); }
+            if (state == SweepState::STOPPING) { style::endDisabled(); }
+        }
+        ImGui::SameLine();
+        if (!active) { style::beginDisabled(); }
+        if (ImGui::Button(controller.paused() ? "Resume##sa_pause" : "Pause##sa_pause", ImVec2(half, 0))) { controller.setPaused(!controller.paused()); }
+        if (!active) { style::endDisabled(); }
+    }
 
-        // Row 1: device, mode, start/stop/pause, settings
+    // Device, mode, start/stop and status, at the top of the menu entry.
+    void drawControls() {
+        float w = ImGui::GetContentRegionAvail().x;
+        bool active = controller.active();
+        SweepState state = controller.state();
         {
             std::lock_guard<std::mutex> lck(devMtx);
             if (active) { style::beginDisabled(); }
-            ImGui::SetNextItemWidth(narrow ? avail * 0.5f : 300.0f * scale);
+            ImGui::SetNextItemWidth(w);
             int idx = deviceIdx;
             if (ImGui::Combo("##sa_device", &idx, devicesTxt.c_str())) { selectDevice(idx); }
-            ImGui::SameLine();
-            if (ImGui::Button("Refresh##sa_refresh")) { devicesStale = true; }
-            ImGui::SameLine();
-            ImGui::SetNextItemWidth(150.0f * scale);
+            ImGui::LeftLabel("Mode");
+            ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x - ImGui::CalcTextSize("Refresh").x - ImGui::GetStyle().FramePadding.x * 2 - ImGui::GetStyle().ItemSpacing.x);
             int mode = (int)settings.sweep.mode;
             if (ImGui::Combo("##sa_mode", &mode, MODES_TXT)) {
                 settings.sweep.mode = (SweepMode)mode;
                 saveConfig();
             }
+            ImGui::SameLine();
+            if (ImGui::Button("Refresh##sa_refresh")) { devicesStale = true; }
             if (active) { style::endDisabled(); }
         }
         if (devicesStale && !active) { refreshDevices(); }
-        if (narrow) { ImGui::NewLine(); }
-        else { ImGui::SameLine(); }
+        startStopButtons(w);
+        drawPresetCombo(w);
 
-        if (!active) {
-            if (ImGui::Button("  Start  ##sa_start")) { startSweep(false); }
-        }
-        else {
-            if (state == SweepState::STOPPING) { style::beginDisabled(); }
-            if (ImGui::Button("  Stop  ##sa_stop")) { stopSweep(); }
-            if (state == SweepState::STOPPING) { style::endDisabled(); }
-        }
-        ImGui::SameLine();
-        if (!active) { style::beginDisabled(); }
-        if (ImGui::Button(controller.paused() ? "Resume##sa_pause" : "Pause##sa_pause")) { controller.setPaused(!controller.paused()); }
-        if (!active) { style::endDisabled(); }
-        ImGui::SameLine();
-        if (ImGui::Button(showSettings ? "Hide settings##sa_settings" : "Settings##sa_settings")) {
-            showSettings = !showSettings;
-            saveConfig();
-        }
-
-        // Row 2: range
-        float fw = (narrow ? 110.0f : 130.0f) * scale;
-        ImGui::AlignTextToFramePadding();
-        ImGui::TextUnformatted("Start");
-        ImGui::SameLine();
-        bool changed = freqInput("##sa_start_f", editRange.startHz, fw);
-        ImGui::SameLine();
-        ImGui::TextUnformatted("Stop");
-        ImGui::SameLine();
-        changed |= freqInput("##sa_stop_f", editRange.stopHz, fw);
-        ImGui::SameLine();
-        ImGui::SetNextItemWidth(70.0f * scale);
-        int u = (int)unit;
-        if (ImGui::Combo("##sa_unit", &u, UNITS_TXT)) {
-            unit = (FreqUnit)u;
-            saveConfig();
-        }
-        bool rangeDirty = editRange.startHz != settings.range.startHz || editRange.stopHz != settings.range.stopHz;
-        ImGui::SameLine();
-        if (!rangeDirty) { style::beginDisabled(); }
-        if (ImGui::Button(active ? "Apply (restart)##sa_apply_range" : "Apply##sa_apply_range")) { applyRange(); }
-        if (!rangeDirty) { style::endDisabled(); }
-        if (!narrow) { ImGui::SameLine(); }
-        drawPresetCombo(narrow ? avail : 260.0f * scale);
-        if (!rangeError.empty()) { ImGui::TextColored(ImVec4(1, 0.4f, 0.3f, 1), "%s", rangeError.c_str()); }
-
-        // Row 3: status
         EngineStats st = engine.stats();
         ImGui::TextColored(stateColor(state), "%s", sweepStateName(state));
-        ImGui::SameLine();
         if (state == SweepState::SWEEPING || state == SweepState::PAUSED) {
-            char buf[320];
-            snprintf(buf, sizeof(buf), "| %s | measured: %.2f sweeps/s, cycle %.0f ms | %d seg | incomplete %llu, lost %llu | RBW %s",
-                     formatFrequency(settings.range.spanHz(), 3).c_str(), st.sweepsPerSec, st.lastSweepSec * 1000.0, st.segmentsPerSweep,
-                     (unsigned long long)st.sweepsIncomplete, (unsigned long long)st.capturesDropped, formatFrequency(st.rbwHz, 1).c_str());
-            ImGui::TextUnformatted(buf);
-            float frac = st.segmentsPerSweep > 0 ? (float)st.segmentsReceived / (float)st.segmentsPerSweep : 0.0f;
-            ImGui::ProgressBar(frac, ImVec2(-1, 4.0f * scale), "");
+            ImGui::SameLine();
+            ImGui::TextDisabled("%.2f sweeps/s (measured)", st.sweepsPerSec);
+            ImGui::TextDisabled("cycle %.0f ms, %d seg, incomplete %llu, lost %llu", st.lastSweepSec * 1000.0, st.segmentsPerSweep,
+                                (unsigned long long)st.sweepsIncomplete, (unsigned long long)st.capturesDropped);
         }
-        else {
-            std::string m = controller.message();
-            if (!m.empty()) { ImGui::TextColored(ImVec4(1, 0.45f, 0.35f, 1), "%s", m.c_str()); }
-            else { ImGui::TextDisabled("| %s", formatFrequency(settings.range.spanHz(), 3).c_str()); }
-        }
+        std::string m = controller.message();
+        if (!m.empty() && !active) { ImGui::TextColored(ImVec4(1, 0.45f, 0.35f, 1), "%s", m.c_str()); }
         if (!notice.empty()) { ImGui::TextColored(ImVec4(1.0f, 0.8f, 0.4f, 1.0f), "%s", notice.c_str()); }
+        if (!rangeError.empty()) { ImGui::TextColored(ImVec4(1, 0.4f, 0.3f, 1), "%s", rangeError.c_str()); }
     }
 
     void drawPresetCombo(float width) {
@@ -855,18 +822,37 @@ private:
 
     void drawPlots() {
         float scale = style::uiScale;
-        // Toolbar
+        // One slim line: start/stop, status, zoom, tap actions
+        SweepState state = controller.state();
+        if (!controller.active()) {
+            if (ImGui::Button("Start##sa_vstart")) { startSweep(false); }
+        }
+        else if (ImGui::Button("Stop##sa_vstop")) { stopSweep(); }
+        ImGui::SameLine();
+        ImGui::TextColored(stateColor(state), "%s", sweepStateName(state));
+        ImGui::SameLine();
+        {
+            EngineStats st = engine.stats();
+            float frac = st.segmentsPerSweep > 0 ? (float)st.segmentsReceived / (float)st.segmentsPerSweep : 0.0f;
+            char buf[160];
+            if (state == SweepState::SWEEPING || state == SweepState::PAUSED) {
+                snprintf(buf, sizeof(buf), "%s - %s  %.1f sw/s", formatFrequency(settings.range.startHz, 3).c_str(), formatFrequency(settings.range.stopHz, 3).c_str(), st.sweepsPerSec);
+            }
+            else {
+                snprintf(buf, sizeof(buf), "%s - %s", formatFrequency(settings.range.startHz, 3).c_str(), formatFrequency(settings.range.stopHz, 3).c_str());
+            }
+            ImGui::TextDisabled("%s", buf);
+            if (state == SweepState::SWEEPING) {
+                ImGui::SameLine();
+                ImGui::ProgressBar(frac, ImVec2(60.0f * scale, ImGui::GetTextLineHeight() * 0.5f), "");
+            }
+        }
+        ImGui::SameLine();
         if (ImGui::Button(" - ##sa_zout")) { freqView.zoom(0.5, (freqView.viewStart() + freqView.viewStop()) / 2); }
         ImGui::SameLine();
         if (ImGui::Button(" + ##sa_zin")) { freqView.zoom(2.0, (freqView.viewStart() + freqView.viewStop()) / 2); }
         ImGui::SameLine();
         if (ImGui::Button("Fit##sa_fit")) { freqView.reset(); }
-        ImGui::SameLine();
-        if (ImGui::Button("Reset max##sa_rmax")) { engine.resetMaxHold(); }
-        ImGui::SameLine();
-        if (ImGui::Checkbox("Freeze WF##sa_wfp", &settings.waterfall.paused)) {}
-        ImGui::SameLine();
-        if (ImGui::Button("Snapshot##sa_snap")) { exportSnapshot(); }
         ImGui::SameLine();
         // Touch friendly actions on the last tapped frequency (no right click on touch screens)
         if (!view.hasTap) { style::beginDisabled(); }
@@ -877,10 +863,14 @@ private:
             saveConfig();
         }
         if (!view.hasTap) { style::endDisabled(); }
-        ImGui::SameLine();
-        if (std::isfinite(view.hoverHz)) { ImGui::TextDisabled("%s", formatFrequency(view.hoverHz).c_str()); }
-        else if (view.hasTap) { ImGui::TextDisabled("Selected %s", formatFrequency(view.tapHz).c_str()); }
-        else { ImGui::TextDisabled("View %s - %s", formatFrequency(freqView.viewStart(), 3).c_str(), formatFrequency(freqView.viewStop(), 3).c_str()); }
+        if (std::isfinite(view.hoverHz)) {
+            ImGui::SameLine();
+            ImGui::TextDisabled("%s", formatFrequency(view.hoverHz).c_str());
+        }
+        else if (view.hasTap) {
+            ImGui::SameLine();
+            ImGui::TextDisabled("%s", formatFrequency(view.tapHz).c_str());
+        }
 
         ImVec2 avail = ImGui::GetContentRegionAvail();
         float splitterH = 6.0f * scale;
@@ -912,6 +902,15 @@ private:
         if (ImGui::IsItemDeactivated()) { saveConfig(); }
         ImGui::GetWindowDrawList()->AddRectFilled(ImVec2(sp.x, sp.y + splitterH / 2 - 1), ImVec2(sp.x + avail.x, sp.y + splitterH / 2 + 1), IM_COL32(90, 90, 100, 255));
 
+        if (settings.waterfall.autoLevels && std::isfinite(snap.noiseFloorDb)) {
+            // Follow the noise floor in 5 dB steps: noise dark, signals bright.
+            float lo = std::floor((snap.noiseFloorDb - 3.0f) / 5.0f) * 5.0f;
+            float hi = lo + settings.waterfall.autoRangeDb;
+            if (lo != settings.waterfall.minDb || hi != settings.waterfall.maxDb) {
+                settings.waterfall.minDb = lo;
+                settings.waterfall.maxDb = hi;
+            }
+        }
         view.drawWaterfall(ImVec2(avail.x, wfH), engine.waterfall(), settings.waterfall, freqView, ov, ev);
         handleEvents(ev);
     }
@@ -949,33 +948,10 @@ private:
         if (plan.valid && (snap.hasFrame || controller.active())) { freqView.setFullRange(plan.range.startHz, plan.range.stopHz, false); }
         else { freqView.setFullRange(settings.range.startHz, settings.range.stopHz, false); }
 
-        drawTopPanel();
-        ImGui::Separator();
-
-        float scale = style::uiScale;
-        ImVec2 avail = ImGui::GetContentRegionAvail();
-        bool narrow = avail.x < 760.0f * scale;
-        settingsFullWidth = showSettings && narrow;
-        if (showSettings && !narrow) {
-            float panelW = std::min(360.0f * scale, avail.x * 0.45f);
-            ImGui::BeginChild("##sa_plots", ImVec2(avail.x - panelW - ImGui::GetStyle().ItemSpacing.x, 0), false, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
-            drawPlots();
-            ImGui::EndChild();
-            ImGui::SameLine();
-            ImGui::BeginChild("##sa_settings_panel", ImVec2(0, 0), true);
-            drawSettings();
-            ImGui::EndChild();
-        }
-        else if (showSettings) {
-            ImGui::BeginChild("##sa_settings_panel", ImVec2(0, 0), true);
-            drawSettings();
-            ImGui::EndChild();
-        }
-        else {
-            ImGui::BeginChild("##sa_plots", ImVec2(0, 0), false, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
-            drawPlots();
-            ImGui::EndChild();
-        }
+        // Settings are in the left menu ("Spectrum Analyzer" entry), like every other module.
+        ImGui::BeginChild("##sa_plots", ImVec2(0, 0), false, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
+        drawPlots();
+        ImGui::EndChild();
         drawPopups();
     }
 
@@ -1020,6 +996,13 @@ private:
     }
 
     // ------------------------------------------------------------ settings panel
+    // Sub-sections of the menu entry: tree nodes, so they do not look like menu entries.
+    bool section(const char* label, bool defaultOpen) {
+        ImGuiTreeNodeFlags f = ImGuiTreeNodeFlags_NoTreePushOnOpen | ImGuiTreeNodeFlags_SpanAvailWidth;
+        if (defaultOpen) { f |= ImGuiTreeNodeFlags_DefaultOpen; }
+        return ImGui::TreeNodeEx(label, f);
+    }
+
     void drawSettings() {
         float scale = style::uiScale;
         bool active = controller.active();
@@ -1029,19 +1012,13 @@ private:
         bool isNative = kind == Kind::NATIVE;
         bool isGenericLike = kind == Kind::GENERIC || kind == Kind::DEMO;
 
-        if (settingsFullWidth) {
-            if (ImGui::Button("Show plots##sa_showplots", ImVec2(-1, 0))) {
-                showSettings = false;
-                saveConfig();
-            }
-        }
         if (acqDirty && active) {
             ImGui::TextColored(ImVec4(1, 0.8f, 0.3f, 1), "Changed parameters apply after a restart.");
             if (ImGui::Button("Restart sweep now##sa_restart", ImVec2(-1, 0))) { restartIfRunning(); }
         }
 
         // ---- Frequency range
-        if (ImGui::CollapsingHeader("Frequency Range", ImGuiTreeNodeFlags_DefaultOpen)) {
+        if (section("Frequency Range", true)) {
             double center = editRange.centerHz(), span = editRange.spanHz();
             float w = ImGui::GetContentRegionAvail().x - 70.0f * scale;
             ImGui::LeftLabel("Start");
@@ -1071,7 +1048,7 @@ private:
         }
 
         // ---- Sweep configuration
-        if (ImGui::CollapsingHeader("Sweep Settings", ImGuiTreeNodeFlags_DefaultOpen)) {
+        if (section("Sweep Settings", false)) {
             if (active) { ImGui::TextDisabled("Changes apply after restart."); }
             bool ch = false;
             ch |= ImGui::Checkbox("Auto parameters##sa_auto", &settings.sweep.autoParams);
@@ -1204,7 +1181,7 @@ private:
         }
 
         // ---- Gain
-        if (ImGui::CollapsingHeader("Gain")) {
+        if (section("Gain", false)) {
             if (isNative && capsValid) {
                 for (auto& g : caps.gains) {
                     double& v = settings.gains[g.id];
@@ -1249,7 +1226,7 @@ private:
         }
 
         // ---- Display
-        if (ImGui::CollapsingHeader("Spectrum Display")) {
+        if (section("Spectrum Display", false)) {
             DisplayConfig& d = settings.display;
             bool ch = false, live = false;
             ImGui::LeftLabel("Max dB");
@@ -1286,13 +1263,14 @@ private:
             live |= ImGui::SliderInt("##sa_persn", &d.proc.persistence, 0, 32);
             if (ImGui::Button("Reset average##sa_ravg")) { engine.resetAverage(); }
             ImGui::SameLine();
-            if (ImGui::Button("Reset max hold##sa_rmh")) { engine.resetMaxHold(); }
+            if (ImGui::Button("Reset max##sa_rmax")) { engine.resetMaxHold(); }
+
             if (live) { applyLiveSettings(); }
             else if (ch) { saveConfig(); }
         }
 
         // ---- Waterfall
-        if (ImGui::CollapsingHeader("Waterfall")) {
+        if (section("Waterfall", false)) {
             WaterfallConfig& w = settings.waterfall;
             bool ch = false;
             ImGui::LeftLabel("Palette");
@@ -1307,12 +1285,20 @@ private:
                 }
                 ImGui::EndCombo();
             }
-            ImGui::LeftLabel("Max dB");
-            ImGui::FillWidth();
-            ch |= ImGui::SliderFloat("##sa_wmax", &w.maxDb, -150.0f, 30.0f, "%.0f");
-            ImGui::LeftLabel("Min dB");
-            ImGui::FillWidth();
-            ch |= ImGui::SliderFloat("##sa_wmin", &w.minDb, -200.0f, 0.0f, "%.0f");
+            ch |= ImGui::Checkbox("Auto levels (follow noise floor)##sa_wauto", &w.autoLevels);
+            if (w.autoLevels) {
+                ImGui::LeftLabel("Dynamic range (dB)");
+                ImGui::FillWidth();
+                ch |= ImGui::SliderFloat("##sa_wrange", &w.autoRangeDb, 20.0f, 100.0f, "%.0f");
+            }
+            else {
+                ImGui::LeftLabel("Max dB");
+                ImGui::FillWidth();
+                ch |= ImGui::SliderFloat("##sa_wmax", &w.maxDb, -150.0f, 30.0f, "%.0f");
+                ImGui::LeftLabel("Min dB");
+                ImGui::FillWidth();
+                ch |= ImGui::SliderFloat("##sa_wmin", &w.minDb, -200.0f, 0.0f, "%.0f");
+            }
             if (w.maxDb < w.minDb + 5) { w.maxDb = w.minDb + 5; }
             ImGui::LeftLabel("Brightness");
             ImGui::FillWidth();
@@ -1335,7 +1321,7 @@ private:
                 engine.resizeWaterfall(w.historyRows);
                 view.invalidateWaterfall();
             }
-            ImGui::Checkbox("Pause display##sa_wpause", &w.paused);
+            ImGui::Checkbox("Freeze display##sa_wpause", &w.paused);
             ImGui::SameLine();
             if (ImGui::Button("Clear history##sa_wclear")) {
                 engine.clearWaterfall();
@@ -1350,7 +1336,7 @@ private:
         }
 
         // ---- Markers
-        if (ImGui::CollapsingHeader("Markers")) {
+        if (section("Markers", false)) {
             static double newMarkerHz = 100e6;
             static char newMarkerName[64] = "";
             freqInput("##sa_mk_f", newMarkerHz, 120.0f * scale);
@@ -1403,7 +1389,7 @@ private:
         }
 
         // ---- Peaks / signals
-        if (ImGui::CollapsingHeader("Detected Signals")) {
+        if (section("Detected Signals", false)) {
             bool live = false;
             live |= ImGui::Checkbox("Detect peaks##sa_pd", &settings.peaksEnabled);
             ImGui::SameLine();
@@ -1459,7 +1445,7 @@ private:
         }
 
         // ---- Presets
-        if (ImGui::CollapsingHeader("Presets")) {
+        if (section("Presets", false)) {
             static char presetName[64] = "Custom";
             drawPresetCombo(-1);
             ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x - 90.0f * scale);
@@ -1494,7 +1480,7 @@ private:
         }
 
         // ---- Export
-        if (ImGui::CollapsingHeader("Export")) {
+        if (section("Export", false)) {
             char dirBuf[512];
             snprintf(dirBuf, sizeof(dirBuf), "%s", exportDir.c_str());
             ImGui::LeftLabel("Folder");
@@ -1509,7 +1495,7 @@ private:
         }
 
         // ---- Device
-        if (ImGui::CollapsingHeader("Device & Ownership")) {
+        if (section("Device & Ownership", false)) {
             if (dev) {
                 ImGui::TextWrapped("%s", dev->label.c_str());
                 if (dev->kind == Kind::NATIVE) {
@@ -1568,11 +1554,6 @@ private:
     std::string capsError;
 
     FreqUnit unit = FreqUnit::MHZ;
-#ifdef __ANDROID__
-    bool showSettings = false;
-#else
-    bool showSettings = true;
-#endif
     bool muteAudio = true;
     bool restoreReceiver = true;
     bool resumeReceiver = true;
@@ -1581,7 +1562,6 @@ private:
     std::string notice;
     std::string rangeError;
     bool acqDirty = false;
-    bool settingsFullWidth = false;
 
     Kind runKind = Kind::NONE;
     DeviceEntry runDevice;

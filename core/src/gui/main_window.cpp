@@ -125,7 +125,6 @@ namespace {
 
     std::vector<MainView> mainViews;
     std::string selectedMainView;
-    int mainViewTabSync = 0;
 }
 
 void MainWindow::init() {
@@ -1357,7 +1356,6 @@ void MainWindow::unregisterMainView(std::string name) {
 void MainWindow::selectMainView(std::string name) {
     if (name == selectedMainView) { return; }
     selectedMainView = name;
-    mainViewTabSync = 2;
 }
 
 std::string MainWindow::getSelectedMainView() {
@@ -1374,34 +1372,25 @@ bool MainWindow::mainViewShown() {
 
 void MainWindow::drawMainViewTabs() {
     if (mainViews.empty()) { return; }
-    // After a programmatic selection the tab bar needs a couple of frames to
-    // follow; ignore what it reports in the meantime.
-    bool sync = mainViewTabSync > 0;
+    // Plain buttons instead of an ImGui tab bar: they switch on the first
+    // click/tap and need no state synchronisation with programmatic selection.
+    ImVec4 activeCol = ImGui::GetStyleColorVec4(ImGuiCol_ButtonActive);
+    ImVec4 idleCol = ImGui::GetStyleColorVec4(ImGuiCol_FrameBg);
     std::string clicked = selectedMainView;
-    ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(10.0f * style::uiScale, 4.0f * style::uiScale));
-    if (ImGui::BeginTabBar("##sdrpp_main_views", ImGuiTabBarFlags_FittingPolicyScroll)) {
-        ImGuiTabItemFlags flags = (sync && selectedMainView.empty()) ? ImGuiTabItemFlags_SetSelected : 0;
-        if (ImGui::BeginTabItem("Receiver", NULL, flags)) {
-            clicked = "";
-            ImGui::EndTabItem();
-        }
-        for (auto& v : mainViews) {
-            flags = (sync && selectedMainView == v.name) ? ImGuiTabItemFlags_SetSelected : 0;
-            if (ImGui::BeginTabItem(v.name.c_str(), NULL, flags)) {
-                clicked = v.name;
-                ImGui::EndTabItem();
-            }
-        }
-        ImGui::EndTabBar();
+    ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(12.0f * style::uiScale, 4.0f * style::uiScale));
+    auto viewButton = [&](const char* label, const std::string& viewName) {
+        bool selected = (selectedMainView == viewName);
+        ImGui::PushStyleColor(ImGuiCol_Button, selected ? activeCol : idleCol);
+        if (ImGui::Button(label) && !selected) { clicked = viewName; }
+        ImGui::PopStyleColor();
+    };
+    viewButton("Receiver##sdrpp_view_rx", "");
+    for (auto& v : mainViews) {
+        ImGui::SameLine();
+        viewButton((v.name + "##sdrpp_view").c_str(), v.name);
     }
     ImGui::PopStyleVar();
-    if (sync) {
-        mainViewTabSync--;
-    }
-    else if (clicked != selectedMainView) {
-        selectMainView(clicked);
-        mainViewTabSync = 0;
-    }
+    if (clicked != selectedMainView) { selectMainView(clicked); }
 }
 
 void MainWindow::addBottomWindow(std::string name, std::function<void()> drawFunc) {

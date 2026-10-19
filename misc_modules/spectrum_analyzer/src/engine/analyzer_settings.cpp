@@ -76,6 +76,8 @@ namespace spectrum {
         w["contrast"] = s.waterfall.contrast;
         w["historyRows"] = s.waterfall.historyRows;
         w["sweepsPerLine"] = s.waterfall.sweepsPerLine;
+        w["autoLevels"] = s.waterfall.autoLevels;
+        w["autoRangeDb"] = s.waterfall.autoRangeDb;
 
         j["gains"] = json::object();
         for (auto& [k, v] : s.gains) { j["gains"][k] = v; }
@@ -145,6 +147,8 @@ namespace spectrum {
             read(w, "contrast", s.waterfall.contrast);
             read(w, "historyRows", s.waterfall.historyRows);
             read(w, "sweepsPerLine", s.waterfall.sweepsPerLine);
+            read(w, "autoLevels", s.waterfall.autoLevels);
+            read(w, "autoRangeDb", s.waterfall.autoRangeDb);
         }
         if (j.contains("gains") && j["gains"].is_object()) {
             for (auto& [k, v] : j["gains"].items()) {
@@ -201,6 +205,7 @@ namespace spectrum {
         w.contrast = std::clamp(w.contrast, 0.2f, 5.0f);
         w.historyRows = std::clamp(w.historyRows, 16, 2048); // texture height limit on mobile GPUs
         w.sweepsPerLine = std::clamp(w.sweepsPerLine, 1, 100);
+        w.autoRangeDb = std::clamp(w.autoRangeDb, 10.0f, 150.0f);
         s.peaks.maxPeaks = std::clamp(s.peaks.maxPeaks, 1, 500);
         s.peaks.minSpacingHz = std::max(0.0, s.peaks.minSpacingHz);
         s.peaks.minWidthHz = std::max(0.0, s.peaks.minWidthHz);

@@ -37,7 +37,7 @@ namespace spectrum {
         bool showPartial = true;         // sweep in progress, drawn dimmed and labelled
         bool showPeaks = true;
         bool showMarkers = true;
-        float spectrumHeightFrac = 0.45f;
+        float spectrumHeightFrac = 0.3f;
         DisplaySettings proc;
     };
 
@@ -50,6 +50,8 @@ namespace spectrum {
         int historyRows = 400;
         int sweepsPerLine = 1;           // "Waterfall speed": complete sweeps per row
         bool paused = false;             // freeze display (acquisition continues)
+        bool autoLevels = true;          // min/max follow the noise floor
+        float autoRangeDb = 50.0f;       // dynamic range used with autoLevels
     };
 
     struct AnalyzerSettings {

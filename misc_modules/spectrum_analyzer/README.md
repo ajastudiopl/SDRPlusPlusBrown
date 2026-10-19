@@ -12,10 +12,15 @@ nie jest osobną aplikacją i nie zastępuje zwykłego widma/wodospadu.
 2. Instancja „Spectrum Analyzer” jest w domyślnej konfiguracji; do istniejących
    konfiguracji dodawana jest jednorazowo (flaga `spectrumAnalyzerAdded`
    w `config.json`). Można ją wyłączyć/usunąć w Module Manager.
-3. Nad wodospadem pojawia się pasek zakładek **Receiver | Spectrum Analyzer**.
-   W menu po lewej jest też pozycja „Spectrum Analyzer” z przyciskiem
-   *Open Spectrum Analyzer* (działa również w układzie transceivera).
-4. W zakładce: wybierz urządzenie, zakres (Start/Stop) i naciśnij **Start**.
+3. Nad wodospadem są przyciski **Receiver | Spectrum Analyzer** (jedno
+   kliknięcie przełącza widok). Zakładka analizatora pokazuje, tak jak zwykły
+   widok SDR++, widmo u góry i duży wodospad pod nim, plus jedną linię statusu
+   (Start/Stop, stan, zakres, zoom, Tune/Mark).
+4. Wszystkie ustawienia są w lewym menu, w pozycji „Spectrum Analyzer”, tak jak
+   w innych modułach: urządzenie, tryb, Start/Stop/Pause, presety, a niżej
+   rozwijane sekcje (zakres, sweep, gain, widmo, wodospad, markery, sygnały,
+   presety, eksport, urządzenie). Przycisk *Show Spectrum Analyzer* przełącza
+   widok (działa również w układzie transceivera).
 
 ## Urządzenia i tryby
 
@@ -123,7 +128,8 @@ Peak decay (dB/s), Persistence, Noise floor (percentyl widma), Grid, Peaks,
 Markers, Sweep in progress.
 
 **Waterfall** — paleta (mapy kolorów SDR++), zakres dynamiki (min/max dB),
-Brightness, Contrast, Speed (ile pełnych sweepów na linię), History (linie),
+Auto levels (domyślnie: zakres podąża za poziomem szumu, regulowany zakres
+dynamiki), Brightness, Contrast, Speed (ile pełnych sweepów na linię), History (linie),
 Pause display / Freeze, Clear history. Każda linia to co najmniej jeden
 kompletny cykl. Pamięć: poziomy 8-bit (~0,8 dB), ograniczenie 48 MB
 (np. 4096 punktów × 2048 linii = 8 MB).
@@ -162,7 +168,8 @@ Stany: *Idle, Starting, Sweeping, Paused, Stopping, Error, Device Disconnected*.
   przeciąganie palcem przesuwa widok, dwukrotne stuknięcie stroi odbiornik.
 * Markery: nazwa, częstotliwość, aktualny poziom; dodawanie z menu, z listy
   sygnałów lub ręcznie; zapisywane w konfiguracji.
-* Podział wykres/wodospad można przeciągać.
+* Podział wykres/wodospad można przeciągać (domyślnie 30% widmo / 70% wodospad).
+  Każdy sweep ma w wodospadzie co najmniej 2 piksele (× skala UI) wysokości.
 
 ## Wykrywanie sygnałów, presety, eksport
 

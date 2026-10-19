@@ -77,6 +77,8 @@ namespace spectrum {
         double texViewStart = 0;
         double texViewStop = 0;
         bool wfDirty = true;
+        float wfRowPx = 1.0f;
+        int wfShown = 0;
         std::vector<int> colB0, colB1;
         std::vector<uint32_t> rowBuf;
         std::vector<uint32_t> fullBuf;
