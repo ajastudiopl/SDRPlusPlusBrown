@@ -18,6 +18,7 @@
         <activity
             android:exported="true"
             android:name=".MainActivity"
+            android:launchMode="singleTask"
             android:icon="@mipmap/ic_launcher"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
             android:configChanges="orientation|keyboardHidden|screenSize">

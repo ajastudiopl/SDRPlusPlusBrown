@@ -197,6 +197,7 @@ class MainActivity : NativeActivity(), SensorEventListener {
     override fun onDestroy() {
         super.onDestroy()
         sensorManager.unregisterListener(this)
+        unregisterReceiver(usbDetachReceiver)
     }
 
     fun proceedWithPermissions() {
@@ -343,6 +344,7 @@ class MainActivity : NativeActivity(), SensorEventListener {
 
 
         registerReceiver(this.batteryBroadcastReceiver, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
+        registerReceiver(usbDetachReceiver, IntentFilter(UsbManager.ACTION_USB_DEVICE_DETACHED))
 
         batteryManager = getSystemService(BATTERY_SERVICE) as BatteryManager
 
@@ -447,6 +449,52 @@ class MainActivity : NativeActivity(), SensorEventListener {
                 FLAG_MUTABLE
             )
         }
+    }
+
+    // The SDR was unplugged: forget its file descriptor so the source modules don't reuse it.
+    // The old connection is left open on purpose, native code may still hold its fd until the source is stopped.
+    private val usbDetachReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            if (UsbManager.ACTION_USB_DEVICE_DETACHED != intent.action) { return }
+            val dev: UsbDevice? = intent.getParcelableExtra(UsbManager.EXTRA_DEVICE)
+            if (dev == null || SDR_device == null || dev.deviceName != SDR_device!!.deviceName) { return }
+            Log.w("SDR++", "USB SDR detached: ${dev.deviceName}")
+            SDR_FD = -1
+            SDR_VID = -1
+            SDR_PID = -1
+        }
+    }
+
+    private fun openSdrDevice(dev: UsbDevice) {
+        val conn = usbManager!!.openDevice(dev)
+        if (conn == null) {
+            Log.w("SDR++", "USB openDevice failed: ${dev.deviceName}")
+            return
+        }
+        SDR_device = dev
+        SDR_conn = conn
+        SDR_VID = dev.getVendorId()
+        SDR_PID = dev.getProductId()
+        SDR_FD = conn.getFileDescriptor()
+        Log.w("SDR++", "USB SDR opened: ${dev.deviceName} fd=$SDR_FD")
+    }
+
+    // With launchMode=singleTask a re-plugged SDR is delivered here instead of starting a second
+    // NativeActivity, which the native side can't handle (black screen).
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        setIntent(intent)
+        if (UsbManager.ACTION_USB_DEVICE_ATTACHED != intent.action) { return }
+        val dev: UsbDevice = intent.getParcelableExtra(UsbManager.EXTRA_DEVICE) ?: return
+        Log.w("SDR++", "USB SDR attached: ${dev.deviceName}")
+        if (usbManager == null) { usbManager = getSystemService(USB_SERVICE) as UsbManager }
+        if (usbManager!!.hasPermission(dev)) {
+            openSdrDevice(dev)
+        } else {
+            registerReceiver(usbReceiver, IntentFilter(ACTION_USB_PERMISSION))
+            usbManager!!.requestPermission(dev, makeUsbPermissionIntent())
+        }
+        hideSystemBars()
     }
 
     fun getThisCacheDir(): String {
