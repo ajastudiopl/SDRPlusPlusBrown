@@ -18,7 +18,7 @@ namespace displaymenu {
     bool showMicHistogram = false;
     bool fullWaterfallUpdate = true;
     bool showBattery = true;
-    int screenOrientation = 0; // Android: 0 auto (sensor), 1 landscape, 2 portrait
+    int screenOrientation = 0; // Android: 0 landscape (default, as before), 1 auto (sensor), 2 portrait
     bool showClock = true;
     bool detectSignals = false;
 
@@ -136,8 +136,8 @@ namespace displaymenu {
         gui::waterfall.autoScrollVFO = core::configManager.conf["autoScrollVFO"];
 
 #ifdef __ANDROID__
-        if (core::configManager.conf.contains("screenOrientation")) {
-            screenOrientation = std::clamp<int>(core::configManager.conf["screenOrientation"], 0, 2);
+        if (core::configManager.conf.contains("screenOrientationMode")) {
+            screenOrientation = std::clamp<int>(core::configManager.conf["screenOrientationMode"], 0, 2);
         }
         backend::setScreenOrientation(screenOrientation);
 #endif
@@ -288,10 +288,10 @@ namespace displaymenu {
 #ifdef __ANDROID__
         ImGui::LeftLabel("Screen orientation");
         ImGui::FillWidth();
-        if (ImGui::Combo("##_sdrpp_orientation", &screenOrientation, "Auto (rotate)\0Landscape\0Portrait\0")) {
+        if (ImGui::Combo("##_sdrpp_orientation", &screenOrientation, "Landscape\0Auto (rotate)\0Portrait\0")) {
             backend::setScreenOrientation(screenOrientation);
             core::configManager.acquire();
-            core::configManager.conf["screenOrientation"] = screenOrientation;
+            core::configManager.conf["screenOrientationMode"] = screenOrientation;
             core::configManager.release(true);
         }
         if (ImGui::Checkbox("Show Battery##_sdrpp", &showBattery)) {

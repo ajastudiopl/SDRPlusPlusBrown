@@ -496,13 +496,13 @@ class MainActivity : NativeActivity(), SensorEventListener {
         Log.w("SDR++", "USB SDR opened: ${dev.deviceName} fd=$SDR_FD")
     }
 
-    // Called from native code (Display menu): 0 = sensor, 1 = landscape, 2 = portrait.
+    // Called from native code (Display menu): 0 = landscape (default), 1 = sensor, 2 = portrait.
     fun setScreenOrientation(mode: Int) {
         runOnUiThread {
             requestedOrientation = when (mode) {
-                1 -> ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE
+                1 -> ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR
                 2 -> ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT
-                else -> ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR
+                else -> ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE
             }
         }
     }
