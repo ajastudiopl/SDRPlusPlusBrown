@@ -64,7 +64,7 @@ namespace credits {
         ImGui::Spacing();
         ImGui::Spacing();
         ImGui::Spacing();
-        ImGui::TextUnformatted("SDR++Brown v" VERSION_STR " (Built at " __TIME__ ", " __DATE__ ")");
+        ImGui::TextUnformatted("SDR++ by AJA v" VERSION_STR " (Built at " __TIME__ ", " __DATE__ ")");
 
         ImGui::EndPopup();
         ImGui::PopStyleColor();

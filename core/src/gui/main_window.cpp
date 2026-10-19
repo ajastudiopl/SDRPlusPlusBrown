@@ -39,8 +39,81 @@
 #include "brown/imgui-notify/imgui_notify.h"
 #include "utils/proto/brown_ai.h"
 #include "../../decoder_modules/radio/src/radio_interface.h"
+#ifdef __ANDROID__
+#include <imgui_internal.h>
+#endif
 
 static BrownAIClient brownAIClient;
+
+#ifdef __ANDROID__
+void MainWindow::handleAndroidMenuScroll() {
+    enum MenuTouchState { MenuTouchIdle, MenuTouchTracking, MenuTouchDragging, MenuTouchIgnored };
+    static MenuTouchState menuTouchState = MenuTouchIdle;
+    static ImVec2 menuTouchStartPos(0, 0);
+    static ImVec2 menuTouchLastPos(0, 0);
+    static float menuTouchVelocity = 0;
+    static float menuTouchScroll = 0;
+    auto &io = ImGui::GetIO();
+    auto window = ImGui::GetCurrentWindow();
+
+    if (menuTouchState == MenuTouchIdle) {
+        if (ImGui::IsMouseClicked(ImGuiMouseButton_Left) && window->InnerRect.Contains(io.MousePos)) {
+            menuTouchState = MenuTouchTracking;
+            menuTouchStartPos = io.MousePos;
+            menuTouchLastPos = menuTouchStartPos;
+            menuTouchVelocity = 0;
+            menuTouchScroll = ImGui::GetScrollY();
+        }
+    }
+
+    if (menuTouchState != MenuTouchIdle) {
+        if (!ImGui::IsMouseDown(ImGuiMouseButton_Left)) {
+            if (menuTouchState != MenuTouchDragging) {
+                menuTouchVelocity = 0;
+            }
+            menuTouchState = MenuTouchIdle;
+        } else {
+            ImVec2 touchPos = io.MousePos;
+            ImVec2 totalDelta = touchPos - menuTouchStartPos;
+            ImVec2 frameDelta = touchPos - menuTouchLastPos;
+            if (menuTouchState == MenuTouchTracking) {
+                float threshold = 8.0f * style::uiScale;
+                if (ImGui::GetActiveID() == ImGui::GetWindowScrollbarID(window, ImGuiAxis_Y)) {
+                    menuTouchState = MenuTouchIgnored;
+                } else if (fabsf(totalDelta.y) >= threshold && fabsf(totalDelta.y) > fabsf(totalDelta.x) * 1.2f) {
+                    menuTouchState = MenuTouchDragging;
+                    menuTouchScroll = ImGui::GetScrollY();
+                    ImGui::ClearActiveID();
+                } else if (fabsf(totalDelta.x) >= threshold && fabsf(totalDelta.x) > fabsf(totalDelta.y) * 1.2f) {
+                    menuTouchState = MenuTouchIgnored;
+                }
+            }
+
+            if (menuTouchState == MenuTouchDragging) {
+                menuTouchScroll = ImClamp(menuTouchScroll - frameDelta.y, 0.0f, ImGui::GetScrollMaxY());
+                ImGui::SetScrollY(menuTouchScroll);
+                if (frameDelta.y != 0) {
+                    float deltaTime = ImMax(io.DeltaTime, 0.008f);
+                    menuTouchVelocity = ImClamp(frameDelta.y / deltaTime, -3000.0f, 3000.0f);
+                }
+            }
+            menuTouchLastPos = touchPos;
+        }
+    } else if (fabsf(menuTouchVelocity) > 80.0f) {
+        float deltaTime = ImMin(io.DeltaTime, 0.05f);
+        float previousScroll = menuTouchScroll;
+        menuTouchScroll = ImClamp(menuTouchScroll - menuTouchVelocity * deltaTime, 0.0f, ImGui::GetScrollMaxY());
+        ImGui::SetScrollY(menuTouchScroll);
+        if (menuTouchScroll == previousScroll) {
+            menuTouchVelocity = 0;
+        } else {
+            menuTouchVelocity *= expf(-6.0f * deltaTime);
+        }
+    } else {
+        menuTouchVelocity = 0;
+    }
+}
+#endif
 
 
 void MainWindow::init() {
@@ -728,6 +801,9 @@ void MainWindow::draw() {
         ImGui::SetColumnWidth(2, 60.0f * style::uiScale);
 
         ImGui::BeginChild("Left Column");
+#ifdef __ANDROID__
+        handleAndroidMenuScroll();
+#endif
 
 
         if (gui::menu.draw(firstMenuRender)) {
