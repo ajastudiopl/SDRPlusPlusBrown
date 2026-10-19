@@ -262,6 +262,12 @@ private:
 #ifndef __ANDROID__
         int err = hydrasdr_open_sn(&_this->openDev, _this->selectedSerial);
 #else
+        {
+            // The USB fd changes when the device is re-plugged: use the current one.
+            int vid, pid;
+            int fd = backend::getDeviceFD(vid, pid, backend::HYDRASDR_VIDPIDS);
+            if (fd >= 0) { _this->devFd = fd; }
+        }
         int err = hydrasdr_open_fd(&_this->openDev, _this->devFd);
 #endif
         if (err != 0) {

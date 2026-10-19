@@ -1,3 +1,4 @@
+#include <chrono>
 #include <backend.h>log
 #include "android_backend.h"
 #include <core.h>
@@ -390,6 +391,19 @@ namespace backend {
         jclass native_activity_clazz = java_env->GetObjectClass(app->activity->clazz);
         if (native_activity_clazz == NULL)
             return -1;
+
+        // Let the activity re-detect a re-plugged SDR (opens it, or asks for USB permission).
+        // Throttled; older activities without rescanUsb() are handled gracefully.
+        static int64_t lastRescanMs = 0;
+        int64_t nowMs = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now().time_since_epoch()).count();
+        if (nowMs - lastRescanMs > 500) {
+            lastRescanMs = nowMs;
+            jmethodID rescan_id = java_env->GetMethodID(native_activity_clazz, "rescanUsb", "()I");
+            if (rescan_id != NULL) {
+                java_env->CallIntMethod(app->activity->clazz, rescan_id);
+            }
+            if (java_env->ExceptionCheck()) { java_env->ExceptionClear(); }
+        }
 
         jfieldID fd_field_id = java_env->GetFieldID(native_activity_clazz, "SDR_FD", "I");
         jfieldID vid_field_id = java_env->GetFieldID(native_activity_clazz, "SDR_VID", "I");

@@ -479,6 +479,49 @@ class MainActivity : NativeActivity(), SensorEventListener {
         Log.w("SDR++", "USB SDR opened: ${dev.deviceName} fd=$SDR_FD")
     }
 
+    private var lastUsbPermissionRequestMs: Long = 0
+
+    // Called from native code (backend::getDeviceFD, e.g. a source's Refresh or Play).
+    // If the SDR we know about is gone, look for a newly plugged one: open it when we
+    // already have permission, otherwise ask for it (at most every 5 s). Returns SDR_FD.
+    fun rescanUsb(): Int {
+        try {
+            if (usbManager == null) { usbManager = getSystemService(USB_SERVICE) as UsbManager }
+            val devices = usbManager!!.deviceList
+            val current = SDR_device
+            if (SDR_FD >= 0 && current != null && devices.containsKey(current.deviceName)) { return SDR_FD }
+            if (SDR_FD >= 0) {
+                Log.w("SDR++", "USB SDR no longer present, forgetting fd")
+                SDR_FD = -1
+                SDR_VID = -1
+                SDR_PID = -1
+            }
+            for ((name, dev) in devices) {
+                val prodName = dev.productName?.toUpperCase(Locale.US) ?: ""
+                if (prodName.indexOf("Network") != -1 || prodName.indexOf("LAN") != -1
+                    || prodName.indexOf("KEYBOARD") != -1 || prodName.indexOf("MOUSE") != -1) { continue }
+                if (usbManager!!.hasPermission(dev)) {
+                    openSdrDevice(dev)
+                    if (SDR_FD >= 0) { return SDR_FD }
+                } else {
+                    val now = System.currentTimeMillis()
+                    if (now - lastUsbPermissionRequestMs > 5000) {
+                        lastUsbPermissionRequestMs = now
+                        Log.w("SDR++", "USB rescan: requesting permission for $name")
+                        runOnUiThread {
+                            try { registerReceiver(usbReceiver, IntentFilter(ACTION_USB_PERMISSION)) } catch (e: Exception) { }
+                            usbManager!!.requestPermission(dev, makeUsbPermissionIntent())
+                        }
+                    }
+                    return SDR_FD
+                }
+            }
+        } catch (e: Exception) {
+            Log.w("SDR++", "USB rescan failed: ${e.message}")
+        }
+        return SDR_FD
+    }
+
     // With launchMode=singleTask a re-plugged SDR is delivered here instead of starting a second
     // NativeActivity, which the native side can't handle (black screen).
     override fun onNewIntent(intent: Intent) {

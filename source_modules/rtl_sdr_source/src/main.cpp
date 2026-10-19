@@ -286,6 +286,19 @@ private:
     static void start(void* ctx) {
         RTLSDRSourceModule* _this = (RTLSDRSourceModule*)ctx;
         if (_this->running) { return; }
+#ifdef __ANDROID__
+        // The USB fd changes when the dongle is re-plugged: pick up the current one,
+        // and initialize the device if none was present at startup.
+        {
+            int vid, pid;
+            int fd = backend::getDeviceFD(vid, pid, backend::RTL_SDR_VIDPIDS);
+            if (fd >= 0 && (fd != _this->devFd || _this->selectedDevName == "")) {
+                _this->refresh();
+                _this->selectFirst();
+                propagateInputSampleRate(_this);
+            }
+        }
+#endif
         if (_this->selectedDevName == "") {
             flog::error("No device selected");
             return;
