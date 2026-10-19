@@ -547,6 +547,7 @@ int sdrpp_main(int argc, char* argv[]) {
     defConfig["bandPlanEnabled"] = true;
     defConfig["bandPlanPos"] = 0;
     defConfig["centerTuning"] = false;
+    defConfig["autoScrollVFO"] = true;
     defConfig["colorMap"] = "Classic";
     defConfig["fftHold"] = false;
     defConfig["fftHoldSpeed"] = 60;

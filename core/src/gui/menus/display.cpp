@@ -132,6 +132,7 @@ namespace displaymenu {
 
         fullWaterfallUpdate = core::configManager.conf["fullWaterfallUpdate"];
         gui::waterfall.setFullWaterfallUpdate(fullWaterfallUpdate);
+        gui::waterfall.autoScrollVFO = core::configManager.conf["autoScrollVFO"];
 
         if (core::configManager.conf.contains("showBattery")) {
             showBattery = core::configManager.conf["showBattery"];
@@ -270,6 +271,11 @@ namespace displaymenu {
             gui::waterfall.setFullWaterfallUpdate(fullWaterfallUpdate);
             core::configManager.acquire();
             core::configManager.conf["fullWaterfallUpdate"] = fullWaterfallUpdate;
+            core::configManager.release(true);
+        }
+        if (ImGui::Checkbox("Auto-scroll VFO at spectrum edges##_sdrpp", &gui::waterfall.autoScrollVFO)) {
+            core::configManager.acquire();
+            core::configManager.conf["autoScrollVFO"] = gui::waterfall.autoScrollVFO;
             core::configManager.release(true);
         }
 #ifdef __ANDROID__

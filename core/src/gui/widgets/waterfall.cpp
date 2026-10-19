@@ -390,6 +390,8 @@ namespace ImGui {
         bool mouseMoved = false;
         if (mousePos.x != lastMousePos.x || mousePos.y != lastMousePos.y) { mouseMoved = true; }
         lastMousePos = mousePos;
+        float vfoDragThreshold = 4.0f * style::uiScale;
+        bool vfoDragStarted = vfoSelect && ((drag.x * drag.x) + (drag.y * drag.y) >= (vfoDragThreshold * vfoDragThreshold));
 
         std::string hoveredVFOName = "";
         for (auto const& [name, _vfo] : vfos) {
@@ -456,6 +458,7 @@ namespace ImGui {
             if (!targetFound && hoveredVFOName != "") {
                 selectedVFO = hoveredVFOName;
                 selectedVFOChanged = true;
+                vfoSelect = true;
                 targetFound = true;
                 return;
             }
@@ -491,14 +494,8 @@ namespace ImGui {
             return;
         }
 
-        // If the frequency scale is selected, move it
-        if (freqScaleSelect) {
-            ImGui::SetMouseCursor(ImGuiMouseCursor_ResizeEW);
-            double deltax = drag.x - lastDrag;
-            lastDrag = drag.x;
-            double viewDelta = deltax * (viewBandwidth / (double)dataWidth);
-
-            viewOffset -= viewDelta;
+        auto shiftViewOffset = [this](double offsetDelta) {
+            viewOffset += offsetDelta;
 
             if (viewOffset + (viewBandwidth / 2.0) > wholeBandwidth / 2.0) {
                 double freqOffset = (viewOffset + (viewBandwidth / 2.0)) - (wholeBandwidth / 2.0);
@@ -524,6 +521,15 @@ namespace ImGui {
                 updateAllVFOs();
                 if (_fullUpdate) { updateWaterfallFb(); };
             }
+        };
+
+        // If the frequency scale is selected, move it
+        if (freqScaleSelect) {
+            ImGui::SetMouseCursor(ImGuiMouseCursor_ResizeEW);
+            double deltax = drag.x - lastDrag;
+            lastDrag = drag.x;
+            double viewDelta = deltax * (viewBandwidth / (double)dataWidth);
+            shiftViewOffset(-viewDelta);
             return;
         }
 
@@ -582,8 +588,30 @@ namespace ImGui {
             return;
         }
 
+        if (autoScrollVFO && vfoDragStarted && ImGui::IsMouseDown(ImGuiMouseButton_Left) && selVfo != NULL && dataWidth > 0 && mousePos.y >= fftAreaMin.y && mousePos.y <= wfMax.y) {
+            float edgeZone = std::min<float>((float)dataWidth * 0.15f, std::max<float>(24.0f * style::uiScale, (float)dataWidth * 0.08f));
+            float edgeStrength = 0.0f;
+            double direction = 0.0;
+
+            if (mousePos.x >= fftAreaMin.x && mousePos.x <= fftAreaMin.x + edgeZone) {
+                edgeStrength = 1.0f - ((mousePos.x - fftAreaMin.x) / edgeZone);
+                direction = -1.0;
+            }
+            else if (mousePos.x <= fftAreaMax.x && mousePos.x >= fftAreaMax.x - edgeZone) {
+                edgeStrength = 1.0f - ((fftAreaMax.x - mousePos.x) / edgeZone);
+                direction = 1.0;
+            }
+
+            if (edgeStrength > 0.0f) {
+                float deltaTime = std::clamp<float>(ImGui::GetIO().DeltaTime, 0.0f, 0.05f);
+                double offsetDelta = direction * viewBandwidth * edgeStrength * edgeStrength * deltaTime;
+                shiftViewOffset(offsetDelta);
+            }
+        }
+
         // Finally, if nothing else was selected, just move the VFO
-        if ((VFOMoveSingleClick ? ImGui::IsMouseClicked(ImGuiMouseButton_Left) : ImGui::IsMouseDown(ImGuiMouseButton_Left)) && (mouseInFFT | mouseInWaterfall) && (mouseMoved || hoveredVFOName == "")) {
+        if ((VFOMoveSingleClick ? ImGui::IsMouseClicked(ImGuiMouseButton_Left) : ImGui::IsMouseDown(ImGuiMouseButton_Left)) && (mouseInFFT | mouseInWaterfall) &&
+            (mouseMoved || hoveredVFOName == "" || vfoDragStarted)) {
             if (selVfo != NULL) {
                 int refCenter = mousePos.x - fftAreaMin.x;
                 if (refCenter >= 0 && refCenter < dataWidth) {

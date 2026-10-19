@@ -218,6 +218,7 @@ namespace ImGui {
         bool inputHandled = false;
         bool alwaysDrawLine = false;
         bool VFOMoveSingleClick = false;
+        bool autoScrollVFO = true;
         Event<InputHandlerArgs> onInputProcess;
 
         enum {
