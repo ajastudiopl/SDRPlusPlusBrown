@@ -13,6 +13,7 @@ if (MSVC)
 elseif (ANDROID)
     target_include_directories(hackrf_source PUBLIC
             ${SDR_KIT_ROOT}/${ANDROID_ABI}/include/libhackrf
+            ${SDR_KIT_ROOT}/${ANDROID_ABI}/include
     )
 
     target_link_libraries(hackrf_source PUBLIC
