@@ -256,6 +256,11 @@ namespace backend {
     // External test function declaration
     extern "C" void test_increment_counter();
 
+    uint64_t glContextGeneration() {
+        // The GLFW window and its GL context live for the whole session.
+        return 1;
+    }
+
     int renderLoop() {
         // Main loop
         while (!glfwWindowShouldClose(window)) {

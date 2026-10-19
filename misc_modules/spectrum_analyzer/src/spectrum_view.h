@@ -70,6 +70,7 @@ namespace spectrum {
 
         // waterfall texture
         GLuint tex = 0;
+        uint64_t texGlGeneration = 0;
         int texW = 0;
         int texH = 0;
         uint64_t texGeneration = ~0ull;

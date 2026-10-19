@@ -24,6 +24,9 @@
 
 // Credit to the ImGui android OpenGL3 example for a lot of this code!
 
+// Number of GL contexts created so far (see backend::glContextGeneration())
+static uint64_t glContextGen = 0;
+
 namespace backend {
     SDRPP_EXPORT struct android_app* app = NULL;
     EGLDisplay _EglDisplay = EGL_NO_DISPLAY;
@@ -235,8 +238,13 @@ namespace backend {
         // Setup Platform/Renderer backends
         ImGui_ImplAndroid_Init(app->window);
         ImGui_ImplOpenGL3_Init("#version 300 es");
+        glContextGen++;
 
         return 0;
+    }
+
+    uint64_t glContextGeneration() {
+        return glContextGen;
     }
 
     void beginFrame() {

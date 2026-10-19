@@ -1,4 +1,5 @@
 #include "spectrum_view.h"
+#include <backend.h>
 #include <gui/style.h>
 #include <imgui_internal.h>
 #include <algorithm>
@@ -314,9 +315,6 @@ namespace spectrum {
             for (auto& pk : snap.peaks) {
                 if (pk.freqHz < view.viewStart() || pk.freqHz > view.viewStop()) { continue; }
                 visible.push_back(&pk);
-                float x = (float)view.freqToX(pk.freqHz, p0.x, size.x);
-                float y = yOf(pk.levelDb) - 3.0f;
-                dl->AddTriangleFilled(ImVec2(x, y), ImVec2(x - s, y - 2 * s), ImVec2(x + s, y - 2 * s), COL_PEAK);
             }
             // Labels only for the strongest signals that have room.
             std::sort(visible.begin(), visible.end(), [](const DetectedPeak* a, const DetectedPeak* b) { return a->levelDb > b->levelDb; });
@@ -330,6 +328,8 @@ namespace spectrum {
                 float lx = std::clamp(x - ts.x / 2, p0.x + 36.0f * style::uiScale, p1.x - ts.x - 4);
                 float ly = std::max(y - 2 * s - ts.y - 2, plotTop + 2);
                 if (overlaps(lx - 2, ly - 1, lx + ts.x + 2, ly + ts.y + 1)) { continue; }
+                // Only labelled (strongest) peaks get a marker, so the plot stays readable.
+                dl->AddTriangleFilled(ImVec2(x, y), ImVec2(x - s, y - 2 * s), ImVec2(x + s, y - 2 * s), COL_PEAK);
                 labelBox(dl, ImVec2(lx, ly), l.c_str(), COL_PEAK);
                 placed.push_back(ImVec4(lx - 2, ly - 1, lx + ts.x + 2, ly + ts.y + 1));
                 labelled++;
@@ -478,6 +478,17 @@ namespace spectrum {
         ImVec2 p1(p0.x + size.x, p0.y + size.y);
         dl->AddRectFilled(p0, p1, COL_NODATA);
         colorTable(cfg);
+
+        // A new GL context (Android recreates it when the window comes back)
+        // invalidates our texture name; it may now belong to another texture,
+        // e.g. the font atlas, which must never be overwritten.
+        uint64_t glGen = backend::glContextGeneration();
+        GLuint fontTex = (GLuint)(intptr_t)ImGui::GetIO().Fonts->TexID;
+        if (glGen != texGlGeneration || (tex != 0 && tex == fontTex)) {
+            tex = 0;
+            texGlGeneration = glGen;
+            wfDirty = true;
+        }
 
         const int width = std::clamp((int)size.x, 16, 4096);
         int h = 0;
