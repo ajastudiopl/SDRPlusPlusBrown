@@ -80,6 +80,7 @@ class MainActivity : NativeActivity(), SensorEventListener {
                     if (intent.getBooleanExtra(UsbManager.EXTRA_PERMISSION_GRANTED, false)) {
                         Log.w("SDR++", "USB Permission granted")
                         _this.SDR_conn = _this.usbManager!!.openDevice(_this.SDR_device);
+                        _this.SDR_conn?.let { _this.ensureConfigured(_this.SDR_device!!, it) }
 
                         // Save SDR info
                         _this.SDR_VID = _this.SDR_device!!.getVendorId();
@@ -465,12 +466,28 @@ class MainActivity : NativeActivity(), SensorEventListener {
         }
     }
 
+    // Some phones (e.g. Galaxy A23, Android 14) leave a vendor-class device unconfigured
+    // (bConfigurationValue = 0); libusb then fails with LIBUSB_ERROR_NOT_FOUND. Select config 1.
+    fun ensureConfigured(dev: UsbDevice, conn: UsbDeviceConnection) {
+        try {
+            val cur = ByteArray(1)
+            val r = conn.controlTransfer(0x80, 0x08, 0, 0, cur, 1, 1000)
+            if (r == 1 && cur[0].toInt() == 0 && dev.configurationCount > 0) {
+                val ok = conn.setConfiguration(dev.getConfiguration(0))
+                Log.w("SDR++", "USB device was unconfigured, setConfiguration: $ok")
+            }
+        } catch (e: Exception) {
+            Log.w("SDR++", "USB configuration check failed: ${e.message}")
+        }
+    }
+
     private fun openSdrDevice(dev: UsbDevice) {
         val conn = usbManager!!.openDevice(dev)
         if (conn == null) {
             Log.w("SDR++", "USB openDevice failed: ${dev.deviceName}")
             return
         }
+        ensureConfigured(dev, conn)
         SDR_device = dev
         SDR_conn = conn
         SDR_VID = dev.getVendorId()
