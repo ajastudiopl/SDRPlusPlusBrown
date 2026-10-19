@@ -322,7 +322,11 @@ public:
         sweepConv.resize(2 * hf::BLOCK_SAMPLES);
         sweepCb = cb;
         sweepCtx = ctx;
+#ifndef SDRPP_HACKRF_NO_START_RX_SWEEP
         err = (hackrf_error)hackrf_start_rx_sweep(dev, sweepCallback, this);
+#else
+        err = (hackrf_error)hackrf_start_rx(dev, sweepCallback, this);
+#endif
         if (err != HACKRF_SUCCESS) {
             sweepCb = NULL;
             sweepCtx = NULL;
