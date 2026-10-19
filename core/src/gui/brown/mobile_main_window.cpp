@@ -1681,6 +1681,7 @@ void MobileMainWindow::draw() {
     gui::waterfall.alwaysDrawLine = true;
     ImGui::WaterfallVFO* vfo = nullptr; // gets initialized below
     this->preDraw(&vfo);
+    handleDemodulatorShortcuts();
 
     ImGui::Begin("Main", nullptr, WINDOW_FLAGS);
 

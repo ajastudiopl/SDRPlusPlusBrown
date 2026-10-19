@@ -27,6 +27,8 @@
 #include <gui/dialogs/credits.h>
 #include <cstring>
 #include <map>
+#include <algorithm>
+#include <cctype>
 #include <filesystem>
 #include <signal_path/source.h>
 #include <gui/dialogs/loading_screen.h>
@@ -127,9 +129,101 @@ namespace {
     std::vector<MainView> mainViews;
     std::string selectedMainView;
 
-    // Squelch level hint shown after Shift+0 / Shift+9
-    double squelchHintUntil = 0;
-    float squelchHintLevel = 0;
+    // Short centred hint shown after a keyboard shortcut (squelch level etc.)
+    double keyHintUntil = 0;
+    std::string keyHintText;
+
+    void showKeyHint(const std::string& text) {
+        keyHintText = text;
+        keyHintUntil = ImGui::GetTime() + 1.5;
+    }
+
+    // Enter: type a frequency
+    bool freqEntryOpenRequest = false;
+    char freqEntryBuf[64] = "";
+
+    // Accepts "145.5", "145.5M", "7074k", "1.2G", "145500000", "145.500.000" (grouped Hz).
+    // A bare number below 100000 is MHz, larger ones are Hz. Returns <= 0 when invalid.
+    double parseTypedFrequency(const char* text) {
+        std::string t;
+        for (const char* c = text; *c; c++) {
+            if (*c == ' ' || *c == '_') { continue; }
+            t += (*c == ',') ? '.' : *c;
+        }
+        if (t.empty()) { return -1; }
+        double mult = 0;
+        while (!t.empty() && std::isalpha((unsigned char)t.back())) {
+            char u = (char)std::tolower((unsigned char)t.back());
+            if (u == 'k') { mult = 1e3; }
+            else if (u == 'm') { mult = 1e6; }
+            else if (u == 'g') { mult = 1e9; }
+            else if (u == 'h' && mult == 0) { mult = 1; }
+            else if (u != 'z' && u != 'h') { return -1; }
+            t.pop_back();
+        }
+        if (std::count(t.begin(), t.end(), '.') > 1) {
+            t.erase(std::remove(t.begin(), t.end(), '.'), t.end());
+            if (mult == 0) { mult = 1; }
+        }
+        char* end = nullptr;
+        double v = strtod(t.c_str(), &end);
+        if (t.empty() || end != t.c_str() + t.size() || !(v > 0)) { return -1; }
+        if (mult == 0) { mult = (v < 100000) ? 1e6 : 1; }
+        return v * mult;
+    }
+
+    void drawKeyHintAndFrequencyEntry() {
+        ImGuiIO& io = ImGui::GetIO();
+        if (ImGui::GetTime() < keyHintUntil) {
+            ImGui::PushFont(style::bigFont);
+            ImVec2 ts = ImGui::CalcTextSize(keyHintText.c_str());
+            ImVec2 pos((io.DisplaySize.x - ts.x) * 0.5f, io.DisplaySize.y * 0.3f);
+            ImDrawList* dl = ImGui::GetForegroundDrawList();
+            dl->AddRectFilled(ImVec2(pos.x - 16, pos.y - 8), ImVec2(pos.x + ts.x + 16, pos.y + ts.y + 8), IM_COL32(0, 0, 0, 190), 6.0f);
+            dl->AddText(pos, IM_COL32(255, 255, 255, 255), keyHintText.c_str());
+            ImGui::PopFont();
+        }
+
+        bool focusInput = false;
+        if (freqEntryOpenRequest) {
+            freqEntryOpenRequest = false;
+            snprintf(freqEntryBuf, sizeof(freqEntryBuf), "%.6f", (double)gui::freqSelect.frequency / 1e6);
+            ImGui::OpenPopup("Go to frequency##sdrpp_freq_entry");
+            focusInput = true;
+        }
+        if (!ImGui::IsPopupOpen("Go to frequency##sdrpp_freq_entry")) { return; }
+        ImGui::SetNextWindowPos(ImVec2(io.DisplaySize.x * 0.5f, io.DisplaySize.y * 0.25f), ImGuiCond_Always, ImVec2(0.5f, 0.0f));
+        if (!ImGui::BeginPopupModal("Go to frequency##sdrpp_freq_entry", NULL, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove)) {
+            return;
+        }
+        float scale = style::uiScale;
+        ImGui::TextDisabled("MHz by default; k / M / G suffix, or Hz");
+        if (focusInput) { ImGui::SetKeyboardFocusHere(); }
+        ImGui::SetNextItemWidth(260.0f * scale);
+        ImGui::PushFont(style::bigFont);
+        bool enter = ImGui::InputText("##sdrpp_freq_entry_txt", freqEntryBuf, sizeof(freqEntryBuf),
+                                      ImGuiInputTextFlags_EnterReturnsTrue | ImGuiInputTextFlags_AutoSelectAll | ImGuiInputTextFlags_CharsNoBlank);
+        ImGui::PopFont();
+        double hz = parseTypedFrequency(freqEntryBuf);
+        if (hz > 0) {
+            ImGui::Text("= %.6f MHz", hz / 1e6);
+        }
+        else {
+            ImGui::TextColored(ImVec4(1.0f, 0.5f, 0.3f, 1.0f), "not a frequency");
+        }
+        bool go = ImGui::Button("Go##sdrpp_freq_entry_go", ImVec2(120.0f * scale, 0)) || enter;
+        ImGui::SameLine();
+        bool cancel = ImGui::Button("Cancel##sdrpp_freq_entry_cancel", ImVec2(120.0f * scale, 0)) || ImGui::IsKeyPressed(ImGuiKey_Escape, false);
+        if (go && hz > 0) {
+            gui::freqSelect.setFrequency((int64_t)std::llround(hz));
+            gui::freqSelect.frequencyChanged = true;
+            ImGui::CloseCurrentPopup();
+        }
+        else if (cancel) {
+            ImGui::CloseCurrentPopup();
+        }
+        ImGui::EndPopup();
+    }
 
     // Portrait layout state
     bool portraitSlidersOpen = false;
@@ -1107,22 +1201,16 @@ void MainWindow::draw() {
 
 void MainWindow::handleDemodulatorShortcuts() {
     ImGuiIO& io = ImGui::GetIO();
-    if (ImGui::GetTime() < squelchHintUntil) {
-        // Single on-screen hint instead of a toast per key repeat
-        char txt[48];
-        snprintf(txt, sizeof(txt), "Squelch %.0f dB", squelchHintLevel);
-        ImGui::PushFont(style::bigFont);
-        ImVec2 ts = ImGui::CalcTextSize(txt);
-        ImVec2 pos((io.DisplaySize.x - ts.x) * 0.5f, io.DisplaySize.y * 0.3f);
-        ImDrawList* dl = ImGui::GetForegroundDrawList();
-        dl->AddRectFilled(ImVec2(pos.x - 16, pos.y - 8), ImVec2(pos.x + ts.x + 16, pos.y + ts.y + 8), IM_COL32(0, 0, 0, 190), 6.0f);
-        dl->AddText(pos, IM_COL32(255, 255, 255, 255), txt);
-        ImGui::PopFont();
-    }
+    drawKeyHintAndFrequencyEntry();
     if (mainViewShown()) {
         return;
     }
     if (io.WantTextInput || io.KeyCtrl || io.KeyAlt || io.KeySuper || gui::waterfall.selectedVFO.empty()) {
+        return;
+    }
+    // Enter: type the frequency to tune to
+    if (!io.KeyShift && (ImGui::IsKeyPressed(ImGuiKey_Enter, false) || ImGui::IsKeyPressed(ImGuiKey_KeypadEnter, false)) && !ImGui::IsPopupOpen((const char*)NULL, ImGuiPopupFlags_AnyPopupId)) {
+        freqEntryOpenRequest = true;
         return;
     }
     if (!core::modComManager.interfaceExists(gui::waterfall.selectedVFO) || core::modComManager.getModuleName(gui::waterfall.selectedVFO) != "radio") {
@@ -1137,12 +1225,14 @@ void MainWindow::handleDemodulatorShortcuts() {
         bool enabled = true;
         core::modComManager.callInterface(gui::waterfall.selectedVFO, RADIO_IFACE_CMD_SET_SQUELCH_ENABLED, &enabled, NULL);
         core::modComManager.callInterface(gui::waterfall.selectedVFO, RADIO_IFACE_CMD_SET_SQUELCH_LEVEL, &level, NULL);
-        squelchHintLevel = level;
-        squelchHintUntil = ImGui::GetTime() + 1.5;
+        char hint[48];
+        snprintf(hint, sizeof(hint), "Squelch %.0f dB", level);
+        showKeyHint(hint);
         return;
     }
 
-    // One key per mode, no Shift: A AM, F/W WFM, N NFM, D DSB, U USB, L LSB, C CW, R RAW
+    // One key per mode, no Shift: A AM, F/W WFM, N NFM, D DSB, U USB, L LSB, C CW, R RAW,
+    // S DSD, O oldDSD (the last two exist only with ch_extravhf_decoder loaded)
     int mode = -1;
     if (io.KeyShift) {
         return;
@@ -1171,9 +1261,25 @@ void MainWindow::handleDemodulatorShortcuts() {
     else if (ImGui::IsKeyPressed(ImGuiKey_R, false)) {
         mode = RADIO_IFACE_MODE_RAW;
     }
+    else if (ImGui::IsKeyPressed(ImGuiKey_S, false)) {
+        mode = 0x1301; // RADIO_DEMOD_DSD (ch_extravhf_decoder)
+    }
+    else if (ImGui::IsKeyPressed(ImGuiKey_O, false)) {
+        mode = 0x1302; // RADIO_DEMOD_OLDDSD (ch_extravhf_decoder)
+    }
 
     if (mode >= 0) {
         core::modComManager.callInterface(gui::waterfall.selectedVFO, RADIO_IFACE_CMD_SET_MODE, &mode, NULL);
+        int now = -1;
+        core::modComManager.callInterface(gui::waterfall.selectedVFO, RADIO_IFACE_CMD_GET_MODE, NULL, &now);
+        static const std::map<int, const char*> modeNames = {
+            { RADIO_IFACE_MODE_NFM, "NFM" }, { RADIO_IFACE_MODE_WFM, "WFM" }, { RADIO_IFACE_MODE_AM, "AM" }, { RADIO_IFACE_MODE_DSB, "DSB" },
+            { RADIO_IFACE_MODE_USB, "USB" }, { RADIO_IFACE_MODE_CW, "CW" }, { RADIO_IFACE_MODE_LSB, "LSB" }, { RADIO_IFACE_MODE_RAW, "RAW" },
+            { 0x1301, "DSD" }, { 0x1302, "oldDSD" }
+        };
+        auto it = modeNames.find(mode);
+        std::string name = it != modeNames.end() ? it->second : "mode";
+        showKeyHint(now == mode ? name : name + " not available");
     }
 }
 

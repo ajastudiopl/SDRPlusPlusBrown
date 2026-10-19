@@ -36,11 +36,19 @@ namespace ImGui {
         window->DrawList->AddLine(min, min + ImVec2(0, (10.0f * style::uiScale) - 1), text, style::uiScale);
         window->DrawList->AddLine(min + ImVec2(0, (10.0f * style::uiScale) - 1), min + ImVec2(size.x + 1, (10.0f * style::uiScale) - 1), text, style::uiScale);
 
+        // On narrow meters label only every 2nd/3rd/... tick so the numbers do not overlap
+        float labelW = ImGui::CalcTextSize("90").x;
+        int labelEvery = 1;
+        while (labelEvery < 9 && (float)labelEvery * it < labelW * 1.8f) {
+            labelEvery = (labelEvery == 1) ? 2 : (labelEvery == 2) ? 3 : 9;
+        }
         for (int i = 0; i < 10; i++) {
             window->DrawList->AddLine(min + ImVec2(roundf((float)i * it), (10.0f * style::uiScale) - 1), min + ImVec2(roundf((float)i * it), (15.0f * style::uiScale) - 1), text, style::uiScale);
+            if (i % labelEvery != 0) { continue; }
             snprintf(buf, sizeof buf, "%d", i * 10);
             ImVec2 sz = ImGui::CalcTextSize(buf);
-            window->DrawList->AddText(min + ImVec2(roundf(((float)i * it) - (sz.x / 2.0f)) + 1, 16.0f * style::uiScale), text, buf);
+            float x = std::clamp(roundf(((float)i * it) - (sz.x / 2.0f)) + 1, 0.0f, size.x - sz.x);
+            window->DrawList->AddText(min + ImVec2(x, 16.0f * style::uiScale), text, buf);
         }
 
         onSNRMeterExtPoint.emit(SNRMeterExtPoint(min + ImVec2(0, -min.y), drawVal));
