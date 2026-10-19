@@ -126,7 +126,7 @@ namespace satest {
             caps.maxFreqHz = 7250e6;
             caps.sampleRateHz = hf::SAMPLE_RATE_HZ;
             caps.stepWidthHz = hf::STEP_WIDTH_HZ;
-            caps.samplesPerBlock = hf::SAMPLES_PER_BLOCK;
+            caps.samplesPerBlock = hf::BLOCK_SAMPLES;
             caps.maxDwellBlocks = 4;
             caps.gains = { { "lna", "LNA", 0, 40, 8, 16, false, "" }, { "vga", "VGA", 0, 62, 2, 20, false, "" } };
             return true;
@@ -152,7 +152,7 @@ namespace satest {
             plan.loOffsetHz = hf::OFFSET_HZ;
             plan.blockFrequenciesHz = hf::interleavedBlockFrequencies(s, steps);
             plan.validOffsets = hf::validOffsets();
-            plan.samplesPerBlock = hf::SAMPLES_PER_BLOCK;
+            plan.samplesPerBlock = hf::BLOCK_SAMPLES;
             freqs = plan.blockFrequenciesHz;
             dwell = req.dwellBlocks;
             callback = cb;
@@ -192,8 +192,8 @@ namespace satest {
     private:
         void streamer() {
             namespace hf = sweep::hackrf_format;
-            std::vector<cf32> samples(hf::SAMPLES_PER_BLOCK);
-            std::vector<float> iq(2 * hf::SAMPLES_PER_BLOCK);
+            std::vector<cf32> samples(hf::BLOCK_SAMPLES);
+            std::vector<float> iq(2 * hf::BLOCK_SAMPLES);
             uint64_t blockNo = 0;
             auto t0 = std::chrono::steady_clock::now();
             while (running) {
@@ -206,12 +206,12 @@ namespace satest {
                         blockNo++;
                         if (skipEveryNthBlock > 0 && blockNo % skipEveryNthBlock == 0) { continue; }
                         double t = std::chrono::duration<double>(std::chrono::steady_clock::now() - t0).count();
-                        scene.generate(f + hf::OFFSET_HZ, hf::SAMPLE_RATE_HZ, hf::SAMPLES_PER_BLOCK, t, samples.data());
-                        for (int i = 0; i < hf::SAMPLES_PER_BLOCK; i++) {
+                        scene.generate(f + hf::OFFSET_HZ, hf::SAMPLE_RATE_HZ, hf::BLOCK_SAMPLES, t, samples.data());
+                        for (int i = 0; i < hf::BLOCK_SAMPLES; i++) {
                             iq[2 * i] = samples[i].real();
                             iq[2 * i + 1] = samples[i].imag();
                         }
-                        callback(cbCtx, (uint64_t)f, iq.data(), hf::SAMPLES_PER_BLOCK, nowNs());
+                        callback(cbCtx, (uint64_t)f, iq.data(), hf::BLOCK_SAMPLES, nowNs());
                     }
                     if (!running) { break; }
                 }

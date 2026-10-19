@@ -122,16 +122,16 @@ namespace sweep {
 
     // HackRF sweep transfer format (firmware `sweep_mode`, libhackrf >= 0.5).
     namespace hackrf_format {
-        inline constexpr int BYTES_PER_BLOCK = 16384;   // libhackrf BYTES_PER_BLOCK
+        inline constexpr int BLOCK_BYTES = 16384;       // libhackrf BYTES_PER_BLOCK (a macro there)
         inline constexpr int HEADER_BYTES = 10;         // 0x7F 0x7F + uint64 LE frequency
         inline constexpr int SKIP_BYTES = 16;           // header rounded up to an even sample boundary
-        inline constexpr int SAMPLES_PER_BLOCK = (BYTES_PER_BLOCK - SKIP_BYTES) / 2;
+        inline constexpr int BLOCK_SAMPLES = (BLOCK_BYTES - SKIP_BYTES) / 2;
         inline constexpr double SAMPLE_RATE_HZ = 20e6;  // hackrf_sweep DEFAULT_SAMPLE_RATE_HZ
         inline constexpr double BASEBAND_FILTER_HZ = 15e6;
         inline constexpr double STEP_WIDTH_HZ = 20e6;   // TUNE_STEP
         inline constexpr double OFFSET_HZ = 7.5e6;      // OFFSET
         inline constexpr double MAX_FREQ_MHZ = 7250;    // FREQ_MAX_MHZ in hackrf_sweep
-        inline constexpr int MAX_SWEEP_RANGES = 10;
+        inline constexpr int MAX_RANGES = 10;
 
         // Returns false if the block does not start with the sweep header.
         inline bool parseHeader(const uint8_t* block, uint64_t& freqHz) {

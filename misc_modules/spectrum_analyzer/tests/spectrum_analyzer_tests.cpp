@@ -482,7 +482,7 @@ TEST(native_blocks_assemble_full_cycles_only) {
     SweepEngine eng(testFftFactory());
     std::string err;
     CHECK(eng.configure(plan, basicEngine(1024, 4096), err));
-    std::vector<cf32> buf(hf::SAMPLES_PER_BLOCK);
+    std::vector<cf32> buf(hf::BLOCK_SAMPLES);
     std::vector<double> freqs = hf::interleavedBlockFrequencies(400, 2);
     int64_t t = 1000;
     auto feed = [&](double f) {
@@ -518,7 +518,7 @@ TEST(native_dropped_blocks_make_incomplete_frames) {
     SweepEngine eng(testFftFactory());
     std::string err;
     CHECK(eng.configure(plan, basicEngine(1024, 4096), err));
-    std::vector<cf32> buf(hf::SAMPLES_PER_BLOCK);
+    std::vector<cf32> buf(hf::BLOCK_SAMPLES);
     std::vector<double> freqs = hf::interleavedBlockFrequencies(400, 2);
     int64_t t = 1;
     auto feed = [&](double f) {
@@ -559,7 +559,7 @@ TEST(refresh_limit_holds_next_sweep) {
     e.refreshLimitHz = 2.0; // one sweep per 500 ms
     std::string err;
     CHECK(eng.configure(plan, e, err));
-    std::vector<cf32> buf(hf::SAMPLES_PER_BLOCK);
+    std::vector<cf32> buf(hf::BLOCK_SAMPLES);
     std::vector<double> freqs = hf::interleavedBlockFrequencies(400, 1);
     int64_t t = 1000000000;
     auto sweepAt = [&](int64_t ts) {
@@ -1255,7 +1255,7 @@ TEST(auto_parameters_follow_device) {
     CHECK(s.overlapFraction >= minOverlapForDcCoverage(2.4e6 * 0.8, s.dcGuardHz));
     sweep::NativeSweepCaps caps;
     caps.sampleRateHz = 20e6;
-    caps.samplesPerBlock = sweep::hackrf_format::SAMPLES_PER_BLOCK;
+    caps.samplesPerBlock = sweep::hackrf_format::BLOCK_SAMPLES;
     caps.maxDwellBlocks = 8;
     SweepSettings ns;
     EngineSettings ne;
