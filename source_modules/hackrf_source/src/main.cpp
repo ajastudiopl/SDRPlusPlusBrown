@@ -13,6 +13,7 @@
 #else
 #include <android_backend.h>
 #include <hackrf.h>
+#include <libusb.h>
 #endif
 
 #define CONCAT(a, b) ((std::string(a) + b).c_str())
@@ -83,7 +84,21 @@ public:
     HackRFSourceModule(std::string name) {
         this->name = name;
 
-        hackrf_init();
+#ifdef __ANDROID__
+        int usbErr = libusb_set_option(NULL, LIBUSB_OPTION_NO_DEVICE_DISCOVERY);
+        if (usbErr != LIBUSB_SUCCESS) {
+            hackrfError = HACKRF_ERROR_LIBUSB;
+            flog::error("Could not disable HackRF USB discovery: {0}", libusb_error_name(usbErr));
+        }
+        else {
+            hackrfError = (hackrf_error)hackrf_init();
+        }
+#else
+        hackrfError = (hackrf_error)hackrf_init();
+#endif
+        if (hackrfError != HACKRF_SUCCESS) {
+            flog::error("Could not initialize HackRF: {0}", hackrf_error_name(hackrfError));
+        }
 
         // Select the last samplerate option
         sampleRate = 2000000;
@@ -110,7 +125,7 @@ public:
 
     ~HackRFSourceModule() {
         stop(this);
-        hackrf_exit();
+        if (hackrfError == HACKRF_SUCCESS) { hackrf_exit(); }
         sigpath::sourceManager.unregisterSource("HackRF");
     }
 
@@ -243,6 +258,10 @@ private:
     static void start(void* ctx) {
         HackRFSourceModule* _this = (HackRFSourceModule*)ctx;
         if (_this->running) { return; }
+        if (_this->hackrfError != HACKRF_SUCCESS) {
+            flog::error("Could not start HackRF: initialization failed: {0}", hackrf_error_name(_this->hackrfError));
+            return;
+        }
         if (_this->selectedSerial == "") {
             flog::error("Tried to start HackRF source with empty serial");
             return;
@@ -251,6 +270,12 @@ private:
 #ifndef __ANDROID__
         hackrf_error err = (hackrf_error)hackrf_open_by_serial(_this->selectedSerial.c_str(), &_this->openDev);
 #else
+        int vid, pid;
+        _this->devFd = backend::getDeviceFD(vid, pid, backend::HACKRF_VIDPIDS);
+        if (_this->devFd < 0) {
+            flog::error("Could not start HackRF: no authorized USB file descriptor");
+            return;
+        }
         hackrf_error err = (hackrf_error)hackrf_open_by_fd(_this->devFd, &_this->openDev);
 #endif
         if (err != HACKRF_SUCCESS) {
@@ -267,7 +292,13 @@ private:
         hackrf_set_lna_gain(_this->openDev, _this->lna);
         hackrf_set_vga_gain(_this->openDev, _this->vga);
 
-        hackrf_start_rx(_this->openDev, callback, _this);
+        err = (hackrf_error)hackrf_start_rx(_this->openDev, callback, _this);
+        if (err != HACKRF_SUCCESS) {
+            flog::error("Could not start HackRF RX: {0}", hackrf_error_name(err));
+            hackrf_close(_this->openDev);
+            _this->openDev = NULL;
+            return;
+        }
 
         _this->running = true;
         flog::info("HackRFSourceModule '{0}': Start!", _this->name);
@@ -280,6 +311,7 @@ private:
         _this->stream.stopWriter();
         // TODO: Stream stop
         hackrf_error err = (hackrf_error)hackrf_close(_this->openDev);
+        _this->openDev = NULL;
         if (err != HACKRF_SUCCESS) {
             flog::error("Could not close HackRF {0}: {1}", _this->selectedSerial, hackrf_error_name(err));
         }
@@ -389,7 +421,8 @@ private:
     }
 
     std::string name;
-    hackrf_device* openDev;
+    hackrf_device* openDev = NULL;
+    hackrf_error hackrfError = HACKRF_ERROR_OTHER;
     bool enabled = true;
     dsp::stream<dsp::complex_t> stream;
     int sampleRate;
