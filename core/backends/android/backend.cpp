@@ -384,6 +384,17 @@ namespace backend {
         return 0;
     }
 
+    void setScreenOrientation(int mode) {
+        JavaVM* java_vm = app->activity->vm;
+        JNIEnv* java_env = NULL;
+        if (java_vm->AttachCurrentThread(&java_env, NULL) != JNI_OK) { return; }
+        jclass clazz = java_env->GetObjectClass(app->activity->clazz);
+        jmethodID method_id = clazz ? java_env->GetMethodID(clazz, "setScreenOrientation", "(I)V") : NULL;
+        if (method_id != NULL) { java_env->CallVoidMethod(app->activity->clazz, method_id, (jint)mode); }
+        if (java_env->ExceptionCheck()) { java_env->ExceptionClear(); }
+        java_vm->DetachCurrentThread();
+    }
+
     int getDeviceFD(int& vid, int& pid, const std::vector<DevVIDPID>& allowedVidPids) {
         JavaVM* java_vm = app->activity->vm;
         JNIEnv* java_env = NULL;

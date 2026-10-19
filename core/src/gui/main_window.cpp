@@ -26,6 +26,7 @@
 #include <gui/menus/theme.h>
 #include <gui/dialogs/credits.h>
 #include <cstring>
+#include <map>
 #include <filesystem>
 #include <signal_path/source.h>
 #include <gui/dialogs/loading_screen.h>
@@ -125,6 +126,60 @@ namespace {
 
     std::vector<MainView> mainViews;
     std::string selectedMainView;
+
+    // Portrait layout state
+    bool portraitSlidersOpen = false;
+    bool upperLineSkipFreq = false;
+    ImVec2 volumeSliderMin(0, 0), volumeSliderMax(0, 0);
+}
+
+bool MainWindow::isPortraitLayout() {
+    ImVec2 ds = ImGui::GetIO().DisplaySize;
+    return ds.y > ds.x * 1.05f;
+}
+
+void MainWindow::handleTouchScrollX(ImVec2 excludeMin, ImVec2 excludeMax) {
+    // Same gesture logic as the Android menu scroll, on the X axis, per window.
+    struct State {
+        int mode = 0; // 0 idle, 1 tracking, 2 dragging, 3 ignored
+        ImVec2 start, last;
+        float scroll = 0;
+    };
+    static std::map<ImGuiID, State> states;
+    auto& io = ImGui::GetIO();
+    auto window = ImGui::GetCurrentWindow();
+    State& st = states[window->ID];
+    if (st.mode == 0) {
+        bool inExclude = excludeMax.x > excludeMin.x && ImRect(excludeMin, excludeMax).Contains(io.MousePos);
+        if (ImGui::IsMouseClicked(ImGuiMouseButton_Left) && window->InnerRect.Contains(io.MousePos) && !inExclude) {
+            st.mode = 1;
+            st.start = st.last = io.MousePos;
+            st.scroll = ImGui::GetScrollX();
+        }
+    }
+    if (st.mode == 0) { return; }
+    if (!ImGui::IsMouseDown(ImGuiMouseButton_Left)) {
+        st.mode = 0;
+        return;
+    }
+    ImVec2 total = io.MousePos - st.start;
+    ImVec2 frame = io.MousePos - st.last;
+    if (st.mode == 1) {
+        float threshold = 8.0f * style::uiScale;
+        if (fabsf(total.x) >= threshold && fabsf(total.x) > fabsf(total.y) * 1.2f) {
+            st.mode = 2;
+            st.scroll = ImGui::GetScrollX();
+            ImGui::ClearActiveID();
+        }
+        else if (fabsf(total.y) >= threshold) {
+            st.mode = 3;
+        }
+    }
+    if (st.mode == 2) {
+        st.scroll = ImClamp(st.scroll - frame.x, 0.0f, ImGui::GetScrollMaxX());
+        ImGui::SetScrollX(st.scroll);
+    }
+    st.last = io.MousePos;
 }
 
 void MainWindow::init() {
@@ -468,13 +523,18 @@ void MainWindow::drawUpperLine(ImGui::WaterfallVFO* vfo) {
     float origY = ImGui::GetCursorPosY();
 
     sigpath::sinkManager.showVolumeSlider(gui::waterfall.selectedVFO, "##_sdrpp_main_volume_", 248 * style::uiScale, btnSize.x, 5, true);
+    volumeSliderMin = ImGui::GetItemRectMin();
+    volumeSliderMax = ImGui::GetItemRectMax();
 
     ImGui::SameLine();
 
-    ImGui::SetCursorPosY(origY);
-    gui::freqSelect.draw();
+    // In portrait the frequency is drawn on its own row (see MainWindow::draw)
+    if (!upperLineSkipFreq) {
+        ImGui::SetCursorPosY(origY);
+        gui::freqSelect.draw();
 
-    ImGui::SameLine();
+        ImGui::SameLine();
+    }
 
     ImGui::SetCursorPosY(origY);
     if (tuningMode == tuner::TUNER_MODE_CENTER) {
@@ -636,6 +696,13 @@ void MainWindow::draw() {
     // To Bar
     // ImGui::BeginChild("TopBarChild", ImVec2(0, 49.0f * style::uiScale), false, ImGuiWindowFlags_HorizontalScrollbar);
     ImVec2 btnSize(30 * style::uiScale, 30 * style::uiScale);
+    // Portrait: the top bar is a horizontally scrollable strip, the frequency gets its own row
+    bool portrait = isPortraitLayout();
+    if (portrait) {
+        ImGui::PushStyleVar(ImGuiStyleVar_ScrollbarSize, 4.0f * style::uiScale);
+        ImGui::BeginChild("##sdrpp_portrait_strip", ImVec2(0, btnSize.y + 24.0f * style::uiScale), false, ImGuiWindowFlags_HorizontalScrollbar);
+    }
+    upperLineSkipFreq = portrait;
     ImGui::PushID(ImGui::GetID("sdrpp_menu_btn"));
     if (ImGui::ImageButton(icons::MENU, btnSize, ImVec2(0, 0), ImVec2(1, 1), 5, ImVec4(0, 0, 0, 0), textCol) || ImGui::IsKeyPressed(ImGuiKey_Menu, false)) {
         showMenu = !showMenu;
@@ -753,10 +820,19 @@ void MainWindow::draw() {
     // ImGui::EndChild();
 
     // Logo button
-    ImGui::SetCursorPosX(ImGui::GetWindowSize().x - (48 * style::uiScale));
-    ImGui::SetCursorPosY(10.0f * style::uiScale);
+    if (!portrait) {
+        ImGui::SetCursorPosX(ImGui::GetWindowSize().x - (48 * style::uiScale));
+        ImGui::SetCursorPosY(10.0f * style::uiScale);
+    }
     if (ImGui::ImageButton(icons::LOGO, ImVec2(32 * style::uiScale, 32 * style::uiScale), ImVec2(0, 0), ImVec2(1, 1), 0)) {
         showCredits = true;
+    }
+    if (portrait) {
+        handleTouchScrollX(volumeSliderMin, volumeSliderMax);
+        ImGui::EndChild();
+        ImGui::PopStyleVar();
+        ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 8.0f * style::uiScale);
+        gui::freqSelect.draw();
     }
     if (ImGui::IsMouseDown(ImGuiMouseButton_Left)) {
         if (showCredits) {
@@ -774,7 +850,7 @@ void MainWindow::draw() {
     // Handle menu resize
     ImVec2 winSize = ImGui::GetWindowSize();
     ImVec2 mousePos = ImGui::GetMousePos();
-    if (!lockWaterfallControls && showMenu && ImGui::GetTopMostPopupModal() == NULL) {
+    if (!lockWaterfallControls && showMenu && !portrait && ImGui::GetTopMostPopupModal() == NULL) {
         float curY = ImGui::GetCursorPosY();
         bool click = ImGui::IsMouseClicked(ImGuiMouseButton_Left);
         bool down = ImGui::IsMouseDown(ImGuiMouseButton_Left);
@@ -806,13 +882,16 @@ void MainWindow::draw() {
 
     // A main view other than the receiver also takes the waterfall controls column
     bool viewShown = mainViewShown();
-    float controlsWidth = viewShown ? 1.0f : (60.0f * style::uiScale);
+    float controlsWidth = (viewShown || portrait) ? 1.0f : (60.0f * style::uiScale);
+    // Portrait: an open menu takes the whole width instead of sharing it with the waterfall
+    bool portraitMenuOnly = portrait && showMenu;
+    float menuColWidth = portraitMenuOnly ? (winSize.x - 2.0f) : (float)menuWidth;
 
     // Left Column
     if (showMenu) {
         ImGui::Columns(3, "WindowColumns", false);
-        ImGui::SetColumnWidth(0, menuWidth);
-        ImGui::SetColumnWidth(1, std::max<int>(winSize.x - menuWidth - controlsWidth, 100.0f * style::uiScale));
+        ImGui::SetColumnWidth(0, menuColWidth);
+        ImGui::SetColumnWidth(1, portraitMenuOnly ? 1.0f : std::max<int>(winSize.x - menuColWidth - controlsWidth, 100.0f * style::uiScale));
         ImGui::SetColumnWidth(2, controlsWidth);
 
         ImGui::BeginChild("Left Column");
@@ -870,8 +949,16 @@ void MainWindow::draw() {
     if (!bottomWindows.empty()) {
         wfSize.y -= bottomWindows[0].size.y;
     }
-    drawMainViewTabs();
-    if (viewShown) {
+    if (portraitMenuOnly) {
+        // Menu only: nothing else fits next to it in portrait
+    }
+    else {
+        drawMainViewTabs();
+    }
+    if (portraitMenuOnly) {
+        // the waterfall is not drawn while the menu covers the screen
+    }
+    else if (viewShown) {
         std::function<void()> viewDraw;
         for (auto& v : mainViews) {
             if (v.name == selectedMainView) { viewDraw = v.drawFunc; }
@@ -1371,7 +1458,8 @@ bool MainWindow::mainViewShown() {
 }
 
 void MainWindow::drawMainViewTabs() {
-    if (mainViews.empty()) { return; }
+    bool portrait = isPortraitLayout();
+    if (mainViews.empty() && !portrait) { return; }
     // Plain buttons instead of an ImGui tab bar: they switch on the first
     // click/tap and need no state synchronisation with programmatic selection.
     ImVec4 activeCol = ImGui::GetStyleColorVec4(ImGuiCol_ButtonActive);
@@ -1384,13 +1472,54 @@ void MainWindow::drawMainViewTabs() {
         if (ImGui::Button(label) && !selected) { clicked = viewName; }
         ImGui::PopStyleColor();
     };
-    viewButton("Receiver##sdrpp_view_rx", "");
-    for (auto& v : mainViews) {
-        ImGui::SameLine();
-        viewButton((v.name + "##sdrpp_view").c_str(), v.name);
+    if (!mainViews.empty()) {
+        viewButton("Receiver##sdrpp_view_rx", "");
+        for (auto& v : mainViews) {
+            ImGui::SameLine();
+            viewButton((v.name + "##sdrpp_view").c_str(), v.name);
+        }
+    }
+    // Portrait: the zoom / max / min sliders are hidden behind a button
+    bool receiverView = selectedMainView.empty() || !mainViewShown();
+    if (portrait && receiverView) {
+        if (!mainViews.empty()) { ImGui::SameLine(); }
+        ImGui::PushStyleColor(ImGuiCol_Button, portraitSlidersOpen ? activeCol : idleCol);
+        if (ImGui::Button("Zoom / Min / Max##sdrpp_psliders")) { portraitSlidersOpen = !portraitSlidersOpen; }
+        ImGui::PopStyleColor();
     }
     ImGui::PopStyleVar();
     if (clicked != selectedMainView) { selectMainView(clicked); }
+
+    if (portrait && receiverView && portraitSlidersOpen) {
+        float w = (ImGui::GetContentRegionAvail().x - 2.0f * ImGui::GetStyle().ItemSpacing.x) / 3.0f;
+        ImGui::SetNextItemWidth(w);
+        if (ImGui::SliderFloat("##sdrpp_pzoom", &bw, 1.0f, 0.0f, "Zoom")) {
+            core::configManager.acquire();
+            core::configManager.conf["zoomBw"] = bw;
+            core::configManager.release(true);
+            updateWaterfallZoomBandwidth(bw);
+        }
+        ImGui::SameLine();
+        ImGui::SetNextItemWidth(w);
+        if (ImGui::SliderFloat("##sdrpp_pmin", &fftMin, -200.0f, 0.0f, "Min %.0f dB")) {
+            fftMin = std::min<float>(fftMax - 10, fftMin);
+            core::configManager.acquire();
+            core::configManager.conf["min"] = fftMin;
+            core::configManager.release(true);
+            gui::waterfall.setFFTMin(fftMin);
+            gui::waterfall.setWaterfallMin(fftMin);
+        }
+        ImGui::SameLine();
+        ImGui::SetNextItemWidth(w);
+        if (ImGui::SliderFloat("##sdrpp_pmax", &fftMax, -180.0f, 0.0f, "Max %.0f dB")) {
+            fftMax = std::max<float>(fftMax, fftMin + 10);
+            core::configManager.acquire();
+            core::configManager.conf["max"] = fftMax;
+            core::configManager.release(true);
+            gui::waterfall.setFFTMax(fftMax);
+            gui::waterfall.setWaterfallMax(fftMax);
+        }
+    }
 }
 
 void MainWindow::addBottomWindow(std::string name, std::function<void()> drawFunc) {

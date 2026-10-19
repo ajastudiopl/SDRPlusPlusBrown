@@ -1660,7 +1660,7 @@ void MobileMainWindow::draw() {
 
     gui::waterfall.alwaysDrawLine = false;
     ImGuiIO& io = ImGui::GetIO();
-    if (displaymenu::transcieverLayout == 0 || mainViewShown()) {
+    if (displaymenu::transcieverLayout == 0 || mainViewShown() || isPortraitLayout()) {
         shouldInitialize = true;
         MainWindow::draw();
         return;

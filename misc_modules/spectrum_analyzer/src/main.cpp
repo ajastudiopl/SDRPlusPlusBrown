@@ -942,7 +942,7 @@ private:
         for (auto group : bandGroups()) {
             ImGui::TextDisabled("%s", group);
             float x0 = ImGui::GetCursorPosX();
-            float maxX = x0 + 520.0f * scale;
+            float maxX = x0 + std::min(520.0f * scale, ImGui::GetIO().DisplaySize.x * 0.85f);
             bool first = true;
             for (auto& b : bandPlan()) {
                 if (std::string(b.group) != group) { continue; }
@@ -1013,7 +1013,10 @@ private:
 
     void drawPlots() {
         float scale = style::uiScale;
-        // One slim line: start/stop, status, zoom, tap actions
+        // One slim line: start/stop, status, zoom, tap actions. It scrolls sideways
+        // (drag) when it does not fit, e.g. in portrait.
+        ImGui::PushStyleVar(ImGuiStyleVar_ScrollbarSize, 4.0f * scale);
+        ImGui::BeginChild("##sa_status_line", ImVec2(0, ImGui::GetFrameHeight() + 8.0f * scale), false, ImGuiWindowFlags_HorizontalScrollbar);
         SweepState state = controller.state();
         if (!controller.active()) {
             if (ImGui::Button("Start##sa_vstart")) { startSweep(false); }
@@ -1097,6 +1100,9 @@ private:
             ImGui::SameLine();
             ImGui::TextDisabled("%s", formatFrequency(view.tapHz).c_str());
         }
+        MainWindow::handleTouchScrollX();
+        ImGui::EndChild();
+        ImGui::PopStyleVar();
 
         ImVec2 avail = ImGui::GetContentRegionAvail();
         float splitterH = 6.0f * scale;

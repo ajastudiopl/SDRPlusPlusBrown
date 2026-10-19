@@ -62,6 +62,13 @@ public:
     void selectMainView(std::string name);
     std::string getSelectedMainView();
 
+    // Portrait layout (screen taller than wide): scrollable top strip, frequency on its
+    // own row, full width menu instead of the waterfall, sliders behind a button.
+    static bool isPortraitLayout();
+    // Lets the current child window be scrolled horizontally by dragging (touch).
+    // `exclude` is a screen rectangle where drags belong to a widget (e.g. a slider).
+    static void handleTouchScrollX(ImVec2 excludeMin = ImVec2(0, 0), ImVec2 excludeMax = ImVec2(0, 0));
+
     bool logWindow = false;
     bool showMenu = true;
 

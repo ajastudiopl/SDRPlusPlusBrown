@@ -26,6 +26,8 @@ namespace backend {
     std::string stopBtSco();
 
     void doPermissionsDialogs();
+    // 0 = follow the sensor, 1 = landscape, 2 = portrait
+    void setScreenOrientation(int mode);
     std::string getBatteryLevel();
 
 }
