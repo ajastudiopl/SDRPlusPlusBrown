@@ -694,6 +694,19 @@ reports_monitor/fast:
 	$(MAKE) $(MAKESILENT) -f misc_modules/reports_monitor/CMakeFiles/reports_monitor.dir/build.make misc_modules/reports_monitor/CMakeFiles/reports_monitor.dir/build
 .PHONY : reports_monitor/fast
 
+#=============================================================================
+# Target rules for targets named spectrum_analyzer
+
+# Build rule for target.
+spectrum_analyzer: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 spectrum_analyzer
+.PHONY : spectrum_analyzer
+
+# fast build rule for target.
+spectrum_analyzer/fast:
+	$(MAKE) $(MAKESILENT) -f misc_modules/spectrum_analyzer/CMakeFiles/spectrum_analyzer.dir/build.make misc_modules/spectrum_analyzer/CMakeFiles/spectrum_analyzer.dir/build
+.PHONY : spectrum_analyzer/fast
+
 src/macos_init.o: src/macos_init.m.o
 .PHONY : src/macos_init.o
 
@@ -793,6 +806,7 @@ help:
 	@echo "... sdrpp_core"
 	@echo "... sdrpp_server_source"
 	@echo "... spectran_http_source"
+	@echo "... spectrum_analyzer"
 	@echo "... spyserver_source"
 	@echo "... websdr_view"
 	@echo "... src/macos_init.o"

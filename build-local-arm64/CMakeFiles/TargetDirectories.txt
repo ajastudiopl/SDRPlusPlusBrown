@@ -189,3 +189,10 @@
 /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/misc_modules/reports_monitor/CMakeFiles/install.dir
 /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/misc_modules/reports_monitor/CMakeFiles/install/local.dir
 /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/misc_modules/reports_monitor/CMakeFiles/install/strip.dir
+/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/misc_modules/spectrum_analyzer/CMakeFiles/spectrum_analyzer.dir
+/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/misc_modules/spectrum_analyzer/CMakeFiles/edit_cache.dir
+/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/misc_modules/spectrum_analyzer/CMakeFiles/rebuild_cache.dir
+/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/misc_modules/spectrum_analyzer/CMakeFiles/list_install_components.dir
+/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/misc_modules/spectrum_analyzer/CMakeFiles/install.dir
+/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/misc_modules/spectrum_analyzer/CMakeFiles/install/local.dir
+/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/misc_modules/spectrum_analyzer/CMakeFiles/install/strip.dir

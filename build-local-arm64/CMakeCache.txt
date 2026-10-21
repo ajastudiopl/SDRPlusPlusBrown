@@ -427,6 +427,9 @@ OPT_BUILD_SPECTRAN_HTTP_SOURCE:BOOL=ON
 //Build Spectran Source Module (Dependencies: Aaronia RTSA Suite)
 OPT_BUILD_SPECTRAN_SOURCE:BOOL=OFF
 
+//Wideband sweep spectrum analyzer (no dependencies required)
+OPT_BUILD_SPECTRUM_ANALYZER:BOOL=ON
+
 //Build SpyServer Source Module (no dependencies required)
 OPT_BUILD_SPYSERVER_SOURCE:BOOL=ON
 
@@ -619,6 +622,15 @@ spectran_http_source_IS_TOP_LEVEL:STATIC=OFF
 spectran_http_source_SOURCE_DIR:STATIC=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/source_modules/spectran_http_source
 
 //Value Computed by CMake
+spectrum_analyzer_BINARY_DIR:STATIC=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/misc_modules/spectrum_analyzer
+
+//Value Computed by CMake
+spectrum_analyzer_IS_TOP_LEVEL:STATIC=OFF
+
+//Value Computed by CMake
+spectrum_analyzer_SOURCE_DIR:STATIC=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/misc_modules/spectrum_analyzer
+
+//Value Computed by CMake
 spyserver_source_BINARY_DIR:STATIC=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/source_modules/spyserver_source
 
 //Value Computed by CMake
@@ -740,7 +752,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=25
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=26
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP
@@ -971,5 +983,5 @@ pkgcfg_lib_GLFW3_glfw-ADVANCED:INTERNAL=1
 pkgcfg_lib_LIBZSTD_zstd-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: pkgcfg_lib_VOLK_volk
 pkgcfg_lib_VOLK_volk-ADVANCED:INTERNAL=1
-prefix_result:INTERNAL=/opt/homebrew/opt/zstd/lib
+prefix_result:INTERNAL=/opt/homebrew/Cellar/fftw/3.3.11/lib
 

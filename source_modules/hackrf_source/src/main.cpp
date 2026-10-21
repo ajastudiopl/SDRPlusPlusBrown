@@ -49,6 +49,11 @@ const int sampleRates[] = {
     2000000,
 };
 
+#ifdef __ANDROID__
+// Above this the phone's CPU and USB link cannot keep up: the receiver stalls and the audio breaks up
+const int ANDROID_MAX_SAMPLE_RATE = 8000000;
+#endif
+
 const int bandwidths[] = {
     1750000,
     2500000,
@@ -436,7 +441,7 @@ public:
         config.release(created);
 
         // Set default values
-        srId = 0;
+        srId = 6;
         sampleRate = 2000000;
         biasT = false;
         amp = false;
@@ -447,6 +452,9 @@ public:
         // Load from config if available and validate
         if (config.conf["devices"][serial].contains("sampleRate")) {
             int psr = config.conf["devices"][serial]["sampleRate"];
+#ifdef __ANDROID__
+            psr = std::min(psr, ANDROID_MAX_SAMPLE_RATE);
+#endif
             for (int i = 0; i < 7; i++) {
                 if (sampleRates[i] == psr) {
                     sampleRate = psr;
@@ -477,6 +485,11 @@ public:
 private:
     static void menuSelected(void* ctx) {
         HackRFSourceModule* _this = (HackRFSourceModule*)ctx;
+#ifdef __ANDROID__
+        // Pick up a receiver that was plugged in after the list was last built
+        _this->refresh();
+        _this->selectFirst();
+#endif
         core::setInputSampleRate(_this->sampleRate);
         flog::info("HackRFSourceModule '{0}': Menu Select!", _this->name);
     }
@@ -583,6 +596,10 @@ private:
         }
 
         if (SmGui::Combo(CONCAT("##_hackrf_sr_sel_", _this->name), &_this->srId, sampleRatesTxt)) {
+#ifdef __ANDROID__
+            // Rates above the phone limit (20, 16 and 10 MS/s) are not offered
+            _this->srId = std::max(_this->srId, 3);
+#endif
             _this->sampleRate = sampleRates[_this->srId];
             core::setInputSampleRate(_this->sampleRate);
             config.acquire();

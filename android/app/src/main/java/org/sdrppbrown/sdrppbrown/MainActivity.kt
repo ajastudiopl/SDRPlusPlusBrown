@@ -14,6 +14,7 @@ import android.content.IntentFilter
 import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
 import android.content.res.AssetManager
+import android.database.ContentObserver
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
@@ -29,6 +30,8 @@ import android.os.BatteryManager.BATTERY_PROPERTY_CAPACITY
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
+import android.os.Handler
+import android.os.Looper
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.provider.Settings
@@ -198,6 +201,7 @@ class MainActivity : NativeActivity(), SensorEventListener {
     override fun onDestroy() {
         super.onDestroy()
         sensorManager.unregisterListener(this)
+        contentResolver.unregisterContentObserver(autoRotateObserver)
         unregisterReceiver(usbDetachReceiver)
     }
 
@@ -336,6 +340,7 @@ class MainActivity : NativeActivity(), SensorEventListener {
         Log.w("SDR++", "Display density: ${dm.density} scaled: ${dm.scaledDensity} densityDpi: ${dm.densityDpi} width: ${dm.widthPixels} height: ${dm.heightPixels} xdpi: ${dm.xdpi} ydpi: ${dm.ydpi} widthDp: ${dm.widthPixels/dm.density} heightDp: ${dm.heightPixels/dm.density}")
 
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE;
+        contentResolver.registerContentObserver(Settings.System.getUriFor(Settings.System.ACCELEROMETER_ROTATION), false, autoRotateObserver)
 
         //// cont here
 
@@ -498,13 +503,28 @@ class MainActivity : NativeActivity(), SensorEventListener {
 
     // Called from native code (Display menu): 0 = landscape, 1 = sensor (default), 2 = portrait.
     fun setScreenOrientation(mode: Int) {
+        screenOrientationMode = mode
+        applyScreenOrientation()
+    }
+
+    // Auto mode follows the sensor only while the system auto-rotate is on.
+    // With the system rotation lock on, the screen stays where it is.
+    private fun applyScreenOrientation() {
         runOnUiThread {
-            requestedOrientation = when (mode) {
-                1 -> ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR
+            requestedOrientation = when (screenOrientationMode) {
+                1 -> if (isAutoRotateOn()) ActivityInfo.SCREEN_ORIENTATION_SENSOR else ActivityInfo.SCREEN_ORIENTATION_LOCKED
                 2 -> ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT
                 else -> ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE
             }
         }
+    }
+
+    private fun isAutoRotateOn(): Boolean =
+        Settings.System.getInt(contentResolver, Settings.System.ACCELEROMETER_ROTATION, 1) == 1
+
+    private var screenOrientationMode = 1
+    private val autoRotateObserver = object : ContentObserver(Handler(Looper.getMainLooper())) {
+        override fun onChange(selfChange: Boolean) { applyScreenOrientation() }
     }
 
     private var lastUsbPermissionRequestMs: Long = 0

@@ -22,6 +22,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/core/libcorrect/util/CMakeLists.txt"
   "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/decoder_modules/radio/CMakeLists.txt"
   "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/misc_modules/reports_monitor/CMakeLists.txt"
+  "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/misc_modules/spectrum_analyzer/CMakeLists.txt"
   "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/misc_modules/websdr_view/CMakeLists.txt"
   "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/sdrpp.desktop"
   "/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/sdrpp_module.cmake"
@@ -120,6 +121,7 @@ set(CMAKE_MAKEFILE_PRODUCTS
   "decoder_modules/radio/CMakeFiles/CMakeDirectoryInformation.cmake"
   "misc_modules/websdr_view/CMakeFiles/CMakeDirectoryInformation.cmake"
   "misc_modules/reports_monitor/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "misc_modules/spectrum_analyzer/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
@@ -165,4 +167,5 @@ set(CMAKE_DEPEND_INFO_FILES
   "decoder_modules/radio/CMakeFiles/radio.dir/DependInfo.cmake"
   "misc_modules/websdr_view/CMakeFiles/websdr_view.dir/DependInfo.cmake"
   "misc_modules/reports_monitor/CMakeFiles/reports_monitor.dir/DependInfo.cmake"
+  "misc_modules/spectrum_analyzer/CMakeFiles/spectrum_analyzer.dir/DependInfo.cmake"
   )

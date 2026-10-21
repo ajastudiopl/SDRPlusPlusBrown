@@ -33,11 +33,27 @@
 #include <android/log.h>
 #include <android/configuration.h>
 #include <android_native_app_glue.h>
+#include <math.h>
 
 // Android data
 static double                                   g_Time = 0.0;
 static ANativeWindow*                           g_Window;
 static char                                     g_LogTag[] = "ImGuiExample";
+
+// A finger is not sent to ImGui as a mouse click until it is released.  This
+// gives scrollable windows a chance to recognize a vertical drag before an
+// InputText widget requests the Android soft keyboard.  Horizontal drags are
+// still forwarded as mouse drags, so sliders keep their normal behaviour.
+struct ImGui_ImplAndroid_TouchState
+{
+    int32_t PointerId = -1;
+    float StartX = 0.0f;
+    float StartY = 0.0f;
+    bool MouseDrag = false;
+};
+
+static ImGui_ImplAndroid_TouchState g_TouchState;
+static constexpr float g_TouchDragThreshold = 12.0f;
 
 static ImGuiKey ImGui_ImplAndroid_KeyCodeToImGuiKey(int32_t key_code)
 {
@@ -210,25 +226,64 @@ int32_t ImGui_ImplAndroid_HandleInputEvent(AInputEvent* input_event)
         switch (event_action)
         {
         case AMOTION_EVENT_ACTION_DOWN:
+        case AMOTION_EVENT_ACTION_POINTER_DOWN:
         case AMOTION_EVENT_ACTION_UP:
-            // Physical mouse buttons (and probably other physical devices) also invoke the actions AMOTION_EVENT_ACTION_DOWN/_UP,
-            // but we have to process them separately to identify the actual button pressed. This is done below via
-            // AMOTION_EVENT_ACTION_BUTTON_PRESS/_RELEASE. Here, we only process "FINGER" input (and "UNKNOWN", as a fallback).
-            if((AMotionEvent_getToolType(input_event, event_pointer_index) == AMOTION_EVENT_TOOL_TYPE_FINGER)
-            || (AMotionEvent_getToolType(input_event, event_pointer_index) == AMOTION_EVENT_TOOL_TYPE_STYLUS)
-            || (AMotionEvent_getToolType(input_event, event_pointer_index) == AMOTION_EVENT_TOOL_TYPE_MOUSE)
-            || (AMotionEvent_getToolType(input_event, event_pointer_index) == AMOTION_EVENT_TOOL_TYPE_UNKNOWN))
-            {
-                io.AddMousePosEvent(AMotionEvent_getX(input_event, event_pointer_index), AMotionEvent_getY(input_event, event_pointer_index));
-                io.AddMouseButtonEvent(0, event_action == AMOTION_EVENT_ACTION_DOWN);
-            }
-            if (AMotionEvent_getToolType(input_event, event_pointer_index) == AMOTION_EVENT_TOOL_TYPE_FINGER) {
-                io.AddFingerEvent(event_pointer_index, event_action == AMOTION_EVENT_ACTION_DOWN);
-                if (event_action == AMOTION_EVENT_ACTION_DOWN) {
-                    io.AddFingerMotion(event_pointer_index, AMotionEvent_getX(input_event, event_pointer_index), AMotionEvent_getY(input_event, event_pointer_index));
+        case AMOTION_EVENT_ACTION_POINTER_UP:
+        case AMOTION_EVENT_ACTION_CANCEL:
+        {
+            const int32_t tool_type = AMotionEvent_getToolType(input_event, event_pointer_index);
+            const bool finger = tool_type == AMOTION_EVENT_TOOL_TYPE_FINGER;
+            const bool down = event_action == AMOTION_EVENT_ACTION_DOWN || event_action == AMOTION_EVENT_ACTION_POINTER_DOWN;
+            const float x = AMotionEvent_getX(input_event, event_pointer_index);
+            const float y = AMotionEvent_getY(input_event, event_pointer_index);
+
+            if (finger) {
+                io.AddFingerEvent(event_pointer_index, down);
+                io.AddFingerMotion(event_pointer_index, x, y);
+
+                // Keep ImGui's hover window in sync before the scrolling code
+                // chooses its target. This does not generate a click, so a touch
+                // inside a combo popup selects the popup instead of its parent.
+                if (down) {
+                    io.AddMousePosEvent(x, y);
                 }
+
+                const int32_t pointer_id = AMotionEvent_getPointerId(input_event, event_pointer_index);
+                if (down && g_TouchState.PointerId == -1) {
+                    g_TouchState.PointerId = pointer_id;
+                    g_TouchState.StartX = x;
+                    g_TouchState.StartY = y;
+                    g_TouchState.MouseDrag = false;
+                }
+                if (!down && pointer_id == g_TouchState.PointerId) {
+                    if (g_TouchState.MouseDrag) {
+                        io.AddMousePosEvent(x, y);
+                        io.AddMouseButtonEvent(0, false);
+                    }
+                    else {
+                        const float dx = x - g_TouchState.StartX;
+                        const float dy = y - g_TouchState.StartY;
+                        if (dx * dx + dy * dy < g_TouchDragThreshold * g_TouchDragThreshold) {
+                            // Queue a regular click only for a genuine tap. ImGui's
+                            // event queue spreads press and release over frames.
+                            io.AddMousePosEvent(x, y);
+                            io.AddMouseButtonEvent(0, true);
+                            io.AddMouseButtonEvent(0, false);
+                        }
+                    }
+                    g_TouchState.PointerId = -1;
+                    g_TouchState.MouseDrag = false;
+                }
+                break;
+            }
+
+            // Physical mouse/stylus input remains immediate.
+            if (tool_type == AMOTION_EVENT_TOOL_TYPE_STYLUS || tool_type == AMOTION_EVENT_TOOL_TYPE_MOUSE || tool_type == AMOTION_EVENT_TOOL_TYPE_UNKNOWN) {
+                io.AddMousePosEvent(x, y);
+                io.AddMouseButtonEvent(0, down);
             }
             break;
+        }
         case AMOTION_EVENT_ACTION_BUTTON_PRESS:
         case AMOTION_EVENT_ACTION_BUTTON_RELEASE:
             {
@@ -239,9 +294,29 @@ int32_t ImGui_ImplAndroid_HandleInputEvent(AInputEvent* input_event)
             }
             break;
         case AMOTION_EVENT_ACTION_MOVE:       // Touch pointer moves while DOWN
-            if (AMotionEvent_getToolType(input_event, event_pointer_index) == AMOTION_EVENT_TOOL_TYPE_FINGER) {
-                io.AddFingerMotion(event_pointer_index, AMotionEvent_getX(input_event, event_pointer_index), AMotionEvent_getY(input_event, event_pointer_index));
+            if (g_TouchState.PointerId != -1) {
+                const size_t pointer_count = AMotionEvent_getPointerCount(input_event);
+                for (size_t i = 0; i < pointer_count; i++) {
+                    if (AMotionEvent_getPointerId(input_event, i) != g_TouchState.PointerId) { continue; }
+                    const float x = AMotionEvent_getX(input_event, i);
+                    const float y = AMotionEvent_getY(input_event, i);
+                    io.AddFingerMotion((int)i, x, y);
+                    const float dx = x - g_TouchState.StartX;
+                    const float dy = y - g_TouchState.StartY;
+                    const bool horizontalDrag = fabsf(dx) >= g_TouchDragThreshold && fabsf(dx) > fabsf(dy) * 1.2f;
+                    const bool verticalWidgetDrag = fabsf(dy) >= g_TouchDragThreshold && fabsf(dy) > fabsf(dx) * 1.2f;
+                    if (!g_TouchState.MouseDrag && (horizontalDrag || verticalWidgetDrag)) {
+                        g_TouchState.MouseDrag = true;
+                        io.AddMousePosEvent(g_TouchState.StartX, g_TouchState.StartY);
+                        io.AddMouseButtonEvent(0, true);
+                    }
+                    if (g_TouchState.MouseDrag) {
+                        io.AddMousePosEvent(x, y);
+                    }
+                    break;
+                }
             }
+            // Intentional fallthrough: finger and mouse motion both update the cursor.
         case AMOTION_EVENT_ACTION_HOVER_MOVE: // Hovering: Tool moves while NOT pressed (such as a physical mouse)
             io.AddMousePosEvent(AMotionEvent_getX(input_event, event_pointer_index), AMotionEvent_getY(input_event, event_pointer_index));
             break;

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+
+<plist version="1.0">
+    <dict>
+        <key>CFBundleName</key><string>sdrpp</string>
+        <key>CFBundleDisplayName</key><string>SDR++Brown</string>
+        <key>CFBundleIdentifier</key><string>oorg.sdrpp.sdrppbrown</string>
+        <key>CFBundleVersion</key><string>1.2.1</string>
+        <key>CFBundlePackageType</key><string>APPL</string>
+        <key>CFBundleSignature</key><string>sdrp</string>
+        <key>CFBundleExecutable</key><string>sdrpp</string>
+        <key>CFBundleIconFile</key><string>sdrpp</string>
+        <key>NSMicrophoneUsageDescription</key><string>Microphone is needed for TX (e.g. SSB) and the app voice control</string>
+    </dict>
+</plist>

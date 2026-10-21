@@ -6634,6 +6634,114 @@ bool ImGui::Begin(const char* name, bool* p_open, ImGuiWindowFlags flags)
     return !window->SkipItems;
 }
 
+static int ImGui_FindTouchScrollFinger(const ImGuiIO& io)
+{
+    for (int finger = 0; finger < IM_ARRAYSIZE(io.FingerDown); finger++)
+        if (io.FingerDown[finger])
+            return finger;
+    return -1;
+}
+
+static ImGuiWindow* ImGui_FindTouchScrollWindow(ImGuiContext& g)
+{
+    ImGuiWindow* window = g.HoveredWindow;
+    if (window != NULL && strstr(window->Name, "WaterfallControls") != NULL)
+        return NULL;
+    while (window != NULL && (window->ScrollMax.y <= 0.0f || (window->Flags & ImGuiWindowFlags_NoScrollWithMouse))) {
+        // A dropdown never hands the gesture to the window underneath it
+        if (window->Flags & ImGuiWindowFlags_Popup)
+            return NULL;
+        window = window->ParentWindow;
+    }
+    return window;
+}
+
+static void ImGui_UpdateTouchScroll(ImGuiWindow* window)
+{
+    ImGuiContext& g = *GImGui;
+    ImGuiIO& io = g.IO;
+    ImGuiStorage& storage = window->StateStorage;
+    const ImGuiID mode_key = ImHashStr("##TouchScrollMode", 0, window->ID);
+    const ImGuiID finger_key = ImHashStr("##TouchScrollFinger", 0, window->ID);
+    const ImGuiID start_x_key = ImHashStr("##TouchScrollStartX", 0, window->ID);
+    const ImGuiID start_y_key = ImHashStr("##TouchScrollStartY", 0, window->ID);
+    const ImGuiID last_y_key = ImHashStr("##TouchScrollLastY", 0, window->ID);
+    const ImGuiID scroll_key = ImHashStr("##TouchScrollPosition", 0, window->ID);
+    const ImGuiID velocity_key = ImHashStr("##TouchScrollVelocity", 0, window->ID);
+    const int finger = ImGui_FindTouchScrollFinger(io);
+    int mode = storage.GetInt(mode_key);
+    float velocity = storage.GetFloat(velocity_key);
+
+    if (mode == 0 && finger >= 0 && ImGui_FindTouchScrollWindow(g) == window) {
+        const ImVec2 touch_pos = io.FingerPos[finger];
+        storage.SetInt(mode_key, 1);
+        storage.SetInt(finger_key, finger);
+        storage.SetFloat(start_x_key, touch_pos.x);
+        storage.SetFloat(start_y_key, touch_pos.y);
+        storage.SetFloat(last_y_key, touch_pos.y);
+        storage.SetFloat(scroll_key, window->Scroll.y);
+        storage.SetFloat(velocity_key, 0.0f);
+        return;
+    }
+
+    if (mode != 0) {
+        const int tracked_finger = storage.GetInt(finger_key, -1);
+        if (tracked_finger < 0 || !io.FingerDown[tracked_finger]) {
+            if (mode != 2)
+                velocity = 0.0f;
+            storage.SetInt(mode_key, 0);
+            storage.SetFloat(velocity_key, velocity);
+            return;
+        }
+
+        const ImVec2 touch_pos = io.FingerPos[tracked_finger];
+        const float start_x = storage.GetFloat(start_x_key);
+        const float start_y = storage.GetFloat(start_y_key);
+        const float last_y = storage.GetFloat(last_y_key);
+        const float total_x = touch_pos.x - start_x;
+        const float total_y = touch_pos.y - start_y;
+        const float frame_y = touch_pos.y - last_y;
+
+        if (mode == 1) {
+            const float threshold = ImMax(8.0f, g.FontSize * 0.25f);
+            if (ImFabs(total_y) >= threshold && ImFabs(total_y) > ImFabs(total_x) * 1.2f) {
+                mode = 2;
+                storage.SetInt(mode_key, mode);
+                storage.SetFloat(scroll_key, window->Scroll.y);
+                ImGui::ClearActiveID();
+            }
+            else if (ImFabs(total_x) >= threshold && ImFabs(total_x) > ImFabs(total_y) * 1.2f) {
+                mode = 3;
+                storage.SetInt(mode_key, mode);
+            }
+        }
+
+        if (mode == 2) {
+            float scroll = storage.GetFloat(scroll_key);
+            scroll = ImClamp(scroll - frame_y, 0.0f, window->ScrollMax.y);
+            ImGui::SetScrollY(window, scroll);
+            storage.SetFloat(scroll_key, scroll);
+            if (frame_y != 0.0f)
+                velocity = ImClamp(frame_y / ImMax(io.DeltaTime, 0.008f), -4000.0f, 4000.0f);
+            storage.SetFloat(velocity_key, velocity);
+        }
+        storage.SetFloat(last_y_key, touch_pos.y);
+        return;
+    }
+
+    if (ImFabs(velocity) > 60.0f && window->ScrollMax.y > 0.0f) {
+        const float delta_time = ImMin(io.DeltaTime, 0.05f);
+        const float previous_scroll = storage.GetFloat(scroll_key, window->Scroll.y);
+        const float scroll = ImClamp(previous_scroll - velocity * delta_time, 0.0f, window->ScrollMax.y);
+        ImGui::SetScrollY(window, scroll);
+        storage.SetFloat(scroll_key, scroll);
+        storage.SetFloat(velocity_key, scroll == previous_scroll ? 0.0f : velocity * expf(-5.0f * delta_time));
+    }
+    else if (velocity != 0.0f) {
+        storage.SetFloat(velocity_key, 0.0f);
+    }
+}
+
 void ImGui::End()
 {
     ImGuiContext& g = *GImGui;
@@ -6655,6 +6763,8 @@ void ImGui::End()
     if (window->DC.CurrentColumns)
         EndColumns();
     PopClipRect();   // Inner window clip rectangle
+
+    ImGui_UpdateTouchScroll(window);
 
     // Stop logging
     if (!(window->Flags & ImGuiWindowFlags_ChildWindow))    // FIXME: add more options for scope of logging

@@ -101,6 +101,7 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   include("/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/decoder_modules/radio/cmake_install.cmake")
   include("/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/misc_modules/websdr_view/cmake_install.cmake")
   include("/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/misc_modules/reports_monitor/cmake_install.cmake")
+  include("/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/misc_modules/spectrum_analyzer/cmake_install.cmake")
 
 endif()
 

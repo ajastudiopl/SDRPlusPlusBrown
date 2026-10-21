@@ -248,6 +248,11 @@ private:
 
     static void menuSelected(void* ctx) {
         AirspySourceModule* _this = (AirspySourceModule*)ctx;
+#ifdef __ANDROID__
+        // Pick up a receiver that was plugged in after the list was last built
+        _this->refresh();
+        _this->selectFirst();
+#endif
         core::setInputSampleRate(_this->sampleRate);
         flog::info("AirspySourceModule '{0}': Menu Select!", _this->name);
     }

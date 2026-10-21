@@ -90,10 +90,8 @@ public:
 
 
 protected:
-#ifdef __ANDROID__
-    void handleAndroidMenuScroll();
-#endif
     void displayVariousWindows();
+    void updateSourceAvailability(bool sourceReady);
     static void vfoAddedHandler(VFOManager::VFO* vfo, void* ctx);
 
     // FFT Variables

@@ -274,6 +274,11 @@ private:
 
     static void menuSelected(void* ctx) {
         RTLSDRSourceModule* _this = (RTLSDRSourceModule*)ctx;
+#ifdef __ANDROID__
+        // Pick up a receiver that was plugged in after the list was last built
+        _this->refresh();
+        _this->selectFirst();
+#endif
         propagateInputSampleRate(_this);
         flog::info("RTLSDRSourceModule '{0}': Menu Select!", _this->name);
     }

@@ -244,6 +244,11 @@ private:
 
     static void menuSelected(void* ctx) {
         AirspyHFSourceModule* _this = (AirspyHFSourceModule*)ctx;
+#ifdef __ANDROID__
+        // Pick up a receiver that was plugged in after the list was last built
+        _this->refresh();
+        _this->selectFirst();
+#endif
         core::setInputSampleRate(_this->sampleRate * _this->narrowSamplerate());
         flog::info("AirspyHFSourceModule '{0}': Menu Select!", _this->name);
     }

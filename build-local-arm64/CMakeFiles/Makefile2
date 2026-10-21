@@ -82,6 +82,7 @@ all: sink_modules/null_audio_sink/all
 all: decoder_modules/radio/all
 all: misc_modules/websdr_view/all
 all: misc_modules/reports_monitor/all
+all: misc_modules/spectrum_analyzer/all
 .PHONY : all
 
 # The main recursive "codegen" target.
@@ -104,6 +105,7 @@ codegen: sink_modules/null_audio_sink/codegen
 codegen: decoder_modules/radio/codegen
 codegen: misc_modules/websdr_view/codegen
 codegen: misc_modules/reports_monitor/codegen
+codegen: misc_modules/spectrum_analyzer/codegen
 .PHONY : codegen
 
 # The main recursive "preinstall" target.
@@ -124,6 +126,7 @@ preinstall: sink_modules/null_audio_sink/preinstall
 preinstall: decoder_modules/radio/preinstall
 preinstall: misc_modules/websdr_view/preinstall
 preinstall: misc_modules/reports_monitor/preinstall
+preinstall: misc_modules/spectrum_analyzer/preinstall
 .PHONY : preinstall
 
 # The main recursive "clean" target.
@@ -147,6 +150,7 @@ clean: sink_modules/null_audio_sink/clean
 clean: decoder_modules/radio/clean
 clean: misc_modules/websdr_view/clean
 clean: misc_modules/reports_monitor/clean
+clean: misc_modules/spectrum_analyzer/clean
 .PHONY : clean
 
 #=============================================================================
@@ -381,6 +385,25 @@ misc_modules/reports_monitor/preinstall:
 # Recursive "clean" directory target.
 misc_modules/reports_monitor/clean: misc_modules/reports_monitor/CMakeFiles/reports_monitor.dir/clean
 .PHONY : misc_modules/reports_monitor/clean
+
+#=============================================================================
+# Directory level rules for directory misc_modules/spectrum_analyzer
+
+# Recursive "all" directory target.
+misc_modules/spectrum_analyzer/all: misc_modules/spectrum_analyzer/CMakeFiles/spectrum_analyzer.dir/all
+.PHONY : misc_modules/spectrum_analyzer/all
+
+# Recursive "codegen" directory target.
+misc_modules/spectrum_analyzer/codegen: misc_modules/spectrum_analyzer/CMakeFiles/spectrum_analyzer.dir/codegen
+.PHONY : misc_modules/spectrum_analyzer/codegen
+
+# Recursive "preinstall" directory target.
+misc_modules/spectrum_analyzer/preinstall:
+.PHONY : misc_modules/spectrum_analyzer/preinstall
+
+# Recursive "clean" directory target.
+misc_modules/spectrum_analyzer/clean: misc_modules/spectrum_analyzer/CMakeFiles/spectrum_analyzer.dir/clean
+.PHONY : misc_modules/spectrum_analyzer/clean
 
 #=============================================================================
 # Directory level rules for directory misc_modules/websdr_view
@@ -656,12 +679,12 @@ CMakeFiles/sdrpp.dir/all: core/CMakeFiles/sdrpp_core.dir/all
 CMakeFiles/sdrpp.dir/all: core/libcorrect/CMakeFiles/correct_static.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdrpp.dir/build.make CMakeFiles/sdrpp.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdrpp.dir/build.make CMakeFiles/sdrpp.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=43 "Built target sdrpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=38 "Built target sdrpp"
 .PHONY : CMakeFiles/sdrpp.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/sdrpp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 59
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 52
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/sdrpp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 0
 .PHONY : CMakeFiles/sdrpp.dir/rule
@@ -673,7 +696,7 @@ sdrpp: CMakeFiles/sdrpp.dir/rule
 # codegen rule for target.
 CMakeFiles/sdrpp.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdrpp.dir/build.make CMakeFiles/sdrpp.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=43 "Finished codegen for target sdrpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=38 "Finished codegen for target sdrpp"
 .PHONY : CMakeFiles/sdrpp.dir/codegen
 
 # clean rule for target.
@@ -685,8 +708,8 @@ CMakeFiles/sdrpp.dir/clean:
 # Target rules for target CMakeFiles/do_always.dir
 
 # All Build rule for target.
-CMakeFiles/do_always.dir/all: core/CMakeFiles/sdrpp_core.dir/all
 CMakeFiles/do_always.dir/all: CMakeFiles/sdrpp.dir/all
+CMakeFiles/do_always.dir/all: core/CMakeFiles/sdrpp_core.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/do_always.dir/build.make CMakeFiles/do_always.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/do_always.dir/build.make CMakeFiles/do_always.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num= "Built target do_always"
@@ -694,7 +717,7 @@ CMakeFiles/do_always.dir/all: CMakeFiles/sdrpp.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/do_always.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 59
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 52
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/do_always.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 0
 .PHONY : CMakeFiles/do_always.dir/rule
@@ -753,12 +776,12 @@ CMakeFiles/uninstall.dir/clean:
 core/CMakeFiles/sdrpp_core.dir/all: core/libcorrect/CMakeFiles/correct_static.dir/all
 	$(MAKE) $(MAKESILENT) -f core/CMakeFiles/sdrpp_core.dir/build.make core/CMakeFiles/sdrpp_core.dir/depend
 	$(MAKE) $(MAKESILENT) -f core/CMakeFiles/sdrpp_core.dir/build.make core/CMakeFiles/sdrpp_core.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93 "Built target sdrpp_core"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82 "Built target sdrpp_core"
 .PHONY : core/CMakeFiles/sdrpp_core.dir/all
 
 # Build rule for subdir invocation for target.
 core/CMakeFiles/sdrpp_core.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 58
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 51
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 core/CMakeFiles/sdrpp_core.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 0
 .PHONY : core/CMakeFiles/sdrpp_core.dir/rule
@@ -770,7 +793,7 @@ sdrpp_core: core/CMakeFiles/sdrpp_core.dir/rule
 # codegen rule for target.
 core/CMakeFiles/sdrpp_core.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f core/CMakeFiles/sdrpp_core.dir/build.make core/CMakeFiles/sdrpp_core.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93 "Finished codegen for target sdrpp_core"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82 "Finished codegen for target sdrpp_core"
 .PHONY : core/CMakeFiles/sdrpp_core.dir/codegen
 
 # clean rule for target.
@@ -818,12 +841,12 @@ core/libcorrect/CMakeFiles/correct.dir/all: core/libcorrect/src/convolutional/CM
 core/libcorrect/CMakeFiles/correct.dir/all: core/libcorrect/src/reed-solomon/CMakeFiles/correct-reed-solomon.dir/all
 	$(MAKE) $(MAKESILENT) -f core/libcorrect/CMakeFiles/correct.dir/build.make core/libcorrect/CMakeFiles/correct.dir/depend
 	$(MAKE) $(MAKESILENT) -f core/libcorrect/CMakeFiles/correct.dir/build.make core/libcorrect/CMakeFiles/correct.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=5 "Built target correct"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num= "Built target correct"
 .PHONY : core/libcorrect/CMakeFiles/correct.dir/all
 
 # Build rule for subdir invocation for target.
 core/libcorrect/CMakeFiles/correct.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 8
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 7
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 core/libcorrect/CMakeFiles/correct.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 0
 .PHONY : core/libcorrect/CMakeFiles/correct.dir/rule
@@ -835,7 +858,7 @@ correct: core/libcorrect/CMakeFiles/correct.dir/rule
 # codegen rule for target.
 core/libcorrect/CMakeFiles/correct.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f core/libcorrect/CMakeFiles/correct.dir/build.make core/libcorrect/CMakeFiles/correct.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=5 "Finished codegen for target correct"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num= "Finished codegen for target correct"
 .PHONY : core/libcorrect/CMakeFiles/correct.dir/codegen
 
 # clean rule for target.
@@ -851,12 +874,12 @@ core/libcorrect/CMakeFiles/correct_static.dir/all: core/libcorrect/src/convoluti
 core/libcorrect/CMakeFiles/correct_static.dir/all: core/libcorrect/src/reed-solomon/CMakeFiles/correct-reed-solomon.dir/all
 	$(MAKE) $(MAKESILENT) -f core/libcorrect/CMakeFiles/correct_static.dir/build.make core/libcorrect/CMakeFiles/correct_static.dir/depend
 	$(MAKE) $(MAKESILENT) -f core/libcorrect/CMakeFiles/correct_static.dir/build.make core/libcorrect/CMakeFiles/correct_static.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=13 "Built target correct_static"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num= "Built target correct_static"
 .PHONY : core/libcorrect/CMakeFiles/correct_static.dir/all
 
 # Build rule for subdir invocation for target.
 core/libcorrect/CMakeFiles/correct_static.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 8
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 7
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 core/libcorrect/CMakeFiles/correct_static.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 0
 .PHONY : core/libcorrect/CMakeFiles/correct_static.dir/rule
@@ -868,7 +891,7 @@ correct_static: core/libcorrect/CMakeFiles/correct_static.dir/rule
 # codegen rule for target.
 core/libcorrect/CMakeFiles/correct_static.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f core/libcorrect/CMakeFiles/correct_static.dir/build.make core/libcorrect/CMakeFiles/correct_static.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=13 "Finished codegen for target correct_static"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num= "Finished codegen for target correct_static"
 .PHONY : core/libcorrect/CMakeFiles/correct_static.dir/codegen
 
 # clean rule for target.
@@ -884,7 +907,7 @@ core/libcorrect/CMakeFiles/fec_shim_static.dir/all: core/libcorrect/src/convolut
 core/libcorrect/CMakeFiles/fec_shim_static.dir/all: core/libcorrect/src/reed-solomon/CMakeFiles/correct-reed-solomon.dir/all
 	$(MAKE) $(MAKESILENT) -f core/libcorrect/CMakeFiles/fec_shim_static.dir/build.make core/libcorrect/CMakeFiles/fec_shim_static.dir/depend
 	$(MAKE) $(MAKESILENT) -f core/libcorrect/CMakeFiles/fec_shim_static.dir/build.make core/libcorrect/CMakeFiles/fec_shim_static.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=17 "Built target fec_shim_static"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=15 "Built target fec_shim_static"
 .PHONY : core/libcorrect/CMakeFiles/fec_shim_static.dir/all
 
 # Build rule for subdir invocation for target.
@@ -901,7 +924,7 @@ fec_shim_static: core/libcorrect/CMakeFiles/fec_shim_static.dir/rule
 # codegen rule for target.
 core/libcorrect/CMakeFiles/fec_shim_static.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f core/libcorrect/CMakeFiles/fec_shim_static.dir/build.make core/libcorrect/CMakeFiles/fec_shim_static.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=17 "Finished codegen for target fec_shim_static"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=15 "Finished codegen for target fec_shim_static"
 .PHONY : core/libcorrect/CMakeFiles/fec_shim_static.dir/codegen
 
 # clean rule for target.
@@ -917,7 +940,7 @@ core/libcorrect/CMakeFiles/fec_shim_shared.dir/all: core/libcorrect/src/convolut
 core/libcorrect/CMakeFiles/fec_shim_shared.dir/all: core/libcorrect/src/reed-solomon/CMakeFiles/correct-reed-solomon.dir/all
 	$(MAKE) $(MAKESILENT) -f core/libcorrect/CMakeFiles/fec_shim_shared.dir/build.make core/libcorrect/CMakeFiles/fec_shim_shared.dir/depend
 	$(MAKE) $(MAKESILENT) -f core/libcorrect/CMakeFiles/fec_shim_shared.dir/build.make core/libcorrect/CMakeFiles/fec_shim_shared.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=16 "Built target fec_shim_shared"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=14 "Built target fec_shim_shared"
 .PHONY : core/libcorrect/CMakeFiles/fec_shim_shared.dir/all
 
 # Build rule for subdir invocation for target.
@@ -934,7 +957,7 @@ fec_shim_shared: core/libcorrect/CMakeFiles/fec_shim_shared.dir/rule
 # codegen rule for target.
 core/libcorrect/CMakeFiles/fec_shim_shared.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f core/libcorrect/CMakeFiles/fec_shim_shared.dir/build.make core/libcorrect/CMakeFiles/fec_shim_shared.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=16 "Finished codegen for target fec_shim_shared"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=14 "Finished codegen for target fec_shim_shared"
 .PHONY : core/libcorrect/CMakeFiles/fec_shim_shared.dir/codegen
 
 # clean rule for target.
@@ -1017,7 +1040,7 @@ core/libcorrect/CMakeFiles/shim.dir/clean:
 core/libcorrect/src/convolutional/CMakeFiles/correct-convolutional.dir/all:
 	$(MAKE) $(MAKESILENT) -f core/libcorrect/src/convolutional/CMakeFiles/correct-convolutional.dir/build.make core/libcorrect/src/convolutional/CMakeFiles/correct-convolutional.dir/depend
 	$(MAKE) $(MAKESILENT) -f core/libcorrect/src/convolutional/CMakeFiles/correct-convolutional.dir/build.make core/libcorrect/src/convolutional/CMakeFiles/correct-convolutional.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=6,7,8,9,10 "Built target correct-convolutional"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=5,6,7,8,9 "Built target correct-convolutional"
 .PHONY : core/libcorrect/src/convolutional/CMakeFiles/correct-convolutional.dir/all
 
 # Build rule for subdir invocation for target.
@@ -1034,7 +1057,7 @@ correct-convolutional: core/libcorrect/src/convolutional/CMakeFiles/correct-conv
 # codegen rule for target.
 core/libcorrect/src/convolutional/CMakeFiles/correct-convolutional.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f core/libcorrect/src/convolutional/CMakeFiles/correct-convolutional.dir/build.make core/libcorrect/src/convolutional/CMakeFiles/correct-convolutional.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=6,7,8,9,10 "Finished codegen for target correct-convolutional"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=5,6,7,8,9 "Finished codegen for target correct-convolutional"
 .PHONY : core/libcorrect/src/convolutional/CMakeFiles/correct-convolutional.dir/codegen
 
 # clean rule for target.
@@ -1049,7 +1072,7 @@ core/libcorrect/src/convolutional/CMakeFiles/correct-convolutional.dir/clean:
 core/libcorrect/src/reed-solomon/CMakeFiles/correct-reed-solomon.dir/all:
 	$(MAKE) $(MAKESILENT) -f core/libcorrect/src/reed-solomon/CMakeFiles/correct-reed-solomon.dir/build.make core/libcorrect/src/reed-solomon/CMakeFiles/correct-reed-solomon.dir/depend
 	$(MAKE) $(MAKESILENT) -f core/libcorrect/src/reed-solomon/CMakeFiles/correct-reed-solomon.dir/build.make core/libcorrect/src/reed-solomon/CMakeFiles/correct-reed-solomon.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=11,12 "Built target correct-reed-solomon"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=10,11 "Built target correct-reed-solomon"
 .PHONY : core/libcorrect/src/reed-solomon/CMakeFiles/correct-reed-solomon.dir/all
 
 # Build rule for subdir invocation for target.
@@ -1066,7 +1089,7 @@ correct-reed-solomon: core/libcorrect/src/reed-solomon/CMakeFiles/correct-reed-s
 # codegen rule for target.
 core/libcorrect/src/reed-solomon/CMakeFiles/correct-reed-solomon.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f core/libcorrect/src/reed-solomon/CMakeFiles/correct-reed-solomon.dir/build.make core/libcorrect/src/reed-solomon/CMakeFiles/correct-reed-solomon.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=11,12 "Finished codegen for target correct-reed-solomon"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=10,11 "Finished codegen for target correct-reed-solomon"
 .PHONY : core/libcorrect/src/reed-solomon/CMakeFiles/correct-reed-solomon.dir/codegen
 
 # clean rule for target.
@@ -1081,7 +1104,7 @@ core/libcorrect/src/reed-solomon/CMakeFiles/correct-reed-solomon.dir/clean:
 core/libcorrect/util/CMakeFiles/error_sim_shim.dir/all:
 	$(MAKE) $(MAKESILENT) -f core/libcorrect/util/CMakeFiles/error_sim_shim.dir/build.make core/libcorrect/util/CMakeFiles/error_sim_shim.dir/depend
 	$(MAKE) $(MAKESILENT) -f core/libcorrect/util/CMakeFiles/error_sim_shim.dir/build.make core/libcorrect/util/CMakeFiles/error_sim_shim.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=15 "Built target error_sim_shim"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=13 "Built target error_sim_shim"
 .PHONY : core/libcorrect/util/CMakeFiles/error_sim_shim.dir/all
 
 # Build rule for subdir invocation for target.
@@ -1098,7 +1121,7 @@ error_sim_shim: core/libcorrect/util/CMakeFiles/error_sim_shim.dir/rule
 # codegen rule for target.
 core/libcorrect/util/CMakeFiles/error_sim_shim.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f core/libcorrect/util/CMakeFiles/error_sim_shim.dir/build.make core/libcorrect/util/CMakeFiles/error_sim_shim.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=15 "Finished codegen for target error_sim_shim"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=13 "Finished codegen for target error_sim_shim"
 .PHONY : core/libcorrect/util/CMakeFiles/error_sim_shim.dir/codegen
 
 # clean rule for target.
@@ -1113,7 +1136,7 @@ core/libcorrect/util/CMakeFiles/error_sim_shim.dir/clean:
 core/libcorrect/util/CMakeFiles/error_sim.dir/all:
 	$(MAKE) $(MAKESILENT) -f core/libcorrect/util/CMakeFiles/error_sim.dir/build.make core/libcorrect/util/CMakeFiles/error_sim.dir/depend
 	$(MAKE) $(MAKESILENT) -f core/libcorrect/util/CMakeFiles/error_sim.dir/build.make core/libcorrect/util/CMakeFiles/error_sim.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=14 "Built target error_sim"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=12 "Built target error_sim"
 .PHONY : core/libcorrect/util/CMakeFiles/error_sim.dir/all
 
 # Build rule for subdir invocation for target.
@@ -1130,7 +1153,7 @@ error_sim: core/libcorrect/util/CMakeFiles/error_sim.dir/rule
 # codegen rule for target.
 core/libcorrect/util/CMakeFiles/error_sim.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f core/libcorrect/util/CMakeFiles/error_sim.dir/build.make core/libcorrect/util/CMakeFiles/error_sim.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=14 "Finished codegen for target error_sim"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=12 "Finished codegen for target error_sim"
 .PHONY : core/libcorrect/util/CMakeFiles/error_sim.dir/codegen
 
 # clean rule for target.
@@ -1151,7 +1174,7 @@ core/libcorrect/tests/CMakeFiles/convolutional_test_runner.dir/all: core/libcorr
 
 # Build rule for subdir invocation for target.
 core/libcorrect/tests/CMakeFiles/convolutional_test_runner.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 10
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 9
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 core/libcorrect/tests/CMakeFiles/convolutional_test_runner.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 0
 .PHONY : core/libcorrect/tests/CMakeFiles/convolutional_test_runner.dir/rule
@@ -1185,7 +1208,7 @@ core/libcorrect/tests/CMakeFiles/convolutional_shim_test_runner.dir/all: core/li
 
 # Build rule for subdir invocation for target.
 core/libcorrect/tests/CMakeFiles/convolutional_shim_test_runner.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 11
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 10
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 core/libcorrect/tests/CMakeFiles/convolutional_shim_test_runner.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 0
 .PHONY : core/libcorrect/tests/CMakeFiles/convolutional_shim_test_runner.dir/rule
@@ -1212,12 +1235,12 @@ core/libcorrect/tests/CMakeFiles/convolutional_shim_test_runner.dir/clean:
 core/libcorrect/tests/CMakeFiles/reed_solomon_test_runner.dir/all: core/libcorrect/CMakeFiles/correct_static.dir/all
 	$(MAKE) $(MAKESILENT) -f core/libcorrect/tests/CMakeFiles/reed_solomon_test_runner.dir/build.make core/libcorrect/tests/CMakeFiles/reed_solomon_test_runner.dir/depend
 	$(MAKE) $(MAKESILENT) -f core/libcorrect/tests/CMakeFiles/reed_solomon_test_runner.dir/build.make core/libcorrect/tests/CMakeFiles/reed_solomon_test_runner.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=35 "Built target reed_solomon_test_runner"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=31 "Built target reed_solomon_test_runner"
 .PHONY : core/libcorrect/tests/CMakeFiles/reed_solomon_test_runner.dir/all
 
 # Build rule for subdir invocation for target.
 core/libcorrect/tests/CMakeFiles/reed_solomon_test_runner.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 9
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 8
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 core/libcorrect/tests/CMakeFiles/reed_solomon_test_runner.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 0
 .PHONY : core/libcorrect/tests/CMakeFiles/reed_solomon_test_runner.dir/rule
@@ -1229,7 +1252,7 @@ reed_solomon_test_runner: core/libcorrect/tests/CMakeFiles/reed_solomon_test_run
 # codegen rule for target.
 core/libcorrect/tests/CMakeFiles/reed_solomon_test_runner.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f core/libcorrect/tests/CMakeFiles/reed_solomon_test_runner.dir/build.make core/libcorrect/tests/CMakeFiles/reed_solomon_test_runner.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=35 "Finished codegen for target reed_solomon_test_runner"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=31 "Finished codegen for target reed_solomon_test_runner"
 .PHONY : core/libcorrect/tests/CMakeFiles/reed_solomon_test_runner.dir/codegen
 
 # clean rule for target.
@@ -1245,12 +1268,12 @@ core/libcorrect/tests/CMakeFiles/reed_solomon_shim_interop_test_runner.dir/all: 
 core/libcorrect/tests/CMakeFiles/reed_solomon_shim_interop_test_runner.dir/all: core/libcorrect/CMakeFiles/fec_shim_static.dir/all
 	$(MAKE) $(MAKESILENT) -f core/libcorrect/tests/CMakeFiles/reed_solomon_shim_interop_test_runner.dir/build.make core/libcorrect/tests/CMakeFiles/reed_solomon_shim_interop_test_runner.dir/depend
 	$(MAKE) $(MAKESILENT) -f core/libcorrect/tests/CMakeFiles/reed_solomon_shim_interop_test_runner.dir/build.make core/libcorrect/tests/CMakeFiles/reed_solomon_shim_interop_test_runner.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=32,33,34 "Built target reed_solomon_shim_interop_test_runner"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=29,30 "Built target reed_solomon_shim_interop_test_runner"
 .PHONY : core/libcorrect/tests/CMakeFiles/reed_solomon_shim_interop_test_runner.dir/all
 
 # Build rule for subdir invocation for target.
 core/libcorrect/tests/CMakeFiles/reed_solomon_shim_interop_test_runner.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 12
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 10
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 core/libcorrect/tests/CMakeFiles/reed_solomon_shim_interop_test_runner.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 0
 .PHONY : core/libcorrect/tests/CMakeFiles/reed_solomon_shim_interop_test_runner.dir/rule
@@ -1262,7 +1285,7 @@ reed_solomon_shim_interop_test_runner: core/libcorrect/tests/CMakeFiles/reed_sol
 # codegen rule for target.
 core/libcorrect/tests/CMakeFiles/reed_solomon_shim_interop_test_runner.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f core/libcorrect/tests/CMakeFiles/reed_solomon_shim_interop_test_runner.dir/build.make core/libcorrect/tests/CMakeFiles/reed_solomon_shim_interop_test_runner.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=32,33,34 "Finished codegen for target reed_solomon_shim_interop_test_runner"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=29,30 "Finished codegen for target reed_solomon_shim_interop_test_runner"
 .PHONY : core/libcorrect/tests/CMakeFiles/reed_solomon_shim_interop_test_runner.dir/codegen
 
 # clean rule for target.
@@ -1285,7 +1308,7 @@ core/libcorrect/tests/CMakeFiles/test_runners.dir/all: core/libcorrect/tests/CMa
 
 # Build rule for subdir invocation for target.
 core/libcorrect/tests/CMakeFiles/test_runners.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 17
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 15
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 core/libcorrect/tests/CMakeFiles/test_runners.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 0
 .PHONY : core/libcorrect/tests/CMakeFiles/test_runners.dir/rule
@@ -1320,7 +1343,7 @@ core/libcorrect/tests/CMakeFiles/check.dir/all: core/libcorrect/tests/CMakeFiles
 
 # Build rule for subdir invocation for target.
 core/libcorrect/tests/CMakeFiles/check.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 17
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 15
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 core/libcorrect/tests/CMakeFiles/check.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 0
 .PHONY : core/libcorrect/tests/CMakeFiles/check.dir/rule
@@ -1347,12 +1370,12 @@ core/libcorrect/tests/CMakeFiles/check.dir/clean:
 core/libcorrect/tools/CMakeFiles/rs_find_primitive_poly.dir/all: core/libcorrect/CMakeFiles/correct_static.dir/all
 	$(MAKE) $(MAKESILENT) -f core/libcorrect/tools/CMakeFiles/rs_find_primitive_poly.dir/build.make core/libcorrect/tools/CMakeFiles/rs_find_primitive_poly.dir/depend
 	$(MAKE) $(MAKESILENT) -f core/libcorrect/tools/CMakeFiles/rs_find_primitive_poly.dir/build.make core/libcorrect/tools/CMakeFiles/rs_find_primitive_poly.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=40 "Built target rs_find_primitive_poly"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=35 "Built target rs_find_primitive_poly"
 .PHONY : core/libcorrect/tools/CMakeFiles/rs_find_primitive_poly.dir/all
 
 # Build rule for subdir invocation for target.
 core/libcorrect/tools/CMakeFiles/rs_find_primitive_poly.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 9
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 8
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 core/libcorrect/tools/CMakeFiles/rs_find_primitive_poly.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 0
 .PHONY : core/libcorrect/tools/CMakeFiles/rs_find_primitive_poly.dir/rule
@@ -1364,7 +1387,7 @@ rs_find_primitive_poly: core/libcorrect/tools/CMakeFiles/rs_find_primitive_poly.
 # codegen rule for target.
 core/libcorrect/tools/CMakeFiles/rs_find_primitive_poly.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f core/libcorrect/tools/CMakeFiles/rs_find_primitive_poly.dir/build.make core/libcorrect/tools/CMakeFiles/rs_find_primitive_poly.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=40 "Finished codegen for target rs_find_primitive_poly"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=35 "Finished codegen for target rs_find_primitive_poly"
 .PHONY : core/libcorrect/tools/CMakeFiles/rs_find_primitive_poly.dir/codegen
 
 # clean rule for target.
@@ -1385,7 +1408,7 @@ core/libcorrect/tools/CMakeFiles/conv_find_optim_poly.dir/all: core/libcorrect/u
 
 # Build rule for subdir invocation for target.
 core/libcorrect/tools/CMakeFiles/conv_find_optim_poly.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 10
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 9
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 core/libcorrect/tools/CMakeFiles/conv_find_optim_poly.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 0
 .PHONY : core/libcorrect/tools/CMakeFiles/conv_find_optim_poly.dir/rule
@@ -1418,7 +1441,7 @@ core/libcorrect/tools/CMakeFiles/conv_find_optim_poly_annealing.dir/all: core/li
 
 # Build rule for subdir invocation for target.
 core/libcorrect/tools/CMakeFiles/conv_find_optim_poly_annealing.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 10
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 9
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 core/libcorrect/tools/CMakeFiles/conv_find_optim_poly_annealing.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 0
 .PHONY : core/libcorrect/tools/CMakeFiles/conv_find_optim_poly_annealing.dir/rule
@@ -1452,7 +1475,7 @@ core/libcorrect/tools/CMakeFiles/tools.dir/all: core/libcorrect/tools/CMakeFiles
 
 # Build rule for subdir invocation for target.
 core/libcorrect/tools/CMakeFiles/tools.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 12
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 11
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 core/libcorrect/tools/CMakeFiles/tools.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 0
 .PHONY : core/libcorrect/tools/CMakeFiles/tools.dir/rule
@@ -1482,12 +1505,12 @@ source_modules/file_source/CMakeFiles/file_source.dir/all: core/CMakeFiles/sdrpp
 source_modules/file_source/CMakeFiles/file_source.dir/all: core/libcorrect/CMakeFiles/correct_static.dir/all
 	$(MAKE) $(MAKESILENT) -f source_modules/file_source/CMakeFiles/file_source.dir/build.make source_modules/file_source/CMakeFiles/file_source.dir/depend
 	$(MAKE) $(MAKESILENT) -f source_modules/file_source/CMakeFiles/file_source.dir/build.make source_modules/file_source/CMakeFiles/file_source.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=18 "Built target file_source"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=16 "Built target file_source"
 .PHONY : source_modules/file_source/CMakeFiles/file_source.dir/all
 
 # Build rule for subdir invocation for target.
 source_modules/file_source/CMakeFiles/file_source.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 59
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 52
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 source_modules/file_source/CMakeFiles/file_source.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 0
 .PHONY : source_modules/file_source/CMakeFiles/file_source.dir/rule
@@ -1499,7 +1522,7 @@ file_source: source_modules/file_source/CMakeFiles/file_source.dir/rule
 # codegen rule for target.
 source_modules/file_source/CMakeFiles/file_source.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f source_modules/file_source/CMakeFiles/file_source.dir/build.make source_modules/file_source/CMakeFiles/file_source.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=18 "Finished codegen for target file_source"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=16 "Finished codegen for target file_source"
 .PHONY : source_modules/file_source/CMakeFiles/file_source.dir/codegen
 
 # clean rule for target.
@@ -1515,12 +1538,12 @@ source_modules/hermes_source/CMakeFiles/hermes_source.dir/all: core/CMakeFiles/s
 source_modules/hermes_source/CMakeFiles/hermes_source.dir/all: core/libcorrect/CMakeFiles/correct_static.dir/all
 	$(MAKE) $(MAKESILENT) -f source_modules/hermes_source/CMakeFiles/hermes_source.dir/build.make source_modules/hermes_source/CMakeFiles/hermes_source.dir/depend
 	$(MAKE) $(MAKESILENT) -f source_modules/hermes_source/CMakeFiles/hermes_source.dir/build.make source_modules/hermes_source/CMakeFiles/hermes_source.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=19,20 "Built target hermes_source"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=17,18 "Built target hermes_source"
 .PHONY : source_modules/hermes_source/CMakeFiles/hermes_source.dir/all
 
 # Build rule for subdir invocation for target.
 source_modules/hermes_source/CMakeFiles/hermes_source.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 60
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 53
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 source_modules/hermes_source/CMakeFiles/hermes_source.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 0
 .PHONY : source_modules/hermes_source/CMakeFiles/hermes_source.dir/rule
@@ -1532,7 +1555,7 @@ hermes_source: source_modules/hermes_source/CMakeFiles/hermes_source.dir/rule
 # codegen rule for target.
 source_modules/hermes_source/CMakeFiles/hermes_source.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f source_modules/hermes_source/CMakeFiles/hermes_source.dir/build.make source_modules/hermes_source/CMakeFiles/hermes_source.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=19,20 "Finished codegen for target hermes_source"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=17,18 "Finished codegen for target hermes_source"
 .PHONY : source_modules/hermes_source/CMakeFiles/hermes_source.dir/codegen
 
 # clean rule for target.
@@ -1548,12 +1571,12 @@ source_modules/network_source/CMakeFiles/network_source.dir/all: core/CMakeFiles
 source_modules/network_source/CMakeFiles/network_source.dir/all: core/libcorrect/CMakeFiles/correct_static.dir/all
 	$(MAKE) $(MAKESILENT) -f source_modules/network_source/CMakeFiles/network_source.dir/build.make source_modules/network_source/CMakeFiles/network_source.dir/depend
 	$(MAKE) $(MAKESILENT) -f source_modules/network_source/CMakeFiles/network_source.dir/build.make source_modules/network_source/CMakeFiles/network_source.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=28 "Built target network_source"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=25 "Built target network_source"
 .PHONY : source_modules/network_source/CMakeFiles/network_source.dir/all
 
 # Build rule for subdir invocation for target.
 source_modules/network_source/CMakeFiles/network_source.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 59
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 52
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 source_modules/network_source/CMakeFiles/network_source.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 0
 .PHONY : source_modules/network_source/CMakeFiles/network_source.dir/rule
@@ -1565,7 +1588,7 @@ network_source: source_modules/network_source/CMakeFiles/network_source.dir/rule
 # codegen rule for target.
 source_modules/network_source/CMakeFiles/network_source.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f source_modules/network_source/CMakeFiles/network_source.dir/build.make source_modules/network_source/CMakeFiles/network_source.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=28 "Finished codegen for target network_source"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=25 "Finished codegen for target network_source"
 .PHONY : source_modules/network_source/CMakeFiles/network_source.dir/codegen
 
 # clean rule for target.
@@ -1581,12 +1604,12 @@ source_modules/rfspace_source/CMakeFiles/rfspace_source.dir/all: core/CMakeFiles
 source_modules/rfspace_source/CMakeFiles/rfspace_source.dir/all: core/libcorrect/CMakeFiles/correct_static.dir/all
 	$(MAKE) $(MAKESILENT) -f source_modules/rfspace_source/CMakeFiles/rfspace_source.dir/build.make source_modules/rfspace_source/CMakeFiles/rfspace_source.dir/depend
 	$(MAKE) $(MAKESILENT) -f source_modules/rfspace_source/CMakeFiles/rfspace_source.dir/build.make source_modules/rfspace_source/CMakeFiles/rfspace_source.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=38,39 "Built target rfspace_source"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=33,34 "Built target rfspace_source"
 .PHONY : source_modules/rfspace_source/CMakeFiles/rfspace_source.dir/all
 
 # Build rule for subdir invocation for target.
 source_modules/rfspace_source/CMakeFiles/rfspace_source.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 60
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 53
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 source_modules/rfspace_source/CMakeFiles/rfspace_source.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 0
 .PHONY : source_modules/rfspace_source/CMakeFiles/rfspace_source.dir/rule
@@ -1598,7 +1621,7 @@ rfspace_source: source_modules/rfspace_source/CMakeFiles/rfspace_source.dir/rule
 # codegen rule for target.
 source_modules/rfspace_source/CMakeFiles/rfspace_source.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f source_modules/rfspace_source/CMakeFiles/rfspace_source.dir/build.make source_modules/rfspace_source/CMakeFiles/rfspace_source.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=38,39 "Finished codegen for target rfspace_source"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=33,34 "Finished codegen for target rfspace_source"
 .PHONY : source_modules/rfspace_source/CMakeFiles/rfspace_source.dir/codegen
 
 # clean rule for target.
@@ -1614,12 +1637,12 @@ source_modules/rtl_tcp_source/CMakeFiles/rtl_tcp_source.dir/all: core/CMakeFiles
 source_modules/rtl_tcp_source/CMakeFiles/rtl_tcp_source.dir/all: core/libcorrect/CMakeFiles/correct_static.dir/all
 	$(MAKE) $(MAKESILENT) -f source_modules/rtl_tcp_source/CMakeFiles/rtl_tcp_source.dir/build.make source_modules/rtl_tcp_source/CMakeFiles/rtl_tcp_source.dir/depend
 	$(MAKE) $(MAKESILENT) -f source_modules/rtl_tcp_source/CMakeFiles/rtl_tcp_source.dir/build.make source_modules/rtl_tcp_source/CMakeFiles/rtl_tcp_source.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=41,42 "Built target rtl_tcp_source"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=36,37 "Built target rtl_tcp_source"
 .PHONY : source_modules/rtl_tcp_source/CMakeFiles/rtl_tcp_source.dir/all
 
 # Build rule for subdir invocation for target.
 source_modules/rtl_tcp_source/CMakeFiles/rtl_tcp_source.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 60
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 53
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 source_modules/rtl_tcp_source/CMakeFiles/rtl_tcp_source.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 0
 .PHONY : source_modules/rtl_tcp_source/CMakeFiles/rtl_tcp_source.dir/rule
@@ -1631,7 +1654,7 @@ rtl_tcp_source: source_modules/rtl_tcp_source/CMakeFiles/rtl_tcp_source.dir/rule
 # codegen rule for target.
 source_modules/rtl_tcp_source/CMakeFiles/rtl_tcp_source.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f source_modules/rtl_tcp_source/CMakeFiles/rtl_tcp_source.dir/build.make source_modules/rtl_tcp_source/CMakeFiles/rtl_tcp_source.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=41,42 "Finished codegen for target rtl_tcp_source"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=36,37 "Finished codegen for target rtl_tcp_source"
 .PHONY : source_modules/rtl_tcp_source/CMakeFiles/rtl_tcp_source.dir/codegen
 
 # clean rule for target.
@@ -1647,12 +1670,12 @@ source_modules/sdrpp_server_source/CMakeFiles/sdrpp_server_source.dir/all: core/
 source_modules/sdrpp_server_source/CMakeFiles/sdrpp_server_source.dir/all: core/libcorrect/CMakeFiles/correct_static.dir/all
 	$(MAKE) $(MAKESILENT) -f source_modules/sdrpp_server_source/CMakeFiles/sdrpp_server_source.dir/build.make source_modules/sdrpp_server_source/CMakeFiles/sdrpp_server_source.dir/depend
 	$(MAKE) $(MAKESILENT) -f source_modules/sdrpp_server_source/CMakeFiles/sdrpp_server_source.dir/build.make source_modules/sdrpp_server_source/CMakeFiles/sdrpp_server_source.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=94,95 "Built target sdrpp_server_source"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=83,84 "Built target sdrpp_server_source"
 .PHONY : source_modules/sdrpp_server_source/CMakeFiles/sdrpp_server_source.dir/all
 
 # Build rule for subdir invocation for target.
 source_modules/sdrpp_server_source/CMakeFiles/sdrpp_server_source.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 60
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 53
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 source_modules/sdrpp_server_source/CMakeFiles/sdrpp_server_source.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 0
 .PHONY : source_modules/sdrpp_server_source/CMakeFiles/sdrpp_server_source.dir/rule
@@ -1664,7 +1687,7 @@ sdrpp_server_source: source_modules/sdrpp_server_source/CMakeFiles/sdrpp_server_
 # codegen rule for target.
 source_modules/sdrpp_server_source/CMakeFiles/sdrpp_server_source.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f source_modules/sdrpp_server_source/CMakeFiles/sdrpp_server_source.dir/build.make source_modules/sdrpp_server_source/CMakeFiles/sdrpp_server_source.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=94,95 "Finished codegen for target sdrpp_server_source"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=83,84 "Finished codegen for target sdrpp_server_source"
 .PHONY : source_modules/sdrpp_server_source/CMakeFiles/sdrpp_server_source.dir/codegen
 
 # clean rule for target.
@@ -1680,12 +1703,12 @@ source_modules/spectran_http_source/CMakeFiles/spectran_http_source.dir/all: cor
 source_modules/spectran_http_source/CMakeFiles/spectran_http_source.dir/all: core/libcorrect/CMakeFiles/correct_static.dir/all
 	$(MAKE) $(MAKESILENT) -f source_modules/spectran_http_source/CMakeFiles/spectran_http_source.dir/build.make source_modules/spectran_http_source/CMakeFiles/spectran_http_source.dir/depend
 	$(MAKE) $(MAKESILENT) -f source_modules/spectran_http_source/CMakeFiles/spectran_http_source.dir/build.make source_modules/spectran_http_source/CMakeFiles/spectran_http_source.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=96 "Built target spectran_http_source"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=85 "Built target spectran_http_source"
 .PHONY : source_modules/spectran_http_source/CMakeFiles/spectran_http_source.dir/all
 
 # Build rule for subdir invocation for target.
 source_modules/spectran_http_source/CMakeFiles/spectran_http_source.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 59
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 52
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 source_modules/spectran_http_source/CMakeFiles/spectran_http_source.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 0
 .PHONY : source_modules/spectran_http_source/CMakeFiles/spectran_http_source.dir/rule
@@ -1697,7 +1720,7 @@ spectran_http_source: source_modules/spectran_http_source/CMakeFiles/spectran_ht
 # codegen rule for target.
 source_modules/spectran_http_source/CMakeFiles/spectran_http_source.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f source_modules/spectran_http_source/CMakeFiles/spectran_http_source.dir/build.make source_modules/spectran_http_source/CMakeFiles/spectran_http_source.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=96 "Finished codegen for target spectran_http_source"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=85 "Finished codegen for target spectran_http_source"
 .PHONY : source_modules/spectran_http_source/CMakeFiles/spectran_http_source.dir/codegen
 
 # clean rule for target.
@@ -1713,12 +1736,12 @@ source_modules/spyserver_source/CMakeFiles/spyserver_source.dir/all: core/CMakeF
 source_modules/spyserver_source/CMakeFiles/spyserver_source.dir/all: core/libcorrect/CMakeFiles/correct_static.dir/all
 	$(MAKE) $(MAKESILENT) -f source_modules/spyserver_source/CMakeFiles/spyserver_source.dir/build.make source_modules/spyserver_source/CMakeFiles/spyserver_source.dir/depend
 	$(MAKE) $(MAKESILENT) -f source_modules/spyserver_source/CMakeFiles/spyserver_source.dir/build.make source_modules/spyserver_source/CMakeFiles/spyserver_source.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=97,98 "Built target spyserver_source"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=98 "Built target spyserver_source"
 .PHONY : source_modules/spyserver_source/CMakeFiles/spyserver_source.dir/all
 
 # Build rule for subdir invocation for target.
 source_modules/spyserver_source/CMakeFiles/spyserver_source.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 60
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 52
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 source_modules/spyserver_source/CMakeFiles/spyserver_source.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 0
 .PHONY : source_modules/spyserver_source/CMakeFiles/spyserver_source.dir/rule
@@ -1730,7 +1753,7 @@ spyserver_source: source_modules/spyserver_source/CMakeFiles/spyserver_source.di
 # codegen rule for target.
 source_modules/spyserver_source/CMakeFiles/spyserver_source.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f source_modules/spyserver_source/CMakeFiles/spyserver_source.dir/build.make source_modules/spyserver_source/CMakeFiles/spyserver_source.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=97,98 "Finished codegen for target spyserver_source"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=98 "Finished codegen for target spyserver_source"
 .PHONY : source_modules/spyserver_source/CMakeFiles/spyserver_source.dir/codegen
 
 # clean rule for target.
@@ -1746,12 +1769,12 @@ source_modules/hl2_source/CMakeFiles/hl2_source.dir/all: core/CMakeFiles/sdrpp_c
 source_modules/hl2_source/CMakeFiles/hl2_source.dir/all: core/libcorrect/CMakeFiles/correct_static.dir/all
 	$(MAKE) $(MAKESILENT) -f source_modules/hl2_source/CMakeFiles/hl2_source.dir/build.make source_modules/hl2_source/CMakeFiles/hl2_source.dir/depend
 	$(MAKE) $(MAKESILENT) -f source_modules/hl2_source/CMakeFiles/hl2_source.dir/build.make source_modules/hl2_source/CMakeFiles/hl2_source.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=21,22,23 "Built target hl2_source"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=19,20,21 "Built target hl2_source"
 .PHONY : source_modules/hl2_source/CMakeFiles/hl2_source.dir/all
 
 # Build rule for subdir invocation for target.
 source_modules/hl2_source/CMakeFiles/hl2_source.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 61
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 54
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 source_modules/hl2_source/CMakeFiles/hl2_source.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 0
 .PHONY : source_modules/hl2_source/CMakeFiles/hl2_source.dir/rule
@@ -1763,7 +1786,7 @@ hl2_source: source_modules/hl2_source/CMakeFiles/hl2_source.dir/rule
 # codegen rule for target.
 source_modules/hl2_source/CMakeFiles/hl2_source.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f source_modules/hl2_source/CMakeFiles/hl2_source.dir/build.make source_modules/hl2_source/CMakeFiles/hl2_source.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=21,22,23 "Finished codegen for target hl2_source"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=19,20,21 "Finished codegen for target hl2_source"
 .PHONY : source_modules/hl2_source/CMakeFiles/hl2_source.dir/codegen
 
 # clean rule for target.
@@ -1779,12 +1802,12 @@ source_modules/kiwisdr_source/CMakeFiles/kiwisdr_source.dir/all: core/CMakeFiles
 source_modules/kiwisdr_source/CMakeFiles/kiwisdr_source.dir/all: core/libcorrect/CMakeFiles/correct_static.dir/all
 	$(MAKE) $(MAKESILENT) -f source_modules/kiwisdr_source/CMakeFiles/kiwisdr_source.dir/build.make source_modules/kiwisdr_source/CMakeFiles/kiwisdr_source.dir/depend
 	$(MAKE) $(MAKESILENT) -f source_modules/kiwisdr_source/CMakeFiles/kiwisdr_source.dir/build.make source_modules/kiwisdr_source/CMakeFiles/kiwisdr_source.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=24,25 "Built target kiwisdr_source"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=22 "Built target kiwisdr_source"
 .PHONY : source_modules/kiwisdr_source/CMakeFiles/kiwisdr_source.dir/all
 
 # Build rule for subdir invocation for target.
 source_modules/kiwisdr_source/CMakeFiles/kiwisdr_source.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 60
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 52
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 source_modules/kiwisdr_source/CMakeFiles/kiwisdr_source.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 0
 .PHONY : source_modules/kiwisdr_source/CMakeFiles/kiwisdr_source.dir/rule
@@ -1796,7 +1819,7 @@ kiwisdr_source: source_modules/kiwisdr_source/CMakeFiles/kiwisdr_source.dir/rule
 # codegen rule for target.
 source_modules/kiwisdr_source/CMakeFiles/kiwisdr_source.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f source_modules/kiwisdr_source/CMakeFiles/kiwisdr_source.dir/build.make source_modules/kiwisdr_source/CMakeFiles/kiwisdr_source.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=24,25 "Finished codegen for target kiwisdr_source"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=22 "Finished codegen for target kiwisdr_source"
 .PHONY : source_modules/kiwisdr_source/CMakeFiles/kiwisdr_source.dir/codegen
 
 # clean rule for target.
@@ -1812,12 +1835,12 @@ sink_modules/macos_coreaudio_sink/CMakeFiles/macos_coreaudio_sink.dir/all: core/
 sink_modules/macos_coreaudio_sink/CMakeFiles/macos_coreaudio_sink.dir/all: core/libcorrect/CMakeFiles/correct_static.dir/all
 	$(MAKE) $(MAKESILENT) -f sink_modules/macos_coreaudio_sink/CMakeFiles/macos_coreaudio_sink.dir/build.make sink_modules/macos_coreaudio_sink/CMakeFiles/macos_coreaudio_sink.dir/depend
 	$(MAKE) $(MAKESILENT) -f sink_modules/macos_coreaudio_sink/CMakeFiles/macos_coreaudio_sink.dir/build.make sink_modules/macos_coreaudio_sink/CMakeFiles/macos_coreaudio_sink.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=26 "Built target macos_coreaudio_sink"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=23 "Built target macos_coreaudio_sink"
 .PHONY : sink_modules/macos_coreaudio_sink/CMakeFiles/macos_coreaudio_sink.dir/all
 
 # Build rule for subdir invocation for target.
 sink_modules/macos_coreaudio_sink/CMakeFiles/macos_coreaudio_sink.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 59
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 52
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 sink_modules/macos_coreaudio_sink/CMakeFiles/macos_coreaudio_sink.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 0
 .PHONY : sink_modules/macos_coreaudio_sink/CMakeFiles/macos_coreaudio_sink.dir/rule
@@ -1829,7 +1852,7 @@ macos_coreaudio_sink: sink_modules/macos_coreaudio_sink/CMakeFiles/macos_coreaud
 # codegen rule for target.
 sink_modules/macos_coreaudio_sink/CMakeFiles/macos_coreaudio_sink.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f sink_modules/macos_coreaudio_sink/CMakeFiles/macos_coreaudio_sink.dir/build.make sink_modules/macos_coreaudio_sink/CMakeFiles/macos_coreaudio_sink.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=26 "Finished codegen for target macos_coreaudio_sink"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=23 "Finished codegen for target macos_coreaudio_sink"
 .PHONY : sink_modules/macos_coreaudio_sink/CMakeFiles/macos_coreaudio_sink.dir/codegen
 
 # clean rule for target.
@@ -1845,12 +1868,12 @@ sink_modules/network_sink/CMakeFiles/network_sink.dir/all: core/CMakeFiles/sdrpp
 sink_modules/network_sink/CMakeFiles/network_sink.dir/all: core/libcorrect/CMakeFiles/correct_static.dir/all
 	$(MAKE) $(MAKESILENT) -f sink_modules/network_sink/CMakeFiles/network_sink.dir/build.make sink_modules/network_sink/CMakeFiles/network_sink.dir/depend
 	$(MAKE) $(MAKESILENT) -f sink_modules/network_sink/CMakeFiles/network_sink.dir/build.make sink_modules/network_sink/CMakeFiles/network_sink.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=27 "Built target network_sink"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=24 "Built target network_sink"
 .PHONY : sink_modules/network_sink/CMakeFiles/network_sink.dir/all
 
 # Build rule for subdir invocation for target.
 sink_modules/network_sink/CMakeFiles/network_sink.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 59
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 52
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 sink_modules/network_sink/CMakeFiles/network_sink.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 0
 .PHONY : sink_modules/network_sink/CMakeFiles/network_sink.dir/rule
@@ -1862,7 +1885,7 @@ network_sink: sink_modules/network_sink/CMakeFiles/network_sink.dir/rule
 # codegen rule for target.
 sink_modules/network_sink/CMakeFiles/network_sink.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f sink_modules/network_sink/CMakeFiles/network_sink.dir/build.make sink_modules/network_sink/CMakeFiles/network_sink.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=27 "Finished codegen for target network_sink"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=24 "Finished codegen for target network_sink"
 .PHONY : sink_modules/network_sink/CMakeFiles/network_sink.dir/codegen
 
 # clean rule for target.
@@ -1878,12 +1901,12 @@ sink_modules/null_audio_sink/CMakeFiles/null_audio_sink.dir/all: core/CMakeFiles
 sink_modules/null_audio_sink/CMakeFiles/null_audio_sink.dir/all: core/libcorrect/CMakeFiles/correct_static.dir/all
 	$(MAKE) $(MAKESILENT) -f sink_modules/null_audio_sink/CMakeFiles/null_audio_sink.dir/build.make sink_modules/null_audio_sink/CMakeFiles/null_audio_sink.dir/depend
 	$(MAKE) $(MAKESILENT) -f sink_modules/null_audio_sink/CMakeFiles/null_audio_sink.dir/build.make sink_modules/null_audio_sink/CMakeFiles/null_audio_sink.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=29 "Built target null_audio_sink"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=26 "Built target null_audio_sink"
 .PHONY : sink_modules/null_audio_sink/CMakeFiles/null_audio_sink.dir/all
 
 # Build rule for subdir invocation for target.
 sink_modules/null_audio_sink/CMakeFiles/null_audio_sink.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 59
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 52
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 sink_modules/null_audio_sink/CMakeFiles/null_audio_sink.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 0
 .PHONY : sink_modules/null_audio_sink/CMakeFiles/null_audio_sink.dir/rule
@@ -1895,7 +1918,7 @@ null_audio_sink: sink_modules/null_audio_sink/CMakeFiles/null_audio_sink.dir/rul
 # codegen rule for target.
 sink_modules/null_audio_sink/CMakeFiles/null_audio_sink.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f sink_modules/null_audio_sink/CMakeFiles/null_audio_sink.dir/build.make sink_modules/null_audio_sink/CMakeFiles/null_audio_sink.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=29 "Finished codegen for target null_audio_sink"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=26 "Finished codegen for target null_audio_sink"
 .PHONY : sink_modules/null_audio_sink/CMakeFiles/null_audio_sink.dir/codegen
 
 # clean rule for target.
@@ -1911,12 +1934,12 @@ decoder_modules/radio/CMakeFiles/radio.dir/all: core/CMakeFiles/sdrpp_core.dir/a
 decoder_modules/radio/CMakeFiles/radio.dir/all: core/libcorrect/CMakeFiles/correct_static.dir/all
 	$(MAKE) $(MAKESILENT) -f decoder_modules/radio/CMakeFiles/radio.dir/build.make decoder_modules/radio/CMakeFiles/radio.dir/depend
 	$(MAKE) $(MAKESILENT) -f decoder_modules/radio/CMakeFiles/radio.dir/build.make decoder_modules/radio/CMakeFiles/radio.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=30,31 "Built target radio"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=27,28 "Built target radio"
 .PHONY : decoder_modules/radio/CMakeFiles/radio.dir/all
 
 # Build rule for subdir invocation for target.
 decoder_modules/radio/CMakeFiles/radio.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 60
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 53
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 decoder_modules/radio/CMakeFiles/radio.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 0
 .PHONY : decoder_modules/radio/CMakeFiles/radio.dir/rule
@@ -1928,7 +1951,7 @@ radio: decoder_modules/radio/CMakeFiles/radio.dir/rule
 # codegen rule for target.
 decoder_modules/radio/CMakeFiles/radio.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f decoder_modules/radio/CMakeFiles/radio.dir/build.make decoder_modules/radio/CMakeFiles/radio.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=30,31 "Finished codegen for target radio"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=27,28 "Finished codegen for target radio"
 .PHONY : decoder_modules/radio/CMakeFiles/radio.dir/codegen
 
 # clean rule for target.
@@ -1949,7 +1972,7 @@ misc_modules/websdr_view/CMakeFiles/websdr_view.dir/all: core/libcorrect/CMakeFi
 
 # Build rule for subdir invocation for target.
 misc_modules/websdr_view/CMakeFiles/websdr_view.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 60
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 53
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 misc_modules/websdr_view/CMakeFiles/websdr_view.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 0
 .PHONY : misc_modules/websdr_view/CMakeFiles/websdr_view.dir/rule
@@ -1977,12 +2000,12 @@ misc_modules/reports_monitor/CMakeFiles/reports_monitor.dir/all: core/CMakeFiles
 misc_modules/reports_monitor/CMakeFiles/reports_monitor.dir/all: core/libcorrect/CMakeFiles/correct_static.dir/all
 	$(MAKE) $(MAKESILENT) -f misc_modules/reports_monitor/CMakeFiles/reports_monitor.dir/build.make misc_modules/reports_monitor/CMakeFiles/reports_monitor.dir/depend
 	$(MAKE) $(MAKESILENT) -f misc_modules/reports_monitor/CMakeFiles/reports_monitor.dir/build.make misc_modules/reports_monitor/CMakeFiles/reports_monitor.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=36,37 "Built target reports_monitor"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=32 "Built target reports_monitor"
 .PHONY : misc_modules/reports_monitor/CMakeFiles/reports_monitor.dir/all
 
 # Build rule for subdir invocation for target.
 misc_modules/reports_monitor/CMakeFiles/reports_monitor.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 60
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 52
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 misc_modules/reports_monitor/CMakeFiles/reports_monitor.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 0
 .PHONY : misc_modules/reports_monitor/CMakeFiles/reports_monitor.dir/rule
@@ -1994,13 +2017,46 @@ reports_monitor: misc_modules/reports_monitor/CMakeFiles/reports_monitor.dir/rul
 # codegen rule for target.
 misc_modules/reports_monitor/CMakeFiles/reports_monitor.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f misc_modules/reports_monitor/CMakeFiles/reports_monitor.dir/build.make misc_modules/reports_monitor/CMakeFiles/reports_monitor.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=36,37 "Finished codegen for target reports_monitor"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=32 "Finished codegen for target reports_monitor"
 .PHONY : misc_modules/reports_monitor/CMakeFiles/reports_monitor.dir/codegen
 
 # clean rule for target.
 misc_modules/reports_monitor/CMakeFiles/reports_monitor.dir/clean:
 	$(MAKE) $(MAKESILENT) -f misc_modules/reports_monitor/CMakeFiles/reports_monitor.dir/build.make misc_modules/reports_monitor/CMakeFiles/reports_monitor.dir/clean
 .PHONY : misc_modules/reports_monitor/CMakeFiles/reports_monitor.dir/clean
+
+#=============================================================================
+# Target rules for target misc_modules/spectrum_analyzer/CMakeFiles/spectrum_analyzer.dir
+
+# All Build rule for target.
+misc_modules/spectrum_analyzer/CMakeFiles/spectrum_analyzer.dir/all: core/CMakeFiles/sdrpp_core.dir/all
+misc_modules/spectrum_analyzer/CMakeFiles/spectrum_analyzer.dir/all: core/libcorrect/CMakeFiles/correct_static.dir/all
+	$(MAKE) $(MAKESILENT) -f misc_modules/spectrum_analyzer/CMakeFiles/spectrum_analyzer.dir/build.make misc_modules/spectrum_analyzer/CMakeFiles/spectrum_analyzer.dir/depend
+	$(MAKE) $(MAKESILENT) -f misc_modules/spectrum_analyzer/CMakeFiles/spectrum_analyzer.dir/build.make misc_modules/spectrum_analyzer/CMakeFiles/spectrum_analyzer.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=86,87,88,89,90,91,92,93,94,95,96,97 "Built target spectrum_analyzer"
+.PHONY : misc_modules/spectrum_analyzer/CMakeFiles/spectrum_analyzer.dir/all
+
+# Build rule for subdir invocation for target.
+misc_modules/spectrum_analyzer/CMakeFiles/spectrum_analyzer.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 63
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 misc_modules/spectrum_analyzer/CMakeFiles/spectrum_analyzer.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles 0
+.PHONY : misc_modules/spectrum_analyzer/CMakeFiles/spectrum_analyzer.dir/rule
+
+# Convenience name for target.
+spectrum_analyzer: misc_modules/spectrum_analyzer/CMakeFiles/spectrum_analyzer.dir/rule
+.PHONY : spectrum_analyzer
+
+# codegen rule for target.
+misc_modules/spectrum_analyzer/CMakeFiles/spectrum_analyzer.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f misc_modules/spectrum_analyzer/CMakeFiles/spectrum_analyzer.dir/build.make misc_modules/spectrum_analyzer/CMakeFiles/spectrum_analyzer.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/macbook/Documents/GitHub/SDRPlusPlusBrown/build-local-arm64/CMakeFiles --progress-num=86,87,88,89,90,91,92,93,94,95,96,97 "Finished codegen for target spectrum_analyzer"
+.PHONY : misc_modules/spectrum_analyzer/CMakeFiles/spectrum_analyzer.dir/codegen
+
+# clean rule for target.
+misc_modules/spectrum_analyzer/CMakeFiles/spectrum_analyzer.dir/clean:
+	$(MAKE) $(MAKESILENT) -f misc_modules/spectrum_analyzer/CMakeFiles/spectrum_analyzer.dir/build.make misc_modules/spectrum_analyzer/CMakeFiles/spectrum_analyzer.dir/clean
+.PHONY : misc_modules/spectrum_analyzer/CMakeFiles/spectrum_analyzer.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

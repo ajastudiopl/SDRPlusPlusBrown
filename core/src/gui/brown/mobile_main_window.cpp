@@ -1790,9 +1790,6 @@ void MobileMainWindow::draw() {
 
         ImU32 bg = ImGui::ColorConvertFloat4ToU32(gui::themeManager.waterfallBg);
         auto window = ImGui::GetCurrentWindow();
-#ifdef __ANDROID__
-        handleAndroidMenuScroll();
-#endif
         auto widgetPos = ImGui::GetWindowContentRegionMin();
         auto rectRegion = menuRegion;
         rectRegion.y += 10000; // menu is scrolling, rect somehow scrolls with it, so must be big enough to be always visible

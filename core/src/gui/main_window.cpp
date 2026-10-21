@@ -44,83 +44,60 @@
 #include "../../decoder_modules/radio/src/radio_interface.h"
 #ifdef __ANDROID__
 #include <imgui_internal.h>
+#include <android_backend.h>
 #endif
 
 static BrownAIClient brownAIClient;
 
-#ifdef __ANDROID__
-void MainWindow::handleAndroidMenuScroll() {
-    enum MenuTouchState { MenuTouchIdle, MenuTouchTracking, MenuTouchDragging, MenuTouchIgnored };
-    static MenuTouchState menuTouchState = MenuTouchIdle;
-    static ImVec2 menuTouchStartPos(0, 0);
-    static ImVec2 menuTouchLastPos(0, 0);
-    static float menuTouchVelocity = 0;
-    static float menuTouchScroll = 0;
-    auto &io = ImGui::GetIO();
-    auto window = ImGui::GetCurrentWindow();
-
-    if (menuTouchState == MenuTouchIdle) {
-        if (ImGui::IsMouseClicked(ImGuiMouseButton_Left) && window->InnerRect.Contains(io.MousePos)) {
-            menuTouchState = MenuTouchTracking;
-            menuTouchStartPos = io.MousePos;
-            menuTouchLastPos = menuTouchStartPos;
-            menuTouchVelocity = 0;
-            menuTouchScroll = ImGui::GetScrollY();
-        }
-    }
-
-    if (menuTouchState != MenuTouchIdle) {
-        if (!ImGui::IsMouseDown(ImGuiMouseButton_Left)) {
-            if (menuTouchState != MenuTouchDragging) {
-                menuTouchVelocity = 0;
-            }
-            menuTouchState = MenuTouchIdle;
-        } else {
-            ImVec2 touchPos = io.MousePos;
-            ImVec2 totalDelta = touchPos - menuTouchStartPos;
-            ImVec2 frameDelta = touchPos - menuTouchLastPos;
-            if (menuTouchState == MenuTouchTracking) {
-                float threshold = 8.0f * style::uiScale;
-                if (ImGui::GetActiveID() == ImGui::GetWindowScrollbarID(window, ImGuiAxis_Y)) {
-                    menuTouchState = MenuTouchIgnored;
-                } else if (fabsf(totalDelta.y) >= threshold && fabsf(totalDelta.y) > fabsf(totalDelta.x) * 1.2f) {
-                    menuTouchState = MenuTouchDragging;
-                    menuTouchScroll = ImGui::GetScrollY();
-                    ImGui::ClearActiveID();
-                } else if (fabsf(totalDelta.x) >= threshold && fabsf(totalDelta.x) > fabsf(totalDelta.y) * 1.2f) {
-                    menuTouchState = MenuTouchIgnored;
-                }
-            }
-
-            if (menuTouchState == MenuTouchDragging) {
-                menuTouchScroll = ImClamp(menuTouchScroll - frameDelta.y, 0.0f, ImGui::GetScrollMaxY());
-                ImGui::SetScrollY(menuTouchScroll);
-                if (frameDelta.y != 0) {
-                    float deltaTime = ImMax(io.DeltaTime, 0.008f);
-                    menuTouchVelocity = ImClamp(frameDelta.y / deltaTime, -3000.0f, 3000.0f);
-                }
-            }
-            menuTouchLastPos = touchPos;
-        }
-    } else if (fabsf(menuTouchVelocity) > 80.0f) {
-        float deltaTime = ImMin(io.DeltaTime, 0.05f);
-        float previousScroll = menuTouchScroll;
-        menuTouchScroll = ImClamp(menuTouchScroll - menuTouchVelocity * deltaTime, 0.0f, ImGui::GetScrollMaxY());
-        ImGui::SetScrollY(menuTouchScroll);
-        if (menuTouchScroll == previousScroll) {
-            menuTouchVelocity = 0;
-        } else {
-            menuTouchVelocity *= expf(-6.0f * deltaTime);
-        }
-    } else {
-        menuTouchVelocity = 0;
-    }
-}
-#endif
-
-
 // Main views (tabs next to the receiver), see MainWindow::registerMainView()
 namespace {
+#ifdef __ANDROID__
+    bool touchVSliderFloat(const char* label, const ImVec2& size, float* value, float min, float max) {
+        bool changed = ImGui::VSliderFloat(label, size, value, min, max, "");
+        static ImGuiID activeSlider = 0;
+        static int activeFinger = -1;
+        const ImGuiID slider = ImGui::GetItemID();
+        ImGuiIO& io = ImGui::GetIO();
+        // Where each finger went down: a slider only takes the touch if the touch began on it
+        static bool fingerWasDown[IM_ARRAYSIZE(io.FingerDown)] = {};
+        static ImVec2 fingerPressPos[IM_ARRAYSIZE(io.FingerDown)];
+        static int pressFrame = -1;
+        if (pressFrame != ImGui::GetFrameCount()) {
+            pressFrame = ImGui::GetFrameCount();
+            for (int finger = 0; finger < IM_ARRAYSIZE(io.FingerDown); finger++) {
+                if (io.FingerDown[finger] && !fingerWasDown[finger]) { fingerPressPos[finger] = io.FingerPos[finger]; }
+                fingerWasDown[finger] = io.FingerDown[finger];
+            }
+        }
+
+        if (activeSlider != 0 && (activeFinger < 0 || !io.FingerDown[activeFinger])) {
+            activeSlider = 0;
+            activeFinger = -1;
+        }
+        if (activeSlider == 0) {
+            const ImRect sliderRect(ImGui::GetItemRectMin(), ImGui::GetItemRectMax());
+            for (int finger = 0; finger < IM_ARRAYSIZE(io.FingerDown); finger++) {
+                if (io.FingerDown[finger] && sliderRect.Contains(fingerPressPos[finger])) {
+                    activeSlider = slider;
+                    activeFinger = finger;
+                    break;
+                }
+            }
+        }
+        if (activeSlider == slider && activeFinger >= 0 && io.FingerDown[activeFinger]) {
+            const ImVec2 sliderMin = ImGui::GetItemRectMin();
+            const ImVec2 sliderMax = ImGui::GetItemRectMax();
+            const float position = ImClamp((io.FingerPos[activeFinger].y - sliderMin.y) / (sliderMax.y - sliderMin.y), 0.0f, 1.0f);
+            const float touchValue = max + position * (min - max);
+            if (touchValue != *value) {
+                *value = touchValue;
+                changed = true;
+            }
+        }
+        return changed;
+    }
+#endif
+
     struct MainView {
         std::string name;
         std::function<void()> drawFunc;
@@ -128,6 +105,33 @@ namespace {
 
     std::vector<MainView> mainViews;
     std::string selectedMainView;
+
+    bool selectedSourceReady() {
+        const std::string& source = sigpath::sourceManager.getSelectedName();
+        if (source.empty()) { return false; }
+#ifdef __ANDROID__
+        const std::vector<backend::DevVIDPID>* allowed = NULL;
+        if (source == "RTL-SDR") { allowed = &backend::RTL_SDR_VIDPIDS; }
+        else if (source == "HackRF") { allowed = &backend::HACKRF_VIDPIDS; }
+        else if (source == "Airspy") { allowed = &backend::AIRSPY_VIDPIDS; }
+        else if (source == "Airspy HF+") { allowed = &backend::AIRSPYHF_VIDPIDS; }
+        else if (source == "HydraSDR") { allowed = &backend::HYDRASDR_VIDPIDS; }
+        if (allowed != NULL) {
+            static std::string checkedSource;
+            static double nextCheck = 0.0;
+            static bool ready = false;
+            const double now = ImGui::GetTime();
+            if (source != checkedSource || now >= nextCheck) {
+                int vid, pid;
+                ready = backend::getDeviceFD(vid, pid, *allowed) >= 0;
+                checkedSource = source;
+                nextCheck = now + 0.5;
+            }
+            return ready;
+        }
+#endif
+        return true;
+    }
 
     // Short centred hint shown after a keyboard shortcut (squelch level etc.)
     double keyHintUntil = 0;
@@ -588,11 +592,34 @@ void MainWindow::preDraw(ImGui::WaterfallVFO** vfo) {
     }
 }
 
+// Receiver unplugged: stop and remember whether we were playing.
+// Receiver back: reselect its source (rebuilds the device list and picks the receiver),
+// then continue playing if it was running before.
+void MainWindow::updateSourceAvailability(bool sourceReady) {
+    // Starts false so a receiver that is already there at launch also gets its device list built
+    static bool lastReady = false;
+    static bool resumeOnReconnect = false;
+    if (sourceReady == lastReady) { return; }
+    lastReady = sourceReady;
+    if (!sourceReady) {
+        resumeOnReconnect = playing;
+        if (playing) { setPlayState(false); }
+        return;
+    }
+    sigpath::sourceManager.selectSource(sigpath::sourceManager.getSelectedName());
+    if (resumeOnReconnect) {
+        resumeOnReconnect = false;
+        setPlayState(true);
+    }
+}
+
 void MainWindow::drawUpperLine(ImGui::WaterfallVFO* vfo) {
     ImVec2 btnSize(30 * style::uiScale, 30 * style::uiScale);
     ImVec4 textCol = ImGui::GetStyleColorVec4(ImGuiCol_Text);
+    const bool sourceReady = selectedSourceReady();
+    updateSourceAvailability(sourceReady);
     bool tmpPlaySate = playing;
-    if (playButtonLocked && !tmpPlaySate) { style::beginDisabled(); }
+    if ((playButtonLocked || !sourceReady) && !tmpPlaySate) { style::beginDisabled(); }
     if (playing) {
         ImGui::PushID(ImGui::GetID("sdrpp_stop_btn"));
         if (ImGui::ImageButton(icons::STOP, btnSize, ImVec2(0, 0), ImVec2(1, 1), 5, ImVec4(0, 0, 0, 0), textCol) || ImGui::IsKeyPressed(ImGuiKey_End, false)) {
@@ -600,7 +627,7 @@ void MainWindow::drawUpperLine(ImGui::WaterfallVFO* vfo) {
         }
         ImGui::PopID();
     }
-    else { // TODO: Might need to check if there even is a device
+    else if (sourceReady) {
         ImGui::PushID(ImGui::GetID("sdrpp_play_btn"));
         if (ImGui::ImageButton(icons::PLAY, btnSize, ImVec2(0, 0), ImVec2(1, 1), 5, ImVec4(0, 0, 0, 0), textCol) || ImGui::IsKeyPressed(ImGuiKey_End, false)) {
             if (!playButtonLocked) {
@@ -609,7 +636,13 @@ void MainWindow::drawUpperLine(ImGui::WaterfallVFO* vfo) {
         }
         ImGui::PopID();
     }
-    if (playButtonLocked && !tmpPlaySate) { style::endDisabled(); }
+    else {
+        ImGui::Button("...##sdrpp_waiting_for_receiver", btnSize);
+        if (ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled)) {
+            ImGui::SetTooltip("Waiting for receiver");
+        }
+    }
+    if ((playButtonLocked || !sourceReady) && !tmpPlaySate) { style::endDisabled(); }
 
     // Handle auto-start
     if (autostart) {
@@ -993,11 +1026,6 @@ void MainWindow::draw() {
         ImGui::SetColumnWidth(2, controlsWidth);
 
         ImGui::BeginChild("Left Column");
-#ifdef __ANDROID__
-        handleAndroidMenuScroll();
-#endif
-
-
         if (gui::menu.draw(firstMenuRender)) {
             core::configManager.acquire();
             json arr = json::array();
@@ -1066,7 +1094,9 @@ void MainWindow::draw() {
         ImGui::EndChild();
     }
     else {
-        ImGui::BeginChild("Waterfall", wfSize);
+        ImGui::BeginChild("Waterfall", wfSize, false, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
+        ImGui::SetScrollX(0.0f);
+        ImGui::SetScrollY(0.0f);
 
         gui::waterfall.draw();
         onWaterfallDrawn.emit(GImGui);
@@ -1096,7 +1126,11 @@ void MainWindow::draw() {
     ImGui::TextUnformatted("Zoom");
     ImGui::SetCursorPosX((ImGui::GetWindowSize().x / 2.0) - wfSliderSize.x / 2);
 
+#ifdef __ANDROID__
+    if (touchVSliderFloat("##_7_", wfSliderSize, &bw, 1.0, 0.0)) {
+#else
     if (ImGui::VSliderFloat("##_7_", wfSliderSize, &bw, 1.0, 0.0, "")) {
+#endif
         core::configManager.acquire();
         core::configManager.conf["zoomBw"] = bw;
         core::configManager.release(true);
@@ -1122,7 +1156,11 @@ void MainWindow::draw() {
             }
         }
         ImGui::SetCursorPosX((ImGui::GetWindowSize().x / 2.0) - wfSliderSize.x / 2);
+#ifdef __ANDROID__
+        if (touchVSliderFloat("##_8_", wfSliderSize, &fftMax, 0.0, -180.0f)) {
+#else
         if (ImGui::VSliderFloat("##_8_", wfSliderSize, &fftMax, 0.0, -180.0f, "")) {
+#endif
             fftMax = std::max<float>(fftMax, fftMin + 10);
             core::configManager.acquire();
             core::configManager.conf["max"] = fftMax;
@@ -1138,7 +1176,11 @@ void MainWindow::draw() {
         ImGui::TextUnformatted("Min");
         ImGui::SetCursorPosX((ImGui::GetWindowSize().x / 2.0) - wfSliderSize.x / 2);
         ImGui::SetItemUsingMouseWheel();
+#ifdef __ANDROID__
+        if (touchVSliderFloat("##_9_", wfSliderSize, &fftMin, 0.0, -200.0f)) {
+#else
         if (ImGui::VSliderFloat("##_9_", wfSliderSize, &fftMin, 0.0, -200.0f, "")) {
+#endif
             fftMin = std::min<float>(fftMax - 10, fftMin);
             core::configManager.acquire();
             core::configManager.conf["min"] = fftMin;
@@ -1286,6 +1328,7 @@ void MainWindow::handleDemodulatorShortcuts() {
 void MainWindow::setPlayState(bool _playing) {
     if (_playing == playing) { return; }
     if (_playing) {
+        if (playButtonLocked || !selectedSourceReady()) { return; }
         sigpath::iqFrontEnd.flushInputBuffer();
         sigpath::sourceManager.start();
         sigpath::sourceManager.tune(gui::waterfall.getCenterFrequency());
