@@ -125,6 +125,7 @@ public:
         sourceChangedHandler.ctx = this;
         sigpath::sourceManager.onSourceRegistered.bindHandler(&sourceChangedHandler);
         sigpath::sourceManager.onSourceUnregistered.bindHandler(&sourceChangedHandler);
+        sigpath::sourceManager.onSourceSelected.bindHandler(&sourceChangedHandler);
     }
 
     ~SpectrumAnalyzerModule() {
@@ -132,6 +133,7 @@ public:
         releasePlayLock();
         sigpath::sourceManager.onSourceRegistered.unbindHandler(&sourceChangedHandler);
         sigpath::sourceManager.onSourceUnregistered.unbindHandler(&sourceChangedHandler);
+        sigpath::sourceManager.onSourceSelected.unbindHandler(&sourceChangedHandler);
         gui::mainWindow.onWaterfallDrawn.unbindHandler(&wfDrawnHandler);
         gui::mainWindow.unregisterMainView(VIEW_NAME);
         gui::menu.removeEntry(name);
@@ -207,6 +209,9 @@ private:
         }
         selectedDeviceKey = config.conf["device"];
         json& ui = config.conf["ui"];
+        // Without an explicit choice the analyzer follows the receiver's source.
+        deviceChosen = ui.contains("deviceChosen") ? ui["deviceChosen"].get<bool>() : !selectedDeviceKey.empty();
+        if (ui.contains("autoScanView")) { autoScanView = ui["autoScanView"]; }
         if (ui.contains("unit")) { unit = (FreqUnit)std::clamp<int>(ui["unit"].get<int>(), 0, 2); }
         if (ui.contains("muteAudio")) { muteAudio = ui["muteAudio"]; }
         if (ui.contains("restoreReceiver")) { restoreReceiver = ui["restoreReceiver"]; }
@@ -246,6 +251,8 @@ private:
         json rr = json::array();
         for (auto& r : recentRanges) { rr.push_back({ r.startHz, r.stopHz }); }
         config.conf["ui"]["recentRanges"] = rr;
+        config.conf["ui"]["deviceChosen"] = deviceChosen;
+        config.conf["ui"]["autoScanView"] = autoScanView;
         config.conf["ui"]["unit"] = (int)unit;
         config.conf["ui"]["muteAudio"] = muteAudio;
         config.conf["ui"]["restoreReceiver"] = restoreReceiver;
@@ -332,8 +339,19 @@ private:
             devicesTxt += '\0';
         }
         deviceIdx = 0;
-        for (int i = 0; i < (int)devices.size(); i++) {
-            if (devices[i].key == selectedDeviceKey) { deviceIdx = i; }
+        if (deviceChosen) {
+            for (int i = 0; i < (int)devices.size(); i++) {
+                if (devices[i].key == selectedDeviceKey) { deviceIdx = i; }
+            }
+        }
+        else {
+            const std::string& sel = sigpath::sourceManager.getSelectedName();
+            for (int i = 0; i < (int)devices.size(); i++) {
+                if (devices[i].kind != Kind::DEMO && devices[i].sourceName == sel) {
+                    deviceIdx = i;
+                    break;
+                }
+            }
         }
         devicesStale = false;
         updateCaps();
@@ -515,6 +533,7 @@ private:
         lastTickFrame = ImGui::GetFrameCount();
         controller.update();
         runQueuedCommands();
+        if (devicesStale && !controller.active()) { refreshDevices(); }
 
         // Status for the HTTP debug server, built here on the UI thread.
         int64_t now = nowNs();
@@ -635,6 +654,7 @@ private:
         if (i < 0 || i >= (int)devices.size()) { return; }
         deviceIdx = i;
         selectedDeviceKey = devices[i].key;
+        deviceChosen = true;
         updateCaps();
         saveConfig();
     }
@@ -1189,18 +1209,58 @@ private:
             snapHadPartial = wantPartial;
         }
         PlanSummary plan = engine.planSummary();
-        if (plan.valid && (snap.hasFrame || controller.active())) { freqView.setFullRange(plan.range.startHz, plan.range.stopHz, false); }
+        if (awaitPlan && (nowNs() - awaitPlanNs > 3000000000LL || (plan.valid && (plan.range.startHz != awaitOldPlan.startHz || plan.range.stopHz != awaitOldPlan.stopHz)))) { awaitPlan = false; }
+        if (awaitPlan) { freqView.setFullRange(settings.range.startHz, settings.range.stopHz, false); }
+        else if (plan.valid && (snap.hasFrame || controller.active())) { freqView.setFullRange(plan.range.startHz, plan.range.stopHz, false); }
         else { freqView.setFullRange(settings.range.startHz, settings.range.stopHz, false); }
         // The view can be moved over the whole device range to pick a new range.
         const DeviceEntry* navDev = currentDevice();
         if (navDev && navDev->kind == Kind::NATIVE && capsValid) { freqView.setNavigationLimits(caps.minFreqHz, caps.maxFreqHz); }
         else { freqView.setNavigationLimits(0, 6e9); }
 
+        followVisibleRange();
+
         // Settings are in the left menu ("Spectrum Analyzer" entry), like every other module.
         ImGui::BeginChild("##sa_plots", ImVec2(0, 0), false, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
         drawPlots();
         ImGui::EndChild();
         drawPopups();
+    }
+
+    // While sweeping, the scanned range follows the visible one: zooming out
+    // scans a wider band, zooming in a narrower one (after the view settles).
+    void followVisibleRange() {
+        if (!autoScanView || !controller.active() || pendingRestart || view.selectMode || rangePopupOpen) {
+            viewStableNs = 0;
+            return;
+        }
+        FrequencyRange target = { std::max(0.0, freqView.viewStart()), freqView.viewStop() };
+        double tol = std::max(1e3, 0.02 * settings.range.spanHz());
+        if (std::fabs(target.startHz - settings.range.startHz) < tol && std::fabs(target.stopHz - settings.range.stopHz) < tol) {
+            viewStableNs = 0;
+            return;
+        }
+        int64_t now = nowNs();
+        if (viewStableNs == 0 || std::fabs(target.startHz - viewTarget.startHz) > 1 || std::fabs(target.stopHz - viewTarget.stopHz) > 1) {
+            viewTarget = target;
+            viewStableNs = now;
+            return;
+        }
+        if (now - viewStableNs < 500000000LL) { return; }
+        viewStableNs = 0;
+        if (std::fabs(target.startHz - failedTarget.startHz) < 1 && std::fabs(target.stopHz - failedTarget.stopHz) < 1) { return; }
+        std::string note;
+        const DeviceEntry* d = currentDevice();
+        Kind k = d ? resolveKind(*d, note) : Kind::GENERIC;
+        if (!validateRange(target, currentLimits(k)).empty()) {
+            failedTarget = target;
+            return;
+        }
+        awaitOldPlan = engine.planSummary().range;
+        awaitPlan = true;
+        awaitPlanNs = now;
+        editRange = target;
+        applyRange();
     }
 
     void drawPopups() {
@@ -1292,6 +1352,7 @@ private:
                 }
                 ImGui::TextDisabled("Native sweeps run on a 1 MHz / 20 MHz grid; the display shows the requested range.");
             }
+            if (ImGui::Checkbox("Scan visible range automatically##sa_autoview", &autoScanView)) { saveConfig(); }
             if (ImGui::Button("Apply range##sa_s_apply", ImVec2(-1, 0))) { applyRange(); }
         }
 
@@ -1812,6 +1873,12 @@ private:
     bool acqDirty = false;
     std::vector<FrequencyRange> recentRanges;
     bool rangePopupOpen = false;
+    bool deviceChosen = false;
+    bool autoScanView = true;
+    FrequencyRange viewTarget, failedTarget, awaitOldPlan;
+    int64_t viewStableNs = 0;
+    bool awaitPlan = false;
+    int64_t awaitPlanNs = 0;
     std::string textEditId;
     bool textEditFocus = false;
     float dragPressY = 0;
