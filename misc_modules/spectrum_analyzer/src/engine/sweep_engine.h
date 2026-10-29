@@ -17,8 +17,9 @@ namespace spectrum {
         DisplaySettings display;
         int waterfallRows = 400;         // history length (bounded by memory limit)
         int sweepsPerLine = 1;           // complete sweeps merged into one waterfall row
+        double rowIntervalMs = 0;        // minimum time between waterfall rows (sweeps in between are merged), 0 = off
         bool peaksEnabled = true;
-        bool peaksOnAverage = false;
+        bool peaksOnAverage = true;
         PeakDetectorConfig peaks;
         double refreshLimitHz = 0;       // max sweeps per second, 0 = unlimited
     };
@@ -72,6 +73,8 @@ namespace spectrum {
         float noiseFloorDb = nanValue();
         float peakDb = nanValue();
         std::vector<DetectedPeak> peaks;
+        std::vector<TrackedSignal> signals; // history of confirmed signals, strongest first
+        int64_t snapshotNs = 0;
         bool hasFrame = false;
         bool lastComplete = false;
         int lastSegmentsExpected = 0;
@@ -145,8 +148,10 @@ namespace spectrum {
         bool hasLast = false;
         std::vector<float> wfRow;
         int wfRowSweeps = 0;
+        int64_t wfRowStartNs = 0;
         bool wfRowComplete = true;
         std::vector<DetectedPeak> peaks;
+        PeakTracker tracker;
         EngineStats st;
         int lastNativeSegment = -1;
         int64_t lastFinishNs = 0;

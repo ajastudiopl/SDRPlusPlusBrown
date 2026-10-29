@@ -28,7 +28,7 @@ namespace spectrum {
         const ImU32 COL_WARN = IM_COL32(255, 90, 80, 255);
         const ImU32 COL_NODATA = IM_COL32(28, 24, 30, 255);
         const float WF_MIN_LINE_PX = 2.0f;
-        const int MAX_PEAK_LABELS = 5;
+        const int MAX_PEAK_LABELS = 20;
 
         std::string axisLabel(double hz, double step) {
             char buf[48];

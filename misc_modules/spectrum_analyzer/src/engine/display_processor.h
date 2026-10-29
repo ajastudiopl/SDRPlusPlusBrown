@@ -5,7 +5,7 @@
 namespace spectrum {
     struct DisplaySettings {
         int averageCount = 8;            // sweeps in the exponential average (1 = off)
-        float peakDecayDbPerSec = 0.0f;  // max-hold decay, 0 = hold forever
+        float peakDecayDbPerSec = 4.0f;  // max-hold decay, 0 = hold forever
         int persistence = 0;             // number of previous sweeps kept for the persistence view
         float noisePercentile = 0.20f;   // percentile of the spectrum used as noise floor estimate
     };

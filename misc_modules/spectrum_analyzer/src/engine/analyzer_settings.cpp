@@ -76,6 +76,7 @@ namespace spectrum {
         w["contrast"] = s.waterfall.contrast;
         w["historyRows"] = s.waterfall.historyRows;
         w["sweepsPerLine"] = s.waterfall.sweepsPerLine;
+        w["rowIntervalMs"] = s.waterfall.rowIntervalMs;
         w["autoLevels"] = s.waterfall.autoLevels;
         w["autoRangeDb"] = s.waterfall.autoRangeDb;
 
@@ -90,6 +91,9 @@ namespace spectrum {
         p["minSpacingHz"] = s.peaks.minSpacingHz;
         p["minWidthHz"] = s.peaks.minWidthHz;
         p["maxPeaks"] = s.peaks.maxPeaks;
+        p["confirmHits"] = s.peaks.confirmHits;
+        p["holdSeconds"] = s.peaks.holdSeconds;
+        p["maxShown"] = s.peaks.maxShown;
         return j;
     }
 
@@ -147,6 +151,7 @@ namespace spectrum {
             read(w, "contrast", s.waterfall.contrast);
             read(w, "historyRows", s.waterfall.historyRows);
             read(w, "sweepsPerLine", s.waterfall.sweepsPerLine);
+            read(w, "rowIntervalMs", s.waterfall.rowIntervalMs);
             read(w, "autoLevels", s.waterfall.autoLevels);
             read(w, "autoRangeDb", s.waterfall.autoRangeDb);
         }
@@ -164,6 +169,9 @@ namespace spectrum {
             read(p, "minSpacingHz", s.peaks.minSpacingHz);
             read(p, "minWidthHz", s.peaks.minWidthHz);
             read(p, "maxPeaks", s.peaks.maxPeaks);
+            read(p, "confirmHits", s.peaks.confirmHits);
+            read(p, "holdSeconds", s.peaks.holdSeconds);
+            read(p, "maxShown", s.peaks.maxShown);
         }
         clampSettings(s);
     }
@@ -205,10 +213,14 @@ namespace spectrum {
         w.contrast = std::clamp(w.contrast, 0.2f, 5.0f);
         w.historyRows = std::clamp(w.historyRows, 16, 2048); // texture height limit on mobile GPUs
         w.sweepsPerLine = std::clamp(w.sweepsPerLine, 1, 100);
+        w.rowIntervalMs = std::clamp(w.rowIntervalMs, 0.0f, 5000.0f);
         w.autoRangeDb = std::clamp(w.autoRangeDb, 10.0f, 150.0f);
         s.peaks.maxPeaks = std::clamp(s.peaks.maxPeaks, 1, 500);
         s.peaks.minSpacingHz = std::max(0.0, s.peaks.minSpacingHz);
         s.peaks.minWidthHz = std::max(0.0, s.peaks.minWidthHz);
+        s.peaks.confirmHits = std::clamp(s.peaks.confirmHits, 1, 10);
+        s.peaks.holdSeconds = std::clamp(s.peaks.holdSeconds, 0.0, 60.0);
+        s.peaks.maxShown = std::clamp(s.peaks.maxShown, 1, 20);
     }
 
     std::vector<Preset> builtInPresets(const AnalyzerSettings& base) {

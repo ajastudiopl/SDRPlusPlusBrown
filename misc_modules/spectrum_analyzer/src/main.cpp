@@ -229,6 +229,25 @@ private:
         if (layoutVersion < 2) { settings.waterfall.autoLevels = true; }
         // Layout v3: spectrum 40 % / waterfall 60 %
         if (layoutVersion < 3) { settings.display.spectrumHeightFrac = 0.4f; }
+        // Layout v4: calmer trace by default (average shown, max hold decays)
+        if (layoutVersion < 4) {
+            settings.display.showAverage = true;
+            if (settings.display.proc.peakDecayDbPerSec <= 0.0f) { settings.display.proc.peakDecayDbPerSec = 4.0f; }
+        }
+        // Layout v6: peaks are found on the average trace, with a lower threshold (only the strongest are shown anyway)
+        if (layoutVersion < 6) {
+            settings.peaksOnAverage = true;
+            if (settings.peaks.aboveNoiseDb >= 20.0f) { settings.peaks.aboveNoiseDb = 12.0f; }
+            if (settings.peaks.confirmHits >= 3) { settings.peaks.confirmHits = 2; }
+        }
+        // Layout v5: only the strong, stable peaks are labelled; the waterfall runs at a readable speed
+        if (layoutVersion < 5) {
+            settings.peaks.aboveNoiseDb = std::max(settings.peaks.aboveNoiseDb, 20.0f);
+            settings.peaks.confirmHits = std::max(settings.peaks.confirmHits, 3);
+            settings.peaks.holdSeconds = std::max(settings.peaks.holdSeconds, 5.0);
+            settings.peaks.maxShown = 5;
+            settings.waterfall.rowIntervalMs = 250.0f;
+        }
         if (config.conf["settleBySource"].is_object()) {
             for (auto& [k, v] : config.conf["settleBySource"].items()) {
                 if (v.is_number()) { settleBySource[k] = v.get<double>(); }
@@ -247,7 +266,7 @@ private:
         for (auto& p : userPresets) { presets[p.name] = settingsToJson(p.settings); }
         config.conf["presets"] = presets;
         config.conf["device"] = selectedDeviceKey;
-        config.conf["ui"]["layoutVersion"] = 3;
+        config.conf["ui"]["layoutVersion"] = 6;
         json rr = json::array();
         for (auto& r : recentRanges) { rr.push_back({ r.startHz, r.stopHz }); }
         config.conf["ui"]["recentRanges"] = rr;
@@ -274,6 +293,7 @@ private:
         e.display = settings.display.proc;
         e.waterfallRows = settings.waterfall.historyRows;
         e.sweepsPerLine = settings.waterfall.sweepsPerLine;
+        e.rowIntervalMs = settings.waterfall.rowIntervalMs;
         e.peaksEnabled = settings.peaksEnabled;
         e.peaksOnAverage = settings.peaksOnAverage;
         e.peaks = settings.peaks;
@@ -1623,6 +1643,9 @@ private:
             ImGui::LeftLabel("Speed (sweeps/line)");
             ImGui::FillWidth();
             if (ImGui::SliderInt("##sa_spl", &w.sweepsPerLine, 1, 20)) { applyLiveSettings(); }
+            ImGui::LeftLabel("Row interval (ms)");
+            ImGui::FillWidth();
+            if (ImGui::SliderFloat("##sa_rowms", &w.rowIntervalMs, 0.0f, 2000.0f, "%.0f")) { applyLiveSettings(); }
             ImGui::LeftLabel("History (lines)");
             ImGui::FillWidth();
             if (ImGui::SliderInt("##sa_hist", &w.historyRows, 16, 2048)) { ch = true; }
@@ -1700,6 +1723,7 @@ private:
         // ---- Peaks / signals
         if (section("Detected Signals", false)) {
             bool live = false;
+            float holdSecF = (float)settings.peaks.holdSeconds;
             live |= ImGui::Checkbox("Detect peaks##sa_pd", &settings.peaksEnabled);
             ImGui::SameLine();
             live |= ImGui::Checkbox("On average trace##sa_pda", &settings.peaksOnAverage);
@@ -1723,24 +1747,44 @@ private:
                 settings.peaks.minWidthHz = widthK * 1e3;
                 live = true;
             }
+            ImGui::LeftLabel("Max labels");
+            ImGui::FillWidth();
+            live |= ImGui::SliderInt("##sa_pmax", &settings.peaks.maxShown, 1, 20);
+            ImGui::LeftLabel("Confirm (sweeps)");
+            ImGui::FillWidth();
+            live |= ImGui::SliderInt("##sa_pconf", &settings.peaks.confirmHits, 1, 5);
+            ImGui::LeftLabel("Hold (s)");
+            ImGui::FillWidth();
+            live |= ImGui::SliderFloat("##sa_phold", &holdSecF, 0.0f, 30.0f, "%.1f");
+            settings.peaks.holdSeconds = holdSecF;
             if (live) { applyLiveSettings(); }
-            if (ImGui::BeginTable("##sa_peaks", 4, ImGuiTableFlags_RowBg | ImGuiTableFlags_ScrollY | ImGuiTableFlags_SizingStretchProp, ImVec2(0, 200.0f * scale))) {
+            ImGui::TextDisabled("Signals are kept for 2 minutes after they disappear.");
+            if (ImGui::BeginTable("##sa_peaks", 5, ImGuiTableFlags_RowBg | ImGuiTableFlags_ScrollY | ImGuiTableFlags_SizingStretchProp, ImVec2(0, 200.0f * scale))) {
                 ImGui::TableSetupColumn("Frequency");
                 ImGui::TableSetupColumn("Level");
                 ImGui::TableSetupColumn("Width");
+                ImGui::TableSetupColumn("Seen");
                 ImGui::TableSetupColumn("");
                 ImGui::TableHeadersRow();
-                for (int i = 0; i < (int)snap.peaks.size(); i++) {
-                    const DetectedPeak& p = snap.peaks[i];
+                for (int i = 0; i < (int)snap.signals.size(); i++) {
+                    const TrackedSignal& t = snap.signals[i];
+                    const DetectedPeak& p = t.peak;
+                    double ageSec = std::max(0.0, (double)(snap.snapshotNs - t.lastNs) * 1e-9);
+                    bool gone = ageSec > settings.peaks.holdSeconds;
                     ImGui::PushID(i);
                     ImGui::TableNextRow();
+                    if (gone) { ImGui::PushStyleColor(ImGuiCol_Text, ImGui::GetStyleColorVec4(ImGuiCol_TextDisabled)); }
                     ImGui::TableSetColumnIndex(0);
                     ImGui::TextUnformatted(formatFrequency(p.freqHz, 4).c_str());
                     ImGui::TableSetColumnIndex(1);
-                    ImGui::Text("%.1f (+%.0f)", p.levelDb, p.aboveNoiseDb);
+                    ImGui::Text("%.1f max %.1f", p.levelDb, t.maxDb);
                     ImGui::TableSetColumnIndex(2);
                     ImGui::TextUnformatted(formatFrequency(p.widthHz, 1).c_str());
                     ImGui::TableSetColumnIndex(3);
+                    if (gone) { ImGui::Text("%dx, %.0f s ago", t.hits, ageSec); }
+                    else { ImGui::Text("%dx, now", t.hits); }
+                    if (gone) { ImGui::PopStyleColor(); }
+                    ImGui::TableSetColumnIndex(4);
                     if (ImGui::SmallButton("Tune")) { requestTune(p.freqHz); }
                     ImGui::SameLine();
                     if (ImGui::SmallButton("+M")) {

@@ -29,7 +29,7 @@ namespace spectrum {
         float maxDb = -10.0f;
         bool autoScale = false;
         bool showCurrent = true;
-        bool showAverage = false;
+        bool showAverage = true;
         bool showMaxHold = true;
         bool showPersistence = false;
         bool showNoiseFloor = true;
@@ -49,6 +49,7 @@ namespace spectrum {
         float contrast = 1.0f;           // 0.2 .. 5
         int historyRows = 400;
         int sweepsPerLine = 1;           // "Waterfall speed": complete sweeps per row
+        float rowIntervalMs = 250.0f;    // minimum time per row, faster sweeps are merged (peak) into one row
         bool paused = false;             // freeze display (acquisition continues)
         bool autoLevels = true;          // min/max follow the noise floor
         float autoRangeDb = 50.0f;       // dynamic range used with autoLevels
@@ -62,7 +63,7 @@ namespace spectrum {
         std::map<std::string, double> gains; // device gain id -> value
         PeakDetectorConfig peaks;
         bool peaksEnabled = true;
-        bool peaksOnAverage = false;
+        bool peaksOnAverage = true;
     };
 
     nlohmann::json settingsToJson(const AnalyzerSettings& s);

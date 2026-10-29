@@ -47,8 +47,10 @@ namespace spectrum {
         history.configure(bins, s.waterfallRows);
         wfRow.assign(bins, nanValue());
         wfRowSweeps = 0;
+        wfRowStartNs = 0;
         wfRowComplete = true;
         peaks.clear();
+        tracker.clear();
         st = EngineStats();
         st.segmentsPerSweep = (int)plan.segments.size();
         st.fftBinHz = proc.binWidthHz();
@@ -82,14 +84,13 @@ namespace spectrum {
         cfg.peaksOnAverage = s.peaksOnAverage;
         cfg.peaks = s.peaks;
         cfg.sweepsPerLine = std::clamp(s.sweepsPerLine, 1, 100);
+        cfg.rowIntervalMs = std::max(0.0, s.rowIntervalMs);
         cfg.refreshLimitHz = std::max(0.0, s.refreshLimitHz);
         refreshLimitHz = cfg.refreshLimitHz;
         display.setSettings(cfg.display);
-        if (hasLast && cfg.peaksEnabled) {
-            peaks = detectPeaks(cfg.peaksOnAverage ? display.average() : display.current(), assembler.startHz(), assembler.binWidthHz(), display.noiseFloorDb(), cfg.peaks);
-        }
-        else if (!cfg.peaksEnabled) {
+        if (!cfg.peaksEnabled) {
             peaks.clear();
+            tracker.clear();
         }
         ver++;
     }
@@ -180,9 +181,11 @@ namespace spectrum {
             float x = f.db[i];
             if (std::isfinite(x) && (!std::isfinite(wfRow[i]) || x > wfRow[i])) { wfRow[i] = x; }
         }
+        if (wfRowSweeps == 0) { wfRowStartNs = f.startTimeNs; }
         wfRowSweeps++;
         wfRowComplete = wfRowComplete && f.complete;
-        if (wfRowSweeps >= cfg.sweepsPerLine) {
+        bool rowTimeReached = cfg.rowIntervalMs <= 0 || (double)(f.endTimeNs - wfRowStartNs) * 1e-6 >= cfg.rowIntervalMs;
+        if (wfRowSweeps >= cfg.sweepsPerLine && rowTimeReached) {
             WaterfallRowInfo info;
             info.sequence = f.sequence;
             info.timeNs = f.endTimeNs;
@@ -196,7 +199,8 @@ namespace spectrum {
         }
 
         if (cfg.peaksEnabled) {
-            peaks = detectPeaks(cfg.peaksOnAverage ? display.average() : display.current(), f.startHz, f.binWidthHz(), display.noiseFloorDb(), cfg.peaks);
+            std::vector<DetectedPeak> found = detectPeaks(cfg.peaksOnAverage ? display.average() : display.current(), f.startHz, f.binWidthHz(), display.noiseFloorDb(), cfg.peaks);
+            tracker.update(found, nowNs(), std::max(cfg.peaks.minSpacingHz, 3.0 * f.binWidthHz()), cfg.peaks);
         }
         last = f;
         hasLast = true;
@@ -277,7 +281,9 @@ namespace spectrum {
         else { out.partial.clear(); }
         out.noiseFloorDb = display.noiseFloorDb();
         out.peakDb = display.peakDb();
-        out.peaks = peaks;
+        out.snapshotNs = nowNs();
+        out.peaks = cfg.peaksEnabled ? tracker.active(out.snapshotNs, cfg.peaks) : std::vector<DetectedPeak>();
+        out.signals = cfg.peaksEnabled ? tracker.history() : std::vector<TrackedSignal>();
         out.hasFrame = hasLast;
         out.lastComplete = last.complete;
         out.lastSegmentsExpected = last.segmentsExpected;

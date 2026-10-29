@@ -50,6 +50,7 @@ namespace {
         e.peaks.minLevelDb = -70;
         e.peaks.aboveNoiseDb = 15;
         e.peaks.minSpacingHz = 50e3;
+        e.peaks.confirmHits = 1;
         return e;
     }
 
@@ -1315,6 +1316,81 @@ TEST(band_plan_and_drag_editing) {
     CHECK(dragOffsetHz(240) > 200e6);
     CHECK_NEAR(dragSnapHz(145123456.0, 2500.0), 145123000.0, 1e-3);
     CHECK_NEAR(dragSnapHz(145123456.0, 2.5e6), 145000000.0, 1e-3);
+}
+
+TEST(peak_tracker_confirms_holds_and_forgets) {
+    PeakDetectorConfig cfg;
+    cfg.confirmHits = 2;
+    cfg.holdSeconds = 3.0;
+    PeakTracker tr;
+    auto peak = [](double f, float db) {
+        DetectedPeak p;
+        p.freqHz = f;
+        p.levelDb = db;
+        return p;
+    };
+    const int64_t S = 1000000000LL;
+    // One detection is not enough
+    tr.update({ peak(100e6, -50) }, 1 * S, 50e3, cfg);
+    CHECK(tr.active(1 * S, cfg).empty());
+    // It repeats slightly off frequency: confirmed, one signal
+    tr.update({ peak(100.01e6, -45) }, 2 * S, 50e3, cfg);
+    auto act = tr.active(2 * S, cfg);
+    CHECK(act.size() == 1);
+    // A single-sweep blip never shows up
+    tr.update({ peak(100.01e6, -46), peak(105e6, -40) }, 3 * S, 50e3, cfg);
+    tr.update({ peak(100.01e6, -47) }, 4 * S, 50e3, cfg);
+    tr.update({ peak(100.01e6, -47) }, 4 * S + 1, 50e3, cfg);
+    CHECK(tr.active(4 * S, cfg).size() == 1);
+    CHECK(tr.history().size() == 1);
+    // Gone: stays within the hold time, then disappears from the plot but not from the history
+    tr.update({}, 5 * S, 50e3, cfg);
+    CHECK(tr.active(5 * S, cfg).size() == 1);
+    tr.update({}, 8 * S, 50e3, cfg);
+    CHECK(tr.active(8 * S, cfg).empty());
+    CHECK(tr.history().size() == 1);
+    CHECK_NEAR(tr.history()[0].maxDb, -45.0, 1e-3);
+    // Forgotten after the history time
+    tr.update({}, 200 * S, 50e3, cfg);
+    CHECK(tr.history().empty());
+}
+
+TEST(peak_tracker_shows_only_the_strongest_and_keeps_them) {
+    PeakDetectorConfig cfg;
+    cfg.confirmHits = 1;
+    cfg.maxShown = 2;
+    PeakTracker tr;
+    auto peak = [](double f, float db) {
+        DetectedPeak p;
+        p.freqHz = f;
+        p.levelDb = db;
+        return p;
+    };
+    const int64_t S = 1000000000LL;
+    tr.update({ peak(100e6, -40), peak(101e6, -50), peak(102e6, -60) }, 1 * S, 50e3, cfg);
+    auto act = tr.active(1 * S, cfg);
+    CHECK(act.size() == 2);
+    CHECK_NEAR(act[0].freqHz, 100e6, 1.0);
+    CHECK_NEAR(act[1].freqHz, 101e6, 1.0);
+    // The third one gets slightly stronger than the second: the shown set does not flip
+    tr.update({ peak(100e6, -40), peak(101e6, -52), peak(102e6, -51) }, 2 * S, 50e3, cfg);
+    act = tr.active(2 * S, cfg);
+    CHECK(act.size() == 2);
+    CHECK_NEAR(act[1].freqHz, 101e6, 1.0);
+}
+
+TEST(peak_tracker_tolerates_one_missed_sweep_before_confirming) {
+    PeakDetectorConfig cfg;
+    cfg.confirmHits = 2;
+    PeakTracker tr;
+    DetectedPeak p;
+    p.freqHz = 100e6;
+    p.levelDb = -50;
+    const int64_t S = 1000000000LL;
+    tr.update({ p }, 1 * S, 50e3, cfg);
+    tr.update({}, 2 * S, 50e3, cfg);
+    tr.update({ p }, 3 * S, 50e3, cfg);
+    CHECK(tr.active(3 * S, cfg).size() == 1);
 }
 
 int main(int argc, char** argv) {
