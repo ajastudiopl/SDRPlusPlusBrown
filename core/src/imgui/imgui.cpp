@@ -6668,15 +6668,15 @@ static void ImGui_UpdateTouchScroll(ImGuiWindow* window)
     const ImGuiID last_y_key = ImHashStr("##TouchScrollLastY", 0, window->ID);
     const ImGuiID scroll_key = ImHashStr("##TouchScrollPosition", 0, window->ID);
     const ImGuiID velocity_key = ImHashStr("##TouchScrollVelocity", 0, window->ID);
+    const ImGuiID carry_key = ImHashStr("##TouchScrollCarry", 0, window->ID);
     const ImGuiID max_scroll_key = ImHashStr("##TouchScrollMax", 0, window->ID);
     const int finger = ImGui_FindTouchScrollFinger(io);
     int mode = storage.GetInt(mode_key);
     float velocity = storage.GetFloat(velocity_key);
 
     if (storage.GetFloat(max_scroll_key, window->ScrollMax.y) != window->ScrollMax.y) {
-        velocity = 0.0f;
-        storage.SetFloat(velocity_key, 0.0f);
-        storage.SetFloat(scroll_key, window->Scroll.y);
+        // The content height changed (live status texts etc.): follow the position but keep gliding
+        storage.SetFloat(scroll_key, ImClamp(storage.GetFloat(scroll_key, window->Scroll.y), 0.0f, window->ScrollMax.y));
     }
     storage.SetFloat(max_scroll_key, window->ScrollMax.y);
 
@@ -6691,6 +6691,8 @@ static void ImGui_UpdateTouchScroll(ImGuiWindow* window)
         storage.SetFloat(start_y_key, touch_pos.y);
         storage.SetFloat(last_y_key, touch_pos.y);
         storage.SetFloat(scroll_key, window->Scroll.y);
+        // Touching a moving list stops it, but a new flick in the same direction builds on its speed
+        storage.SetFloat(carry_key, ImFabs(velocity) > 300.0f ? velocity : 0.0f);
         storage.SetFloat(velocity_key, 0.0f);
         return;
     }
@@ -6698,8 +6700,23 @@ static void ImGui_UpdateTouchScroll(ImGuiWindow* window)
     if (mode != 0) {
         const int tracked_finger = storage.GetInt(finger_key, -1);
         if (tracked_finger < 0 || !io.FingerDown[tracked_finger]) {
-            if (mode != 2)
+            if (mode != 2) {
                 velocity = 0.0f;
+            }
+            else {
+                // Finger lifted after a scroll: flick. Held still = stop; a flick is boosted and
+                // adds to the speed carried over from the previous one so the list keeps accelerating.
+                const float max_velocity = ImMax(io.DisplaySize.y, 600.0f) * 12.0f;
+                const float carry = storage.GetFloat(carry_key);
+                float flick = 0.0f;
+                if (ImFabs(velocity) > 150.0f) {
+                    flick = velocity * 1.8f;
+                    if (carry != 0.0f && flick * carry > 0.0f && ImFabs(velocity) > 400.0f)
+                        flick += carry * 0.9f;
+                }
+                velocity = ImClamp(flick, -max_velocity, max_velocity);
+            }
+            storage.SetFloat(carry_key, 0.0f);
             storage.SetInt(mode_key, 0);
             storage.SetFloat(velocity_key, velocity);
             return;
@@ -6732,8 +6749,9 @@ static void ImGui_UpdateTouchScroll(ImGuiWindow* window)
             scroll = ImClamp(scroll - frame_y, 0.0f, window->ScrollMax.y);
             ImGui::SetScrollY(window, scroll);
             storage.SetFloat(scroll_key, scroll);
-            if (frame_y != 0.0f)
-                velocity = ImClamp(frame_y / ImMax(io.DeltaTime, 0.008f), -4000.0f, 4000.0f);
+            // Smoothed finger speed (a still finger lets it fall to zero)
+            const float instant = ImClamp(frame_y / ImMax(io.DeltaTime, 0.008f), -8000.0f, 8000.0f);
+            velocity = velocity * 0.4f + instant * 0.6f;
             storage.SetFloat(velocity_key, velocity);
         }
         storage.SetFloat(last_y_key, touch_pos.y);
@@ -6746,7 +6764,7 @@ static void ImGui_UpdateTouchScroll(ImGuiWindow* window)
         const float scroll = ImClamp(previous_scroll - velocity * delta_time, 0.0f, window->ScrollMax.y);
         ImGui::SetScrollY(window, scroll);
         storage.SetFloat(scroll_key, scroll);
-        storage.SetFloat(velocity_key, scroll == previous_scroll ? 0.0f : velocity * expf(-5.0f * delta_time));
+        storage.SetFloat(velocity_key, scroll == previous_scroll ? 0.0f : velocity * expf(-1.1f * delta_time));
     }
     else if (velocity != 0.0f) {
         storage.SetFloat(velocity_key, 0.0f);

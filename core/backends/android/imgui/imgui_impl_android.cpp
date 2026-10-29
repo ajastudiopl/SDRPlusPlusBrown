@@ -325,6 +325,23 @@ int32_t ImGui_ImplAndroid_HandleInputEvent(AInputEvent* input_event)
         default:
             break;
         }
+
+        // Android renumbers the pointers when one of them lifts, so keep the finger slots in
+        // step with the pointers that are really down (a stale slot would look like a second finger).
+        if (AMotionEvent_getPointerCount(input_event) > 0 && AMotionEvent_getToolType(input_event, 0) == AMOTION_EVENT_TOOL_TYPE_FINGER) {
+            const bool ending = event_action == AMOTION_EVENT_ACTION_UP || event_action == AMOTION_EVENT_ACTION_CANCEL;
+            const size_t pointer_count = AMotionEvent_getPointerCount(input_event);
+            int slot = 0;
+            for (size_t i = 0; i < pointer_count && slot < 10 && !ending; i++) {
+                if (event_action == AMOTION_EVENT_ACTION_POINTER_UP && (int32_t)i == event_pointer_index) { continue; }
+                io.AddFingerMotion(slot, AMotionEvent_getX(input_event, i), AMotionEvent_getY(input_event, i));
+                if (!io.FingerDown[slot]) { io.AddFingerEvent(slot, true); }
+                slot++;
+            }
+            for (; slot < 10; slot++) {
+                if (io.FingerDown[slot]) { io.AddFingerEvent(slot, false); }
+            }
+        }
     }
         return 1;
     default:

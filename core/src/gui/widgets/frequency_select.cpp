@@ -23,7 +23,7 @@ FrequencySelect::FrequencySelect() {
 }
 
 static int getNumberOfDigits() {
-    return displaymenu::phoneLayout ? 9 : 12;
+    return displaymenu::phoneLayout ? 10 : 12;
 }
 
 void FrequencySelect::init() {
@@ -45,7 +45,7 @@ void FrequencySelect::onPosChange() {
         digitTopMaxs[i] = ImVec2(widgetPos.x + (i * digitWidth) + commaOffset + digitWidth, widgetPos.y + (digitHeight / 2));
         digitBottomMaxs[i] = ImVec2(widgetPos.x + (i * digitWidth) + commaOffset + digitWidth, widgetPos.y + digitHeight);
 
-        if ((i + 1) % 3 == 0 && i < (getNumberOfDigits()-1)) {
+        if (((getNumberOfDigits() - 1 - i) % 3 == 0) && i < (getNumberOfDigits()-1)) {
             commaOffset += commaSz.x;
         }
     }
@@ -132,7 +132,7 @@ void FrequencySelect::draw() {
         snprintf(buf, sizeof buf, "%d", digits[i]);
         window->DrawList->AddText(ImVec2(widgetPos.x + (i * digitWidth) + commaOffset, widgetPos.y),
                                   zeros ? disabledColor : textColor, buf);
-        if ((i + 1) % 3 == 0 && i < getNumberOfDigits()-1) {
+        if (((getNumberOfDigits() - 1 - i) % 3 == 0) && i < getNumberOfDigits()-1) {
             commaOffset += commaSz.x;
             window->DrawList->AddText(ImVec2(widgetPos.x + (i * digitWidth) + commaOffset + textOffset, widgetPos.y),
                                       zeros ? disabledColor : textColor, ".");
@@ -152,14 +152,22 @@ void FrequencySelect::draw() {
             if (isInArea(mousePos, digitTopMins[i], digitTopMaxs[i])) {
                 window->DrawList->AddRectFilled(digitTopMins[i], digitTopMaxs[i], IM_COL32(255, 0, 0, 75));
                 if (leftClick) {
-                    incrementDigit(i);
+                    pressActive = true;
+                    pressTop = true;
+                    pressDigit = i;
+                    pressPos = mousePos;
+                    shuttleActive = false;
                 }
                 onDigit = true;
             }
             if (isInArea(mousePos, digitBottomMins[i], digitBottomMaxs[i])) {
                 window->DrawList->AddRectFilled(digitBottomMins[i], digitBottomMaxs[i], IM_COL32(0, 0, 255, 75));
                 if (leftClick) {
-                    decrementDigit(i);
+                    pressActive = true;
+                    pressTop = false;
+                    pressDigit = i;
+                    pressPos = mousePos;
+                    shuttleActive = false;
                 }
                 onDigit = true;
             }
@@ -205,6 +213,7 @@ void FrequencySelect::draw() {
             }
         }
         digitHovered = hovered;
+        updateShuttle(mousePos);
 
         if (isInArea(mousePos, digitTopMins[0], digitBottomMaxs[11])) {
             bool shortcutKey = io.ConfigMacOSXBehaviors ? (io.KeyMods == ImGuiKeyModFlags_Super) : (io.KeyMods == ImGuiKeyModFlags_Ctrl);
@@ -251,9 +260,127 @@ void FrequencySelect::draw() {
 
     ImGui::PopFont();
 
+    drawShuttleBar();
+
     ImGui::SetCursorPosX(digitBottomMaxs[getNumberOfDigits()-1].x + (17.0f * style::uiScale));
 }
 
+
+// Shuttle speed steps, in units of the pressed digit per second.
+static const double SHUTTLE_MULT[5] = { 1, 3, 10, 30, 100 };
+static const float SHUTTLE_DEAD_ZONE = 0.03f;   // fraction of the screen width
+static const float SHUTTLE_FULL_SCALE = 0.45f;  // fraction of the screen width for the fastest step
+
+void FrequencySelect::updateShuttle(ImVec2 mousePos) {
+    if (!pressActive) { return; }
+    ImGuiIO& io = ImGui::GetIO();
+
+    if (ImGui::IsMouseDown(ImGuiMouseButton_Left)) {
+        float dx = mousePos.x - pressPos.x;
+        if (!shuttleActive && fabsf(dx) > 10.0f * style::uiScale) {
+            shuttleActive = true;
+            shuttleAccum = 0;
+        }
+        if (!shuttleActive) { return; }
+
+        // Distances are fractions of the screen width so it works in portrait as well.
+        float width = std::max(1.0f, io.DisplaySize.x);
+        float norm = fabsf(dx) / width;
+        int level = 0;
+        if (norm > SHUTTLE_DEAD_ZONE) {
+            float stepSize = (SHUTTLE_FULL_SCALE - SHUTTLE_DEAD_ZONE) / 5.0f;
+            level = std::clamp((int)((norm - SHUTTLE_DEAD_ZONE) / stepSize) + 1, 1, 5);
+        }
+        shuttleLevel = level;
+        shuttleDir = (dx < 0) ? -1 : 1;
+        double place = pow(10.0, (getNumberOfDigits() - 1) - pressDigit);
+        shuttleRateHz = (level > 0) ? place * SHUTTLE_MULT[level - 1] : 0.0;
+
+        shuttleAccum += shuttleDir * shuttleRateHz * std::min(io.DeltaTime, 0.1f);
+        double whole = (shuttleAccum < 0) ? ceil(shuttleAccum) : floor(shuttleAccum);
+        if (whole != 0) {
+            shuttleAccum -= whole;
+            double maxValue = pow(10.0, getNumberOfDigits()) - 1;
+            double lo = 0, hi = maxValue;
+            if (limitFreq) {
+                lo = (double)minFreq;
+                hi = std::min(hi, (double)maxFreq);
+            }
+            double target = std::clamp((double)frequency + whole, lo, hi);
+            if ((uint64_t)target != frequency) {
+                setFrequency((int64_t)target);
+                frequencyChanged = true;
+            }
+        }
+        return;
+    }
+
+    // Released: a press without a drag is a tap on the upper (+) or lower (-) half of the digit.
+    if (!shuttleActive) {
+        if (pressTop) { incrementDigit(pressDigit); }
+        else { decrementDigit(pressDigit); }
+    }
+    pressActive = false;
+    shuttleActive = false;
+    shuttleLevel = 0;
+    shuttleRateHz = 0;
+    shuttleAccum = 0;
+}
+
+static void formatRate(char* out, size_t n, double hz, int dir) {
+    const char* sign = (dir < 0) ? "-" : "+";
+    if (hz >= 1e9) { snprintf(out, n, "%s%.0f GHz/s", sign, hz / 1e9); }
+    else if (hz >= 1e6) { snprintf(out, n, "%s%.0f MHz/s", sign, hz / 1e6); }
+    else if (hz >= 1e3) { snprintf(out, n, "%s%.0f kHz/s", sign, hz / 1e3); }
+    else { snprintf(out, n, "%s%.0f Hz/s", sign, hz); }
+}
+
+// Speed bar under the panel: zero in the middle, the fill grows towards the finger.
+void FrequencySelect::drawShuttleBar() {
+    if (!pressActive || !shuttleActive) { return; }
+    ImGuiIO& io = ImGui::GetIO();
+    ImDrawList* dl = ImGui::GetForegroundDrawList();
+    float scale = style::uiScale;
+    int n = getNumberOfDigits();
+
+    // Highlight of the grabbed digit
+    dl->AddRectFilled(digitTopMins[pressDigit], digitBottomMaxs[pressDigit], IM_COL32(255, 200, 0, 90));
+
+    float margin = 16.0f * scale;
+    float barH = 18.0f * scale;
+    float x0 = margin, x1 = io.DisplaySize.x - margin;
+    // Well below the digits and the finger, so neither the values nor the bar hide each other
+    float y0 = std::max(digitBottomMaxs[n - 1].y + 120.0f * scale, io.DisplaySize.y * 0.35f);
+    float y1 = y0 + barH;
+    float cx = (x0 + x1) / 2.0f;
+    float half = (x1 - x0) / 2.0f;
+
+    dl->AddRectFilled(ImVec2(x0 - 6 * scale, y0 - 34 * scale), ImVec2(x1 + 6 * scale, y1 + 10 * scale), IM_COL32(0, 0, 0, 170), 8.0f * scale);
+    dl->AddRectFilled(ImVec2(x0, y0), ImVec2(x1, y1), IM_COL32(60, 60, 60, 255), 4.0f * scale);
+
+    // Dead zone and the five steps
+    float dz = half * (SHUTTLE_DEAD_ZONE / SHUTTLE_FULL_SCALE);
+    float stepW = (half - dz) / 5.0f;
+    for (int s = -1; s <= 1; s += 2) {
+        for (int k = 0; k <= 5; k++) {
+            float tx = cx + s * (dz + k * stepW);
+            dl->AddLine(ImVec2(tx, y0), ImVec2(tx, y1), IM_COL32(150, 150, 150, 255), 1.0f);
+        }
+    }
+    if (shuttleLevel > 0) {
+        float fill = dz + shuttleLevel * stepW;
+        ImU32 col = (shuttleDir < 0) ? IM_COL32(60, 140, 255, 255) : IM_COL32(255, 150, 40, 255);
+        if (shuttleDir < 0) { dl->AddRectFilled(ImVec2(cx - fill, y0), ImVec2(cx, y1), col, 4.0f * scale); }
+        else { dl->AddRectFilled(ImVec2(cx, y0), ImVec2(cx + fill, y1), col, 4.0f * scale); }
+    }
+    dl->AddLine(ImVec2(cx, y0 - 4 * scale), ImVec2(cx, y1 + 4 * scale), IM_COL32(255, 255, 255, 255), 2.0f);
+
+    char label[64];
+    if (shuttleLevel > 0) { formatRate(label, sizeof(label), shuttleRateHz, shuttleDir); }
+    else { snprintf(label, sizeof(label), "0"); }
+    ImVec2 ts = ImGui::CalcTextSize(label);
+    dl->AddText(ImVec2(cx - ts.x / 2.0f, y0 - ts.y - 4.0f * scale), IM_COL32(255, 255, 255, 255), label);
+}
 
 void FrequencySelect::setFrequency(int64_t freq) {
     if (freq != frequency) {
