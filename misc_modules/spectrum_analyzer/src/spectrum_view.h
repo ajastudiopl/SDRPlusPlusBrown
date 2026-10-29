@@ -3,6 +3,7 @@
 #include "engine/sweep_engine.h"
 #include "engine/view_model.h"
 #include <imgui.h>
+#include <gui/widgets/bandplan.h>
 #include <utils/opengl_include_code.h>
 
 namespace spectrum {
@@ -47,6 +48,9 @@ namespace spectrum {
 
         // Colour table (RGBA as uint32, R in the low byte) for quantised levels.
         const uint32_t* colorTable(const WaterfallConfig& cfg);
+
+        // Band plan of the receiver (CB, PMR, ...), drawn as a strip above the frequency axis. NULL = none.
+        const bandplan::BandPlan_t* bands = nullptr;
 
         // Last hovered frequency (for status display), NaN when not hovering.
         double hoverHz = std::numeric_limits<double>::quiet_NaN();
@@ -99,6 +103,8 @@ namespace spectrum {
         bool pressDragged = false;
         bool selPressStarted = false;
         bool pressInside = false;
+        bool pinching = false;
+        float pinchLastDist = 0;
         void drawRangeOverlays(ImDrawList* dl, ImVec2 p0, ImVec2 p1, FrequencyView& view);
         float dragLastX = 0;
         double contextHz = 0;

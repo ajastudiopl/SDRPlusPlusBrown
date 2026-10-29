@@ -36,6 +36,7 @@ namespace spectrum {
         bool showGrid = true;
         bool showPartial = true;         // sweep in progress, drawn dimmed and labelled
         bool showPeaks = true;
+        bool showBandStrip = true;       // band names from the receiver's band plan along the frequency axis
         bool showMarkers = true;
         float spectrumHeightFrac = 0.4f;
         DisplaySettings proc;

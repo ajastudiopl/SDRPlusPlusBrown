@@ -216,6 +216,9 @@ private:
         if (ui.contains("muteAudio")) { muteAudio = ui["muteAudio"]; }
         if (ui.contains("restoreReceiver")) { restoreReceiver = ui["restoreReceiver"]; }
         if (ui.contains("resumeReceiver")) { resumeReceiver = ui["resumeReceiver"]; }
+        if (ui.contains("autoStart")) { autoStart = ui["autoStart"]; }
+        if (ui.contains("takeoverAccepted")) { takeoverAccepted = ui["takeoverAccepted"]; }
+        if (ui.contains("genericAccepted")) { genericAccepted = ui["genericAccepted"]; }
         if (ui.contains("exportDir")) { exportDir = ui["exportDir"]; }
         if (ui.contains("recentRanges") && ui["recentRanges"].is_array()) {
             for (auto& r : ui["recentRanges"]) {
@@ -276,6 +279,9 @@ private:
         config.conf["ui"]["muteAudio"] = muteAudio;
         config.conf["ui"]["restoreReceiver"] = restoreReceiver;
         config.conf["ui"]["resumeReceiver"] = resumeReceiver;
+        config.conf["ui"]["autoStart"] = autoStart;
+        config.conf["ui"]["takeoverAccepted"] = takeoverAccepted;
+        config.conf["ui"]["genericAccepted"] = genericAccepted;
         config.conf["ui"]["exportDir"] = exportDir;
         json sbs = json::object();
         for (auto& [k, v] : settleBySource) { sbs[k] = v; }
@@ -451,7 +457,7 @@ private:
         if (kind == Kind::NATIVE) {
             sweep::Ownership own = d.provider->getOwnership(d.deviceId);
             if (own == sweep::Ownership::RECEIVER) {
-                if (!confirmed) {
+                if (!confirmed && !takeoverAccepted) {
                     openTakeoverPopup = true;
                     return;
                 }
@@ -462,7 +468,7 @@ private:
             runProvider = d.provider;
         }
         else if (kind == Kind::GENERIC) {
-            if (gui::mainWindow.isPlaying() && !confirmed) {
+            if (gui::mainWindow.isPlaying() && !confirmed && !genericAccepted) {
                 openGenericPopup = true;
                 return;
             }
@@ -554,6 +560,13 @@ private:
         controller.update();
         runQueuedCommands();
         if (devicesStale && !controller.active()) { refreshDevices(); }
+
+        // Leaving the analyzer tab hands the device back: the sweep stops and the receiver
+        // (stopped or retuned for the sweep) comes back as it was.
+        if (controller.active() && lastDrawFrame >= 0 && ImGui::GetFrameCount() - lastDrawFrame > 2) {
+            pendingRestart = false;
+            controller.requestStop();
+        }
 
         // Status for the HTTP debug server, built here on the UI thread.
         int64_t now = nowNs();
@@ -1173,6 +1186,7 @@ private:
 
         ViewEvents ev;
         float oldMin = settings.display.minDb, oldMax = settings.display.maxDb;
+        view.bands = gui::waterfall.bandplan;
         view.drawSpectrum(ImVec2(avail.x, specH), snap, settings.display, freqView, markers, ov, ev);
         if (oldMin != settings.display.minDb || oldMax != settings.display.maxDb) { saveConfig(); }
 
@@ -1220,7 +1234,15 @@ private:
     }
 
     void drawView() {
+        // The sweep starts by itself when the analyzer view is opened (Stop ends it).
+        int frame = ImGui::GetFrameCount();
+        bool newlyShown = lastDrawFrame < frame - 1;
+        lastDrawFrame = frame;
         tick();
+        if (newlyShown && autoStart && !pendingRestart) {
+            if (!controller.active()) { startSweep(false); }
+            else { pendingRestart = true; }   // still stopping after the view was left: start again
+        }
         bool sweeping = controller.state() == SweepState::SWEEPING;
         bool wantPartial = settings.display.showPartial && sweeping;
         if (engine.version() != snapVersion || wantPartial || snapHadPartial) {
@@ -1298,6 +1320,7 @@ private:
             ImGui::TextWrapped("A HackRF cannot run a full sweep and continuous reception at the same time. The receiver will be stopped and the device handed to the Spectrum Analyzer.");
             ImGui::Checkbox("Resume the receiver when the sweep stops", &resumeReceiver);
             if (ImGui::Button("Stop receiver and start sweep")) {
+                takeoverAccepted = true;
                 saveConfig();
                 ImGui::CloseCurrentPopup();
                 startSweep(true);
@@ -1313,6 +1336,7 @@ private:
             ImGui::Checkbox("Mute audio while sweeping", &muteAudio);
             ImGui::Checkbox("Restore the receiver afterwards", &restoreReceiver);
             if (ImGui::Button("Start sweep")) {
+                genericAccepted = true;
                 saveConfig();
                 ImGui::CloseCurrentPopup();
                 startSweep(true);
@@ -1579,6 +1603,8 @@ private:
             ch |= ImGui::Checkbox("Sweep in progress##sa_part", &d.showPartial);
             ImGui::SameLine();
             ch |= ImGui::Checkbox("Peaks##sa_pk", &d.showPeaks);
+            ImGui::SameLine();
+            ch |= ImGui::Checkbox("Band names##sa_bandstrip", &d.showBandStrip);
             ImGui::SameLine();
             ch |= ImGui::Checkbox("Markers##sa_mk", &d.showMarkers);
             ImGui::LeftLabel("Averaging (sweeps)");
@@ -1880,6 +1906,12 @@ private:
             bool optCh = ImGui::Checkbox("Mute audio during stepped sweeps##sa_mute", &muteAudio);
             optCh |= ImGui::Checkbox("Restore receiver after stepped sweeps##sa_restore", &restoreReceiver);
             optCh |= ImGui::Checkbox("Resume receiver after HackRF sweeps##sa_resume", &resumeReceiver);
+            optCh |= ImGui::Checkbox("Start scanning when the analyzer is opened##sa_autostart", &autoStart);
+            if (ImGui::Button("Ask again before taking over the receiver##sa_askagain")) {
+                takeoverAccepted = false;
+                genericAccepted = false;
+                optCh = true;
+            }
             if (optCh) { saveConfig(); }
         }
     }
@@ -1910,6 +1942,10 @@ private:
     bool muteAudio = true;
     bool restoreReceiver = true;
     bool resumeReceiver = true;
+    bool autoStart = true;
+    bool takeoverAccepted = false;
+    bool genericAccepted = false;
+    int lastDrawFrame = -10;
     std::string exportDir;
     std::string lastExport;
     std::string notice;

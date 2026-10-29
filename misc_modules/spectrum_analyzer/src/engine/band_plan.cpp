@@ -7,6 +7,7 @@ namespace spectrum {
         const char* HAM_VU = "Amateur VHF/UHF";
         const char* BROADCAST = "Broadcast";
         const char* SERVICES = "Aviation, marine, services";
+        const char* MOBILE = "Mobile, Wi-Fi";
     }
 
     const std::vector<BandEntry>& bandPlan() {
@@ -46,11 +47,34 @@ namespace spectrum {
             { SERVICES, "ADS-B 1090", 1085.0e6, 1095.0e6 },
             { SERVICES, "Weather sat 137", 137.0e6, 138.0e6 },
             { SERVICES, "ISM 2.4 GHz", 2400.0e6, 2483.5e6 },
+            { MOBILE, "LTE B28 700 DL", 758.0e6, 803.0e6 },
+            { MOBILE, "LTE B20 800 DL", 791.0e6, 821.0e6 },
+            { MOBILE, "LTE B20 800 UL", 832.0e6, 862.0e6 },
+            { MOBILE, "GSM/LTE B8 900 UL", 880.0e6, 915.0e6 },
+            { MOBILE, "GSM/LTE B8 900 DL", 925.0e6, 960.0e6 },
+            { MOBILE, "GSM/LTE B3 1800 UL", 1710.0e6, 1785.0e6 },
+            { MOBILE, "GSM/LTE B3 1800 DL", 1805.0e6, 1880.0e6 },
+            { MOBILE, "DECT", 1880.0e6, 1900.0e6 },
+            { MOBILE, "UMTS/LTE B1 2100 UL", 1920.0e6, 1980.0e6 },
+            { MOBILE, "UMTS/LTE B1 2100 DL", 2110.0e6, 2170.0e6 },
+            { MOBILE, "LTE B7 2600 UL", 2500.0e6, 2570.0e6 },
+            { MOBILE, "LTE B7 2600 DL", 2620.0e6, 2690.0e6 },
+            { MOBILE, "5G n78 3.5 GHz", 3400.0e6, 3800.0e6 },
+            { MOBILE, "Wi-Fi 2.4 GHz ch 1-13", 2400.0e6, 2483.5e6 },
+            { MOBILE, "Wi-Fi 2.4 ch 1", 2401.0e6, 2423.0e6 },
+            { MOBILE, "Wi-Fi 2.4 ch 6", 2426.0e6, 2448.0e6 },
+            { MOBILE, "Wi-Fi 2.4 ch 11", 2451.0e6, 2473.0e6 },
+            { MOBILE, "Wi-Fi 5 GHz (all)", 5150.0e6, 5875.0e6 },
+            { MOBILE, "Wi-Fi 5 low (ch 36-64)", 5150.0e6, 5350.0e6 },
+            { MOBILE, "Wi-Fi 5 high (ch 100-140)", 5470.0e6, 5725.0e6 },
+            { MOBILE, "Wi-Fi 5 upper (ch 149-177)", 5725.0e6, 5875.0e6 },
+            { MOBILE, "Wi-Fi 6E (lower 6 GHz)", 5925.0e6, 6425.0e6 },
+            { MOBILE, "GPS L1", 1565.0e6, 1586.0e6 },
         };
         return plan;
     }
 
     std::vector<const char*> bandGroups() {
-        return { HAM_HF, HAM_VU, BROADCAST, SERVICES };
+        return { HAM_HF, HAM_VU, BROADCAST, SERVICES, MOBILE };
     }
 }

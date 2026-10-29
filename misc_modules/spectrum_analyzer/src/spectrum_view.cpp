@@ -163,6 +163,22 @@ namespace spectrum {
         if (hovered && io.MouseWheel != 0.0f) {
             view.zoom(std::pow(1.25, (double)io.MouseWheel), mouseHz);
         }
+        // Two fingers: pinch zooms the range around the point between them
+        if (io.FingerDown[0] && io.FingerDown[1]) {
+            ImVec2 a = io.FingerPos[0], b = io.FingerPos[1];
+            ImVec2 mid((a.x + b.x) / 2.0f, (a.y + b.y) / 2.0f);
+            if (mid.x >= p0.x && mid.x < p0.x + size.x && mid.y >= p0.y && mid.y < p0.y + size.y) {
+                float dist = std::hypot(a.x - b.x, a.y - b.y);
+                if (pinching && pinchLastDist > 1.0f && dist > 1.0f) {
+                    double factor = std::clamp((double)(dist / pinchLastDist), 0.5, 2.0);
+                    view.zoom(factor, view.xToFreq(mid.x, p0.x, size.x));
+                }
+                pinching = true;
+                pinchLastDist = dist;
+                pressDragged = true;   // not a tap
+            }
+        }
+        else { pinching = false; }
         if (hovered && ImGui::IsMouseClicked(ImGuiMouseButton_Left)) {
             pressDragged = false;
             pressInside = true;
@@ -175,7 +191,7 @@ namespace spectrum {
                 }
             }
         }
-        if (active && ImGui::IsMouseDragging(ImGuiMouseButton_Left, 3.0f * style::uiScale)) {
+        if (active && !pinching && ImGui::IsMouseDragging(ImGuiMouseButton_Left, 3.0f * style::uiScale)) {
             dragging = true;
             pressDragged = true;
             if (selectMode) {
@@ -299,6 +315,31 @@ namespace spectrum {
                 labelBox(dl, ImVec2(p0.x + 3, y + 1), buf, COL_TEXT);
             }
             drawFreqGrid(dl, ImVec2(p0.x, plotTop), ImVec2(size.x, plotH), view, true);
+        }
+
+        // Band strip: the receiver's band plan along the frequency axis (names where they fit)
+        if (cfg.showBandStrip && bands != nullptr) {
+            const float stripH = lineH * 1.25f;
+            const float stripBottom = p1.y - lineH - 3.0f * style::uiScale;
+            for (const auto& b : bands->bands) {
+                if (b.end < view.viewStart() || b.start > view.viewStop()) { continue; }
+                float xa = (float)view.freqToX(std::max(b.start, view.viewStart()), p0.x, size.x);
+                float xb = (float)view.freqToX(std::min(b.end, view.viewStop()), p0.x, size.x);
+                if (xb - xa < 1.0f) { continue; }
+                ImU32 col = IM_COL32(255, 255, 255, 255), colTrans = IM_COL32(255, 255, 255, 80);
+                auto ct = bandplan::colorTable.find(b.type);
+                if (ct != bandplan::colorTable.end()) {
+                    col = ct->second.colorValue;
+                    colTrans = ct->second.transColorValue;
+                }
+                dl->AddRectFilled(ImVec2(xa, stripBottom - stripH), ImVec2(xb, stripBottom), colTrans);
+                if (b.start >= view.viewStart()) { dl->AddLine(ImVec2(xa, stripBottom - stripH), ImVec2(xa, stripBottom), col, style::uiScale); }
+                if (b.end <= view.viewStop()) { dl->AddLine(ImVec2(xb, stripBottom - stripH), ImVec2(xb, stripBottom), col, style::uiScale); }
+                ImVec2 ts = ImGui::CalcTextSize(b.name.c_str());
+                if (ts.x + 4.0f <= xb - xa) {
+                    dl->AddText(ImVec2((xa + xb) / 2.0f - ts.x / 2.0f, stripBottom - stripH / 2.0f - ts.y / 2.0f), IM_COL32(255, 255, 255, 255), b.name.c_str());
+                }
+            }
         }
 
         const int width = (int)size.x;

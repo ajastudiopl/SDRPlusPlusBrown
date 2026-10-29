@@ -61,6 +61,7 @@ namespace spectrum {
         d["showGrid"] = s.display.showGrid;
         d["showPartial"] = s.display.showPartial;
         d["showPeaks"] = s.display.showPeaks;
+        d["showBandStrip"] = s.display.showBandStrip;
         d["showMarkers"] = s.display.showMarkers;
         d["spectrumHeightFrac"] = s.display.spectrumHeightFrac;
         d["averageCount"] = s.display.proc.averageCount;
@@ -135,6 +136,7 @@ namespace spectrum {
             read(d, "showGrid", s.display.showGrid);
             read(d, "showPartial", s.display.showPartial);
             read(d, "showPeaks", s.display.showPeaks);
+            read(d, "showBandStrip", s.display.showBandStrip);
             read(d, "showMarkers", s.display.showMarkers);
             read(d, "spectrumHeightFrac", s.display.spectrumHeightFrac);
             read(d, "averageCount", s.display.proc.averageCount);
