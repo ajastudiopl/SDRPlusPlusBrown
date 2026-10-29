@@ -304,8 +304,7 @@ int32_t ImGui_ImplAndroid_HandleInputEvent(AInputEvent* input_event)
                     const float dx = x - g_TouchState.StartX;
                     const float dy = y - g_TouchState.StartY;
                     const bool horizontalDrag = fabsf(dx) >= g_TouchDragThreshold && fabsf(dx) > fabsf(dy) * 1.2f;
-                    const bool verticalWidgetDrag = fabsf(dy) >= g_TouchDragThreshold && fabsf(dy) > fabsf(dx) * 1.2f;
-                    if (!g_TouchState.MouseDrag && (horizontalDrag || verticalWidgetDrag)) {
+                    if (!g_TouchState.MouseDrag && horizontalDrag) {
                         g_TouchState.MouseDrag = true;
                         io.AddMousePosEvent(g_TouchState.StartX, g_TouchState.StartY);
                         io.AddMouseButtonEvent(0, true);

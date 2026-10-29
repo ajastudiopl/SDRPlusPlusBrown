@@ -34,6 +34,9 @@ private:
 
     
     bool menuClicked = false;
+    bool fingerWasDown = false;
+    bool fingerDragActive = false;
+    float fingerDragStartY = 0.0f;
     std::string clickedMenuName = "";
     std::string draggedMenuName = "";
     int insertBefore = -1;

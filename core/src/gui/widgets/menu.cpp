@@ -27,13 +27,17 @@ void Menu::removeEntry(std::string name) {
 }
 
 bool Menu::draw(bool updateStates) {
+    bool touchMenu = displaymenu::phoneLayout;
+#ifdef __ANDROID__
+    touchMenu = true;
+#endif
 
-    static auto CollapsingHeader = [](const char *chname) -> bool {
+    auto CollapsingHeader = [touchMenu](const char *chname) -> bool {
         auto &style = ImGui::GetStyle();
         auto fp = style.FramePadding;
         style.FramePadding.y += displaymenu::phoneLayout ? style::baseFont->FontSize/3.0 : 0;
 //        auto rv = ImGui::CollapsingHeader(chname, ImGuiTreeNodeFlags_FramePadding);
-        auto rv = ImGui::CollapsingHeader(chname);
+        auto rv = ImGui::CollapsingHeader(chname, touchMenu ? ImGuiTreeNodeFlags_OpenOnArrow : 0);
         style.FramePadding = fp;
         return rv;
     };
@@ -46,6 +50,8 @@ bool Menu::draw(bool updateStates) {
     int rawId = 0;
 
     ImU32 textColor = ImGui::GetColorU32(ImGuiCol_Text);
+    const bool fingerDown = touchMenu && ImGui::IsFingerDown(0);
+    const ImVec2 fingerPos = fingerDown ? ImGui::GetFingerPos(0) : ImVec2();
 
     for (MenuOption_t& opt : order) {
         rawId++;
@@ -97,12 +103,20 @@ bool Menu::draw(bool updateStates) {
         headerTops[displayedCount - 1] = posMin.y;
         optionIDs[displayedCount - 1] = rawId - 1;
 
-        if (ImGui::IsMouseClicked(ImGuiMouseButton_Left) && ImGui::IsMouseHoveringRect(posMin, posMax)) {
+        const float handleWidth = ImGui::GetFrameHeight();
+        const float handleRight = posMax.x - (item.inst != NULL ? ImGui::GetTextLineHeight() + 6.0f * style::uiScale : 0.0f);
+        const ImVec2 handleMin(handleRight - handleWidth, posMin.y);
+        const ImVec2 handleMax(handleRight, posMax.y);
+        const bool onDragHandle = !touchMenu || ImGui::IsMouseHoveringRect(handleMin, handleMax);
+        const bool fingerOnHandle = fingerDown && fingerPos.x >= handleMin.x && fingerPos.x < handleMax.x && fingerPos.y >= handleMin.y && fingerPos.y < handleMax.y;
+        if ((ImGui::IsMouseClicked(ImGuiMouseButton_Left) && ImGui::IsMouseHoveringRect(posMin, posMax) && onDragHandle) || (fingerDown && !fingerWasDown && fingerOnHandle)) {
             menuClicked = true;
             clickedMenuName = opt.name;
+            fingerDragActive = fingerDown && !fingerWasDown && fingerOnHandle;
+            fingerDragStartY = fingerPos.y;
         }
 
-        bool menuDragged = (menuClicked && ImGui::IsMouseDragging(ImGuiMouseButton_Left) && draggedMenuName.empty() && clickedMenuName == opt.name);
+        bool menuDragged = (menuClicked && (fingerDragActive ? fingerDown && ImFabs(fingerPos.y - fingerDragStartY) > ImGui::GetIO().MouseDragThreshold : ImGui::IsMouseDragging(ImGuiMouseButton_Left)) && draggedMenuName.empty() && clickedMenuName == opt.name);
         if (menuDragged && !locked) {
             draggedMenuName = opt.name;
             draggedId = rawId - 1;
@@ -171,9 +185,13 @@ bool Menu::draw(bool updateStates) {
             opt.open = false;
             changed = true;
         }
+        if (touchMenu && !locked) {
+            const float mid = (handleMin.y + handleMax.y) * 0.5f;
+            window->DrawList->AddText(ImVec2(handleMin.x + handleWidth * 0.3f, mid - ImGui::GetTextLineHeight() * 0.5f), textColor, "::");
+        }
     }
 
-    if (!ImGui::IsMouseDown(ImGuiMouseButton_Left) && menuClicked) {
+    if (!(fingerDragActive ? fingerDown : ImGui::IsMouseDown(ImGuiMouseButton_Left)) && menuClicked) {
 
         if (!draggedMenuName.empty()) {
             // Move menu
@@ -196,6 +214,7 @@ bool Menu::draw(bool updateStates) {
         }
 
         menuClicked = false;
+        fingerDragActive = false;
         draggedMenuName = "";
         insertBeforeName = "";
         insertBefore = -1;
@@ -224,7 +243,7 @@ bool Menu::draw(bool updateStates) {
 
     if (!draggedMenuName.empty()) {
         insertBefore = displayedCount;
-        ImVec2 mPos = ImGui::GetMousePos();
+        ImVec2 mPos = fingerDragActive ? fingerPos : ImGui::GetMousePos();
         for (int i = 0; i < displayedCount; i++) {
             if (headerTops[i] > mPos.y) {
                 insertBefore = i;
@@ -234,6 +253,7 @@ bool Menu::draw(bool updateStates) {
         }
     }
 
+    fingerWasDown = fingerDown;
     return changed;
 }
 

@@ -6668,9 +6668,20 @@ static void ImGui_UpdateTouchScroll(ImGuiWindow* window)
     const ImGuiID last_y_key = ImHashStr("##TouchScrollLastY", 0, window->ID);
     const ImGuiID scroll_key = ImHashStr("##TouchScrollPosition", 0, window->ID);
     const ImGuiID velocity_key = ImHashStr("##TouchScrollVelocity", 0, window->ID);
+    const ImGuiID max_scroll_key = ImHashStr("##TouchScrollMax", 0, window->ID);
     const int finger = ImGui_FindTouchScrollFinger(io);
     int mode = storage.GetInt(mode_key);
     float velocity = storage.GetFloat(velocity_key);
+
+    if (storage.GetFloat(max_scroll_key, window->ScrollMax.y) != window->ScrollMax.y) {
+        velocity = 0.0f;
+        storage.SetFloat(velocity_key, 0.0f);
+        storage.SetFloat(scroll_key, window->Scroll.y);
+    }
+    storage.SetFloat(max_scroll_key, window->ScrollMax.y);
+
+    if (mode == 0 && velocity == 0.0f)
+        storage.SetFloat(scroll_key, window->Scroll.y);
 
     if (mode == 0 && finger >= 0 && ImGui_FindTouchScrollWindow(g) == window) {
         const ImVec2 touch_pos = io.FingerPos[finger];
