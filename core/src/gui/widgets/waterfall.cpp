@@ -271,6 +271,48 @@ namespace ImGui {
             }
         }
 
+        // Squelch level: a thin line over the right end of the spectrum only (the dB scale is on
+        // the left), so the trace stays readable and the level can be compared with the signal.
+        // The squelch compares 10*log10(mean amplitude) with its threshold, i.e. half the dB of the
+        // spectrum scale. The channel level seen on the spectrum and the level the squelch measures
+        // are taken at the same time to calibrate: spectrum dB = 2 * squelch dB + calibration.
+        float squelchSpectrumDb = -1000.0f;
+        if (squelchLineVisible && latestFFT != NULL && fftLines != 0 && squelchMeasuredDb > -150.0f) {
+            auto vfoIt = vfos.find(selectedVFO);
+            if (vfoIt != vfos.end() && vfoIt->second != NULL) {
+                double vfoFreq = centerFreq + vfoIt->second->centerOffset;
+                double half = vfoIt->second->bandwidth / 2.0;
+                int ia = std::clamp((int)ceil((vfoFreq - half - lowerFreq) * horizScale), 0, dataWidth - 1);
+                int ib = std::clamp((int)floor((vfoFreq + half - lowerFreq) * horizScale), 0, dataWidth - 1);
+                if (ib < ia) { ib = ia; }
+                double acc = 0.0;
+                for (int i = ia; i <= ib; i++) { acc += pow(10.0, latestFFT[i] / 10.0); }
+                float channelDb = 10.0f * log10f((float)(acc / (double)(ib - ia + 1)) + 1e-30f);
+                float cal = channelDb - 2.0f * squelchMeasuredDb;
+                squelchCal = squelchCalValid ? (squelchCal + 0.15f * (cal - squelchCal)) : cal;
+                squelchCalValid = true;
+            }
+        }
+        else {
+            squelchCalValid = false;
+        }
+        if (squelchLineVisible && squelchCalValid) { squelchSpectrumDb = 2.0f * squelchLineDb + squelchCal; }
+
+        if (squelchSpectrumDb > fftMin && squelchSpectrumDb < fftMax) {
+            float sqY = roundf(fftAreaMax.y - ((squelchSpectrumDb - fftMin) * scaleFactor));
+            float sqLen = std::max(60.0f * style::uiScale, (fftAreaMax.x - fftAreaMin.x) * 0.12f);
+            float sqX0 = fftAreaMax.x - sqLen - 2.0f * style::uiScale;
+            float sqX1 = fftAreaMax.x - 2.0f * style::uiScale;
+            ImU32 sqCol = IM_COL32(255, 190, 60, 210);
+            window->DrawList->AddLine(ImVec2(sqX0, sqY), ImVec2(sqX1, sqY), sqCol, style::uiScale);
+            window->DrawList->AddLine(ImVec2(sqX0, sqY - 3.0f * style::uiScale), ImVec2(sqX0, sqY + 3.0f * style::uiScale), sqCol, style::uiScale);
+            snprintf(buf, sizeof buf, "SQ %.0f", squelchLineDb);   // value as set in the radio
+            ImVec2 sqTxt = ImGui::CalcTextSize(buf);
+            // Label above the line, or below it near the top edge
+            float sqTy = (sqY - sqTxt.y - 2.0f * style::uiScale >= fftAreaMin.y) ? (sqY - sqTxt.y - 2.0f * style::uiScale) : (sqY + 2.0f * style::uiScale);
+            window->DrawList->AddText(ImVec2(sqX1 - sqTxt.x, sqTy), sqCol, buf);
+        }
+
         FFTRedrawArgs args;
         args.min = fftAreaMin;
         args.max = fftAreaMax;

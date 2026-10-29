@@ -179,6 +179,13 @@ namespace ImGui {
         std::map<std::string, WaterfallVFO*> vfos;
         std::string selectedVFO = "";
         bool selectedVFOChanged = false;
+
+        // Squelch marker of the selected receiver, drawn on the spectrum while the squelch is on
+        bool squelchLineVisible = false;
+        float squelchLineDb = -100.0f;       // squelch threshold as set in the radio
+        float squelchMeasuredDb = -200.0f;   // level the squelch currently measures in the channel
+        float squelchCal = 0.0f;             // live calibration: spectrum dB of the channel minus twice the squelch dB
+        bool squelchCalValid = false;
         bool quiet = false;
 
         struct FFTRedrawArgs {

@@ -988,6 +988,10 @@ private:
             float* _in = (float*)in;
             _this->setSquelchLevel(*_in);
         }
+        else if (code == RADIO_IFACE_CMD_GET_SQUELCH_POWER && out) {
+            float* _out = (float*)out;
+            *_out = _this->squelch.getMeasuredDb();
+        }
         else {
             return;
         }

@@ -1008,6 +1008,46 @@ void MainWindow::draw() {
         }
     }
 
+    // Touch: swipe in from the left screen edge opens the menu; pulling the menu's edge past its
+    // minimum width towards the screen edge (portrait: swiping in from the right edge) closes it.
+    {
+        ImGuiIO& swIo = ImGui::GetIO();
+        static bool swPrevDown = false, swOpen = false, swClose = false;
+        static ImVec2 swStart;
+        const bool swDown = swIo.FingerDown[0];
+        const ImVec2 swPos = swIo.FingerPos[0];
+        const float swEdge = 28.0f * style::uiScale;
+        const bool swAllowed = !lockWaterfallControls && ImGui::GetTopMostPopupModal() == NULL;
+        if (swDown && !swPrevDown) {
+            swStart = swPos;
+            swOpen = swAllowed && !showMenu && swPos.x < swEdge;
+            swClose = swAllowed && showMenu && (portrait ? swPos.x > winSize.x - swEdge : fabsf(swPos.x - (float)menuWidth) < swEdge);
+        }
+        if (!swDown) {
+            swOpen = false;
+            swClose = false;
+        }
+        bool swChanged = false;
+        if (swDown && swOpen && (swPos.x - swStart.x) > 48.0f * style::uiScale && (swPos.x - swStart.x) > fabsf(swPos.y - swStart.y)) {
+            showMenu = true;
+            swChanged = true;
+            swOpen = false;
+        }
+        else if (swDown && swClose && (swStart.x - swPos.x) > 48.0f * style::uiScale && (swStart.x - swPos.x) > fabsf(swPos.y - swStart.y)
+                 && (portrait || swPos.x < 250.0f + 30.0f * style::uiScale)) {
+            showMenu = false;
+            grabbingMenu = false;
+            swChanged = true;
+            swClose = false;
+        }
+        if (swChanged) {
+            core::configManager.acquire();
+            core::configManager.conf["showMenu"] = showMenu;
+            core::configManager.release(true);
+        }
+        swPrevDown = swDown;
+    }
+
     // Process menu keybinds
     displaymenu::checkKeybinds();
 
@@ -1097,6 +1137,20 @@ void MainWindow::draw() {
         ImGui::BeginChild("Waterfall", wfSize, false, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
         ImGui::SetScrollX(0.0f);
         ImGui::SetScrollY(0.0f);
+
+        // Squelch marker for the selected receiver (only while the squelch is enabled)
+        gui::waterfall.squelchLineVisible = false;
+        if (core::modComManager.interfaceExists(gui::waterfall.selectedVFO) && core::modComManager.getModuleName(gui::waterfall.selectedVFO) == "radio") {
+            bool sqEnabled = false;
+            float sqLevel = -100.0f;
+            core::modComManager.callInterface(gui::waterfall.selectedVFO, RADIO_IFACE_CMD_GET_SQUELCH_ENABLED, NULL, &sqEnabled);
+            core::modComManager.callInterface(gui::waterfall.selectedVFO, RADIO_IFACE_CMD_GET_SQUELCH_LEVEL, NULL, &sqLevel);
+            float sqPower = -200.0f;
+            core::modComManager.callInterface(gui::waterfall.selectedVFO, RADIO_IFACE_CMD_GET_SQUELCH_POWER, NULL, &sqPower);
+            gui::waterfall.squelchLineVisible = sqEnabled;
+            gui::waterfall.squelchLineDb = sqLevel;
+            gui::waterfall.squelchMeasuredDb = sqPower;
+        }
 
         gui::waterfall.draw();
         onWaterfallDrawn.emit(GImGui);

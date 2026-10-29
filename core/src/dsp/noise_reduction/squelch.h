@@ -1,5 +1,6 @@
 #pragma once
 #include "../processor.h"
+#include <atomic>
 
 // TODO: Rewrite better!!!!!
 namespace dsp::noise_reduction {
@@ -23,6 +24,9 @@ namespace dsp::noise_reduction {
 
             base_type::init(in);
         }
+
+        // Level the squelch compared with its threshold on the last block (dB)
+        float getMeasuredDb() const { return measuredDb.load(); }
 
         void setLevel(double level) {
             assert(base_type::_block_init);
@@ -57,6 +61,7 @@ namespace dsp::noise_reduction {
             volk_32fc_magnitude_32f(normBuffer, (lv_32fc_t*)in, count);
             volk_32f_accumulator_s32f(&sum, normBuffer, count);
             sum /= (float)count;
+            measuredDb = 10.0f * log10f(sum);
 
             if (10.0f * log10f(sum) >= _level) {
                 memcpy(out, in, count * sizeof(complex_t));
@@ -82,6 +87,7 @@ namespace dsp::noise_reduction {
     private:
         float* normBuffer;
         float _level = -50.0f;
+        std::atomic<float> measuredDb{ -200.0f };
                 
     };
 }
