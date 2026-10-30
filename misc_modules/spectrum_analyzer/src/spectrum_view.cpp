@@ -154,6 +154,7 @@ namespace spectrum {
         ImGuiIO& io = ImGui::GetIO();
         // Two fingers: pinch zooms the range around the point between them
         if (io.FingerDown[0] && io.FingerDown[1]) {
+            stopPan();
             ImVec2 a = io.FingerPos[0], b = io.FingerPos[1];
             ImVec2 mid((a.x + b.x) / 2.0f, (a.y + b.y) / 2.0f);
             if (mid.x >= p0.x && mid.x < p0.x + size.x && mid.y >= p0.y && mid.y < p0.y + size.y) {
@@ -232,10 +233,12 @@ namespace spectrum {
         }
 
         if (hovered && io.MouseWheel != 0.0f) {
+            stopPan();
             view.zoom(std::pow(1.25, (double)io.MouseWheel), mouseHz);
         }
         handlePinch(p0, size, view);
         if (hovered && ImGui::IsMouseClicked(ImGuiMouseButton_Left)) {
+            stopPan();
             pressDragged = false;
             pressInside = true;
             if (selectMode) {
@@ -269,6 +272,7 @@ namespace spectrum {
             }
         }
         if ((hovered || active) && ImGui::IsMouseDragging(ImGuiMouseButton_Middle, 3.0f * style::uiScale)) {
+            stopPan();
             view.pan(-(double)io.MouseDelta.x / (double)size.x * view.viewSpan());
         }
         if (active && dragging && !pinching && !selectMode) {
@@ -698,13 +702,19 @@ namespace spectrum {
         ImGui::SetCursorScreenPos(p0);
         ImGui::InvisibleButton("##sa_axis", size, ImGuiButtonFlags_MouseButtonLeft);
         bool hovered = ImGui::IsItemHovered();
+        if (ImGui::IsMouseClicked(ImGuiMouseButton_Left)) { stopPan(); }
         ImGui::SetItemUsingMouseWheel();
         if (hovered || ImGui::IsItemActive()) { ImGui::SetMouseCursor(ImGuiMouseCursor_ResizeEW); }
-        if (hovered && io.MouseWheel != 0.0f) { view.zoom(std::pow(1.25, (double)io.MouseWheel), view.xToFreq(io.MousePos.x, p0.x, size.x)); }
-        if (ImGui::IsItemActive() && !pinching && !gripTouch && ImGui::IsMouseDragging(ImGuiMouseButton_Left, 0.0f)) {
-            view.pan(-(double)io.MouseDelta.x / (double)size.x * view.viewSpan());
+        if (hovered && io.MouseWheel != 0.0f) {
+            stopPan();
+            view.zoom(std::pow(1.25, (double)io.MouseWheel), view.xToFreq(io.MousePos.x, p0.x, size.x));
         }
+        if (hovered && ImGui::IsMouseClicked(ImGuiMouseButton_Left)) { stopPan(); }
+        bool axisDragging = ImGui::IsItemActive() && !pinching && !gripTouch && ImGui::IsMouseDragging(ImGuiMouseButton_Left, 0.0f);
+        double panDelta = 0;
+        if (axisDragging) { panDelta = -(double)io.MouseDelta.x / (double)size.x; }
         handlePinch(p0, size, view);
+        if (pinching) { panDelta = 0; }
 
         // Grip in the middle: drag it up or down to change the height of the spectrum against the
         // waterfall. Finger drags are followed directly (vertical drags are not sent as mouse drags).
@@ -715,12 +725,12 @@ namespace spectrum {
         ImGui::InvisibleButton("##sa_grip", ImVec2(gripW, size.y), ImGuiButtonFlags_MouseButtonLeft);
         bool gripActive = ImGui::IsItemActive();
         if (ImGui::IsItemHovered() || gripActive) { ImGui::SetMouseCursor(ImGuiMouseCursor_ResizeNS); }
-        if (ImGui::IsItemActivated()) { gripMoved = 0; }
+        if (ImGui::IsItemActivated()) { gripMoved = 0; stopPan(); }
         if (gripActive && ImGui::IsMouseDragging(ImGuiMouseButton_Left, 0.0f)) {
             gripMoved += std::fabs(io.MouseDelta.x) + std::fabs(io.MouseDelta.y);
             cfg.spectrumHeightFrac = std::clamp(cfg.spectrumHeightFrac + io.MouseDelta.y / std::max(totalH, 1.0f), 0.15f, 0.85f);
             // Sideways movement over the grip still moves the view
-            if (!pinching) { view.pan(-(double)io.MouseDelta.x / (double)size.x * view.viewSpan()); }
+            if (!pinching) { panDelta = -(double)io.MouseDelta.x / (double)size.x; }
             gripShownUntil = ImGui::GetTime() + 3.5;
         }
         if (ImGui::IsItemDeactivated()) {
@@ -744,6 +754,24 @@ namespace spectrum {
             gripTouch = false;
             resizeEnded = true;
             if (std::fabs(fp.y - gripStartY) < 8.0f * scale) { gripShownUntil = ImGui::GetTime() + 3.5; }   // a tap shows the grip
+        }
+        if (panDelta != 0) {
+            double before = view.viewStart();
+            view.pan(panDelta * view.viewSpan());
+            double dt = std::clamp((double)io.DeltaTime, 0.001, 0.05);
+            panVelocity = (view.viewStart() != before) ? std::clamp(panDelta / dt, -4.0, 4.0) : 0;
+            panStopVelocity = std::max(0.02, std::fabs(panVelocity) * 0.02);
+        }
+        else if (axisDragging || gripActive || gripTouch) {
+            panVelocity *= std::exp(-12.0 * std::clamp((double)io.DeltaTime, 0.0, 0.05));
+        }
+        else if (panVelocity != 0 && !io.MouseDown[0]) {
+            double dt = std::clamp((double)io.DeltaTime, 0.0, 0.05);
+            double decay = std::exp(-5.0 * dt);
+            double before = view.viewStart();
+            view.pan(panVelocity * view.viewSpan() * (1.0 - decay) / 5.0);
+            panVelocity *= decay;
+            if (std::fabs(panVelocity) < panStopVelocity || view.viewStart() == before) { stopPan(); }
         }
         ImDrawList* gdl = ImGui::GetWindowDrawList();
         const bool gripOn = gripActive || gripTouch;

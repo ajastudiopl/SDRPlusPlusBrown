@@ -25,6 +25,8 @@ private:
     void decrementDigit(int i);
     void moveCursorToDigit(int i);
     void updateShuttle(ImVec2 mousePos);
+    void updateInertia();
+    void applyShuttleDelta(double hz);
     void drawShuttleBar();
 
     ImVec2 widgetPos;
@@ -49,4 +51,9 @@ private:
     int shuttleDir = 0;          // -1 / +1
     double shuttleRateHz = 0;    // current rate in Hz per second
     double shuttleAccum = 0;
+    double inertiaRateHz = 0;
+    double inertiaInitialRateHz = 0;
+    double inertiaStopRateHz = 0;
+    float wheelAccum = 0;
+    int wheelDigit = -1;
 };

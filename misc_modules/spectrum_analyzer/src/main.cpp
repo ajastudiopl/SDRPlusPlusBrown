@@ -867,6 +867,27 @@ private:
         float scale = style::uiScale;
         ImGuiIO& io = ImGui::GetIO();
         bool changed = false;
+        if (dragFingerFrame != ImGui::GetFrameCount()) {
+            dragFingerPressed = io.FingerDown[0] && !dragFingerWasDown;
+            dragFingerReleased = !io.FingerDown[0] && dragFingerWasDown;
+            dragFingerWasDown = io.FingerDown[0];
+            dragFingerFrame = ImGui::GetFrameCount();
+        }
+        bool stopTap = coastField == id && coastVelocityHz != 0 && (ImGui::IsMouseClicked(ImGuiMouseButton_Left) || dragFingerPressed);
+        if (coastField == id && (stopTap || io.MouseWheel != 0)) { coastVelocityHz = 0; }
+        if (coastField == id && coastVelocityHz != 0) {
+            if (coastLastFrame < ImGui::GetFrameCount() - 1) { coastVelocityHz = 0; }
+            else if (!io.MouseDown[0]) {
+                double dt = std::clamp((double)io.DeltaTime, 0.0, 0.05);
+                double decay = std::exp(-6.0 * dt);
+                double next = std::clamp(hz + coastVelocityHz * (1.0 - decay) / 6.0, freqView.navStart(), freqView.navStop());
+                if (next != hz) { hz = next; changed = true; }
+                else { coastVelocityHz = 0; }
+                coastVelocityHz *= decay;
+                if (std::fabs(coastVelocityHz) < coastStopHz) { coastVelocityHz = 0; }
+            }
+        }
+        if (coastField == id) { coastLastFrame = ImGui::GetFrameCount(); }
         ImGui::PushID(id);
         if (textEditId == id) {
             double v = toUnit(hz, unit);
@@ -885,20 +906,27 @@ private:
         else {
             std::string label = formatFrequency(hz, 6);
             ImGui::Button(label.c_str(), ImVec2(width, 0));
-            if (ImGui::IsItemActivated()) {
+            ImVec2 itemMin = ImGui::GetItemRectMin(), itemMax = ImGui::GetItemRectMax();
+            bool fingerStarted = dragFingerPressed && io.FingerPos[0].x >= itemMin.x && io.FingerPos[0].x < itemMax.x &&
+                                 io.FingerPos[0].y >= itemMin.y && io.FingerPos[0].y < itemMax.y;
+            if (fingerStarted || (ImGui::IsItemActivated() && !dragFingerReleased && dragField.empty())) {
                 dragField = id;
-                dragPressY = io.MousePos.y;
+                dragUsingFinger = fingerStarted;
+                dragPressY = dragUsingFinger ? io.FingerPos[0].y : io.MousePos.y;
                 dragPressTime = ImGui::GetTime();
                 dragValue = hz;
                 dragMoved = false;
+                dragStopTap = stopTap;
+                dragPrevHz = hz;
+                dragVelocityHz = 0;
             }
             // The gesture is tracked by us until the finger lifts, even when it
             // leaves the button (ImGui drops the item's active state then).
             if (dragField == id) {
-                if (io.MouseDown[0]) {
+                if (dragUsingFinger ? io.FingerDown[0] : io.MouseDown[0]) {
                     // Position based: the change depends on how far the finger is from
                     // the press point (up = higher), not on per-frame deltas.
-                    float dist = (dragPressY - io.MousePos.y) / scale;
+                    float dist = (dragPressY - (dragUsingFinger ? io.FingerPos[0].y : io.MousePos.y)) / scale;
                     if (std::fabs(dist) > 6.0f) { dragMoved = true; }
                     if (dragMoved) {
                         double speed = dragSpeedHzPerPx(dist);
@@ -908,14 +936,24 @@ private:
                             hz = snapped;
                             changed = true;
                         }
+                        double dt = std::clamp((double)io.DeltaTime, 0.001, 0.05);
+                        if (hz != dragPrevHz) { dragVelocityHz = std::clamp((hz - dragPrevHz) / dt, -2e9, 2e9); }
+                        else { dragVelocityHz *= std::exp(-12.0 * dt); }
+                        dragPrevHz = hz;
                         double step = std::pow(10.0, std::floor(std::log10(speed)));
                         ImGui::SetTooltip("%s\nstep %s", formatFrequency(hz, 6).c_str(), formatFrequency(step, 0).c_str());
                     }
                 }
                 else {
-                    if (!dragMoved && ImGui::GetTime() - dragPressTime < 0.35) {
+                    if (!dragMoved && !dragStopTap && ImGui::GetTime() - dragPressTime < 0.35) {
                         textEditId = id;
                         textEditFocus = true;
+                    }
+                    if (dragMoved && dragVelocityHz != 0) {
+                        coastField = id;
+                        coastVelocityHz = dragVelocityHz;
+                        coastStopHz = std::max(1e3, std::fabs(coastVelocityHz) * 0.02);
+                        coastLastFrame = ImGui::GetFrameCount();
                     }
                     dragField.clear();
                 }
@@ -1237,6 +1275,7 @@ private:
         int frame = ImGui::GetFrameCount();
         bool newlyShown = lastDrawFrame < frame - 1;
         lastDrawFrame = frame;
+        if (newlyShown) { view.stopPan(); }
         tick();
         if (newlyShown && autoStart && !pendingRestart) {
             if (!controller.active()) { startSweep(false); }
@@ -2026,7 +2065,19 @@ private:
     double dragPressTime = 0;
     double dragValue = 0;
     bool dragMoved = false;
+    bool dragStopTap = false;
+    bool dragUsingFinger = false;
+    bool dragFingerWasDown = false;
+    bool dragFingerPressed = false;
+    bool dragFingerReleased = false;
+    int dragFingerFrame = -1;
+    double dragPrevHz = 0;
+    double dragVelocityHz = 0;
     std::string dragField;
+    std::string coastField;
+    double coastVelocityHz = 0;
+    double coastStopHz = 0;
+    int coastLastFrame = -1;
 
     Kind runKind = Kind::NONE;
     DeviceEntry runDevice;

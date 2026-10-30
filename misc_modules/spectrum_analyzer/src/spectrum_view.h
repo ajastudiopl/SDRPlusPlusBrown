@@ -40,6 +40,7 @@ namespace spectrum {
         void invalidateWaterfall() { wfDirty = true; }
         // Frees the GPU texture; call on the UI thread while the GL context exists.
         void releaseGl();
+        void stopPan() { panVelocity = 0; }
 
         void drawSpectrum(ImVec2 size, const EngineSnapshot& snap, DisplayConfig& cfg, FrequencyView& view,
                           const std::vector<Marker>& markers, const OverlayInfo& overlay, ViewEvents& ev);
@@ -120,6 +121,8 @@ namespace spectrum {
         float pinchLastDist = 0;
         void drawRangeOverlays(ImDrawList* dl, ImVec2 p0, ImVec2 p1, FrequencyView& view);
         float dragLastX = 0;
+        double panVelocity = 0; // view spans per second
+        double panStopVelocity = 0;
         double contextHz = 0;
         int contextMarker = -1;
         std::vector<ImVec2> pts;

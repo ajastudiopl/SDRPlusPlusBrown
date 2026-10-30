@@ -378,6 +378,8 @@ namespace ImGui {
         // UI Select elements
         bool fftResizeSelect = false;
         bool freqScaleSelect = false;
+        double freqScaleVelocity = 0; // view bandwidths per second
+        double freqScaleStopVelocity = 0;
         bool vfoSelect = false;
         bool vfoBorderSelect = false;
         WaterfallVFO* relatedVfo = NULL;

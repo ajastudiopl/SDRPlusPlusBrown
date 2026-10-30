@@ -7,6 +7,7 @@
 #include <imgui_internal.h>
 #include <imutils.h>
 #include <algorithm>
+#include <cmath>
 #include <signal_path/signal_path.h>
 #include <volk/volk.h>
 #include <utils/flog.h>
@@ -424,7 +425,7 @@ namespace ImGui {
     }
 
     void WaterFall::processInputs() {
-        if (touchPinching) { return; }
+        if (touchPinching) { freqScaleVelocity = 0; return; }
         // Pre calculate useful values
         WaterfallVFO* selVfo = NULL;
         if (selectedVFO != "") {
@@ -476,7 +477,7 @@ namespace ImGui {
         mouseInFFT = IS_IN_AREA(dragOrigin, fftAreaMin, fftAreaMax);
         mouseInWaterfall = IS_IN_AREA(dragOrigin, wfMin, wfMax);
 
-        int mouseWheel = ImGui::GetIO().MouseWheel;
+        float mouseWheel = ImGui::GetIO().MouseWheel;
 
         bool mouseMoved = false;
         if (mousePos.x != lastMousePos.x || mousePos.y != lastMousePos.y) { mouseMoved = true; }
@@ -484,6 +485,7 @@ namespace ImGui {
         float vfoDragThreshold = 4.0f * style::uiScale;
         bool vfoDragStarted = (vfoSelect || mouseInFFT || mouseInWaterfall) && ((drag.x * drag.x) + (drag.y * drag.y) >= (vfoDragThreshold * vfoDragThreshold));
         bool edgeScrolling = false;
+        if (ImGui::IsMouseClicked(ImGuiMouseButton_Left) || mouseWheel != 0) { freqScaleVelocity = 0; }
 
         std::string hoveredVFOName = "";
         for (auto const& [name, _vfo] : vfos) {
@@ -558,6 +560,7 @@ namespace ImGui {
             // Now, check frequency scale
             if (!targetFound && mouseInFreq) {
                 freqScaleSelect = true;
+                freqScaleVelocity = 0;
             }
         }
 
@@ -618,66 +621,41 @@ namespace ImGui {
         // If the frequency scale is selected, move it
         if (freqScaleSelect) {
             ImGui::SetMouseCursor(ImGuiMouseCursor_ResizeEW);
+            if (dataWidth <= 0) { freqScaleVelocity = 0; return; }
             double deltax = drag.x - lastDrag;
             lastDrag = drag.x;
             double viewDelta = deltax * (viewBandwidth / (double)dataWidth);
             shiftViewOffset(-viewDelta);
+            double dt = std::clamp((double)ImGui::GetIO().DeltaTime, 0.001, 0.05);
+            if (deltax != 0) {
+                freqScaleVelocity = std::clamp(-deltax / ((double)dataWidth * dt), -4.0, 4.0);
+                freqScaleStopVelocity = std::max(0.02, fabs(freqScaleVelocity) * 0.02);
+            }
+            else { freqScaleVelocity *= std::exp(-12.0 * dt); }
             return;
         }
 
         // If the mouse wheel is moved on the frequency scale
         if (mouseWheel != 0 && mouseInFreq) {
-            viewOffset -= (double)mouseWheel * viewBandwidth / 20.0;
-
-            if (viewOffset + (viewBandwidth / 2.0) > wholeBandwidth / 2.0) {
-                double freqOffset = (viewOffset + (viewBandwidth / 2.0)) - (wholeBandwidth / 2.0);
-                viewOffset = (wholeBandwidth / 2.0) - (viewBandwidth / 2.0);
-                centerFreq += freqOffset;
-                centerFreqMoved = true;
-            }
-            if (viewOffset - (viewBandwidth / 2.0) < -(wholeBandwidth / 2.0)) {
-                double freqOffset = (viewOffset - (viewBandwidth / 2.0)) + (wholeBandwidth / 2.0);
-                viewOffset = (viewBandwidth / 2.0) - (wholeBandwidth / 2.0);
-                centerFreq += freqOffset;
-                centerFreqMoved = true;
-            }
-
-            lowerFreq = (centerFreq + viewOffset) - (viewBandwidth / 2.0);
-            upperFreq = (centerFreq + viewOffset) + (viewBandwidth / 2.0);
-
-            if (viewBandwidth != wholeBandwidth) {
-                updateAllVFOs();
-                if (_fullUpdate) { updateWaterfallFb(); };
-            }
+            shiftViewOffset(-(double)mouseWheel * viewBandwidth / 20.0);
             return;
         }
 
         // If the left and right keys are pressed while hovering the freq scale, move it too
         bool leftKeyPressed = ImGui::IsKeyPressed(ImGuiKey_LeftArrow);
         if ((leftKeyPressed || ImGui::IsKeyPressed(ImGuiKey_RightArrow)) && mouseInFreq) {
-            viewOffset += leftKeyPressed ? (viewBandwidth / 20.0) : (-viewBandwidth / 20.0);
-
-            if (viewOffset + (viewBandwidth / 2.0) > wholeBandwidth / 2.0) {
-                double freqOffset = (viewOffset + (viewBandwidth / 2.0)) - (wholeBandwidth / 2.0);
-                viewOffset = (wholeBandwidth / 2.0) - (viewBandwidth / 2.0);
-                centerFreq += freqOffset;
-                centerFreqMoved = true;
-            }
-            if (viewOffset - (viewBandwidth / 2.0) < -(wholeBandwidth / 2.0)) {
-                double freqOffset = (viewOffset - (viewBandwidth / 2.0)) + (wholeBandwidth / 2.0);
-                viewOffset = (viewBandwidth / 2.0) - (wholeBandwidth / 2.0);
-                centerFreq += freqOffset;
-                centerFreqMoved = true;
-            }
-
-            lowerFreq = (centerFreq + viewOffset) - (viewBandwidth / 2.0);
-            upperFreq = (centerFreq + viewOffset) + (viewBandwidth / 2.0);
-
-            if (viewBandwidth != wholeBandwidth) {
-                updateAllVFOs();
-                if (_fullUpdate) { updateWaterfallFb(); };
-            }
+            freqScaleVelocity = 0;
+            shiftViewOffset(leftKeyPressed ? (viewBandwidth / 20.0) : (-viewBandwidth / 20.0));
             return;
+        }
+
+        if (freqScaleVelocity != 0 && !ImGui::IsMouseDown(ImGuiMouseButton_Left) && dataWidth > 0) {
+            double dt = std::clamp((double)ImGui::GetIO().DeltaTime, 0.0, 0.05);
+            double decay = std::exp(-5.0 * dt);
+            double oldPosition = centerFreq + viewOffset;
+            shiftViewOffset(freqScaleVelocity * viewBandwidth * (1.0 - decay) / 5.0);
+            freqScaleVelocity *= decay;
+            if (fabs(freqScaleVelocity) < freqScaleStopVelocity || centerFreq + viewOffset == oldPosition) { freqScaleVelocity = 0; }
         }
 
         if (autoScrollVFO && vfoDragStarted && ImGui::IsMouseDown(ImGuiMouseButton_Left) && selVfo != NULL && dataWidth > 0 && mousePos.y >= fftAreaMin.y && mousePos.y <= wfMax.y) {
@@ -1292,7 +1270,9 @@ namespace ImGui {
             args.pixelToFreqRatio = viewBandwidth / (double)dataWidth;
             onInputProcess.emit(args);
             if (!inputHandled) { processInputs(); }
+            else { freqScaleVelocity = 0; }
         }
+        else { freqScaleVelocity = 0; }
 
         updateAllVFOs(true);
 
@@ -1493,6 +1473,7 @@ namespace ImGui {
     }
 
     void WaterFall::setCenterFrequency(double freq) {
+        if (freq != centerFreq) { freqScaleVelocity = 0; }
         centerFreq = freq;
         lowerFreq = (centerFreq + viewOffset) - (viewBandwidth / 2.0);
         upperFreq = (centerFreq + viewOffset) + (viewBandwidth / 2.0);
@@ -1536,6 +1517,7 @@ namespace ImGui {
         if (bandWidth == viewBandwidth) {
             return;
         }
+        freqScaleVelocity = 0;
         if (abs(viewOffset) + (bandWidth / 2.0) > wholeBandwidth / 2.0) {
             if (viewOffset < 0) {
                 viewOffset = (bandWidth / 2.0) - (wholeBandwidth / 2.0);
@@ -1561,6 +1543,7 @@ namespace ImGui {
         if (offset == viewOffset) {
             return;
         }
+        freqScaleVelocity = 0;
         if (offset - (viewBandwidth / 2.0) < -(wholeBandwidth / 2.0)) {
             offset = (viewBandwidth / 2.0) - (wholeBandwidth / 2.0);
         }
