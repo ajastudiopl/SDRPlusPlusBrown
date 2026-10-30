@@ -1,4 +1,5 @@
 #include <chrono>
+#include <map>
 #include <backend.h>log
 #include "android_backend.h"
 #include <core.h>
@@ -412,14 +413,22 @@ namespace backend {
             return -1;
 
         // Let the activity re-detect a re-plugged SDR (opens it, or asks for USB permission).
-        // Throttled; older activities without rescanUsb() are handled gracefully.
-        static int64_t lastRescanMs = 0;
+        // Throttled per kind of device; older activities without rescanUsb() are handled gracefully.
+        static std::map<const void*, int64_t> lastRescanMs;
         int64_t nowMs = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now().time_since_epoch()).count();
-        if (nowMs - lastRescanMs > 500) {
-            lastRescanMs = nowMs;
-            jmethodID rescan_id = java_env->GetMethodID(native_activity_clazz, "rescanUsb", "()I");
+        int64_t& lastRescan = lastRescanMs[&allowedVidPids];
+        if (nowMs - lastRescan > 500) {
+            lastRescan = nowMs;
+            jmethodID rescan_id = java_env->GetMethodID(native_activity_clazz, "rescanUsb", "([I)I");
             if (rescan_id != NULL) {
-                java_env->CallIntMethod(app->activity->clazz, rescan_id);
+                std::vector<jint> packed;
+                for (auto const& vp : allowedVidPids) { packed.push_back(((jint)vp.vid << 16) | vp.pid); }
+                jintArray allowedArr = java_env->NewIntArray((jsize)packed.size());
+                if (allowedArr != NULL) {
+                    java_env->SetIntArrayRegion(allowedArr, 0, (jsize)packed.size(), packed.data());
+                    java_env->CallIntMethod(app->activity->clazz, rescan_id, allowedArr);
+                    java_env->DeleteLocalRef(allowedArr);
+                }
             }
             if (java_env->ExceptionCheck()) { java_env->ExceptionClear(); }
         }
@@ -557,6 +566,14 @@ namespace backend {
 
     std::string stopBtSco() {
         return callStringGetter("stopBtSco");
+    }
+
+    std::string getUsbStatus() {
+        return callStringGetter("getUsbStatus");
+    }
+
+    void retryUsbPermission() {
+        callStringGetter("retryUsbPermission");
     }
 
     const std::vector<DevVIDPID> AIRSPY_VIDPIDS = {

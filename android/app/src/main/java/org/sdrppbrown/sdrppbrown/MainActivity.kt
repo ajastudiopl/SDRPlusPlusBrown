@@ -19,6 +19,7 @@ import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
+import android.hardware.usb.UsbConstants
 import android.hardware.usb.UsbDevice
 import android.hardware.usb.UsbDeviceConnection
 import android.hardware.usb.UsbManager
@@ -79,18 +80,14 @@ class MainActivity : NativeActivity(), SensorEventListener {
                 synchronized(this) {
                     var _this = context as MainActivity;
 //                _this.SDR_device = intent.getParcelableExtra(UsbManager.EXTRA_DEVICE, UsbDevice::class.java)
-                    _this.SDR_device = intent.getParcelableExtra(UsbManager.EXTRA_DEVICE)
-                    if (intent.getBooleanExtra(UsbManager.EXTRA_PERMISSION_GRANTED, false)) {
+                    val dev: UsbDevice? = intent.getParcelableExtra(UsbManager.EXTRA_DEVICE)
+                    _this.usbPermissionPendingUntilMs = 0
+                    if (dev != null && intent.getBooleanExtra(UsbManager.EXTRA_PERMISSION_GRANTED, false)) {
                         Log.w("SDR++", "USB Permission granted")
-                        _this.SDR_conn = _this.usbManager!!.openDevice(_this.SDR_device);
-                        _this.SDR_conn?.let { _this.ensureConfigured(_this.SDR_device!!, it) }
-
-                        // Save SDR info
-                        _this.SDR_VID = _this.SDR_device!!.getVendorId();
-                        _this.SDR_PID = _this.SDR_device!!.getProductId()
-                        _this.SDR_FD = _this.SDR_conn!!.getFileDescriptor();
+                        _this.openSdrDevice(dev)
                     } else {
                         Log.w("SDR++", "USB Permission non-granted")
+                        if (dev != null) { _this.usbPermissionDenied.add(dev.deviceName) }
                     }
 
                     // Whatever the hell this does
@@ -234,15 +231,11 @@ class MainActivity : NativeActivity(), SensorEventListener {
 
             for ((name, dev) in usbReceiver.devList) {
                 Log.w("SDR++", "PERM: Dev list item: $name $dev")
-                val prodName = dev.productName?.toUpperCase(Locale.US) ?: ""
-                if (prodName.indexOf("Network") != -1
-                    || prodName.indexOf("LAN") != -1
-                    || prodName.indexOf("KEYBOARD") != -1
-                    || prodName.indexOf("MOUSE") != -1
-                )
-                // ignore LAN device.
+                // ignore hubs, keyboards, storage and other devices that cannot be an SDR.
+                if (!looksLikeSdr(dev))
                     continue
                 Log.w("SDR++", "PERM: Req USB perm: $dev")
+                usbPermissionPendingUntilMs = System.currentTimeMillis() + 60000
                 usbManager!!.requestPermission(dev, permissionIntent);
                 return
             }
@@ -463,6 +456,7 @@ class MainActivity : NativeActivity(), SensorEventListener {
         override fun onReceive(context: Context, intent: Intent) {
             if (UsbManager.ACTION_USB_DEVICE_DETACHED != intent.action) { return }
             val dev: UsbDevice? = intent.getParcelableExtra(UsbManager.EXTRA_DEVICE)
+            if (dev != null) { forgetUsbDevice(dev.deviceName) }
             if (dev == null || SDR_device == null || dev.deviceName != SDR_device!!.deviceName) { return }
             Log.w("SDR++", "USB SDR detached: ${dev.deviceName}")
             SDR_FD = -1
@@ -486,12 +480,27 @@ class MainActivity : NativeActivity(), SensorEventListener {
         }
     }
 
-    private fun openSdrDevice(dev: UsbDevice) {
-        val conn = usbManager!!.openDevice(dev)
+    // Open connections by device name. A connection that is dropped gets closed by the garbage collector,
+    // so the ones of unplugged devices are kept: native code may still hold their fd.
+    private val usbConns = HashMap<String, UsbDeviceConnection>()
+    private val usbRetiredConns = ArrayList<UsbDeviceConnection>()
+    private val usbPermissionDenied = HashSet<String>()
+    private var usbPermissionPendingUntilMs: Long = 0
+
+    @Synchronized
+    private fun forgetUsbDevice(name: String) {
+        usbPermissionDenied.remove(name)
+        usbConns.remove(name)?.let { usbRetiredConns.add(it) }
+    }
+
+    @Synchronized
+    private fun openSdrDevice(dev: UsbDevice): Boolean {
+        val conn = usbConns[dev.deviceName] ?: usbManager!!.openDevice(dev)
         if (conn == null) {
             Log.w("SDR++", "USB openDevice failed: ${dev.deviceName}")
-            return
+            return false
         }
+        usbConns[dev.deviceName] = conn
         ensureConfigured(dev, conn)
         SDR_device = dev
         SDR_conn = conn
@@ -499,6 +508,19 @@ class MainActivity : NativeActivity(), SensorEventListener {
         SDR_PID = dev.getProductId()
         SDR_FD = conn.getFileDescriptor()
         Log.w("SDR++", "USB SDR opened: ${dev.deviceName} fd=$SDR_FD")
+        return true
+    }
+
+    // SDRs use the vendor specific class; hubs, keyboards, storage and serial ports don't.
+    private fun looksLikeSdr(dev: UsbDevice): Boolean {
+        if (dev.deviceClass == UsbConstants.USB_CLASS_VENDOR_SPEC) { return true }
+        return (0 until dev.interfaceCount).any { dev.getInterface(it).interfaceClass == UsbConstants.USB_CLASS_VENDOR_SPEC }
+    }
+
+    // allowed: (vid << 16) | pid of the devices the caller can use, empty = anything that looks like an SDR.
+    private fun usbMatches(dev: UsbDevice, allowed: IntArray): Boolean {
+        if (allowed.isEmpty()) { return looksLikeSdr(dev) }
+        return allowed.contains((dev.vendorId shl 16) or dev.productId)
     }
 
     // Called from native code (Display menu): 0 = landscape, 1 = sensor (default), 2 = portrait.
@@ -527,34 +549,32 @@ class MainActivity : NativeActivity(), SensorEventListener {
         override fun onChange(selfChange: Boolean) { applyScreenOrientation() }
     }
 
-    private var lastUsbPermissionRequestMs: Long = 0
-
     // Called from native code (backend::getDeviceFD, e.g. a source's Refresh or Play).
-    // If the SDR we know about is gone, look for a newly plugged one: open it when we
-    // already have permission, otherwise ask for it (at most every 5 s). Returns SDR_FD.
-    fun rescanUsb(): Int {
+    // Keeps SDR_FD on a device the caller can use: if the current one is gone or of another kind,
+    // look for a matching one. Open it when we already have permission, otherwise ask once
+    // (a refused device is asked again after a Refresh or a re-plug). Returns SDR_FD.
+    @Synchronized
+    fun rescanUsb(allowed: IntArray): Int {
         try {
             if (usbManager == null) { usbManager = getSystemService(USB_SERVICE) as UsbManager }
             val devices = usbManager!!.deviceList
+            for (name in usbConns.keys.filter { !devices.containsKey(it) }) { forgetUsbDevice(name) }
             val current = SDR_device
-            if (SDR_FD >= 0 && current != null && devices.containsKey(current.deviceName)) { return SDR_FD }
-            if (SDR_FD >= 0) {
+            if (SDR_FD >= 0 && (current == null || !devices.containsKey(current.deviceName))) {
                 Log.w("SDR++", "USB SDR no longer present, forgetting fd")
                 SDR_FD = -1
                 SDR_VID = -1
                 SDR_PID = -1
             }
+            if (SDR_FD >= 0 && current != null && usbMatches(current, allowed)) { return SDR_FD }
             for ((name, dev) in devices) {
-                val prodName = dev.productName?.toUpperCase(Locale.US) ?: ""
-                if (prodName.indexOf("Network") != -1 || prodName.indexOf("LAN") != -1
-                    || prodName.indexOf("KEYBOARD") != -1 || prodName.indexOf("MOUSE") != -1) { continue }
+                if (!usbMatches(dev, allowed)) { continue }
                 if (usbManager!!.hasPermission(dev)) {
-                    openSdrDevice(dev)
-                    if (SDR_FD >= 0) { return SDR_FD }
-                } else {
+                    if (openSdrDevice(dev)) { return SDR_FD }
+                } else if (!usbPermissionDenied.contains(name)) {
                     val now = System.currentTimeMillis()
-                    if (now - lastUsbPermissionRequestMs > 5000) {
-                        lastUsbPermissionRequestMs = now
+                    if (now >= usbPermissionPendingUntilMs) {
+                        usbPermissionPendingUntilMs = now + 60000
                         Log.w("SDR++", "USB rescan: requesting permission for $name")
                         runOnUiThread {
                             try { registerReceiver(usbReceiver, IntentFilter(ACTION_USB_PERMISSION)) } catch (e: Exception) { }
@@ -570,6 +590,29 @@ class MainActivity : NativeActivity(), SensorEventListener {
         return SDR_FD
     }
 
+    // Called from native code: what the phone sees on USB, one device per line, empty = nothing.
+    @Synchronized
+    fun getUsbStatus(): String {
+        try {
+            if (usbManager == null) { usbManager = getSystemService(USB_SERVICE) as UsbManager }
+            return usbManager!!.deviceList.values.joinToString("\n") { dev ->
+                val state = if (usbManager!!.hasPermission(dev)) "ready"
+                    else if (usbPermissionDenied.contains(dev.deviceName)) "permission refused" else "no permission"
+                String.format(Locale.US, "%04x:%04x %s", dev.vendorId, dev.productId, state)
+            }
+        } catch (e: Exception) {
+            return "USB status failed: ${e.message}"
+        }
+    }
+
+    // Called from native code (a source's Refresh): ask again for devices that were refused.
+    @Synchronized
+    fun retryUsbPermission(): String {
+        usbPermissionDenied.clear()
+        usbPermissionPendingUntilMs = 0
+        return ""
+    }
+
     // With launchMode=singleTask a re-plugged SDR is delivered here instead of starting a second
     // NativeActivity, which the native side can't handle (black screen).
     override fun onNewIntent(intent: Intent) {
@@ -582,6 +625,7 @@ class MainActivity : NativeActivity(), SensorEventListener {
         if (usbManager!!.hasPermission(dev)) {
             openSdrDevice(dev)
         } else {
+            usbPermissionPendingUntilMs = System.currentTimeMillis() + 60000
             registerReceiver(usbReceiver, IntentFilter(ACTION_USB_PERMISSION))
             usbManager!!.requestPermission(dev, makeUsbPermissionIntent())
         }

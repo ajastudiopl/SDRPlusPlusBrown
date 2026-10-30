@@ -414,6 +414,33 @@ public:
 #endif
     }
 
+#ifdef __ANDROID__
+    // The USB permission answer and re-plugs arrive at any time: follow them while the menu is open.
+    void pollUsb() {
+        if (running || sweepDev != NULL) { return; }
+        int64_t nowMs = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now().time_since_epoch()).count();
+        if (nowMs - lastUsbPollMs < 1000) { return; }
+        lastUsbPollMs = nowMs;
+        bool hadDevice = !devList.empty();
+        refresh();
+        if (hadDevice != !devList.empty()) {
+            int prevRate = sampleRate;
+            devId = 0;
+            selectFirst();
+            // Setting the rate again resets the view and moves the VFO, also when nothing changed
+            if (sampleRate != prevRate) { core::setInputSampleRate(sampleRate); }
+        }
+        updateUsbStatus();
+    }
+
+    void updateUsbStatus() {
+        usbStatusTxt = "";
+        if (!devList.empty()) { return; }
+        std::string seen = backend::getUsbStatus();
+        usbStatusTxt = seen.empty() ? "No USB device seen:\ncheck the cable and power" : "No HackRF. USB sees:\n" + seen;
+    }
+#endif
+
     void selectFirst() {
         if (devList.size() != 0) {
             selectBySerial(devList[0]);
@@ -518,6 +545,16 @@ private:
             flog::error("Could not start HackRF: initialization failed: {0}", hackrf_error_name(_this->hackrfError));
             return;
         }
+#ifdef __ANDROID__
+        // The device may have shown up after the list was last built
+        if (_this->selectedSerial == "") {
+            int prevRate = _this->sampleRate;
+            _this->refresh();
+            _this->devId = 0;
+            _this->selectFirst();
+            if (_this->sampleRate != prevRate) { core::setInputSampleRate(_this->sampleRate); }
+        }
+#endif
         if (_this->selectedSerial == "") {
             flog::error("Tried to start HackRF source with empty serial");
             return;
@@ -586,6 +623,9 @@ private:
 
     static void menuHandler(void* ctx) {
         HackRFSourceModule* _this = (HackRFSourceModule*)ctx;
+#ifdef __ANDROID__
+        _this->pollUsb();
+#endif
 
         if (_this->running) { SmGui::BeginDisabled(); }
         SmGui::FillWidth();
@@ -625,14 +665,28 @@ private:
         }
 #endif
 
+#ifndef __ANDROID__
         SmGui::SameLine();
+#endif
         SmGui::FillWidth();
         SmGui::ForceSync();
         if (SmGui::Button(CONCAT("Refresh##_hackrf_refr_", _this->name))) {
+#ifdef __ANDROID__
+            int prevRate = _this->sampleRate;
+            backend::retryUsbPermission();
+#endif
             _this->refresh();
             _this->selectBySerial(_this->selectedSerial);
+#ifdef __ANDROID__
+            if (_this->sampleRate != prevRate) { core::setInputSampleRate(_this->sampleRate); }
+            _this->updateUsbStatus();
+#else
             core::setInputSampleRate(_this->sampleRate);
+#endif
         }
+#ifdef __ANDROID__
+        if (!_this->usbStatusTxt.empty()) { SmGui::Text(_this->usbStatusTxt.c_str()); }
+#endif
 
         if (_this->running) { SmGui::EndDisabled(); }
 
@@ -778,6 +832,8 @@ private:
 #ifdef __ANDROID__
     int devFd = -1;
     bool allowHighRate = false;
+    int64_t lastUsbPollMs = 0;
+    std::string usbStatusTxt;
 #endif
 
     std::vector<std::string> devList;
