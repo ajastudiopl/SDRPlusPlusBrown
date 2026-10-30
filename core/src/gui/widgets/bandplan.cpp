@@ -74,6 +74,43 @@ namespace bandplan {
         ct.transColorValue = IM_COL32(r, g, b, 100);
     }
 
+    // Wi-Fi channels are added to every plan (type "wifi"), so they show in the band strip with the
+    // other bands. 20 MHz wide, named with their first and last frequency in MHz.
+    static void appendWifiChannels(BandPlan_t& plan) {
+        for (const auto& b : plan.bands) {
+            if (b.type == "wifi") { return; }
+        }
+        // (the microphone ranges below are added together with the Wi-Fi channels)
+        auto add = [&](int channel, double centerHz) {
+            char name[64];
+            snprintf(name, sizeof(name), "Wi-Fi %d %.0f-%.0f", channel, (centerHz - 10e6) / 1e6, (centerHz + 10e6) / 1e6);
+            plan.bands.push_back({ name, "wifi", centerHz - 10e6, centerHz + 10e6 });
+        };
+        // 2.4 GHz: channels 1-13 overlap (20 MHz wide, 5 MHz apart), so each one is drawn as the 5 MHz
+        // slot around its centre, i.e. the frequencies closest to that channel. The name holds the
+        // 20 MHz the channel occupies; the strip shows just the number where the name does not fit.
+        for (int ch = 1; ch <= 13; ch++) {
+            double c = 2412e6 + (ch - 1) * 5e6;
+            char name[64];
+            snprintf(name, sizeof(name), "Wi-Fi %d %.0f-%.0f", ch, (c - 10e6) / 1e6, (c + 10e6) / 1e6);
+            plan.bands.push_back({ name, "wifi", c - 2.5e6, c + 2.5e6 });
+        }
+        // 5 GHz: 36-64, 100-144, 149-177 (centre = 5000 MHz + 5 MHz * channel)
+        for (int ch = 36; ch <= 64; ch += 4) { add(ch, 5000e6 + ch * 5e6); }
+        for (int ch = 100; ch <= 144; ch += 4) { add(ch, 5000e6 + ch * 5e6); }
+        for (int ch = 149; ch <= 177; ch += 4) { add(ch, 5000e6 + ch * 5e6); }
+        // 6 GHz (Wi-Fi 6E, European lower band)
+        plan.bands.push_back({ "Wi-Fi 6E 5945-6425", "wifi", 5945e6, 6425e6 });
+        // Radio microphones: Sennheiser frequency ranges as printed on the equipment (approximate;
+        // some overlap) and the licence-free DECT-guard range
+        struct Mic { const char* name; double a, b; };
+        for (const Mic& m : { Mic{ "Sennh. A1 470-516", 470e6, 516e6 }, Mic{ "Sennh. A 516-558", 516e6, 558e6 }, Mic{ "Sennh. G 566-608", 566e6, 608e6 },
+                              Mic{ "Sennh. GB 606-648", 606e6, 648e6 }, Mic{ "Sennh. B 626-668", 626e6, 668e6 }, Mic{ "Sennh. C 734-776", 734e6, 776e6 },
+                              Mic{ "Sennh. D 780-822", 780e6, 822e6 }, Mic{ "Sennh. E 823-865", 823e6, 865e6 }, Mic{ "Mics 1785-1805", 1785e6, 1805e6 } }) {
+            plan.bands.push_back({ m.name, "mic", m.a, m.b });
+        }
+    }
+
     void loadBandPlan(std::string path) {
         std::ifstream file(wstr::str2wstr(path.c_str()));
         json data;
@@ -81,6 +118,7 @@ namespace bandplan {
         file.close();
 
         BandPlan_t plan = data.get<BandPlan_t>();
+        appendWifiChannels(plan);
         if (bandplans.find(plan.name) != bandplans.end()) {
             flog::error("Duplicate band plan name ({0}), not loading.", plan.name);
             return;
@@ -111,5 +149,11 @@ namespace bandplan {
 
     void loadColorTable(json table) {
         colorTable = table.get<std::map<std::string, BandPlanColor_t>>();
+        if (colorTable.find("mic") == colorTable.end()) {
+            colorTable["mic"] = { IM_COL32(255, 150, 40, 255), IM_COL32(255, 150, 40, 100) };
+        }
+        if (colorTable.find("wifi") == colorTable.end()) {
+            colorTable["wifi"] = { IM_COL32(0, 200, 200, 255), IM_COL32(0, 200, 200, 100) };
+        }
     }
 };

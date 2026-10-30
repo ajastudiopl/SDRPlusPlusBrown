@@ -408,6 +408,11 @@ namespace ImGui {
         }
     }
 
+    // The grip between the FFT and the waterfall is hidden (it would cover frequencies) until the middle
+    // of the divider is tapped or dragged
+    static bool sGripTouch = false;
+    static double sGripShownUntil = 0;
+
     // Half width of the area that grabs a VFO border: wide on touch screens, narrow VFOs keep room in the middle
     static float vfoGripSize(float vfoWidth) {
         bool touch = displaymenu::phoneLayout;
@@ -432,23 +437,28 @@ namespace ImGui {
         // Touch: a finger on the grip in the middle of the FFT / waterfall divider resizes them.
         // Vertical finger drags do not reach us as mouse drags, so the finger is followed directly.
         {
-            static bool gripPrevDown = false, gripTouch = false;
+            static bool gripPrevDown = false;
+            static float gripStartY = 0;
             ImGuiIO& gio = ImGui::GetIO();
             const bool fd = gio.FingerDown[0];
             const ImVec2 fp = gio.FingerPos[0];
             const float gx = widgetPos.x + widgetSize.x / 2.0f, gy = widgetPos.y + newFFTAreaHeight;
             if (fd && !gripPrevDown) {
-                gripTouch = fabsf(fp.x - gx) < 44.0f * style::uiScale && fabsf(fp.y - gy) < 26.0f * style::uiScale;
+                sGripTouch = fabsf(fp.x - gx) < 44.0f * style::uiScale && fabsf(fp.y - gy) < 26.0f * style::uiScale;
+                gripStartY = fp.y;
             }
             gripPrevDown = fd;
-            if (gripTouch && fd) {
+            if (sGripTouch && fd) {
+                sGripShownUntil = ImGui::GetTime() + 3.5;
                 newFFTAreaHeight = std::clamp<float>(fp.y - widgetPos.y, 150, widgetSize.y - 50);
                 ImGui::GetForegroundDrawList()->AddLine(ImVec2(widgetPos.x, newFFTAreaHeight + widgetPos.y), ImVec2(widgetEndPos.x, newFFTAreaHeight + widgetPos.y),
                                                         ImGui::GetColorU32(ImGuiCol_SeparatorActive), style::uiScale);
                 return;
             }
-            if (gripTouch && !fd) {
-                gripTouch = false;
+            if (sGripTouch && !fd) {
+                sGripTouch = false;
+                // A tap on the middle of the divider shows the grip for a few seconds
+                if (fabsf(fp.y - gripStartY) < 8.0f * style::uiScale) { sGripShownUntil = ImGui::GetTime() + 3.5; }
                 FFTAreaHeight = newFFTAreaHeight;
                 onResize();
                 return;
@@ -1051,6 +1061,17 @@ namespace ImGui {
                 window->DrawList->AddText(ImVec2(cPos - (txtSz.x / 2.0), bpBottom - (height / 2.0f) - (txtSz.y / 2.0f)),
                                           IM_COL32(255, 255, 255, 255), bandplan->bands[i].name.c_str());
             }
+            else if ((bandplan->bands[i].type == "wifi" || bandplan->bands[i].type == "mic") && bandplan->bands[i].name.find(' ') != std::string::npos) {
+                // Too narrow for the full name: just the channel / range letter (second word)
+                const std::string& full = bandplan->bands[i].name;
+                size_t sp1 = full.find(' ');
+                std::string shortName = full.substr(sp1 + 1, full.find(' ', sp1 + 1) == std::string::npos ? std::string::npos : full.find(' ', sp1 + 1) - sp1 - 1);
+                ImVec2 shortSz = ImGui::CalcTextSize(shortName.c_str());
+                if (shortSz.x <= width) {
+                    window->DrawList->AddText(ImVec2(cPos - (shortSz.x / 2.0), bpBottom - (height / 2.0f) - (shortSz.y / 2.0f)),
+                                              IM_COL32(255, 255, 255, 255), shortName.c_str());
+                }
+            }
         }
     }
 
@@ -1282,8 +1303,11 @@ namespace ImGui {
             float gripY = widgetPos.y + newFFTAreaHeight;
             float gripX = widgetPos.x + widgetSize.x / 2.0f;
             float gripW = 52.0f * style::uiScale, gripH = 8.0f * style::uiScale;
-            window->DrawList->AddRectFilled(ImVec2(gripX - gripW / 2.0f, gripY - gripH / 2.0f), ImVec2(gripX + gripW / 2.0f, gripY + gripH / 2.0f),
-                                            fftResizeSelect ? IM_COL32(150, 160, 190, 255) : IM_COL32(90, 95, 110, 200), gripH / 2.0f);
+            if (fftResizeSelect) { sGripShownUntil = ImGui::GetTime() + 3.5; }
+            if (sGripTouch || ImGui::GetTime() < sGripShownUntil) {
+                window->DrawList->AddRectFilled(ImVec2(gripX - gripW / 2.0f, gripY - gripH / 2.0f), ImVec2(gripX + gripW / 2.0f, gripY + gripH / 2.0f),
+                                                (fftResizeSelect || sGripTouch) ? IM_COL32(150, 160, 190, 255) : IM_COL32(90, 95, 110, 200), gripH / 2.0f);
+            }
         }
         drawVFOs();
         if (bandplan != NULL && bandplanVisible) {
