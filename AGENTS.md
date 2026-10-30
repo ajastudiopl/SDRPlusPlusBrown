@@ -5,6 +5,7 @@ This document provides guidance for AI agents working with the SDR++ Brown Fork 
 ## Additional Docs
 - [AGENTS-windows.md](./AGENTS-windows.md) — Windows build via windows-mcp (winget/vcpkg toolchain, VS2022 build, runtime assembly, procdump/cdb crash diagnosis, E2E tests)
 - [AGENTS-debugging.md](./AGENTS-debugging.md) — HTTP debug server, module/procfs commands, GUI automation, lldb crash/hang debugging, bugfix workflow
+- [AGENTS-android.md](./AGENTS-android.md) — Android APK build in Docker (`android-sdr-kit`), installing updates on the test phones via adb, wireless adb, troubleshooting
 
 ## Building Locally (Linux - Debian/Ubuntu based)
 
