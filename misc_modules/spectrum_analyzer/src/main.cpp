@@ -594,6 +594,12 @@ private:
                 pendingTune = false;
                 performTune(pendingTuneHz);
             }
+            // Back in the receiver with center tuning: the source goes to the main frequency
+            if (!pendingRestart && lastDrawFrame >= 0 && ImGui::GetFrameCount() - lastDrawFrame > 2
+                && gui::mainWindow.isCenterTuning()
+                && std::fabs(gui::waterfall.getCenterFrequency() + (gui::waterfall.vfos.count(gui::waterfall.selectedVFO) ? gui::waterfall.vfos[gui::waterfall.selectedVFO]->generalOffset : 0.0) - (double)gui::freqSelect.frequency) > 1.0) {
+                tuner::tune(tuner::TUNER_MODE_CENTER, gui::waterfall.selectedVFO, gui::freqSelect.frequency);
+            }
             if (pendingRestart) {
                 pendingRestart = false;
                 startSweep(true);
@@ -1167,7 +1173,7 @@ private:
         ImGui::PopStyleVar();
 
         ImVec2 avail = ImGui::GetContentRegionAvail();
-        float splitterH = 6.0f * scale;
+        float splitterH = view.axisStripHeight();
         if (!rangePopupOpen) {
             view.previewStartHz = view.previewStopHz = std::numeric_limits<double>::quiet_NaN();
         }
@@ -1190,15 +1196,8 @@ private:
         view.drawSpectrum(ImVec2(avail.x, specH), snap, settings.display, freqView, markers, ov, ev);
         if (oldMin != settings.display.minDb || oldMax != settings.display.maxDb) { saveConfig(); }
 
-        // Splitter between spectrum and waterfall
-        ImVec2 sp = ImGui::GetCursorScreenPos();
-        ImGui::InvisibleButton("##sa_split", ImVec2(avail.x, splitterH));
-        if (ImGui::IsItemHovered() || ImGui::IsItemActive()) { ImGui::SetMouseCursor(ImGuiMouseCursor_ResizeNS); }
-        if (ImGui::IsItemActive() && ImGui::IsMouseDragging(ImGuiMouseButton_Left, 0.0f)) {
-            settings.display.spectrumHeightFrac = std::clamp(settings.display.spectrumHeightFrac + ImGui::GetIO().MouseDelta.y / std::max(avail.y, 1.0f), 0.15f, 0.85f);
-        }
-        if (ImGui::IsItemDeactivated()) { saveConfig(); }
-        ImGui::GetWindowDrawList()->AddRectFilled(ImVec2(sp.x, sp.y + splitterH / 2 - 1), ImVec2(sp.x + avail.x, sp.y + splitterH / 2 + 1), IM_COL32(90, 90, 100, 255));
+        // Band names and frequency axis between the plots: the handle for moving the view
+        if (view.drawAxisStrip(ImVec2(avail.x, splitterH), freqView, settings.display, avail.y)) { saveConfig(); }
 
         if (settings.waterfall.autoLevels && std::isfinite(snap.noiseFloorDb)) {
             // Follow the noise floor in 5 dB steps: noise dark, signals bright.
@@ -1260,6 +1259,7 @@ private:
         if (navDev && navDev->kind == Kind::NATIVE && capsValid) { freqView.setNavigationLimits(caps.minFreqHz, caps.maxFreqHz); }
         else { freqView.setNavigationLimits(0, 6e9); }
 
+        followMainFrequency();
         followVisibleRange();
 
         // Settings are in the left menu ("Spectrum Analyzer" entry), like every other module.
@@ -1271,12 +1271,65 @@ private:
 
     // While sweeping, the scanned range follows the visible one: zooming out
     // scans a wider band, zooming in a narrower one (after the view settles).
+    // The "center tuning" switch next to the main frequency also centres the analyzer: while it is
+    // on, the scanned range keeps the main frequency in its centre (same span), also when that
+    // frequency changes. In the receiver the same switch keeps the VFO centred as before.
+    void followMainFrequency() {
+        followMain = gui::mainWindow.isCenterTuning();
+        if (followMain && !prevFollowMain) { followMainNow = true; }   // centre at once when switched on
+        prevFollowMain = followMain;
+        if (!followMain || view.selectMode || rangePopupOpen || pendingRestart) {
+            mainStableNs = 0;
+            return;
+        }
+        const double main = (double)gui::freqSelect.frequency;
+        const double span = settings.range.spanHz();
+        double tol = std::max(1e3, 0.005 * span);
+        if (std::fabs(settings.range.centerHz() - main) <= tol) {
+            mainStableNs = 0;
+            return;
+        }
+        int64_t now = nowNs();
+        if (!followMainNow) {
+            // The frequency may be changing continuously (shuttle): wait until it settles
+            if (mainStableNs == 0 || std::fabs(main - mainTarget) > 1) {
+                mainTarget = main;
+                mainStableNs = now;
+                return;
+            }
+            if (now - mainStableNs < 300000000LL) { return; }
+        }
+        followMainNow = false;
+        mainStableNs = 0;
+        FrequencyRange r = FrequencyRange::fromCenterSpan(main, span);
+        if (r.startHz < 0) { r = { 0.0, span }; }
+        std::string note;
+        const DeviceEntry* d = currentDevice();
+        Kind k = d ? resolveKind(*d, note) : Kind::GENERIC;
+        std::string err = validateRange(r, currentLimits(k));
+        if (!err.empty()) {
+            rangeError = err;
+            return;
+        }
+        awaitOldPlan = engine.planSummary().range;
+        awaitPlan = true;
+        awaitPlanNs = now;
+        editRange = r;
+        applyRange();
+    }
+
     void followVisibleRange() {
         if (!autoScanView || !controller.active() || pendingRestart || view.selectMode || rangePopupOpen) {
             viewStableNs = 0;
             return;
         }
         FrequencyRange target = { std::max(0.0, freqView.viewStart()), freqView.viewStop() };
+        if (followMain) {
+            // Zooming changes the span only; the main frequency stays in the centre
+            double sp = target.spanHz();
+            target = FrequencyRange::fromCenterSpan((double)gui::freqSelect.frequency, sp);
+            if (target.startHz < 0) { target = { 0.0, sp }; }
+        }
         double tol = std::max(1e3, 0.02 * settings.range.spanHz());
         if (std::fabs(target.startHz - settings.range.startHz) < tol && std::fabs(target.stopHz - settings.range.stopHz) < tol) {
             viewStableNs = 0;
@@ -1605,6 +1658,9 @@ private:
             ch |= ImGui::Checkbox("Peaks##sa_pk", &d.showPeaks);
             ImGui::SameLine();
             ch |= ImGui::Checkbox("Band names##sa_bandstrip", &d.showBandStrip);
+            ImGui::LeftLabel("Spectrum height");
+            ImGui::FillWidth();
+            ch |= ImGui::SliderFloat("##sa_sph", &d.spectrumHeightFrac, 0.15f, 0.85f, "%.2f");
             ImGui::SameLine();
             ch |= ImGui::Checkbox("Markers##sa_mk", &d.showMarkers);
             ImGui::LeftLabel("Averaging (sweeps)");
@@ -1955,6 +2011,11 @@ private:
     bool rangePopupOpen = false;
     bool deviceChosen = false;
     bool autoScanView = true;
+    bool followMain = false;
+    bool prevFollowMain = false;
+    bool followMainNow = false;
+    int64_t mainStableNs = 0;
+    double mainTarget = 0;
     FrequencyRange viewTarget, failedTarget, awaitOldPlan;
     int64_t viewStableNs = 0;
     bool awaitPlan = false;

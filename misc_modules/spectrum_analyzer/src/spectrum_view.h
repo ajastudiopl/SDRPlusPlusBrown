@@ -43,6 +43,12 @@ namespace spectrum {
 
         void drawSpectrum(ImVec2 size, const EngineSnapshot& snap, DisplayConfig& cfg, FrequencyView& view,
                           const std::vector<Marker>& markers, const OverlayInfo& overlay, ViewEvents& ev);
+        // Strip between the spectrum and the waterfall: band names and frequency axis. Dragging it
+        // moves the view sideways, the plots above and below only pick frequencies.
+        float axisStripHeight() const;
+        // totalH: height of both plots and the strip; dragging the grip in the middle changes the split.
+        // Returns true when a resize ended (save the setting).
+        bool drawAxisStrip(ImVec2 size, FrequencyView& view, DisplayConfig& cfg, float totalH);
         void drawWaterfall(ImVec2 size, WaterfallHistory& hist, const WaterfallConfig& cfg, FrequencyView& view,
                            const OverlayInfo& overlay, ViewEvents& ev);
 
@@ -71,6 +77,7 @@ namespace spectrum {
     private:
         bool handleInteraction(const char* id, ImVec2 p0, ImVec2 size, FrequencyView& view, ViewEvents& ev,
                                const std::vector<Marker>* markers);
+        void handlePinch(ImVec2 p0, ImVec2 size, FrequencyView& view);
         void drawFreqGrid(ImDrawList* dl, ImVec2 p0, ImVec2 size, FrequencyView& view, bool labels);
         void rebuildLut(const WaterfallConfig& cfg);
         void uploadRows(WaterfallHistory& hist, int width, bool full);
@@ -104,6 +111,9 @@ namespace spectrum {
         bool selPressStarted = false;
         bool pressInside = false;
         bool pinching = false;
+        bool gripTouch = false;
+        bool gripPrevDown = false;
+        float gripLastY = 0;
         float pinchLastDist = 0;
         void drawRangeOverlays(ImDrawList* dl, ImVec2 p0, ImVec2 p1, FrequencyView& view);
         float dragLastX = 0;

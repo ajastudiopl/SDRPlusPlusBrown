@@ -150,19 +150,8 @@ namespace spectrum {
         }
     }
 
-    bool SpectrumView::handleInteraction(const char* id, ImVec2 p0, ImVec2 size, FrequencyView& view, ViewEvents& ev,
-                                         const std::vector<Marker>* markers) {
+    void SpectrumView::handlePinch(ImVec2 p0, ImVec2 size, FrequencyView& view) {
         ImGuiIO& io = ImGui::GetIO();
-        ImGui::SetCursorScreenPos(p0);
-        ImGui::InvisibleButton(id, size, ImGuiButtonFlags_MouseButtonLeft | ImGuiButtonFlags_MouseButtonRight);
-        bool hovered = ImGui::IsItemHovered();
-        bool active = ImGui::IsItemActive();
-        ImGui::SetItemUsingMouseWheel();
-        double mouseHz = view.xToFreq(io.MousePos.x, p0.x, size.x);
-
-        if (hovered && io.MouseWheel != 0.0f) {
-            view.zoom(std::pow(1.25, (double)io.MouseWheel), mouseHz);
-        }
         // Two fingers: pinch zooms the range around the point between them
         if (io.FingerDown[0] && io.FingerDown[1]) {
             ImVec2 a = io.FingerPos[0], b = io.FingerPos[1];
@@ -179,6 +168,22 @@ namespace spectrum {
             }
         }
         else { pinching = false; }
+    }
+
+    bool SpectrumView::handleInteraction(const char* id, ImVec2 p0, ImVec2 size, FrequencyView& view, ViewEvents& ev,
+                                         const std::vector<Marker>* markers) {
+        ImGuiIO& io = ImGui::GetIO();
+        ImGui::SetCursorScreenPos(p0);
+        ImGui::InvisibleButton(id, size, ImGuiButtonFlags_MouseButtonLeft | ImGuiButtonFlags_MouseButtonRight);
+        bool hovered = ImGui::IsItemHovered();
+        bool active = ImGui::IsItemActive();
+        ImGui::SetItemUsingMouseWheel();
+        double mouseHz = view.xToFreq(io.MousePos.x, p0.x, size.x);
+
+        if (hovered && io.MouseWheel != 0.0f) {
+            view.zoom(std::pow(1.25, (double)io.MouseWheel), mouseHz);
+        }
+        handlePinch(p0, size, view);
         if (hovered && ImGui::IsMouseClicked(ImGuiMouseButton_Left)) {
             pressDragged = false;
             pressInside = true;
@@ -205,7 +210,25 @@ namespace spectrum {
                 if (depth != 0) { view.pan(depth * view.viewSpan() * 0.8 * (double)io.DeltaTime); }
                 selB = view.xToFreq(std::clamp(x, p0.x, p0.x + size.x), p0.x, size.x);
             }
-            else { view.pan(-(double)io.MouseDelta.x / (double)size.x * view.viewSpan()); }
+            else {
+                // Dragging over a plot picks a frequency precisely (cursor with a readout above the
+                // finger); the view is moved with the bar between the plots.
+                hasTap = true;
+                tapHz = mouseHz;
+            }
+        }
+        if ((hovered || active) && ImGui::IsMouseDragging(ImGuiMouseButton_Middle, 3.0f * style::uiScale)) {
+            view.pan(-(double)io.MouseDelta.x / (double)size.x * view.viewSpan());
+        }
+        if (active && dragging && !pinching && !selectMode) {
+            ImDrawList* dl = ImGui::GetWindowDrawList();
+            float x = std::clamp(io.MousePos.x, p0.x, p0.x + size.x);
+            dl->AddLine(ImVec2(x, p0.y), ImVec2(x, p0.y + size.y), IM_COL32(120, 230, 255, 220), style::uiScale);
+            std::string l = formatFrequency(mouseHz, 5);
+            ImVec2 ts = ImGui::CalcTextSize(l.c_str());
+            float lx = std::clamp(x - ts.x / 2.0f, p0.x + 2.0f, p0.x + size.x - ts.x - 2.0f);
+            float ly = std::max(io.MousePos.y - 64.0f * style::uiScale, p0.y + 2.0f);
+            labelBox(dl, ImVec2(lx, ly), l.c_str(), IM_COL32(255, 255, 255, 255));
         }
         if ((hovered || (pressInside && pressDragged)) && ImGui::IsMouseReleased(ImGuiMouseButton_Left)) {
             if (selectMode) {
@@ -314,32 +337,7 @@ namespace spectrum {
                 snprintf(buf, sizeof(buf), "%.0f", db);
                 labelBox(dl, ImVec2(p0.x + 3, y + 1), buf, COL_TEXT);
             }
-            drawFreqGrid(dl, ImVec2(p0.x, plotTop), ImVec2(size.x, plotH), view, true);
-        }
-
-        // Band strip: the receiver's band plan along the frequency axis (names where they fit)
-        if (cfg.showBandStrip && bands != nullptr) {
-            const float stripH = lineH * 1.25f;
-            const float stripBottom = p1.y - lineH - 3.0f * style::uiScale;
-            for (const auto& b : bands->bands) {
-                if (b.end < view.viewStart() || b.start > view.viewStop()) { continue; }
-                float xa = (float)view.freqToX(std::max(b.start, view.viewStart()), p0.x, size.x);
-                float xb = (float)view.freqToX(std::min(b.end, view.viewStop()), p0.x, size.x);
-                if (xb - xa < 1.0f) { continue; }
-                ImU32 col = IM_COL32(255, 255, 255, 255), colTrans = IM_COL32(255, 255, 255, 80);
-                auto ct = bandplan::colorTable.find(b.type);
-                if (ct != bandplan::colorTable.end()) {
-                    col = ct->second.colorValue;
-                    colTrans = ct->second.transColorValue;
-                }
-                dl->AddRectFilled(ImVec2(xa, stripBottom - stripH), ImVec2(xb, stripBottom), colTrans);
-                if (b.start >= view.viewStart()) { dl->AddLine(ImVec2(xa, stripBottom - stripH), ImVec2(xa, stripBottom), col, style::uiScale); }
-                if (b.end <= view.viewStop()) { dl->AddLine(ImVec2(xb, stripBottom - stripH), ImVec2(xb, stripBottom), col, style::uiScale); }
-                ImVec2 ts = ImGui::CalcTextSize(b.name.c_str());
-                if (ts.x + 4.0f <= xb - xa) {
-                    dl->AddText(ImVec2((xa + xb) / 2.0f - ts.x / 2.0f, stripBottom - stripH / 2.0f - ts.y / 2.0f), IM_COL32(255, 255, 255, 255), b.name.c_str());
-                }
-            }
+            drawFreqGrid(dl, ImVec2(p0.x, plotTop), ImVec2(size.x, plotH), view, false);
         }
 
         const int width = (int)size.x;
@@ -565,6 +563,119 @@ namespace spectrum {
             glTexSubImage2D(GL_TEXTURE_2D, 0, 0, (GLint)(seq % (uint64_t)h), width, 1, GL_RGBA, GL_UNSIGNED_BYTE, rowBuf.data());
         }
         texUploaded = total;
+    }
+
+    float SpectrumView::axisStripHeight() const {
+        return ImGui::GetTextLineHeight() * 2.7f;
+    }
+
+    bool SpectrumView::drawAxisStrip(ImVec2 size, FrequencyView& view, DisplayConfig& cfg, float totalH) {
+        ImDrawList* dl = ImGui::GetWindowDrawList();
+        ImVec2 p0 = ImGui::GetCursorScreenPos();
+        size.x = std::max(size.x, 32.0f);
+        size.y = std::max(size.y, 16.0f);
+        ImVec2 p1(p0.x + size.x, p0.y + size.y);
+        float lineH = ImGui::GetTextLineHeight();
+        float scale = style::uiScale;
+        dl->AddRectFilled(p0, p1, IM_COL32(26, 28, 36, 255));
+        dl->PushClipRect(p0, p1, true);
+
+        // Band names (the receiver's band plan), upper row
+        const float stripH = lineH * 1.25f;
+        const float stripTop = p0.y + 2.0f * scale;
+        const float stripBottom = stripTop + stripH;
+        if (cfg.showBandStrip && bands != nullptr) {
+            for (const auto& b : bands->bands) {
+                if (b.end < view.viewStart() || b.start > view.viewStop()) { continue; }
+                float xa = (float)view.freqToX(std::max(b.start, view.viewStart()), p0.x, size.x);
+                float xb = (float)view.freqToX(std::min(b.end, view.viewStop()), p0.x, size.x);
+                if (xb - xa < 1.0f) { continue; }
+                ImU32 col = IM_COL32(255, 255, 255, 255), colTrans = IM_COL32(255, 255, 255, 80);
+                auto ct = bandplan::colorTable.find(b.type);
+                if (ct != bandplan::colorTable.end()) {
+                    col = ct->second.colorValue;
+                    colTrans = ct->second.transColorValue;
+                }
+                dl->AddRectFilled(ImVec2(xa, stripTop), ImVec2(xb, stripBottom), colTrans);
+                if (b.start >= view.viewStart()) { dl->AddLine(ImVec2(xa, stripTop), ImVec2(xa, stripBottom), col, scale); }
+                if (b.end <= view.viewStop()) { dl->AddLine(ImVec2(xb, stripTop), ImVec2(xb, stripBottom), col, scale); }
+                ImVec2 ts = ImGui::CalcTextSize(b.name.c_str());
+                if (ts.x + 4.0f <= xb - xa) {
+                    dl->AddText(ImVec2((xa + xb) / 2.0f - ts.x / 2.0f, stripTop + stripH / 2.0f - ts.y / 2.0f), IM_COL32(255, 255, 255, 255), b.name.c_str());
+                }
+            }
+        }
+
+        // Frequency axis, lower row
+        int lines = std::max(2, (int)(size.x / (110.0f * scale)));
+        double step = niceStep(view.viewSpan(), lines);
+        if (step > 0) {
+            double first = std::ceil(view.viewStart() / step) * step;
+            int guard = 0;
+            for (double f = first; f <= view.viewStop() && guard < 200; f += step, guard++) {
+                float x = (float)view.freqToX(f, p0.x, size.x);
+                dl->AddLine(ImVec2(x, stripBottom + 2.0f * scale), ImVec2(x, stripBottom + 7.0f * scale), COL_TEXT, scale);
+                std::string l = axisLabel(f, step);
+                dl->AddText(ImVec2(x + 3.0f * scale, stripBottom + 3.0f * scale), COL_TEXT, l.c_str());
+            }
+            const char* u = axisUnit(view.viewStart(), step);
+            ImVec2 ts = ImGui::CalcTextSize(u);
+            labelBox(dl, ImVec2(p0.x + size.x - ts.x - 4, p1.y - lineH - 1), u, COL_TEXT);
+        }
+        dl->PopClipRect();
+        // Frame lines show where the plots end
+        dl->AddLine(p0, ImVec2(p1.x, p0.y), IM_COL32(90, 90, 100, 255));
+        dl->AddLine(ImVec2(p0.x, p1.y), p1, IM_COL32(90, 90, 100, 255));
+
+        // Dragging moves the view; the plots above and below stay free for picking frequencies
+        ImGuiIO& io = ImGui::GetIO();
+        ImGui::SetCursorScreenPos(p0);
+        ImGui::InvisibleButton("##sa_axis", size, ImGuiButtonFlags_MouseButtonLeft);
+        bool hovered = ImGui::IsItemHovered();
+        ImGui::SetItemUsingMouseWheel();
+        if (hovered || ImGui::IsItemActive()) { ImGui::SetMouseCursor(ImGuiMouseCursor_ResizeEW); }
+        if (hovered && io.MouseWheel != 0.0f) { view.zoom(std::pow(1.25, (double)io.MouseWheel), view.xToFreq(io.MousePos.x, p0.x, size.x)); }
+        if (ImGui::IsItemActive() && !pinching && !gripTouch && ImGui::IsMouseDragging(ImGuiMouseButton_Left, 0.0f)) {
+            view.pan(-(double)io.MouseDelta.x / (double)size.x * view.viewSpan());
+        }
+        handlePinch(p0, size, view);
+
+        // Grip in the middle: drag it up or down to change the height of the spectrum against the
+        // waterfall. Finger drags are followed directly (vertical drags are not sent as mouse drags).
+        bool resizeEnded = false;
+        const float gripW = 64.0f * scale;
+        const ImVec2 g0(p0.x + size.x / 2.0f - gripW / 2.0f, p0.y), g1(g0.x + gripW, p1.y);
+        ImGui::SetCursorScreenPos(g0);
+        ImGui::InvisibleButton("##sa_grip", ImVec2(gripW, size.y), ImGuiButtonFlags_MouseButtonLeft);
+        bool gripActive = ImGui::IsItemActive();
+        if (ImGui::IsItemHovered() || gripActive) { ImGui::SetMouseCursor(ImGuiMouseCursor_ResizeNS); }
+        if (gripActive && ImGui::IsMouseDragging(ImGuiMouseButton_Left, 0.0f)) {
+            cfg.spectrumHeightFrac = std::clamp(cfg.spectrumHeightFrac + io.MouseDelta.y / std::max(totalH, 1.0f), 0.15f, 0.85f);
+        }
+        if (ImGui::IsItemDeactivated()) { resizeEnded = true; }
+        const bool fd = io.FingerDown[0];
+        const ImVec2 fp = io.FingerPos[0];
+        if (fd && !gripPrevDown) {
+            gripTouch = fp.x >= g0.x && fp.x <= g1.x && fp.y >= g0.y - 10.0f * scale && fp.y <= g1.y + 10.0f * scale;
+            gripLastY = fp.y;
+        }
+        gripPrevDown = fd;
+        if (gripTouch && fd) {
+            cfg.spectrumHeightFrac = std::clamp(cfg.spectrumHeightFrac + (fp.y - gripLastY) / std::max(totalH, 1.0f), 0.15f, 0.85f);
+            gripLastY = fp.y;
+        }
+        if (gripTouch && !fd) {
+            gripTouch = false;
+            resizeEnded = true;
+        }
+        ImDrawList* gdl = ImGui::GetWindowDrawList();
+        const bool gripOn = gripActive || gripTouch;
+        float cy = (p0.y + p1.y) / 2.0f, gh = size.y * 0.5f;
+        gdl->AddRectFilled(ImVec2(g0.x + 6 * scale, cy - gh / 2.0f), ImVec2(g1.x - 6 * scale, cy + gh / 2.0f), gripOn ? IM_COL32(150, 160, 190, 235) : IM_COL32(70, 74, 88, 220), gh / 2.0f);
+        for (int i = -1; i <= 1; i++) {
+            gdl->AddLine(ImVec2(p0.x + size.x / 2.0f - 12 * scale, cy + i * 3.0f * scale), ImVec2(p0.x + size.x / 2.0f + 12 * scale, cy + i * 3.0f * scale), IM_COL32(190, 195, 215, 255), scale);
+        }
+        return resizeEnded;
     }
 
     void SpectrumView::drawWaterfall(ImVec2 size, WaterfallHistory& hist, const WaterfallConfig& cfg, FrequencyView& view,
