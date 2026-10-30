@@ -450,10 +450,13 @@ public:
         bwId = 16;
 
         // Load from config if available and validate
+#ifdef __ANDROID__
+        allowHighRate = config.conf["devices"][serial].contains("allowHighRate") && (bool)config.conf["devices"][serial]["allowHighRate"];
+#endif
         if (config.conf["devices"][serial].contains("sampleRate")) {
             int psr = config.conf["devices"][serial]["sampleRate"];
 #ifdef __ANDROID__
-            psr = std::min(psr, ANDROID_MAX_SAMPLE_RATE);
+            if (!allowHighRate) { psr = std::min(psr, ANDROID_MAX_SAMPLE_RATE); }
 #endif
             for (int i = 0; i < 7; i++) {
                 if (sampleRates[i] == psr) {
@@ -597,8 +600,8 @@ private:
 
         if (SmGui::Combo(CONCAT("##_hackrf_sr_sel_", _this->name), &_this->srId, sampleRatesTxt)) {
 #ifdef __ANDROID__
-            // Rates above the phone limit (20, 16 and 10 MS/s) are not offered
-            _this->srId = std::max(_this->srId, 3);
+            // Rates above the phone limit (20, 16 and 10 MS/s) need the option below
+            if (!_this->allowHighRate) { _this->srId = std::max(_this->srId, 3); }
 #endif
             _this->sampleRate = sampleRates[_this->srId];
             core::setInputSampleRate(_this->sampleRate);
@@ -606,6 +609,21 @@ private:
             config.conf["devices"][_this->selectedSerial]["sampleRate"] = _this->sampleRate;
             config.release(true);
         }
+#ifdef __ANDROID__
+        if (SmGui::Checkbox(CONCAT("Allow 10-20 MS/s (may stall on phones)##_hackrf_hirate_", _this->name), &_this->allowHighRate)) {
+            if (!_this->allowHighRate && _this->srId < 3) {
+                _this->srId = 3;
+                _this->sampleRate = sampleRates[_this->srId];
+                core::setInputSampleRate(_this->sampleRate);
+                config.acquire();
+                config.conf["devices"][_this->selectedSerial]["sampleRate"] = _this->sampleRate;
+                config.release(true);
+            }
+            config.acquire();
+            config.conf["devices"][_this->selectedSerial]["allowHighRate"] = _this->allowHighRate;
+            config.release(true);
+        }
+#endif
 
         SmGui::SameLine();
         SmGui::FillWidth();
@@ -759,6 +777,7 @@ private:
 
 #ifdef __ANDROID__
     int devFd = -1;
+    bool allowHighRate = false;
 #endif
 
     std::vector<std::string> devList;
