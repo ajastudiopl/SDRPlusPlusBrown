@@ -8,6 +8,7 @@ namespace spectrum {
         const char* BROADCAST = "Broadcast";
         const char* SERVICES = "Aviation, marine, services";
         const char* MOBILE = "Mobile, Wi-Fi";
+        const char* MICS = "Wireless mics (approx.)";
     }
 
     const std::vector<BandEntry>& bandPlan() {
@@ -70,11 +71,32 @@ namespace spectrum {
             { MOBILE, "Wi-Fi 5 upper (ch 149-177)", 5725.0e6, 5875.0e6 },
             { MOBILE, "Wi-Fi 6E (lower 6 GHz)", 5925.0e6, 6425.0e6 },
             { MOBILE, "GPS L1", 1565.0e6, 1586.0e6 },
+            // Radio microphones: ranges as printed on the equipment (approximate, check the label)
+            { MICS, "Mics 400-600", 400.0e6, 600.0e6 },
+            { MICS, "Mics UHF 470-694", 470.0e6, 694.0e6 },
+            { MICS, "Sennh. A1 470-516", 470.0e6, 516.0e6 },
+            { MICS, "Sennh. A 516-558", 516.0e6, 558.0e6 },
+            { MICS, "Sennh. G 566-608", 566.0e6, 608.0e6 },
+            { MICS, "Sennh. GB 606-648", 606.0e6, 648.0e6 },
+            { MICS, "Sennh. B 626-668", 626.0e6, 668.0e6 },
+            { MICS, "Sennh. C 734-776", 734.0e6, 776.0e6 },
+            { MICS, "Sennh. D 780-822", 780.0e6, 822.0e6 },
+            { MICS, "Sennh. E 823-865", 823.0e6, 865.0e6 },
+            { MICS, "Shure G50 470-534", 470.0e6, 534.0e6 },
+            { MICS, "Shure H50 534-598", 534.0e6, 598.0e6 },
+            { MICS, "Shure J50 572-636", 572.0e6, 636.0e6 },
+            { MICS, "Shure K51 606-670", 606.0e6, 670.0e6 },
+            { MICS, "Shure L50 632-696", 632.0e6, 696.0e6 },
+            { MICS, "Shure P51 710-782", 710.0e6, 782.0e6 },
+            { MICS, "Shure Q51 794-806", 794.0e6, 806.0e6 },
+            { MICS, "Mics 823-832", 823.0e6, 832.0e6 },
+            { MICS, "Mics 863-865", 863.0e6, 865.0e6 },
+            { MICS, "Mics 1785-1805", 1785.0e6, 1805.0e6 },
         };
         return plan;
     }
 
     std::vector<const char*> bandGroups() {
-        return { HAM_HF, HAM_VU, BROADCAST, SERVICES, MOBILE };
+        return { HAM_HF, HAM_VU, BROADCAST, SERVICES, MOBILE, MICS };
     }
 }

@@ -603,6 +603,16 @@ namespace spectrum {
                 if (ts.x + 4.0f <= xb - xa) {
                     dl->AddText(ImVec2((xa + xb) / 2.0f - ts.x / 2.0f, stripTop + stripH / 2.0f - ts.y / 2.0f), IM_COL32(255, 255, 255, 255), b.name.c_str());
                 }
+                else if ((b.type == "wifi" || b.type == "mic") && b.name.find(' ') != std::string::npos) {
+                    // Too narrow for the full name: just the channel / range letter (second word)
+                    size_t sp1 = b.name.find(' ');
+                    size_t sp2 = b.name.find(' ', sp1 + 1);
+                    std::string shortName = b.name.substr(sp1 + 1, sp2 == std::string::npos ? std::string::npos : sp2 - sp1 - 1);
+                    ImVec2 ss = ImGui::CalcTextSize(shortName.c_str());
+                    if (ss.x + 2.0f <= xb - xa) {
+                        dl->AddText(ImVec2((xa + xb) / 2.0f - ss.x / 2.0f, stripTop + stripH / 2.0f - ss.y / 2.0f), IM_COL32(255, 255, 255, 255), shortName.c_str());
+                    }
+                }
             }
         }
 
@@ -649,27 +659,39 @@ namespace spectrum {
         ImGui::InvisibleButton("##sa_grip", ImVec2(gripW, size.y), ImGuiButtonFlags_MouseButtonLeft);
         bool gripActive = ImGui::IsItemActive();
         if (ImGui::IsItemHovered() || gripActive) { ImGui::SetMouseCursor(ImGuiMouseCursor_ResizeNS); }
+        if (ImGui::IsItemActivated()) { gripMoved = 0; }
         if (gripActive && ImGui::IsMouseDragging(ImGuiMouseButton_Left, 0.0f)) {
+            gripMoved += std::fabs(io.MouseDelta.x) + std::fabs(io.MouseDelta.y);
             cfg.spectrumHeightFrac = std::clamp(cfg.spectrumHeightFrac + io.MouseDelta.y / std::max(totalH, 1.0f), 0.15f, 0.85f);
+            // Sideways movement over the grip still moves the view
+            if (!pinching) { view.pan(-(double)io.MouseDelta.x / (double)size.x * view.viewSpan()); }
+            gripShownUntil = ImGui::GetTime() + 3.5;
         }
-        if (ImGui::IsItemDeactivated()) { resizeEnded = true; }
+        if (ImGui::IsItemDeactivated()) {
+            resizeEnded = true;
+            if (gripMoved < 8.0f * scale) { gripShownUntil = ImGui::GetTime() + 3.5; }   // a tap shows the grip
+        }
         const bool fd = io.FingerDown[0];
         const ImVec2 fp = io.FingerPos[0];
         if (fd && !gripPrevDown) {
             gripTouch = fp.x >= g0.x && fp.x <= g1.x && fp.y >= g0.y - 10.0f * scale && fp.y <= g1.y + 10.0f * scale;
             gripLastY = fp.y;
+            gripStartY = fp.y;
         }
         gripPrevDown = fd;
         if (gripTouch && fd) {
             cfg.spectrumHeightFrac = std::clamp(cfg.spectrumHeightFrac + (fp.y - gripLastY) / std::max(totalH, 1.0f), 0.15f, 0.85f);
             gripLastY = fp.y;
+            gripShownUntil = ImGui::GetTime() + 3.5;
         }
         if (gripTouch && !fd) {
             gripTouch = false;
             resizeEnded = true;
+            if (std::fabs(fp.y - gripStartY) < 8.0f * scale) { gripShownUntil = ImGui::GetTime() + 3.5; }   // a tap shows the grip
         }
         ImDrawList* gdl = ImGui::GetWindowDrawList();
         const bool gripOn = gripActive || gripTouch;
+        if (!gripOn && ImGui::GetTime() >= gripShownUntil) { return resizeEnded; }
         float cy = (p0.y + p1.y) / 2.0f, gh = size.y * 0.5f;
         gdl->AddRectFilled(ImVec2(g0.x + 6 * scale, cy - gh / 2.0f), ImVec2(g1.x - 6 * scale, cy + gh / 2.0f), gripOn ? IM_COL32(150, 160, 190, 235) : IM_COL32(70, 74, 88, 220), gh / 2.0f);
         for (int i = -1; i <= 1; i++) {

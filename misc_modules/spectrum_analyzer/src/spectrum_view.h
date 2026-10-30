@@ -114,6 +114,9 @@ namespace spectrum {
         bool gripTouch = false;
         bool gripPrevDown = false;
         float gripLastY = 0;
+        float gripStartY = 0;
+        float gripMoved = 0;
+        double gripShownUntil = 0;   // the grip is hidden (it would cover the axis) until the middle is tapped or dragged
         float pinchLastDist = 0;
         void drawRangeOverlays(ImDrawList* dl, ImVec2 p0, ImVec2 p1, FrequencyView& view);
         float dragLastX = 0;
