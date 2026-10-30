@@ -170,6 +170,39 @@ namespace spectrum {
         else { pinching = false; }
     }
 
+    bool SpectrumView::labelAt(ImVec2 pos, bool hovered, double& hz) const {
+        // The tooltip is drawn over everything else, also outside the plot it belongs to.
+        if (tooltipShown && pos.x >= tooltipLabel.min.x && pos.x < tooltipLabel.max.x && pos.y >= tooltipLabel.min.y && pos.y < tooltipLabel.max.y) {
+            hz = tooltipLabel.hz;
+            return true;
+        }
+        if (!hovered) { return false; }
+        // Labels are small, the area that reacts to a finger is a bit larger.
+        const float pad = 6.0f * style::uiScale;
+        float best = std::numeric_limits<float>::max();
+        bool found = false;
+        for (auto& l : tuneLabels) {
+            if (pos.x < l.min.x - pad || pos.x >= l.max.x + pad || pos.y < l.min.y - pad || pos.y >= l.max.y + pad) { continue; }
+            float dx = pos.x - (l.min.x + l.max.x) / 2.0f;
+            float dy = pos.y - (l.min.y + l.max.y) / 2.0f;
+            float dist = dx * dx + dy * dy;
+            if (dist < best) {
+                best = dist;
+                hz = l.hz;
+                found = true;
+            }
+        }
+        return found;
+    }
+
+    void SpectrumView::captureTooltip(double hz) {
+        if (ImGui::GetFrameCount() <= tooltipHoldFrame) { return; }
+        ImVec2 pos = ImGui::GetWindowPos();
+        ImVec2 sz = ImGui::GetWindowSize();
+        tooltipLabel = { pos, ImVec2(pos.x + sz.x, pos.y + sz.y), hz };
+        tooltipShown = true;
+    }
+
     bool SpectrumView::handleInteraction(const char* id, ImVec2 p0, ImVec2 size, FrequencyView& view, ViewEvents& ev,
                                          const std::vector<Marker>* markers) {
         ImGuiIO& io = ImGui::GetIO();
@@ -179,6 +212,24 @@ namespace spectrum {
         bool active = ImGui::IsItemActive();
         ImGui::SetItemUsingMouseWheel();
         double mouseHz = view.xToFreq(io.MousePos.x, p0.x, size.x);
+
+        // Runs once per frame, in the spectrum pass, before the waterfall looks at the same click.
+        if (markers) {
+            labelTuned = false;
+            if (io.FingerDown[0]) { tooltipHoldFrame = ImGui::GetFrameCount() + 2; }
+            if (ImGui::IsMouseClicked(ImGuiMouseButton_Left)) {
+                labelPressed = !selectMode && labelAt(io.MousePos, hovered, labelPressHz);
+            }
+            if (labelPressed && ImGui::IsMouseReleased(ImGuiMouseButton_Left)) {
+                labelPressed = false;
+                float slop = 3.0f * style::uiScale;
+                if (io.MouseDragMaxDistanceSqr[ImGuiMouseButton_Left] < slop * slop) {
+                    ev.tune = true;
+                    ev.tuneHz = labelPressHz;
+                    labelTuned = true;
+                }
+            }
+        }
 
         if (hovered && io.MouseWheel != 0.0f) {
             view.zoom(std::pow(1.25, (double)io.MouseWheel), mouseHz);
@@ -243,7 +294,7 @@ namespace spectrum {
                 if (selPhase == 2 && selB < selA) { std::swap(selA, selB); }
                 if (selPhase == 2 && selB - selA < 1e3) { selPhase = 1; }
             }
-            else if (!pressDragged) {
+            else if (!pressDragged && !labelTuned) {
                 hasTap = true;
                 tapHz = mouseHz;
             }
@@ -252,7 +303,7 @@ namespace spectrum {
             dragging = false;
             pressInside = false;
         }
-        if (hovered && !selectMode && ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left)) {
+        if (hovered && !selectMode && !labelPressed && !labelTuned && ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left)) {
             ev.tune = true;
             ev.tuneHz = mouseHz;
         }
@@ -396,6 +447,7 @@ namespace spectrum {
 
         // Placed label rectangles, used to keep labels from overlapping.
         std::vector<ImVec4> placed;
+        tuneLabels.clear();
         auto overlaps = [&](float x0, float y0, float x1, float y1) {
             float gap = 8.0f * style::uiScale;
             for (auto& r : placed) {
@@ -427,6 +479,7 @@ namespace spectrum {
                 dl->AddTriangleFilled(ImVec2(x, y), ImVec2(x - s, y - 2 * s), ImVec2(x + s, y - 2 * s), COL_PEAK);
                 labelBox(dl, ImVec2(lx, ly), l.c_str(), COL_PEAK);
                 placed.push_back(ImVec4(lx - 2, ly - 1, lx + ts.x + 2, ly + ts.y + 1));
+                tuneLabels.push_back({ ImVec2(lx - 2, ly - 1), ImVec2(lx + ts.x + 2, ly + ts.y + 1), pk->freqHz });
                 labelled++;
             }
         }
@@ -451,6 +504,7 @@ namespace spectrum {
                 while (overlaps(lx - 2, ly - 1, lx + ts.x + 2, ly + ts.y + 1) && ly < p1.y - 3 * lineH) { ly += lineH + 3; }
                 labelBox(dl, ImVec2(lx, ly), buf, COL_MARKER);
                 placed.push_back(ImVec4(lx - 2, ly - 1, lx + ts.x + 2, ly + ts.y + 1));
+                tuneLabels.push_back({ ImVec2(lx - 2, ly - 1), ImVec2(lx + ts.x + 2, ly + ts.y + 1), m.freqHz });
             }
         }
 
@@ -488,6 +542,7 @@ namespace spectrum {
         drawRangeOverlays(dl, ImVec2(p0.x, plotTop), p1, view);
         bool hovered = handleInteraction("##sa_spectrum", p0, size, view, ev, &markers);
         hoverHz = hovered ? view.xToFreq(ImGui::GetIO().MousePos.x, p0.x, size.x) : std::numeric_limits<double>::quiet_NaN();
+        if (ImGui::GetFrameCount() > tooltipHoldFrame) { tooltipShown = false; }
         if (hovered && !dragging) {
             ImVec2 mp = ImGui::GetIO().MousePos;
             dl->AddLine(ImVec2(mp.x, p0.y), ImVec2(mp.x, p1.y), COL_CURSOR);
@@ -507,7 +562,8 @@ namespace spectrum {
             if (snap.stats.lastFrameTimeNs > 0) {
                 ImGui::TextDisabled("Measured %.1f s ago", (double)(nowNs() - snap.stats.lastFrameTimeNs) * 1e-9);
             }
-            ImGui::TextDisabled("Double-click: tune receiver, right-click: menu");
+            ImGui::TextDisabled("Tap here or double-click: tune receiver, right-click: menu");
+            captureTooltip(f);
             ImGui::EndTooltip();
         }
         dl->PopClipRect();
@@ -804,6 +860,8 @@ namespace spectrum {
                 else { ImGui::TextDisabled("Level: not measured"); }
                 ImGui::TextDisabled("%.1f s ago%s", (double)(nowNs() - info.timeNs) * 1e-9, info.complete ? "" : " (incomplete sweep)");
             }
+            ImGui::TextDisabled("Tap here or double-click: tune receiver");
+            captureTooltip(f);
             ImGui::EndTooltip();
         }
         dl->PopClipRect();

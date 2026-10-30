@@ -123,5 +123,20 @@ namespace spectrum {
         double contextHz = 0;
         int contextMarker = -1;
         std::vector<ImVec2> pts;
+
+        // Frequency bubbles (tooltip, peak and marker labels): a tap on one tunes the receiver.
+        struct TuneLabel {
+            ImVec2 min, max;
+            double hz;
+        };
+        bool labelAt(ImVec2 pos, bool hovered, double& hz) const;
+        void captureTooltip(double hz);
+        std::vector<TuneLabel> tuneLabels;
+        TuneLabel tooltipLabel = {};
+        bool tooltipShown = false;
+        int tooltipHoldFrame = 0;   // a touch moves the tooltip to the finger: keep the rectangle it was tapped at
+        bool labelPressed = false;
+        bool labelTuned = false;
+        double labelPressHz = 0;
     };
 }
