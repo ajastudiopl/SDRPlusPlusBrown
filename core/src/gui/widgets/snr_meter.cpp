@@ -51,6 +51,18 @@ namespace ImGui {
             window->DrawList->AddText(min + ImVec2(x, 16.0f * style::uiScale), text, buf);
         }
 
+        // The value itself, small and dim at the right end of the bar row (SNR in dB)
+        {
+            char vbuf[24];
+            snprintf(vbuf, sizeof vbuf, "%d dB", (int)roundf(val));
+            ImFont* font = ImGui::GetFont();
+            float fs = ImGui::GetFontSize() * 0.62f;
+            ImVec2 ts = font->CalcTextSizeA(fs, FLT_MAX, 0.0f, vbuf);
+            ImVec2 pos(min.x + size.x - ts.x - (3.0f * style::uiScale), min.y + (((10.0f * style::uiScale) - ts.y) / 2.0f));
+            window->DrawList->AddText(font, fs, pos + ImVec2(1, 1), IM_COL32(0, 0, 0, 140), vbuf);
+            window->DrawList->AddText(font, fs, pos, IM_COL32(255, 255, 255, 190), vbuf);
+        }
+
         onSNRMeterExtPoint.emit(SNRMeterExtPoint(min + ImVec2(0, -min.y), drawVal));
     }
 }

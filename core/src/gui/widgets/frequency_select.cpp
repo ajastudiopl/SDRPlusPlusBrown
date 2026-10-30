@@ -349,8 +349,8 @@ void FrequencySelect::drawShuttleBar() {
     float margin = 16.0f * scale;
     float barH = 18.0f * scale;
     float x0 = margin, x1 = io.DisplaySize.x - margin;
-    // Well below the digits and the finger, so neither the values nor the bar hide each other
-    float y0 = std::max(digitBottomMaxs[n - 1].y + 120.0f * scale, io.DisplaySize.y * 0.35f);
+    // Right under the digits: the backdrop (with the speed label) starts below them, so nothing is covered
+    float y0 = digitBottomMaxs[n - 1].y + 42.0f * scale;
     float y1 = y0 + barH;
     float cx = (x0 + x1) / 2.0f;
     float half = (x1 - x0) / 2.0f;
