@@ -186,6 +186,9 @@ namespace ImGui {
         float squelchMeasuredDb = -200.0f;   // level the squelch currently measures in the channel
         float squelchCal = 0.0f;             // live calibration: spectrum dB of the channel minus twice the squelch dB
         bool squelchCalValid = false;
+
+        // Set by the main window while two fingers zoom the view: the waterfall ignores its own input
+        bool touchPinching = false;
         bool quiet = false;
 
         struct FFTRedrawArgs {

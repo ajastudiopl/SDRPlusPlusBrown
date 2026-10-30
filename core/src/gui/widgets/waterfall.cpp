@@ -408,7 +408,18 @@ namespace ImGui {
         }
     }
 
+    // Half width of the area that grabs a VFO border: wide on touch screens, narrow VFOs keep room in the middle
+    static float vfoGripSize(float vfoWidth) {
+        bool touch = displaymenu::phoneLayout;
+#ifdef __ANDROID__
+        touch = true;
+#endif
+        if (!touch) { return 2.0f * style::uiScale; }
+        return std::clamp(vfoWidth / 3.0f, 2.0f * style::uiScale, 22.0f * style::uiScale);
+    }
+
     void WaterFall::processInputs() {
+        if (touchPinching) { return; }
         // Pre calculate useful values
         WaterfallVFO* selVfo = NULL;
         if (selectedVFO != "") {
@@ -418,11 +429,39 @@ namespace ImGui {
         ImVec2 drag = ImGui::GetMouseDragDelta(ImGuiMouseButton_Left);
         ImVec2 dragOrigin(mousePos.x - drag.x, mousePos.y - drag.y);
 
+        // Touch: a finger on the grip in the middle of the FFT / waterfall divider resizes them.
+        // Vertical finger drags do not reach us as mouse drags, so the finger is followed directly.
+        {
+            static bool gripPrevDown = false, gripTouch = false;
+            ImGuiIO& gio = ImGui::GetIO();
+            const bool fd = gio.FingerDown[0];
+            const ImVec2 fp = gio.FingerPos[0];
+            const float gx = widgetPos.x + widgetSize.x / 2.0f, gy = widgetPos.y + newFFTAreaHeight;
+            if (fd && !gripPrevDown) {
+                gripTouch = fabsf(fp.x - gx) < 44.0f * style::uiScale && fabsf(fp.y - gy) < 26.0f * style::uiScale;
+            }
+            gripPrevDown = fd;
+            if (gripTouch && fd) {
+                newFFTAreaHeight = std::clamp<float>(fp.y - widgetPos.y, 150, widgetSize.y - 50);
+                ImGui::GetForegroundDrawList()->AddLine(ImVec2(widgetPos.x, newFFTAreaHeight + widgetPos.y), ImVec2(widgetEndPos.x, newFFTAreaHeight + widgetPos.y),
+                                                        ImGui::GetColorU32(ImGuiCol_SeparatorActive), style::uiScale);
+                return;
+            }
+            if (gripTouch && !fd) {
+                gripTouch = false;
+                FFTAreaHeight = newFFTAreaHeight;
+                onResize();
+                return;
+            }
+        }
+
         bool mouseHovered, mouseHeld;
         bool mouseClicked = ImGui::ButtonBehavior(ImRect(fftAreaMin, wfMax), GetID("WaterfallID"), &mouseHovered, &mouseHeld,
                                                   ImGuiButtonFlags_MouseButtonLeft | ImGuiButtonFlags_PressedOnClick);
 
         mouseInFFTResize = (dragOrigin.x > widgetPos.x && dragOrigin.x < widgetPos.x + widgetSize.x && dragOrigin.y >= widgetPos.y + newFFTAreaHeight - (2.0f * style::uiScale) && dragOrigin.y <= widgetPos.y + newFFTAreaHeight + (2.0f * style::uiScale));
+        // The grip in the middle is a larger target for the mouse as well
+        mouseInFFTResize = mouseInFFTResize || (fabsf(dragOrigin.x - (widgetPos.x + widgetSize.x / 2.0f)) < 40.0f * style::uiScale && fabsf(dragOrigin.y - (widgetPos.y + newFFTAreaHeight)) < 14.0f * style::uiScale);
         mouseInFreq = IS_IN_AREA(dragOrigin, freqAreaMin, freqAreaMax);
         mouseInFFT = IS_IN_AREA(dragOrigin, fftAreaMin, fftAreaMax);
         mouseInWaterfall = IS_IN_AREA(dragOrigin, wfMin, wfMax);
@@ -1239,6 +1278,12 @@ namespace ImGui {
         drawFFT();
         if (waterfallVisible) {
             drawWaterfall();
+            // Grip in the middle of the divider: drag it up or down to resize the FFT and the waterfall
+            float gripY = widgetPos.y + newFFTAreaHeight;
+            float gripX = widgetPos.x + widgetSize.x / 2.0f;
+            float gripW = 52.0f * style::uiScale, gripH = 8.0f * style::uiScale;
+            window->DrawList->AddRectFilled(ImVec2(gripX - gripW / 2.0f, gripY - gripH / 2.0f), ImVec2(gripX + gripW / 2.0f, gripY + gripH / 2.0f),
+                                            fftResizeSelect ? IM_COL32(150, 160, 190, 255) : IM_COL32(90, 95, 110, 200), gripH / 2.0f);
         }
         drawVFOs();
         if (bandplan != NULL && bandplanVisible) {
@@ -1566,10 +1611,11 @@ namespace ImGui {
             vfo->wfRectMax = ImVec2(vfo->rectMax.x, wfMax.y);
             vfo->wfLineMin = ImVec2(vfo->lineMin.x, wfMin.y - 1);
             vfo->wfLineMax = ImVec2(vfo->lineMax.x, wfMax.y - 1);
-            vfo->wfLbwSelMin = ImVec2(vfo->wfRectMin.x - 2, vfo->wfRectMin.y);
-            vfo->wfLbwSelMax = ImVec2(vfo->wfRectMin.x + 2, vfo->wfRectMax.y);
-            vfo->wfRbwSelMin = ImVec2(vfo->wfRectMax.x - 2, vfo->wfRectMin.y);
-            vfo->wfRbwSelMax = ImVec2(vfo->wfRectMax.x + 2, vfo->wfRectMax.y);
+            float wfGrip = vfoGripSize(vfo->wfRectMax.x - vfo->wfRectMin.x);
+            vfo->wfLbwSelMin = ImVec2(vfo->wfRectMin.x - wfGrip, vfo->wfRectMin.y);
+            vfo->wfLbwSelMax = ImVec2(vfo->wfRectMin.x + wfGrip, vfo->wfRectMax.y);
+            vfo->wfRbwSelMin = ImVec2(vfo->wfRectMax.x - wfGrip, vfo->wfRectMin.y);
+            vfo->wfRbwSelMax = ImVec2(vfo->wfRectMax.x + wfGrip, vfo->wfRectMax.y);
             vfo->redrawRequired = false;
         }
     }
@@ -1786,7 +1832,7 @@ namespace ImGui {
         rectMin = ImVec2(gui::waterfall.fftAreaMin.x + left, gui::waterfall.fftAreaMin.y + 1);
         rectMax = ImVec2(gui::waterfall.fftAreaMin.x + right + 1, gui::waterfall.fftAreaMax.y);
 
-        float gripSize = 2.0f * style::uiScale;
+        float gripSize = vfoGripSize(rectMax.x - rectMin.x);
         lbwSelMin = ImVec2(rectMin.x - gripSize, rectMin.y);
         lbwSelMax = ImVec2(rectMin.x + gripSize, rectMax.y);
         rbwSelMin = ImVec2(rectMax.x - gripSize, rectMin.y);

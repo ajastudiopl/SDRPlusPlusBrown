@@ -554,7 +554,11 @@ void MainWindow::preDraw(ImGui::WaterfallVFO** vfo) {
     // Handle change in selected frequency
     if (gui::freqSelect.frequencyChanged) {
         gui::freqSelect.frequencyChanged = false;
-        tuner::tune(tuningMode, gui::waterfall.selectedVFO, gui::freqSelect.frequency);
+        // With center tuning the analyzer centres its own range on this frequency, so the source
+        // is not retuned here while another main view (the analyzer sweep) uses it
+        if (!(tuningMode == tuner::TUNER_MODE_CENTER && mainViewShown())) {
+            tuner::tune(tuningMode, gui::waterfall.selectedVFO, gui::freqSelect.frequency);
+        }
         if (*vfo != NULL) {
             (*vfo)->centerOffsetChanged = false;
             (*vfo)->lowerOffsetChanged = false;
@@ -1138,6 +1142,42 @@ void MainWindow::draw() {
         ImGui::SetScrollX(0.0f);
         ImGui::SetScrollY(0.0f);
 
+        // Touch: pinching over the waterfall zooms like the Zoom slider (the VFO bandwidth is changed
+        // by dragging its edges)
+        {
+            static bool zPinch = false;
+            static float zStartDist = 0;
+            static double zStartBw = 0;
+            ImGuiIO& zio = ImGui::GetIO();
+            gui::waterfall.touchPinching = false;
+            if (zio.FingerDown[0] && zio.FingerDown[1]) {
+                const ImVec2 fa = zio.FingerPos[0], fb = zio.FingerPos[1];
+                const float dist = fabsf(fa.x - fb.x);
+                const float midX = (fa.x + fb.x) / 2.0f, midY = (fa.y + fb.y) / 2.0f;
+                bool inWf = midX >= gui::waterfall.fftAreaMin.x && midX <= gui::waterfall.wfMax.x && midY >= gui::waterfall.fftAreaMin.y && midY <= gui::waterfall.wfMax.y;
+                if (!lockWaterfallControls && ImGui::GetTopMostPopupModal() == NULL && inWf && (zPinch || dist > 30.0f * style::uiScale)) {
+                    double wfBw = gui::waterfall.getBandwidth();
+                    if (!zPinch) {
+                        zPinch = true;
+                        zStartDist = dist;
+                        zStartBw = gui::waterfall.getViewBandwidth() / std::max(gui::waterfall.getUsableSpectrumRatio(), 0.01);
+                    }
+                    // Spreading the fingers narrows the view (zoom in); the slider value is the square root of the position
+                    double target = zStartBw * (double)zStartDist / (double)std::max(dist, 10.0f);
+                    double factor = std::clamp((target - 1000.0) / std::max(wfBw - 1000.0, 1.0), 0.0, 1.0);
+                    bw = (float)sqrt(factor);
+                    updateWaterfallZoomBandwidth(bw);
+                    gui::waterfall.touchPinching = true;
+                }
+            }
+            else if (zPinch) {
+                zPinch = false;
+                core::configManager.acquire();
+                core::configManager.conf["zoomBw"] = bw;
+                core::configManager.release(true);
+            }
+        }
+
         // Squelch marker for the selected receiver (only while the squelch is enabled)
         gui::waterfall.squelchLineVisible = false;
         if (core::modComManager.interfaceExists(gui::waterfall.selectedVFO) && core::modComManager.getModuleName(gui::waterfall.selectedVFO) == "radio") {
@@ -1683,6 +1723,10 @@ void MainWindow::selectMainView(std::string name) {
 
 std::string MainWindow::getSelectedMainView() {
     return selectedMainView;
+}
+
+bool MainWindow::isCenterTuning() {
+    return tuningMode == tuner::TUNER_MODE_CENTER;
 }
 
 bool MainWindow::mainViewShown() {

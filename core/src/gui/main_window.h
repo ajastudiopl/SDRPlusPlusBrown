@@ -62,6 +62,9 @@ public:
     void selectMainView(std::string name);
     std::string getSelectedMainView();
 
+    // True while the "center tuning" switch next to the main frequency is on
+    bool isCenterTuning();
+
     // Portrait layout (screen taller than wide): scrollable top strip, frequency on its
     // own row, full width menu instead of the waterfall, sliders behind a button.
     static bool isPortraitLayout();
