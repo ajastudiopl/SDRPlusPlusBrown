@@ -1777,7 +1777,11 @@ void MobileMainWindow::draw() {
 
     pvt->audioRecorder.updateControlState(!encoder.enabled, this->qsoPanel->transmitting);
 
-    if (drawAudioWaterfall && !hasBottomWindow("audio_waterfall")) {
+    bool showBandPanel = displaymenu::transcieverLayout != 0 && !mainViewShown() && !isPortraitLayout();
+    bandPanelLayout = showBandPanel;
+    // the whole bottom segment can be folded away so that the waterfall gets the room, only the line with the buttons stays
+    const bool bottomFolded = showBandPanel && bottomSegmentHidden;
+    if (drawAudioWaterfall && !bottomFolded && !hasBottomWindow("audio_waterfall")) {
         addBottomWindow("audio_waterfall", [&]() {
             // with the audio made by the server there is a spectrum around the tuned frequency to show, otherwise the audio spectrum
             if (!wideoverview::drawNarrowZoom()) {
@@ -1785,15 +1789,14 @@ void MobileMainWindow::draw() {
             }
         });
     }
-    if (!drawAudioWaterfall && hasBottomWindow("audio_waterfall")) {
+    if ((!drawAudioWaterfall || bottomFolded) && hasBottomWindow("audio_waterfall")) {
         removeBottomWindow("audio_waterfall");
     }
     bottomBarRightLimit = 0;        // set again below by the layout that has buttons in the bottom bar
-    bool showBandPanel = displaymenu::transcieverLayout != 0 && !mainViewShown() && !isPortraitLayout();
-    if (showBandPanel && !hasBottomWindow("bands_panel")) {
+    if (showBandPanel && !bottomFolded && !hasBottomWindow("bands_panel")) {
         addBottomWindow("bands_panel", [this]() { drawBandPanel(); });
     }
-    if (!showBandPanel && hasBottomWindow("bands_panel")) {
+    if ((!showBandPanel || bottomFolded) && hasBottomWindow("bands_panel")) {
         removeBottomWindow("bands_panel");
     }
 
@@ -1848,7 +1851,7 @@ void MobileMainWindow::draw() {
     // landscape keeps room for the bottom bar
     const float rowButtonH = (std::min)(style::baseFont->FontSize * 2.6f, ImGui::GetIO().DisplaySize.y * 0.075f);
     const float rowButtonW = (std::min)(style::baseFont->FontSize * 7.2f, ImGui::GetIO().DisplaySize.x * 0.1f);
-    if (qsoMode == VIEW_DEFAULT && hasBottomWindow("bands_panel")) { statusHeight = rowButtonH + ImGui::GetStyle().WindowPadding.y; }
+    if (qsoMode == VIEW_DEFAULT && bandPanelLayout) { statusHeight = rowButtonH + ImGui::GetStyle().WindowPadding.y; }
     switch (qsoMode) {
     case VIEW_QSO:
         buttonsWidth = 600;
@@ -1880,7 +1883,7 @@ void MobileMainWindow::draw() {
     // waterfall, reduced for menu
     ImGui::SetCursorPos(ImGui::GetCursorPos() + ImVec2(menuWidth, 0));
     // in the default view the few small buttons sit in the bottom bar, so the spectrum and the waterfall take the whole width
-    const bool buttonsInBottomBar = qsoMode == VIEW_DEFAULT && hasBottomWindow("bands_panel");
+    const bool buttonsInBottomBar = qsoMode == VIEW_DEFAULT && bandPanelLayout;
     ImVec2 waterfallRegion = ImVec2(ImGui::GetContentRegionAvail().x - encoderWidth - (buttonsInBottomBar ? 0 : buttonsWidth), ImGui::GetContentRegionAvail().y - statusHeight);
 
     lockWaterfallControls |= (qsoMode != VIEW_DEFAULT && modeToggle.upperText == "CW") || !encoder.enabled;
@@ -1933,7 +1936,6 @@ void MobileMainWindow::draw() {
         ImGuiStyle &style = ImGui::GetStyle();
 
         auto original = style.ScrollbarSize;
-        style.ScrollbarSize *= (displaymenu::phoneLayout ? 3 : 1);
         ImGui::BeginChildEx("Menu", ImGui::GetID("sdrpp_menu"), menuRegion, false, 0);
         style.ScrollbarSize = original;
 
@@ -2053,10 +2055,12 @@ void MobileMainWindow::draw() {
     double offsetDelta = encoder.draw(currentFreq);
     if (offsetDelta != 0) {
         auto externalFreq = vfo ? (vfo->generalOffset + gui::waterfall.getCenterFrequency()) : gui::waterfall.getCenterFrequency();
-        if (fabs(externalFreq - encoder.currentValue) > 10000) {
+        if (fabs(externalFreq - encoder.currentValue) > 500000) {
             // something changed! e.g. changed band when encoder was rotating
             encoder.speed = 0;
         } else {
+            // a fast turn is a big step per frame, the tuning may be a little behind: carry on from where it really is
+            if (fabs(externalFreq - encoder.currentValue) > 10000) { encoder.currentValue = externalFreq; }
             // slow turning is fine tuning, fast turning goes over the band; the speed is in radians per second
             double turnSpeed = fabs(offsetDelta) / std::max<double>(ImGui::GetIO().DeltaTime, 0.001);
             double gain = 300.0 * (1.0 + pow(turnSpeed / 2.0, 1.6));
@@ -2090,7 +2094,8 @@ void MobileMainWindow::draw() {
     auto nButtonsConfig = (int) ((sizeof(buttonsConfig) / sizeof(buttonsConfig[0])));
     auto buttonsSpaceY = ImGui::GetContentRegionAvail().y;
     // in the default view the buttons are one row on the right of the line under the waterfall, next to the rollers they belong to
-    const float rowTotalW = (float) nButtonsDefault * rowButtonW + vertPadding;
+    const float toggleW = buttonsInBottomBar ? rowButtonH * 1.1f : 0.0f;    // the fold button of the bottom segment sits in front of the four buttons
+    const float rowTotalW = (float) nButtonsDefault * rowButtonW + vertPadding + toggleW;
     if (buttonsInBottomBar) {
         buttonsSpaceY = rowButtonH + vertPadding;
         ImGui::SetCursorPos(cornerPos + ImVec2{waterfallRegion.x + menuWidth - rowTotalW, waterfallRegion.y});
@@ -2154,11 +2159,27 @@ void MobileMainWindow::draw() {
     // the buttons of the default view only need to be easy to hit, the QSO views use the full height
     auto intButtonHeight = style::baseFont->FontSize * (this->qsoMode == VIEW_DEFAULT ? 1.8 : 3.3);
     const ImVec2 childRegion = buttonsInBottomBar ? ImVec2(rowButtonW - vertPadding, rowButtonH) : ImVec2(defaultButtonsWidth, intButtonHeight - vertPadding);
+    if (buttonsInBottomBar) {
+        ImGui::SetCursorPos(buttonsStart);
+        ImVec2 size(toggleW - vertPadding, rowButtonH);
+        if (ImGui::InvisibleButton("##fold_bottom_segment", size)) {
+            bottomSegmentHidden = !bottomSegmentHidden;
+            setConfig("bottomSegmentHidden", (int) bottomSegmentHidden);
+        }
+        auto dl = ImGui::GetWindowDrawList();
+        ImVec2 a = ImGui::GetItemRectMin(), z = ImGui::GetItemRectMax();
+        dl->AddRectFilled(a, z, ImGui::IsItemActive() ? IM_COL32(255, 255, 128, 255) : IM_COL32(128, 128, 128, 255), rowButtonH / 10);
+        ImVec2 c((a.x + z.x) / 2, (a.y + z.y) / 2);
+        float r = rowButtonH * 0.22f;
+        // pointing down: press to fold the segment away; pointing up: press to bring it back
+        if (bottomSegmentHidden) { dl->AddTriangleFilled(ImVec2(c.x - r, c.y + r * 0.6f), ImVec2(c.x + r, c.y + r * 0.6f), ImVec2(c.x, c.y - r * 0.8f), IM_COL32_WHITE); }
+        else { dl->AddTriangleFilled(ImVec2(c.x - r, c.y - r * 0.6f), ImVec2(c.x + r, c.y - r * 0.6f), ImVec2(c.x, c.y + r * 0.8f), IM_COL32_WHITE); }
+    }
     for (auto b = 0; b < NBUTTONS; b++) {
         char chi[100];
         snprintf(chi, sizeof(chi), "mob_button_%d", b);
         if (buttonsInBottomBar) {
-            ImGui::SetCursorPos(buttonsStart + ImVec2{(float) b * rowButtonW, 0});
+            ImGui::SetCursorPos(buttonsStart + ImVec2{toggleW + (float) b * rowButtonW, 0});
         } else if (this->qsoMode == VIEW_DEFAULT && false) {
             // align from top
             ImGui::SetCursorPos(buttonsStart + ImVec2{0, buttonsSpaceY - float(nButtonsDefault - b) * (childRegion.y + vertPadding)});
@@ -2667,6 +2688,7 @@ void MobileMainWindow::init() {
     getConfig("scanSWRPosition_y", scanSWRPopupPosition.y);
     getConfig("buttonsWidthScale", buttonsWidthScale);
     getConfig("encoderWidth", encoderWidth);
+    { int folded = 0; getConfig("bottomSegmentHidden", folded); bottomSegmentHidden = folded != 0; }
 
 
     displaymenu::onDisplayDraw.bindHandler(&displayDrawHandler);

@@ -74,6 +74,8 @@ public:
     void drawBandPanel();
     BandPanel::Callbacks bandCallbacks();
     bool openModePopupRequested = false;
+    bool bottomSegmentHidden = false;   // the zoom and band panel are folded away, only the line with the buttons stays
+    bool bandPanelLayout = false;       // this layout has the band panel (shown or folded)
     MobileButton autoWaterfall;
     MobileButton audioConfigToggle;
     MobileButton smallWheelFunction;

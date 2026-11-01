@@ -7,6 +7,7 @@
 #include <imgui_internal.h>
 #include <imutils.h>
 #include <algorithm>
+#include <new>
 #include <cmath>
 #include <signal_path/signal_path.h>
 #include <volk/volk.h>
@@ -1117,7 +1118,7 @@ namespace ImGui {
         MEASURE_LOCK_GUARD(latestFFTMtx);
         MEASURE_LOCK_GUARD1(smoothingBufMtx);
         // return if widget is too small
-        if (widgetSize.x < 100 || widgetSize.y < 100) {
+        if (!(widgetSize.x >= 100 && widgetSize.y >= 100) || widgetSize.x > 16000 || widgetSize.y > 16000) {
             return;
         }
 
@@ -1132,6 +1133,7 @@ namespace ImGui {
                 waterfallHeight += 50.0f * style::uiScale;
             }
 
+            if (waterfallHeight < 1) { waterfallHeight = 1; }
             waterfallHeadSectionIndex = 0;
             waterfallHeadSectionHeight = 0;
             waterfallFbHeadRowIndex = 0;
@@ -1141,27 +1143,40 @@ namespace ImGui {
             fftHeight = widgetSize.y - (50.0f * style::uiScale);
         }
         dataWidth = widgetSize.x - (60.0f * style::uiScale);
+        if (dataWidth < 1) { dataWidth = 1; }
         //        flog::info("onresize: dataWidth={} wsx={}", (int)dataWidth, widgetSize.x);
 
         if (waterfallVisible) {
             // Raw FFT resize
             fftLines = std::min<int>(fftLines, waterfallHeight) - 1;
             if (rawFFTs != NULL) {
-                if (currentFFTLine != 0) {
+                if (currentFFTLine > 0 && currentFFTLine < lastWaterfallHeight && lastWaterfallHeight <= rawFFTsAllocLines && rawFFTSize == rawFFTsAllocSize) {
                     // flog::info("onresize: currentFFTLine={} rawFFTSize={}", currentFFTLine, rawFFTSize);
-                    float* tempWF = new float[currentFFTLine * rawFFTSize];
-                    int moveCount = lastWaterfallHeight - currentFFTLine;
-                    memcpy(tempWF, rawFFTs, currentFFTLine * rawFFTSize * sizeof(float));
-                    memmove(rawFFTs, &rawFFTs[currentFFTLine * rawFFTSize], moveCount * rawFFTSize * sizeof(float));
-                    memcpy(&rawFFTs[moveCount * rawFFTSize], tempWF, currentFFTLine * rawFFTSize * sizeof(float));
-                    delete[] tempWF;
+                    // sizes in size_t: lines x FFT size can pass the range of an int
+                    size_t lineFloats = (size_t)rawFFTSize;
+                    float* tempWF = new (std::nothrow) float[(size_t)currentFFTLine * lineFloats];
+                    if (tempWF) {
+                        size_t moveCount = (size_t)(lastWaterfallHeight - currentFFTLine);
+                        memcpy(tempWF, rawFFTs, (size_t)currentFFTLine * lineFloats * sizeof(float));
+                        memmove(rawFFTs, &rawFFTs[(size_t)currentFFTLine * lineFloats], moveCount * lineFloats * sizeof(float));
+                        memcpy(&rawFFTs[moveCount * lineFloats], tempWF, (size_t)currentFFTLine * lineFloats * sizeof(float));
+                        delete[] tempWF;
+                    }
                 }
                 currentFFTLine = 0;
-                rawFFTs = (float*)realloc(rawFFTs, waterfallHeight * rawFFTSize * sizeof(float));
+                float* grown = (float*)realloc(rawFFTs, (size_t)waterfallHeight * rawFFTSize * sizeof(float));
+                if (grown) { rawFFTs = grown; }
+                else {
+                    flog::error("Waterfall: out of memory for {} lines of {}", waterfallHeight, rawFFTSize);
+                    if (waterfallHeight > rawFFTsAllocLines) { waterfallHeight = std::max(1, rawFFTsAllocLines); }
+                }
+                rawFFTsAllocLines = grown ? waterfallHeight : rawFFTsAllocLines;
             }
             else {
-                rawFFTs = (float*)malloc(waterfallHeight * rawFFTSize * sizeof(float));
+                rawFFTs = (float*)malloc((size_t)waterfallHeight * rawFFTSize * sizeof(float));
+                rawFFTsAllocLines = rawFFTs ? waterfallHeight : 0;
             }
+            rawFFTsAllocSize = rawFFTSize;
             // ==============
         }
 
@@ -1311,6 +1326,11 @@ namespace ImGui {
     float* WaterFall::getFFTBuffer() {
         if (rawFFTs == NULL) { return NULL; }
         MEASURE_LOCK(buf_mtx);
+        // never hand out a line the buffer does not have (a resize may be in between), the caller then skips this spectrum
+        if (rawFFTs == NULL || rawFFTsAllocSize != rawFFTSize || (waterfallVisible ? rawFFTsAllocLines < waterfallHeight : rawFFTsAllocLines < 1) || waterfallHeight < 0) {
+            buf_mtx.unlock();
+            return NULL;
+        }
         if (waterfallVisible && waterfallHeight != 0) {
             currentFFTLine--;
             fftLines++;
@@ -1637,6 +1657,8 @@ namespace ImGui {
         else {
             rawFFTs = (float*)malloc(rawFFTSize * wfSize * sizeof(float));
         }
+        rawFFTsAllocLines = rawFFTs ? wfSize : 0;
+        rawFFTsAllocSize = rawFFTSize;
         fftLines = 0;
         memset(rawFFTs, 0, rawFFTSize * waterfallHeight * sizeof(float));
         updateWaterfallFb();

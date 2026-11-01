@@ -334,6 +334,8 @@ namespace ImGui {
 
         //std::vector<std::vector<float>> rawFFTs;
         int rawFFTSize;
+        int rawFFTsAllocLines = 0; // what rawFFTs really holds: lines of rawFFTsAllocSize floats
+        int rawFFTsAllocSize = 0;
         float* rawFFTs = NULL;
         float* latestFFT = NULL;
         float* latestFFTHold = NULL;

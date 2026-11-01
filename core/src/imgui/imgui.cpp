@@ -6691,6 +6691,28 @@ static void ImGui_UpdateTouchScroll(ImGuiWindow* window)
     if (mode == 0 && velocity == 0.0f)
         storage.SetFloat(scroll_key, window->Scroll.y);
 
+    // A finger that lands on the scrollbar drags its handle, like a mouse would; it is not the start of a list scroll
+    if (mode == 0 && finger >= 0 && window->ScrollbarY && window->ScrollMax.y > 0.0f && g.HoveredWindow == window && !ImGuiTouchScrollSuppress) {
+        ImRect bar = ImGui::GetWindowScrollbarRect(window, ImGuiAxis_Y);
+        bar.Min.x -= g.FontSize * 1.2f;     // the bar is thin, the finger gets a wider strip to hit
+        const ImVec2 touch_pos = io.FingerPos[finger];
+        if (bar.Contains(touch_pos)) {
+            const ImGuiID grab_key = ImHashStr("##TouchScrollGrab", 0, window->ID);
+            const float bar_h = bar.GetHeight();
+            const float inner_h = window->InnerRect.GetHeight();
+            const float grab_h = ImClamp(bar_h * inner_h / (inner_h + window->ScrollMax.y), ImMin(g.Style.GrabMinSize, bar_h), bar_h);
+            const float track = ImMax(bar_h - grab_h, 1.0f);
+            const float grab_center = bar.Min.y + grab_h * 0.5f + track * (window->Scroll.y / window->ScrollMax.y);
+            // grabbing the handle keeps the point that was touched, touching the track puts the handle under the finger
+            storage.SetFloat(grab_key, ImFabs(touch_pos.y - grab_center) <= grab_h * 0.5f ? touch_pos.y - grab_center : 0.0f);
+            storage.SetInt(mode_key, 5);
+            storage.SetInt(finger_key, finger);
+            storage.SetFloat(velocity_key, 0.0f);
+            ImGui::ClearActiveID();
+            mode = 5;
+        }
+    }
+
     if (mode == 0 && finger >= 0 && ImGui_FindTouchScrollWindow(g) == window) {
         const ImVec2 touch_pos = io.FingerPos[finger];
         storage.SetInt(mode_key, 1);
@@ -6727,6 +6749,19 @@ static void ImGui_UpdateTouchScroll(ImGuiWindow* window)
             storage.SetFloat(carry_key, 0.0f);
             storage.SetInt(mode_key, 0);
             storage.SetFloat(velocity_key, velocity);
+            return;
+        }
+
+        if (mode == 5) {
+            ImRect bar = ImGui::GetWindowScrollbarRect(window, ImGuiAxis_Y);
+            const float bar_h = bar.GetHeight();
+            const float inner_h = window->InnerRect.GetHeight();
+            const float grab_h = ImClamp(bar_h * inner_h / (inner_h + window->ScrollMax.y), ImMin(g.Style.GrabMinSize, bar_h), bar_h);
+            const float track = ImMax(bar_h - grab_h, 1.0f);
+            const float held = storage.GetFloat(ImHashStr("##TouchScrollGrab", 0, window->ID));
+            const float t = ImClamp((io.FingerPos[tracked_finger].y - held - bar.Min.y - grab_h * 0.5f) / track, 0.0f, 1.0f);
+            ImGui::SetScrollY(window, t * window->ScrollMax.y);
+            storage.SetFloat(scroll_key, t * window->ScrollMax.y);
             return;
         }
 
