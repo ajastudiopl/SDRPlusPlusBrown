@@ -17,6 +17,7 @@ public:
     bool loadThemesFromDir(std::string path);
     bool loadTheme(std::string path);
     bool applyTheme(std::string name);
+    void addBuiltinThemes();
 
     std::vector<std::string> getThemeNames();
 

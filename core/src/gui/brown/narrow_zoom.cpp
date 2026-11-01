@@ -209,7 +209,7 @@ namespace wideoverview {
                 pts.push_back(ImVec2(x0 + px, spMax.y - t * (spMax.y - spMin.y - 2)));
             }
             for (size_t i = 0; i + 1 < pts.size(); i++) {
-                dl->AddRectFilled(ImVec2(pts[i].x, pts[i].y), ImVec2(pts[i + 1].x, spMax.y), IM_COL32(110, 90, 190, 150));
+                dl->AddRectFilled(ImVec2(pts[i].x, pts[i].y), ImVec2(pts[i + 1].x, spMax.y), ImGuiFieldRadioSkin ? IM_COL32(255, 106, 26, 120) : IM_COL32(110, 90, 190, 150));
                 dl->AddLine(pts[i], pts[i + 1], IM_COL32(230, 230, 255, 255), 1.5f);
             }
         }

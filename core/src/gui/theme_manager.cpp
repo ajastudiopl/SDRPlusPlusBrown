@@ -35,7 +35,40 @@ bool ThemeManager::loadThemesFromDir(std::string path) {
         }
         loadTheme(_path);
     }
+    addBuiltinThemes();
     return true;
+}
+
+// Matte black field radio: dark rubber keys, signal orange for whatever is active
+void ThemeManager::addBuiltinThemes() {
+    if (themes.find("Field Radio") != themes.end()) { return; }
+    Theme thm;
+    thm.author = "AJA";
+    thm.data = json::parse(R"({
+        "name": "Field Radio",
+        "Border": "#3A3D40FF", "BorderShadow": "#00000000",
+        "Button": "#34373AFF", "ButtonHovered": "#3E4144FF", "ButtonActive": "#FF6A1AFF",
+        "CheckMark": "#FF6A1AFF", "ChildBg": "#00000000", "DragDropTarget": "#FF6A1AFF",
+        "FFTHoldColor": "#FFFF00FF",
+        "FrameBg": "#0B0C0DFF", "FrameBgActive": "#1B1C1EFF", "FrameBgHovered": "#151617FF",
+        "Header": "#34373AFF", "HeaderActive": "#FF6A1AFF", "HeaderHovered": "#44474AFF",
+        "MenuBarBg": "#202224FF", "ModalWindowDimBg": "#00000099",
+        "NavHighlight": "#FF6A1AFF", "NavWindowingDimBg": "#CCCCCC33", "NavWindowingHighlight": "#FFFFFFB2",
+        "PlotHistogram": "#FF6A1AFF", "PlotHistogramHovered": "#FF8A45FF",
+        "PlotLines": "#FF6A1AFF", "PlotLinesHovered": "#FF8A45FF",
+        "PopupBg": "#202224F5",
+        "ResizeGrip": "#3A3D4080", "ResizeGripActive": "#FF6A1AFF", "ResizeGripHovered": "#5E6165FF",
+        "ScrollbarBg": "#0B0C0DFF", "ScrollbarGrab": "#4A4D50FF", "ScrollbarGrabActive": "#FF6A1AFF", "ScrollbarGrabHovered": "#5E6165FF",
+        "Separator": "#3A3D40FF", "SeparatorActive": "#FF6A1AFF", "SeparatorHovered": "#5E6165FF",
+        "SliderGrab": "#FF6A1AFF", "SliderGrabActive": "#FF8A45FF",
+        "Tab": "#26282AFF", "TabActive": "#3A3D40FF", "TabHovered": "#4A4D50FF", "TabUnfocused": "#1B1C1EFF", "TabUnfocusedActive": "#2C2E30FF",
+        "TableBorderLight": "#2C2E30FF", "TableBorderStrong": "#3A3D40FF", "TableHeaderBg": "#26282AFF",
+        "TableRowBg": "#00000000", "TableRowBgAlt": "#FFFFFF0A",
+        "Text": "#E9E9E9FF", "TextDisabled": "#7A7D80FF", "TextSelectedBg": "#FF6A1A59",
+        "TitleBg": "#0B0C0DFF", "TitleBgActive": "#26282AFF", "TitleBgCollapsed": "#0B0C0DFF",
+        "WindowBg": "#17181AF2", "ClearColor": "#111213FF", "WaterfallBackground": "#000000FF"
+    })");
+    themes["Field Radio"] = thm;
 }
 
 bool ThemeManager::loadTheme(std::string path) {
@@ -171,6 +204,10 @@ bool ThemeManager::applyTheme(std::string name) {
             continue;
         }
     }
+
+    // the field radio theme also changes how keys are drawn (raised, shaded) and softens the corners
+    ImGuiFieldRadioSkin = name == "Field Radio";
+    if (ImGuiFieldRadioSkin) { style.FrameRounding = 3.0f; }
 
     return true;
 }

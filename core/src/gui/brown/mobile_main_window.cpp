@@ -1434,7 +1434,13 @@ bool MobileButton::draw() {
         }
     }
 
-    window->DrawList->AddRectFilled(windowPos, windowPos + avail, bg0, (float) avail.y / 10.0);
+    if (ImGuiFieldRadioSkin) {
+        bool sunk = pressed && startedInside && withinRect(avail, mouseCoord) && this->currentlyPressedTime != 0;
+        ImU32 key = sunk ? IM_COL32(255, 106, 26, 255) : ImGui::GetColorU32(ImGuiCol_Button);
+        ImGui::RenderSkinButton(windowPos, windowPos + avail, key, sunk, 3.0f);
+    } else {
+        window->DrawList->AddRectFilled(windowPos, windowPos + avail, bg0, (float) avail.y / 10.0);
+    }
 
 
     //    auto ts = ImGui::CalcTextSize(this->upperText.c_str());
@@ -2168,7 +2174,8 @@ void MobileMainWindow::draw() {
         }
         auto dl = ImGui::GetWindowDrawList();
         ImVec2 a = ImGui::GetItemRectMin(), z = ImGui::GetItemRectMax();
-        dl->AddRectFilled(a, z, ImGui::IsItemActive() ? IM_COL32(255, 255, 128, 255) : IM_COL32(128, 128, 128, 255), rowButtonH / 10);
+        if (ImGuiFieldRadioSkin) { ImGui::RenderSkinButton(a, z, ImGui::IsItemActive() ? IM_COL32(255, 106, 26, 255) : ImGui::GetColorU32(ImGuiCol_Button), ImGui::IsItemActive(), 3.0f); }
+        else { dl->AddRectFilled(a, z, ImGui::IsItemActive() ? IM_COL32(255, 255, 128, 255) : IM_COL32(128, 128, 128, 255), rowButtonH / 10); }
         ImVec2 c((a.x + z.x) / 2, (a.y + z.y) / 2);
         float r = rowButtonH * 0.22f;
         // pointing down: press to fold the segment away; pointing up: press to bring it back

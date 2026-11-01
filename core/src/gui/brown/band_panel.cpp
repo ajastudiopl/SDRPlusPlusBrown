@@ -333,8 +333,13 @@ void BandPanel::drawMarkers(const Callbacks& cb, float width, float height) {
         ImVec2 end(start.x + rowWidth, start.y + unit);
         bool droppingHere = drag.active && !isAll && !isAdd && dropTarget == id;
         ImU32 bg = droppingHere ? IM_COL32(60, 160, 80, 255) : selected ? IM_COL32(30, 130, 255, 255) : IM_COL32(45, 55, 80, 255);
-        gdl->AddRectFilled(start, end, bg, 5.0f);
-        if (selected) { gdl->AddRect(start, end, IM_COL32(255, 255, 255, 255), 5.0f, 0, 2.5f); }
+        if (ImGuiFieldRadioSkin) {
+            ImU32 key = droppingHere ? IM_COL32(60, 160, 80, 255) : selected ? IM_COL32(255, 106, 26, 255) : ImGui::GetColorU32(ImGuiCol_Button);
+            ImGui::RenderSkinButton(start, end, key, selected, 3.0f);
+        } else {
+            gdl->AddRectFilled(start, end, bg, 5.0f);
+            if (selected) { gdl->AddRect(start, end, IM_COL32(255, 255, 255, 255), 5.0f, 0, 2.5f); }
+        }
         if (boxWidth > 0) {
             float m = unit * 0.28f;
             ImVec2 b0(start.x + m, start.y + m), b1(start.x + unit - m, start.y + unit - m);
@@ -477,7 +482,7 @@ void BandPanel::drawMarkers(const Callbacks& cb, float width, float height) {
         ImDrawList* fg = ImGui::GetForegroundDrawList();
         ImVec2 ts = ImGui::CalcTextSize(drag.name.c_str());
         ImVec2 a(drag.pos.x - ts.x / 2 - 10, drag.pos.y - unit - ts.y / 2 - 6), b(drag.pos.x + ts.x / 2 + 10, drag.pos.y - unit + ts.y / 2 + 6);
-        fg->AddRectFilled(a, b, IM_COL32(40, 120, 220, 230), 6.0f);
+        fg->AddRectFilled(a, b, ImGuiFieldRadioSkin ? IM_COL32(255, 106, 26, 235) : IM_COL32(40, 120, 220, 230), 6.0f);
         fg->AddText(ImVec2(a.x + 10, a.y + 6), IM_COL32(255, 255, 255, 255), drag.name.c_str());
     }
 }

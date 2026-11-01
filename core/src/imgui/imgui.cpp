@@ -6636,6 +6636,7 @@ bool ImGui::Begin(const char* name, bool* p_open, ImGuiWindowFlags flags)
 
 // Set by the application while a finger drags something (an item being moved between lists, for example)
 bool ImGuiTouchScrollSuppress = false;
+bool ImGuiFieldRadioSkin = false;
 
 static int ImGui_FindTouchScrollFinger(const ImGuiIO& io)
 {

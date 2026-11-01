@@ -5,6 +5,7 @@
 #include <fstream>
 #include <cstring>
 #include <imgui.h>
+#include <imgui_internal.h>
 
 namespace thememenu {
     int themeId;
@@ -50,11 +51,18 @@ namespace thememenu {
         themeNames.push_back("ImGUI Dark");
         themeNames.push_back("ImGUI Light");
         themeNames.push_back("ImGUI Classic");
-        auto it = std::find(themeNames.begin(), themeNames.end(), "Dark");
+        auto it = std::find(themeNames.begin(), themeNames.end(), "Field Radio");
         themeId = std::distance(themeNames.begin(), it);
 
         // Load saved theme from config if exists
         core::configManager.acquire();
+        // the field radio skin is the new default: switched on once, the theme menu can still change it back
+        if (!core::configManager.conf.contains("fieldRadioSkinApplied")) {
+            core::configManager.conf["theme"] = "Field Radio";
+            core::configManager.conf["fieldRadioSkinApplied"] = true;
+            core::configManager.release(true);
+            core::configManager.acquire();
+        }
         if (core::configManager.conf.contains("theme")) {
             std::string savedTheme = core::configManager.conf["theme"];
             auto it2 = std::find(themeNames.begin(), themeNames.end(), savedTheme);
@@ -66,6 +74,8 @@ namespace thememenu {
 
         // Load saved style if exists
         loadStyle();
+        // the chosen theme decides the colors (and the key look), the saved style only keeps sizes
+        applyTheme();
 
         // Apply scaling
         ImGui::GetStyle().ScaleAllSizes(style::uiScale);
@@ -78,6 +88,7 @@ namespace thememenu {
     }
 
     void applyTheme() {
+        ImGuiFieldRadioSkin = false;
         if (themeNames[themeId] == "ImGUI Dark") {
             ImGui::StyleColorsDark();
         }

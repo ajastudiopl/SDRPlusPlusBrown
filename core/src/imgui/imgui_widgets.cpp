@@ -669,6 +669,25 @@ bool ImGui::ButtonBehavior(const ImRect& bb, ImGuiID id, bool* out_hovered, bool
     return pressed;
 }
 
+void ImGui::RenderSkinButton(ImVec2 p_min, ImVec2 p_max, ImU32 fill_col, bool pressed, float rounding)
+{
+    ImDrawList* dl = GetWindowDrawList();
+    const ImVec4 c = ColorConvertU32ToFloat4(fill_col);
+    auto shade = [&](float k) { return ColorConvertFloat4ToU32(ImVec4(ImClamp(c.x * k, 0.0f, 1.0f), ImClamp(c.y * k, 0.0f, 1.0f), ImClamp(c.z * k, 0.0f, 1.0f), c.w)); };
+    const float height = p_max.y - p_min.y;
+    const float depth = ImMax(2.0f, height * 0.06f);
+    // the shadow edge below the key, then the face (a pressed key has sunk onto it)
+    dl->AddRectFilled(p_min, p_max, IM_COL32(8, 8, 9, 235), rounding);
+    ImVec2 face_min(p_min.x, p_min.y + (pressed ? depth : 0.0f));
+    ImVec2 face_max(p_max.x, p_max.y - (pressed ? 0.0f : depth));
+    dl->AddRectFilled(face_min, face_max, shade(pressed ? 0.8f : 1.0f), rounding);
+    ImVec2 g_min(face_min.x + 1.0f, face_min.y + 1.0f), g_max(face_max.x - 1.0f, face_max.y - 1.0f);
+    const ImU32 top = shade(pressed ? 0.85f : 1.28f), bottom = shade(pressed ? 0.7f : 0.82f);
+    dl->AddRectFilledMultiColor(g_min, g_max, top, top, bottom, bottom);
+    if (!pressed)
+        dl->AddLine(ImVec2(face_min.x + rounding, face_min.y + 1.0f), ImVec2(face_max.x - rounding, face_min.y + 1.0f), IM_COL32(255, 255, 255, 46));
+}
+
 bool ImGui::ButtonEx(const char* label, const ImVec2& size_arg, ImGuiButtonFlags flags)
 {
     ImGuiWindow* window = GetCurrentWindow();
@@ -699,11 +718,17 @@ bool ImGui::ButtonEx(const char* label, const ImVec2& size_arg, ImGuiButtonFlags
     // Render
     const ImU32 col = GetColorU32((held && hovered) ? ImGuiCol_ButtonActive : hovered ? ImGuiCol_ButtonHovered : ImGuiCol_Button);
     RenderNavHighlight(bb, id);
-    RenderFrame(bb.Min, bb.Max, col, true, style.FrameRounding);
+    if (ImGuiFieldRadioSkin)
+        RenderSkinButton(bb.Min, bb.Max, col, held && hovered, style.FrameRounding);
+    else
+        RenderFrame(bb.Min, bb.Max, col, true, style.FrameRounding);
 
     if (g.LogEnabled)
         LogSetNextTextDecoration("[", "]");
-    RenderTextClipped(bb.Min + style.FramePadding, bb.Max - style.FramePadding, label, NULL, &label_size, style.ButtonTextAlign, &bb);
+    ImRect text_bb = bb;
+    if (ImGuiFieldRadioSkin && held && hovered)
+        text_bb.Translate(ImVec2(0.0f, ImMax(2.0f, (bb.Max.y - bb.Min.y) * 0.06f)));    // the sunk key carries its label down with it
+    RenderTextClipped(text_bb.Min + style.FramePadding, text_bb.Max - style.FramePadding, label, NULL, &label_size, style.ButtonTextAlign, &text_bb);
 
     // Automatically close popups
     //if (pressed && !(flags & ImGuiButtonFlags_DontClosePopups) && (window->Flags & ImGuiWindowFlags_Popup))
