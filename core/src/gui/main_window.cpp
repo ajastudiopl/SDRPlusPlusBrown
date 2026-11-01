@@ -1830,11 +1830,11 @@ void MainWindow::updateBottomWindowLayout() {
     auto size = fullWidth / nWindows;
     auto scan = 0;
     // the band panel is taller and takes whatever width the other windows leave
-    float height = hasBottomWindow("bands_panel") ? fullHeight / 3.2f : fullHeight / 5;
+    float height = hasBottomWindow("bands_panel") ? fullHeight / 2.95f : fullHeight / 5;
     for (int i = 0; i < bottomWindows.size(); i++) {
         if (bottomWindows[i].name == "bands_panel") { continue; }
         // the zoomed spectrum next to the band panel needs room for its buttons and the frequency scale
-        float width = (bottomWindows[i].name == "audio_waterfall" && hasBottomWindow("bands_panel")) ? fullWidth * 0.34f : size;
+        float width = (bottomWindows[i].name == "audio_waterfall" && hasBottomWindow("bands_panel")) ? fullWidth * 0.27f : size;
         bottomWindows[i].loc.x = scan;
         bottomWindows[i].loc.y = 0;
         bottomWindows[i].size.x = width;
@@ -1845,7 +1845,7 @@ void MainWindow::updateBottomWindowLayout() {
         if (bottomWindows[i].name != "bands_panel") { continue; }
         bottomWindows[i].loc.x = scan;
         bottomWindows[i].loc.y = 0;
-        bottomWindows[i].size.x = fullWidth - scan;
+        bottomWindows[i].size.x = (bottomBarRightLimit > 0 ? fullWidth : (std::max)(fullWidth, gui::waterfall.wfMax.x)) - scan;
         bottomWindows[i].size.y = height;
     }
 }

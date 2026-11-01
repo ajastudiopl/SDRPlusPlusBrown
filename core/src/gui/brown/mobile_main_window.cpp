@@ -1446,8 +1446,15 @@ bool MobileButton::draw() {
     //        ImGui::PushFont(style::bigFont);
     //    }
     auto ts = ImGui::CalcTextSize(buttonTextStr);
+    // a label wider than the button gets a smaller font instead of being cut
+    float fit = ts.x > avail.x * 0.92f ? avail.x * 0.92f / ts.x : 1.0f;
+    if (fit < 1.0f) {
+        ImGui::SetWindowFontScale(fit);
+        ts = ImGui::CalcTextSize(buttonTextStr);
+    }
     ImGui::SetCursorPos((avail - ImVec2{ts.x, ts.y}) / 2);
     ImGui::Text("%s", buttonTextStr);
+    if (fit < 1.0f) { ImGui::SetWindowFontScale(1.0f); }
     //    if (this->buttonText.size() == 1) {
     //        ImGui::PopFont();
     //    }
@@ -1477,13 +1484,39 @@ double TheEncoder::draw(float currentValue) {
     ImU32 bg0 = ImGui::ColorConvertFloat4ToU32(ImVec4(0.0f, 0.0f, 0.0f, 1.0f));
     window->DrawList->AddRectFilled(widgetPos, widgetPos + avail, bg0);
 
-    for (int q = 0; q < MARKS_PER_ENCODER; q++) {
-        auto markY = (R * DRAW_HEIGHT_PERCENT) * (float) sin(M_PI * 2 / MARKS_PER_ENCODER * q + this->somePosition);
-        auto markColor = (float) cos(M_PI * 2 / MARKS_PER_ENCODER * q + this->somePosition);
-        if (markColor > 0) {
-            ImU32 col = ImGui::ColorConvertFloat4ToU32(ImVec4(1, 1, 1, markColor));
-            window->DrawList->AddRectFilled(widgetPos + ImVec2(0, R + markY - 4), widgetPos + ImVec2(avail.x, R + markY + 4), col);
-        }
+    // a knurled metal drum seen from the side: the ridges sit on a cylinder (position = sin of the angle), are lit from above
+    // and get thinner and darker towards the edges, so the surface visibly rolls under the finger
+    const float drumTop = R * (1 - DRAW_HEIGHT_PERCENT);
+    const float drumBottom = avail.y - drumTop;
+    const int ridges = std::max(24, (int) (2 * M_PI * R * DRAW_HEIGHT_PERCENT / (style::baseFont->FontSize * 1.1f)));
+    window->DrawList->AddRectFilled(widgetPos + ImVec2(0, drumTop), widgetPos + ImVec2(avail.x, drumBottom), IM_COL32(34, 34, 36, 255));
+    for (int q = 0; q < ridges; q++) {
+        double th = M_PI * 2 / ridges * q + this->somePosition;
+        float cs = (float) cos(th);
+        if (cs <= 0) { continue; }
+        float sn = (float) sin(th);
+        float y = R + (R * DRAW_HEIGHT_PERCENT) * sn;
+        float pitch = (float) (2 * M_PI * R * DRAW_HEIGHT_PERCENT / ridges) * cs;
+        float thick = std::max(1.0f, pitch * 0.72f);
+        float light = std::clamp(0.25f + 0.75f * cs * (0.65f - 0.35f * sn), 0.0f, 1.0f);
+        int g = (int) (40 + light * 170);
+        ImU32 col = (q % 8 == 0) ? IM_COL32(g, g / 4, g / 4, 255) : IM_COL32(g, g, g + 4, 255);
+        // a ridge with a bright top edge and a deep groove behind it
+        window->DrawList->AddRectFilled(widgetPos + ImVec2(0, y - thick / 2), widgetPos + ImVec2(avail.x, y + thick / 2), col);
+        window->DrawList->AddRectFilled(widgetPos + ImVec2(0, y - thick / 2), widgetPos + ImVec2(avail.x, y - thick / 2 + std::max(1.0f, thick * 0.18f)), IM_COL32(255, 255, 255, (int) (110 * light)));
+        window->DrawList->AddRectFilled(widgetPos + ImVec2(0, y + thick / 2), widgetPos + ImVec2(avail.x, y + pitch / 0.72f / 2 + 0.5f), IM_COL32(0, 0, 0, 230));
+    }
+    {
+        // cylinder shading over the ridges: dark edges, a soft highlight in the upper third
+        const float h = drumBottom - drumTop;
+        const ImU32 dark = IM_COL32(0, 0, 0, 200), clear = IM_COL32(0, 0, 0, 0);
+        const ImU32 shine = IM_COL32(255, 255, 255, 55), shineClear = IM_COL32(255, 255, 255, 0);
+        float y0 = widgetPos.y + drumTop, x0 = widgetPos.x, x1 = widgetPos.x + avail.x;
+        window->DrawList->AddRectFilledMultiColor(ImVec2(x0, y0), ImVec2(x1, y0 + h * 0.25f), dark, dark, clear, clear);
+        window->DrawList->AddRectFilledMultiColor(ImVec2(x0, y0 + h * 0.25f), ImVec2(x1, y0 + h * 0.36f), shineClear, shineClear, shine, shine);
+        window->DrawList->AddRectFilledMultiColor(ImVec2(x0, y0 + h * 0.36f), ImVec2(x1, y0 + h * 0.5f), shine, shine, shineClear, shineClear);
+        window->DrawList->AddRectFilledMultiColor(ImVec2(x0, y0 + h * 0.5f), ImVec2(x1, y0 + h), clear, clear, dark, dark);
+        window->DrawList->AddRect(ImVec2(x0, y0), ImVec2(x1, y0 + h), IM_COL32(90, 90, 94, 255));
     }
 
     if (enabled) {
@@ -1617,7 +1650,11 @@ BandPanel::Callbacks MobileMainWindow::bandCallbacks() {
     cb.tuneTo = [this](int mode, double frequency, double bandwidth) {
         if (auto radio = getRadioModule()) { radio->selectDemodByID((DemodID) mode); }
         if (bandwidth > 0 && gui::waterfall.selectedVFO != "") { sigpath::vfoManager.setBandwidth(gui::waterfall.selectedVFO, bandwidth); }
-        tuner::tune(tuningMode, gui::waterfall.selectedVFO, frequency);
+        // a preset outside the current band is put in the middle of the new view, not at its far edge
+        double span = gui::waterfall.getBandwidth() * gui::waterfall.getUsableSpectrumRatio();
+        bool inside = fabs(frequency - gui::waterfall.getCenterFrequency()) < span / 2.0 - bandwidth;
+        if (inside || gui::waterfall.selectedVFO == "") { tuner::tune(tuningMode, gui::waterfall.selectedVFO, frequency); }
+        else { tuner::centerTuning(gui::waterfall.selectedVFO, frequency); }
     };
     cb.openFullMenu = [this]() { openModePopupRequested = true; };
     return cb;
@@ -1807,6 +1844,11 @@ void MobileMainWindow::draw() {
     float defaultButtonsWidth = 300;
     float buttonsWidth = defaultButtonsWidth;
     float statusHeight = 100;
+    // the four buttons of the default view: sized by the font but never more than a fixed part of the screen, so that a phone in
+    // landscape keeps room for the bottom bar
+    const float rowButtonH = (std::min)(style::baseFont->FontSize * 2.6f, ImGui::GetIO().DisplaySize.y * 0.075f);
+    const float rowButtonW = (std::min)(style::baseFont->FontSize * 7.2f, ImGui::GetIO().DisplaySize.x * 0.1f);
+    if (qsoMode == VIEW_DEFAULT && hasBottomWindow("bands_panel")) { statusHeight = rowButtonH + ImGui::GetStyle().WindowPadding.y; }
     switch (qsoMode) {
     case VIEW_QSO:
         buttonsWidth = 600;
@@ -1933,10 +1975,18 @@ void MobileMainWindow::draw() {
     // draw encoders
     ImGui::SetCursorPos(cornerPos + ImVec2{waterfallRegion.x + (buttonsInBottomBar ? 0 : buttonsWidth) + menuWidth, 0});
     float encodersHeight = ImGui::GetContentRegionAvail().y;
-    ImGui::BeginChildEx("Small Encoder", ImGui::GetID("sdrpp_small_encoder"), ImVec2(encoderWidth, encodersHeight / 3), false, 0);
+    ImGui::BeginChildEx("Small Encoder", ImGui::GetID("sdrpp_small_encoder"), ImVec2(encoderWidth, encodersHeight / 3 - style::baseFont->FontSize * 0.25f), false, 0);
 
     double smallChangeSpeed = smallEncoder.draw(2000); // random value
     ImGui::EndChild();
+    // a drum that hits the end of its range stops there: whatever part of the turn the value did not take is given back
+    auto holdAtLimit = [this](double wanted, double applied, double unitsPerAngle) {
+        double rejected = wanted - applied;
+        if (fabs(rejected) > 1e-9) {
+            smallEncoder.somePosition -= rejected / unitsPerAngle;
+            smallEncoder.speed = 0;
+        }
+    };
     switch (smallWheelFunctionN) {
         case 0: { // zoom
             auto nbw = bw + smallChangeSpeed / 5;
@@ -1946,6 +1996,7 @@ void MobileMainWindow::draw() {
             if (nbw > 1) {
                 nbw = 1;
             }
+            holdAtLimit(smallChangeSpeed / 5, nbw - bw, 1.0 / 5);
             if (bw != nbw) {
                 bw = nbw;
                 core::configManager.acquire();
@@ -1964,6 +2015,7 @@ void MobileMainWindow::draw() {
                 nfftMin = 0;
             }
             nfftMin = std::min<float>(fftMax - 10, nfftMin);
+            holdAtLimit(smallChangeSpeed * 10, nfftMin - fftMin, 10.0);
             if (nfftMin != fftMin) {
                 fftMin = nfftMin;
                 core::configManager.acquire();
@@ -1987,6 +2039,7 @@ void MobileMainWindow::draw() {
             if (nvol > 1) {
                 nvol = 1;
             }
+            holdAtLimit(-smallChangeSpeed / 5, nvol - stream->getVolume(), -1.0 / 5);
             if (nvol != stream->getVolume()) {
                 stream->setVolume(nvol);
             }
@@ -1994,8 +2047,8 @@ void MobileMainWindow::draw() {
         }
     }
     //    flog::info("small encoder speed: {}", smallChangeSpeed);
-    ImGui::SetCursorPos(cornerPos + ImVec2{waterfallRegion.x + (buttonsInBottomBar ? 0 : buttonsWidth) + menuWidth, +encodersHeight / 3});
-    ImGui::BeginChildEx("Encoder", ImGui::GetID("sdrpp_encoder"), ImVec2(encoderWidth, encodersHeight * 2 / 3), false, 0);
+    ImGui::SetCursorPos(cornerPos + ImVec2{waterfallRegion.x + (buttonsInBottomBar ? 0 : buttonsWidth) + menuWidth, +encodersHeight / 3 + style::baseFont->FontSize * 0.25f});
+    ImGui::BeginChildEx("Encoder", ImGui::GetID("sdrpp_encoder"), ImVec2(encoderWidth, encodersHeight * 2 / 3 - style::baseFont->FontSize * 0.25f), false, 0);
     auto currentFreq = vfo ? (vfo->generalOffset + gui::waterfall.getCenterFrequency()) : gui::waterfall.getCenterFrequency();
     double offsetDelta = encoder.draw(currentFreq);
     if (offsetDelta != 0) {
@@ -2016,8 +2069,7 @@ void MobileMainWindow::draw() {
 
 
     // draw TX buttons
-    ImGui::SetCursorPos(cornerPos + ImVec2{waterfallRegion.x + menuWidth - (buttonsInBottomBar ? buttonsWidth : 0), 0});
-    if (buttonsInBottomBar) { bottomBarRightLimit = ImGui::GetCursorScreenPos().x; }
+    ImGui::SetCursorPos(cornerPos + ImVec2{waterfallRegion.x + menuWidth, 0});
     auto vertPadding = ImGui::GetStyle().WindowPadding.y;
 
 
@@ -2037,13 +2089,11 @@ void MobileMainWindow::draw() {
     auto nButtonsDefault = (int) ((sizeof(buttonsDefault) / sizeof(buttonsDefault[0])));
     auto nButtonsConfig = (int) ((sizeof(buttonsConfig) / sizeof(buttonsConfig[0])));
     auto buttonsSpaceY = ImGui::GetContentRegionAvail().y;
-    float buttonsTop = 0;
+    // in the default view the buttons are one row on the right of the line under the waterfall, next to the rollers they belong to
+    const float rowTotalW = (float) nButtonsDefault * rowButtonW + vertPadding;
     if (buttonsInBottomBar) {
-        // just the stack of buttons, at the bottom, so that the child does not cover the waterfall above it
-        float stack = (float) nButtonsDefault * (float) (style::baseFont->FontSize * 1.8);
-        buttonsTop = buttonsSpaceY - stack;
-        buttonsSpaceY = stack;
-        ImGui::SetCursorPosY(ImGui::GetCursorPosY() + buttonsTop);
+        buttonsSpaceY = rowButtonH + vertPadding;
+        ImGui::SetCursorPos(cornerPos + ImVec2{waterfallRegion.x + menuWidth - rowTotalW, waterfallRegion.y});
     }
     switch (this->qsoMode) {
         case VIEW_QSO:
@@ -2053,7 +2103,7 @@ void MobileMainWindow::draw() {
         default:
             break;
     }
-    const ImVec2 buttonsRegion = ImVec2(buttonsWidth, buttonsSpaceY);
+    const ImVec2 buttonsRegion = buttonsInBottomBar ? ImVec2(rowTotalW, buttonsSpaceY) : ImVec2(buttonsWidth, buttonsSpaceY);
     ImGui::BeginChildEx("Buttons", ImGui::GetID("sdrpp_mobile_buttons"), buttonsRegion, false, ImGuiWindowFlags_NoScrollbar);
 
     auto beforePanel = ImGui::GetCursorPos();
@@ -2103,11 +2153,13 @@ void MobileMainWindow::draw() {
     auto buttonsStart = ImGui::GetCursorPos();
     // the buttons of the default view only need to be easy to hit, the QSO views use the full height
     auto intButtonHeight = style::baseFont->FontSize * (this->qsoMode == VIEW_DEFAULT ? 1.8 : 3.3);
-    const ImVec2 childRegion = ImVec2(defaultButtonsWidth, intButtonHeight - vertPadding);
+    const ImVec2 childRegion = buttonsInBottomBar ? ImVec2(rowButtonW - vertPadding, rowButtonH) : ImVec2(defaultButtonsWidth, intButtonHeight - vertPadding);
     for (auto b = 0; b < NBUTTONS; b++) {
         char chi[100];
         snprintf(chi, sizeof(chi), "mob_button_%d", b);
-        if (this->qsoMode == VIEW_DEFAULT && false) {
+        if (buttonsInBottomBar) {
+            ImGui::SetCursorPos(buttonsStart + ImVec2{(float) b * rowButtonW, 0});
+        } else if (this->qsoMode == VIEW_DEFAULT && false) {
             // align from top
             ImGui::SetCursorPos(buttonsStart + ImVec2{0, buttonsSpaceY - float(nButtonsDefault - b) * (childRegion.y + vertPadding)});
         } else {
@@ -2182,7 +2234,7 @@ void MobileMainWindow::draw() {
         ImGui::EndChild(); // buttons
     }
 
-    this->drawBottomWindows(statusLineDY);
+    this->drawBottomWindows(buttonsInBottomBar ? (int) statusHeight : statusLineDY);
 
     ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 5.f);
     ImGui::PushStyleColor(ImGuiCol_WindowBg, ImVec4(43.f / 255.f, 43.f / 255.f, 43.f / 255.f, 100.f / 255.f));
