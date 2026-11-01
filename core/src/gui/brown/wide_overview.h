@@ -9,6 +9,11 @@ namespace wideoverview {
     SDRPP_EXPORT void reset();
     SDRPP_EXPORT void drawOverlay();
 
+    // Server audio mode: 48 kHz of spectrum around the tuned station, drawn like the aux spectrum of SDRuno.
+    // The view is drawn into the current ImGui window; false means there is no data, and the caller draws something else.
+    SDRPP_EXPORT void pushNarrow(double centerFrequency, double span, const uint8_t* bins, int count);
+    SDRPP_EXPORT bool drawNarrowZoom();
+
     // The modulation chosen in the radio (radio module numbering) and its bandwidth, for the server that demodulates.
     // The offset is the station relative to the centre of the waterfall.
     SDRPP_EXPORT void setDemod(int mode, double bandwidth, double offset);

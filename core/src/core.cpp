@@ -861,6 +861,9 @@ int sdrpp_main(int argc, char* argv[]) {
     core::configManager.conf["lockMenuOrder"] = true;
     if ((int)core::configManager.conf["menuWidth"] < 500) { core::configManager.conf["menuWidth"] = 640; }
     core::configManager.conf["moduleInstances"]["iOS Audio Sink"] = "ios_audio_sink";
+    if (!core::configManager.conf["moduleInstances"].contains("Frequency Manager")) {
+        core::configManager.conf["moduleInstances"]["Frequency Manager"] = "frequency_manager";
+    }
     {
         // An old config can remember "None" from before the iOS sink existed
         std::string radioSink = core::configManager.conf["streams"]["Radio"]["sink"];

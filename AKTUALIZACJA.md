@@ -7,6 +7,7 @@ Uruchamiaj z katalogu repozytorium.
 | --- | --- |
 | Aplikacja na Macu (z okienkiem) | `./run-macos.sh` |
 | Aplikacja na Macu **i** serwer w tle (port 5259) | `./run-macos.sh --server` |
+| Aplikacja na Macu, która sama używa radia (zatrzymuje serwer w tle) | `./run-macos.sh --local` |
 | Aplikacja na iPadzie | `./run-ipad.sh` |
 
 Uwagi:

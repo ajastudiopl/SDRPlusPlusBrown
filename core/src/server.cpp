@@ -5,6 +5,7 @@
 #include <config.h>
 #include <filesystem>
 #include <mutex>
+#include <chrono>
 #include <dsp/types.h>
 #include <utils/wav.h>
 #include <signal_path/signal_path.h>
@@ -55,6 +56,14 @@ namespace server {
     double audioVfoOutRate = 0;
     double audioVfoBandwidth = 0;
     double audioOffset = 0;
+    // a second, wide VFO around the station gives the zoomed spectrum the client shows; the audio VFO is cut to the passband
+    static const int ZOOM_BINS = 2048;
+    std::atomic<double> zoomRate{ 48000.0 };       // span of the zoomed spectrum = output rate of the zoom VFO; follows the bandwidth of the demodulator
+    double zoomVfoOutRate = 0;
+    dsp::stream<dsp::complex_t> zoomChanIn("server::zoomChanIn");
+    dsp::channel::RxVFO zoomVfo;
+    double zoomVfoInRate = 0;
+    bool zoomBound = false;
 
     // Channel mode also sends a coarse spectrum of the whole device band, so the client can still show it.
     static const int WIDE_BINS = 8192;
@@ -158,6 +167,94 @@ namespace server {
     };
     ServerAudioSink audioSink;
 
+    class ZoomSpectrumSink : public dsp::Sink<dsp::complex_t> {
+    public:
+        void prepare() {
+            std::lock_guard<std::mutex> plannerLock(fftwPlannerMutex());
+            fftIn = (fftwf_complex*)fftwf_malloc(sizeof(fftwf_complex) * ZOOM_BINS);
+            fftOut = (fftwf_complex*)fftwf_malloc(sizeof(fftwf_complex) * ZOOM_BINS);
+            plan = fftwf_plan_dft_1d(ZOOM_BINS, fftIn, fftOut, FFTW_FORWARD, FFTW_ESTIMATE);
+            window.resize(ZOOM_BINS);
+            acc.assign(ZOOM_BINS, 0.0f);
+            for (int i = 0; i < ZOOM_BINS; i++) { window[i] = 0.5f - 0.5f * cosf(2.0f * (float)M_PI * i / (ZOOM_BINS - 1)); }
+            for (int i = 0; i < ZOOM_BINS; i++) { winSum += window[i]; }
+            buffer.reserve(ZOOM_BINS);
+        }
+
+        int run() override {
+            int count = _in->read();
+            if (count < 0) { return -1; }
+            if (zoomRate != lastRate) {
+                // the samples in the buffer are of the old rate
+                lastRate = zoomRate;
+                buffer.clear();
+                std::fill(acc.begin(), acc.end(), 0.0f);
+                averaged = 0;
+            }
+            if (audioMode && client && client->isOpen()) {
+                // windows overlap when the rate is low, so that the picture moves often enough; the average of what
+                // came in since the last packet is sent about twelve times a second whatever the rate is
+                const int hop = (int)std::clamp(zoomRate / 24.0, 128.0, (double)ZOOM_BINS);
+                for (int i = 0; i < count; i++) {
+                    buffer.push_back(_in->readBuf[i]);
+                    if ((int)buffer.size() < ZOOM_BINS) { continue; }
+                    for (int k = 0; k < ZOOM_BINS; k++) {
+                        fftIn[k][0] = buffer[k].re * window[k];
+                        fftIn[k][1] = buffer[k].im * window[k];
+                    }
+                    buffer.erase(buffer.begin(), buffer.begin() + hop);
+                    fftwf_execute(plan);
+                    for (int k = 0; k < ZOOM_BINS; k++) { acc[k] += fftOut[k][0] * fftOut[k][0] + fftOut[k][1] * fftOut[k][1]; }
+                    averaged++;
+                    auto now = std::chrono::steady_clock::now();
+                    if (now - lastSend >= std::chrono::milliseconds(80)) {
+                        lastSend = now;
+                        send();
+                    }
+                }
+            } else {
+                buffer.clear();
+                averaged = 0;
+            }
+            _in->flush();
+            return count;
+        }
+
+    private:
+        void send() {
+            packet.resize(sizeof(PacketHeader) + sizeof(WideSpectrumHeader) + ZOOM_BINS);
+            PacketHeader* hdr = (PacketHeader*)packet.data();
+            WideSpectrumHeader* wh = (WideSpectrumHeader*)&packet[sizeof(PacketHeader)];
+            uint8_t* bins = &packet[sizeof(PacketHeader) + sizeof(WideSpectrumHeader)];
+            hdr->type = PACKET_TYPE_NARROW_SPECTRUM;
+            hdr->size = (uint32_t)packet.size();
+            wh->centerFrequency = lastTunedFrequency + audioOffset;
+            wh->span = zoomRate;
+            wh->bins = ZOOM_BINS;
+            wh->reserved = 0;
+            for (int k = 0; k < ZOOM_BINS; k++) {
+                float power = acc[(k + ZOOM_BINS / 2) % ZOOM_BINS] / averaged / (winSum * winSum);
+                float db = 10.0f * log10f(power + 1e-20f);
+                bins[k] = (uint8_t)(std::clamp)((db + 130.0f) * 2.0f, 0.0f, 255.0f);
+            }
+            std::fill(acc.begin(), acc.end(), 0.0f);
+            averaged = 0;
+            if (client && client->isOpen()) { client->write(hdr->size, packet.data()); }
+        }
+
+        fftwf_plan plan = NULL;
+        fftwf_complex* fftIn = NULL;
+        fftwf_complex* fftOut = NULL;
+        std::vector<float> window, acc;
+        std::vector<dsp::complex_t> buffer;
+        std::vector<uint8_t> packet;
+        float winSum = 0;
+        int averaged = 0;
+        double lastRate = 0;
+        std::chrono::steady_clock::time_point lastSend = std::chrono::steady_clock::now();
+    };
+    ZoomSpectrumSink zoomSink;
+
     // Runs on the splitter thread with a chunk of the raw device band.
     void wideSpectrumHook(dsp::complex_t* data, int count) {
         if (!channelMode && !audioMode) { return; }
@@ -231,6 +328,11 @@ namespace server {
         audioVfo.start();
         audioSink.init(&audioVfo.out);
         audioSink.start();
+        zoomVfo.init(&zoomChanIn, 1000000, 48000, 43200, 0);
+        zoomVfo.start();
+        zoomSink.prepare();
+        zoomSink.init(&zoomVfo.out);
+        zoomSink.start();
         wideSplit.init(&wideDummyInput);
         wideSplit.setHook(wideSpectrumHook);
         wideSplit.start();
@@ -656,6 +758,10 @@ namespace server {
             if (audio) { wideSplit.bindStream(&audioChanIn); } else { wideSplit.unbindStream(&audioChanIn); }
             audioBound = audio;
         }
+        if (audio != zoomBound) {
+            if (audio) { wideSplit.bindStream(&zoomChanIn); } else { wideSplit.unbindStream(&zoomChanIn); }
+            zoomBound = audio;
+        }
     }
 
     // Points the audio VFO at the station: rates and bandwidth only when the modulation changed, offset every time.
@@ -671,6 +777,21 @@ namespace server {
             audioVfoBandwidth = bw;
         }
         audioVfo.setOffset(audioOffset + serverDemod.vfoShift());
+        if (inRate != zoomVfoInRate) {
+            zoomVfo.setInSamplerate(inRate);
+            zoomVfoInRate = inRate;
+        }
+        zoomVfo.setOffset(audioOffset);
+        // the zoomed view shows the passband in its middle third
+        static const double rates[] = { 12000, 24000, 48000, 96000, 192000, 384000, 768000 };
+        double wanted = bw * 3;
+        double rate = rates[6];
+        for (double r : rates) { if (r >= wanted) { rate = r; break; } }
+        if (rate != zoomVfoOutRate) {
+            zoomVfo.setOutSamplerate(rate, rate * 0.9);
+            zoomVfoOutRate = rate;
+            zoomRate = rate;
+        }
     }
 
     // A stream has one reader, so detach the old consumer before attaching the new one.

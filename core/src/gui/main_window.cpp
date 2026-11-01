@@ -1821,7 +1821,7 @@ void MainWindow::addBottomWindow(std::string name, std::function<void()> drawFun
 }
 
 void MainWindow::updateBottomWindowLayout() {
-    auto fullWidth = gui::waterfall.fftAreaMax.x - gui::waterfall.fftAreaMin.x;
+    auto fullWidth = bottomBarRightLimit > 0 ? bottomBarRightLimit - 4 : gui::waterfall.fftAreaMax.x - gui::waterfall.fftAreaMin.x;
     auto fullHeight = ImGui::GetIO().DisplaySize.y;
     int nWindows = bottomWindows.size();
     if (nWindows < 5) {
@@ -1829,12 +1829,24 @@ void MainWindow::updateBottomWindowLayout() {
     }
     auto size = fullWidth / nWindows;
     auto scan = 0;
+    // the band panel is taller and takes whatever width the other windows leave
+    float height = hasBottomWindow("bands_panel") ? fullHeight / 3.2f : fullHeight / 5;
     for (int i = 0; i < bottomWindows.size(); i++) {
+        if (bottomWindows[i].name == "bands_panel") { continue; }
+        // the zoomed spectrum next to the band panel needs room for its buttons and the frequency scale
+        float width = (bottomWindows[i].name == "audio_waterfall" && hasBottomWindow("bands_panel")) ? fullWidth * 0.34f : size;
         bottomWindows[i].loc.x = scan;
         bottomWindows[i].loc.y = 0;
-        bottomWindows[i].size.x = size;
-        bottomWindows[i].size.y = fullHeight / 5;
-        scan += size;
+        bottomWindows[i].size.x = width;
+        bottomWindows[i].size.y = height;
+        scan += width;
+    }
+    for (int i = 0; i < bottomWindows.size(); i++) {
+        if (bottomWindows[i].name != "bands_panel") { continue; }
+        bottomWindows[i].loc.x = scan;
+        bottomWindows[i].loc.y = 0;
+        bottomWindows[i].size.x = fullWidth - scan;
+        bottomWindows[i].size.y = height;
     }
 }
 

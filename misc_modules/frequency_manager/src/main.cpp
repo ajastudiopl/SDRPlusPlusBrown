@@ -73,6 +73,142 @@ public:
         return demodModeListTxt.c_str();
     }
 
+    // --- lists and bookmarks for the touch panel; they work on the config, then bring the rest of the module up to date
+    void afterListsChanged() {
+        refreshLists();
+        std::string keep = selectedListName;
+        loadByName(keep);
+        refreshWaterfallBookmarks(true);
+    }
+
+    std::vector<std::string> getListNames() override {
+        std::vector<std::string> names;
+        config.acquire();
+        for (auto [_name, list] : config.conf["lists"].items()) { names.push_back(_name); }
+        config.release();
+        return names;
+    }
+
+    bool isListShown(const std::string& list) override {
+        bool shown = false;
+        config.acquire();
+        if (config.conf["lists"].contains(list)) { shown = config.conf["lists"][list].value("showOnWaterfall", true); }
+        config.release();
+        return shown;
+    }
+
+    void setListShown(const std::string& list, bool shown) override {
+        config.acquire();
+        if (config.conf["lists"].contains(list)) { config.conf["lists"][list]["showOnWaterfall"] = shown; }
+        refreshWaterfallBookmarks(false);
+        config.release(true);
+    }
+
+    bool addList(const std::string& list) override {
+        if (list.empty()) { return false; }
+        config.acquire();
+        bool exists = config.conf["lists"].contains(list);
+        if (!exists) {
+            config.conf["lists"][list]["showOnWaterfall"] = true;
+            config.conf["lists"][list]["bookmarks"] = json::object();
+        }
+        config.release(!exists);
+        if (!exists) { afterListsChanged(); }
+        return !exists;
+    }
+
+    bool renameList(const std::string& from, const std::string& to) override {
+        if (to.empty() || from == to) { return false; }
+        config.acquire();
+        bool ok = config.conf["lists"].contains(from) && !config.conf["lists"].contains(to);
+        if (ok) {
+            config.conf["lists"][to] = config.conf["lists"][from];
+            config.conf["lists"].erase(from);
+        }
+        config.release(ok);
+        if (ok) {
+            if (selectedListName == from) { selectedListName = to; }
+            afterListsChanged();
+            config.acquire();
+            config.conf["selectedList"] = selectedListName;
+            config.release(true);
+        }
+        return ok;
+    }
+
+    void removeList(const std::string& list) override {
+        config.acquire();
+        bool ok = config.conf["lists"].contains(list);
+        if (ok) { config.conf["lists"].erase(list); }
+        config.release(ok);
+        if (ok) { afterListsChanged(); }
+    }
+
+    std::vector<BookmarkInfo> getListBookmarks(const std::string& list) override {
+        std::vector<BookmarkInfo> result;
+        config.acquire();
+        if (config.conf["lists"].contains(list)) {
+            for (auto [bmName, bm] : config.conf["lists"][list]["bookmarks"].items()) {
+                BookmarkInfo info;
+                info.name = bmName;
+                info.frequency = bm.value("frequency", 0.0);
+                info.bandwidth = bm.value("bandwidth", 0.0);
+                info.demodId = bm.value("mode", 0);
+                result.push_back(info);
+            }
+        }
+        config.release();
+        std::sort(result.begin(), result.end(), [](const BookmarkInfo& a, const BookmarkInfo& b) { return a.frequency < b.frequency; });
+        return result;
+    }
+
+    bool putBookmark(const std::string& list, const std::string& oldName, const BookmarkInfo& bookmark) override {
+        if (bookmark.name.empty()) { return false; }
+        config.acquire();
+        bool ok = config.conf["lists"].contains(list);
+        if (ok && bookmark.name != oldName && config.conf["lists"][list]["bookmarks"].contains(bookmark.name)) { ok = false; }
+        if (ok) {
+            auto& bms = config.conf["lists"][list]["bookmarks"];
+            std::string vfo;
+            if (!oldName.empty() && bms.contains(oldName)) {
+                vfo = bms[oldName].value("vfo", "");
+                bms.erase(oldName);
+            }
+            bms[bookmark.name]["frequency"] = bookmark.frequency;
+            bms[bookmark.name]["bandwidth"] = bookmark.bandwidth;
+            bms[bookmark.name]["mode"] = bookmark.demodId;
+            bms[bookmark.name]["vfo"] = vfo;
+        }
+        config.release(ok);
+        if (ok) { afterListsChanged(); }
+        return ok;
+    }
+
+    void removeBookmark(const std::string& list, const std::string& name) override {
+        config.acquire();
+        bool ok = config.conf["lists"].contains(list) && config.conf["lists"][list]["bookmarks"].contains(name);
+        if (ok) { config.conf["lists"][list]["bookmarks"].erase(name); }
+        config.release(ok);
+        if (ok) { afterListsChanged(); }
+    }
+
+    bool moveBookmark(const std::string& from, const std::string& to, const std::string& name) override {
+        if (from == to) { return false; }
+        config.acquire();
+        bool ok = config.conf["lists"].contains(from) && config.conf["lists"].contains(to) && config.conf["lists"][from]["bookmarks"].contains(name);
+        if (ok) {
+            // a different name is needed if the target list already has one called the same
+            std::string newName = name;
+            auto& target = config.conf["lists"][to]["bookmarks"];
+            for (int i = 2; target.contains(newName); i++) { newName = name + " " + std::to_string(i); }
+            target[newName] = config.conf["lists"][from]["bookmarks"][name];
+            config.conf["lists"][from]["bookmarks"].erase(name);
+        }
+        config.release(ok);
+        if (ok) { afterListsChanged(); }
+        return ok;
+    }
+
     ~FrequencyManagerModule() {
         gui::menu.removeEntry(name);
         gui::waterfall.onFFTRedraw.unbindHandler(&fftRedrawHandler);

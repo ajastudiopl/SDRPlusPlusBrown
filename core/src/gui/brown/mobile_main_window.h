@@ -1,4 +1,5 @@
 #pragma once
+#include "band_panel.h"
 #include <imgui/imgui.h>
 #include <fftw3.h>
 #include <dsp/types.h>
@@ -69,6 +70,10 @@ class MobileMainWindow : public MainWindow {
 public:
     TheEncoder encoder;
     TheEncoder smallEncoder;
+    BandPanel bandPanel;
+    void drawBandPanel();
+    BandPanel::Callbacks bandCallbacks();
+    bool openModePopupRequested = false;
     MobileButton autoWaterfall;
     MobileButton audioConfigToggle;
     MobileButton smallWheelFunction;

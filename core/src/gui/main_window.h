@@ -141,6 +141,7 @@ protected:
     };
 
     std::vector<ButtomWindow> bottomWindows;
+    float bottomBarRightLimit = 0;          // screen x where the bottom bar has to end because other controls follow; 0 = the width of the waterfall
 
     bool mainViewShown();
     void drawMainViewTabs();

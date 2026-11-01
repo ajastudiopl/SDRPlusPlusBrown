@@ -6634,6 +6634,9 @@ bool ImGui::Begin(const char* name, bool* p_open, ImGuiWindowFlags flags)
     return !window->SkipItems;
 }
 
+// Set by the application while a finger drags something (an item being moved between lists, for example)
+bool ImGuiTouchScrollSuppress = false;
+
 static int ImGui_FindTouchScrollFinger(const ImGuiIO& io)
 {
     for (int finger = 0; finger < IM_ARRAYSIZE(io.FingerDown); finger++)
@@ -6645,6 +6648,8 @@ static int ImGui_FindTouchScrollFinger(const ImGuiIO& io)
 static ImGuiWindow* ImGui_FindTouchScrollWindow(ImGuiContext& g)
 {
     ImGuiWindow* window = g.HoveredWindow;
+    if (ImGuiTouchScrollSuppress)
+        return NULL;
     if (window != NULL && strstr(window->Name, "WaterfallControls") != NULL)
         return NULL;
     // The frequency / zoom drums turn under the finger, scrolling the page with it would keep them still

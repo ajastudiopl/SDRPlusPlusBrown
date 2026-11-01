@@ -5,7 +5,7 @@ HERE="$(cd "$(dirname "$0")" && pwd)"
 B="$HOME/ios-sdr-kit/b-sdrpp"
 DEV_UDID=255d3776ca5b0bc76a2e17d371d3fafc8b31beef
 DEV_ID=B94ADC23-1F53-557F-93C9-B3BD12CE770E
-(cd "$B" && make -j8 sdrpp_core radio ios_audio_sink sdrpp_server_source websdr_view reports_monitor 2>&1 | grep -E "error|\*\*\*" || true)
+(cd "$B" && make -j8 sdrpp_core radio ios_audio_sink sdrpp_server_source frequency_manager websdr_view reports_monitor 2>&1 | grep -E "error|\*\*\*" || true)
 "$HERE/stage.sh" "$B"
 cd "$HERE"
 xcodebuild -project SDRPlusPlus.xcodeproj -scheme SDRPlusPlus -configuration Debug -destination "id=$DEV_UDID" \

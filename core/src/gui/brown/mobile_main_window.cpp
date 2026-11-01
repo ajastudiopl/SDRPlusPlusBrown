@@ -1594,6 +1594,39 @@ double TheEncoder::draw(float currentValue) {
     }
 }
 
+static RadioModule *getRadioModule();
+static TransientBookmarkManager *getTransientBookmarkManager();
+
+BandPanel::Callbacks MobileMainWindow::bandCallbacks() {
+    BandPanel::Callbacks cb;
+    cb.getFrequency = []() {
+        double f = gui::waterfall.getCenterFrequency();
+        auto it = gui::waterfall.vfos.find(gui::waterfall.selectedVFO);
+        if (it != gui::waterfall.vfos.end() && it->second) { f += it->second->generalOffset; }
+        return f;
+    };
+    cb.getMode = []() {
+        auto radio = getRadioModule();
+        return radio ? radio->getSelectedDemodId() : 0;
+    };
+    cb.getBandwidth = []() {
+        auto it = gui::waterfall.vfos.find(gui::waterfall.selectedVFO);
+        return (it != gui::waterfall.vfos.end() && it->second) ? it->second->bandwidth : 0.0;
+    };
+    cb.bookmarks = []() { return getTransientBookmarkManager(); };
+    cb.tuneTo = [this](int mode, double frequency, double bandwidth) {
+        if (auto radio = getRadioModule()) { radio->selectDemodByID((DemodID) mode); }
+        if (bandwidth > 0 && gui::waterfall.selectedVFO != "") { sigpath::vfoManager.setBandwidth(gui::waterfall.selectedVFO, bandwidth); }
+        tuner::tune(tuningMode, gui::waterfall.selectedVFO, frequency);
+    };
+    cb.openFullMenu = [this]() { openModePopupRequested = true; };
+    return cb;
+}
+
+void MobileMainWindow::drawBandPanel() {
+    bandPanel.draw(bandCallbacks());
+}
+
 void MobileMainWindow::updateSubmodeAfterChange() {
     auto mode = getCurrentMode();
     auto submode = getCurrentModeAttr("submode");
@@ -1709,11 +1742,22 @@ void MobileMainWindow::draw() {
 
     if (drawAudioWaterfall && !hasBottomWindow("audio_waterfall")) {
         addBottomWindow("audio_waterfall", [&]() {
-            audioWaterfall->draw();
+            // with the audio made by the server there is a spectrum around the tuned frequency to show, otherwise the audio spectrum
+            if (!wideoverview::drawNarrowZoom()) {
+                audioWaterfall->draw();
+            }
         });
     }
     if (!drawAudioWaterfall && hasBottomWindow("audio_waterfall")) {
         removeBottomWindow("audio_waterfall");
+    }
+    bottomBarRightLimit = 0;        // set again below by the layout that has buttons in the bottom bar
+    bool showBandPanel = displaymenu::transcieverLayout != 0 && !mainViewShown() && !isPortraitLayout();
+    if (showBandPanel && !hasBottomWindow("bands_panel")) {
+        addBottomWindow("bands_panel", [this]() { drawBandPanel(); });
+    }
+    if (!showBandPanel && hasBottomWindow("bands_panel")) {
+        removeBottomWindow("bands_panel");
     }
 
     gui::waterfall.alwaysDrawLine = false;
@@ -1773,6 +1817,10 @@ void MobileMainWindow::draw() {
     default:
         break;
     }
+    if (qsoMode == VIEW_DEFAULT) {
+        // only four small buttons here: narrow, so that the waterfall and the bottom bar get the room
+        buttonsWidth = defaultButtonsWidth = 190;
+    }
     buttonsWidth *= buttonsWidthScale;
     defaultButtonsWidth *= buttonsWidthScale;
 
@@ -1789,7 +1837,9 @@ void MobileMainWindow::draw() {
 
     // waterfall, reduced for menu
     ImGui::SetCursorPos(ImGui::GetCursorPos() + ImVec2(menuWidth, 0));
-    ImVec2 waterfallRegion = ImVec2(ImGui::GetContentRegionAvail().x - encoderWidth - buttonsWidth, ImGui::GetContentRegionAvail().y - statusHeight);
+    // in the default view the few small buttons sit in the bottom bar, so the spectrum and the waterfall take the whole width
+    const bool buttonsInBottomBar = qsoMode == VIEW_DEFAULT && hasBottomWindow("bands_panel");
+    ImVec2 waterfallRegion = ImVec2(ImGui::GetContentRegionAvail().x - encoderWidth - (buttonsInBottomBar ? 0 : buttonsWidth), ImGui::GetContentRegionAvail().y - statusHeight);
 
     lockWaterfallControls |= (qsoMode != VIEW_DEFAULT && modeToggle.upperText == "CW") || !encoder.enabled;
     if (!bottomWindows.empty()) {
@@ -1881,7 +1931,7 @@ void MobileMainWindow::draw() {
     }
 
     // draw encoders
-    ImGui::SetCursorPos(cornerPos + ImVec2{waterfallRegion.x + buttonsWidth + menuWidth, 0});
+    ImGui::SetCursorPos(cornerPos + ImVec2{waterfallRegion.x + (buttonsInBottomBar ? 0 : buttonsWidth) + menuWidth, 0});
     float encodersHeight = ImGui::GetContentRegionAvail().y;
     ImGui::BeginChildEx("Small Encoder", ImGui::GetID("sdrpp_small_encoder"), ImVec2(encoderWidth, encodersHeight / 3), false, 0);
 
@@ -1944,7 +1994,7 @@ void MobileMainWindow::draw() {
         }
     }
     //    flog::info("small encoder speed: {}", smallChangeSpeed);
-    ImGui::SetCursorPos(cornerPos + ImVec2{waterfallRegion.x + buttonsWidth + menuWidth, +encodersHeight / 3});
+    ImGui::SetCursorPos(cornerPos + ImVec2{waterfallRegion.x + (buttonsInBottomBar ? 0 : buttonsWidth) + menuWidth, +encodersHeight / 3});
     ImGui::BeginChildEx("Encoder", ImGui::GetID("sdrpp_encoder"), ImVec2(encoderWidth, encodersHeight * 2 / 3), false, 0);
     auto currentFreq = vfo ? (vfo->generalOffset + gui::waterfall.getCenterFrequency()) : gui::waterfall.getCenterFrequency();
     double offsetDelta = encoder.draw(currentFreq);
@@ -1966,7 +2016,8 @@ void MobileMainWindow::draw() {
 
 
     // draw TX buttons
-    ImGui::SetCursorPos(cornerPos + ImVec2{waterfallRegion.x + menuWidth, 0});
+    ImGui::SetCursorPos(cornerPos + ImVec2{waterfallRegion.x + menuWidth - (buttonsInBottomBar ? buttonsWidth : 0), 0});
+    if (buttonsInBottomBar) { bottomBarRightLimit = ImGui::GetCursorScreenPos().x; }
     auto vertPadding = ImGui::GetStyle().WindowPadding.y;
 
 
@@ -1986,6 +2037,14 @@ void MobileMainWindow::draw() {
     auto nButtonsDefault = (int) ((sizeof(buttonsDefault) / sizeof(buttonsDefault[0])));
     auto nButtonsConfig = (int) ((sizeof(buttonsConfig) / sizeof(buttonsConfig[0])));
     auto buttonsSpaceY = ImGui::GetContentRegionAvail().y;
+    float buttonsTop = 0;
+    if (buttonsInBottomBar) {
+        // just the stack of buttons, at the bottom, so that the child does not cover the waterfall above it
+        float stack = (float) nButtonsDefault * (float) (style::baseFont->FontSize * 1.8);
+        buttonsTop = buttonsSpaceY - stack;
+        buttonsSpaceY = stack;
+        ImGui::SetCursorPosY(ImGui::GetCursorPosY() + buttonsTop);
+    }
     switch (this->qsoMode) {
         case VIEW_QSO:
             qsoButton.buttonText = "End QSO";
@@ -2042,7 +2101,8 @@ void MobileMainWindow::draw() {
     }
     MobileButton *pressedButton = nullptr;
     auto buttonsStart = ImGui::GetCursorPos();
-    auto intButtonHeight = style::baseFont->FontSize * 3.3;
+    // the buttons of the default view only need to be easy to hit, the QSO views use the full height
+    auto intButtonHeight = style::baseFont->FontSize * (this->qsoMode == VIEW_DEFAULT ? 1.8 : 3.3);
     const ImVec2 childRegion = ImVec2(defaultButtonsWidth, intButtonHeight - vertPadding);
     for (auto b = 0; b < NBUTTONS; b++) {
         char chi[100];
@@ -2208,7 +2268,8 @@ void MobileMainWindow::draw() {
         }
     }
 
-    if (pressedButton == &this->modeToggle) {
+    if (pressedButton == &this->modeToggle || openModePopupRequested) {
+        openModePopupRequested = false;
         ImGui::OpenPopup(TxModePopup);
     }
     if (pressedButton == &this->qsoButton) {
@@ -2296,25 +2357,8 @@ void MobileMainWindow::draw() {
         screenSize.y *= 0.8;
         ImGui::SetWindowSize(screenSize);
         ImGui::BeginChild("##TxModePopup", ImVec2(screenSize.x, screenSize.y - style::baseFont->FontSize * 4), true, 0);
-        auto currentBand = getCurrentBand();
-        ImGui::Text("Band (wavelength meters):");
-        ImGui::NewLine();
-        for (auto &b: bands) {
-            ImGui::SameLine();
-            bool pressed = false;
-            if (currentBand == b) {
-                pressed = doFingerButton(">" + b + "<");
-            } else {
-                pressed = doFingerButton(b);
-            }
-            if (pressed && b != currentBand) {
-                selectCurrentBand(b, (int) currentFreq);
-                if (getCurrentMode() == "SSB") {
-                    this->selectSSBModeForBand(b);
-                }
-                updateFrequencyAfterChange();
-            }
-        }
+        ImGui::Text("Band (the modulation is set to the one used on it):");
+        bandPanel.drawAllBands(bandCallbacks(), ImGui::GetContentRegionAvail().x);
         ImGui::NewLine();
         ImGui::Text("Mode / Submode:");
         ImGui::NewLine();
@@ -2553,6 +2597,18 @@ void MobileMainWindow::init() {
 
 
     getConfig("showAudioWaterfall", drawAudioWaterfall);
+#ifdef SDRPP_IOS
+    {
+        // the zoom of the tuned frequency is part of the bottom bar on the iPad; switched on once, can be turned off in the settings
+        bool done = false;
+        getConfig("audioWaterfallOnByDefault", done);
+        if (!done) {
+            drawAudioWaterfall = true;
+            setConfig("showAudioWaterfall", drawAudioWaterfall);
+            setConfig("audioWaterfallOnByDefault", true);
+        }
+    }
+#endif
     getConfig("logbookPopupPosition_x", logbookPopupPosition.x);
     getConfig("logbookPopupPosition_y", logbookPopupPosition.y);
     getConfig("scanSWRPosition_x", scanSWRPopupPosition.x);

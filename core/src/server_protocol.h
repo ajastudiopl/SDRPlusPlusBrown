@@ -28,6 +28,7 @@ namespace server {
         PACKET_TYPE_BASEBAND_EXPERIMENTAL_FFT,  // 0x3a
         PACKET_TYPE_WIDE_SPECTRUM,              // 0x3b, channel mode: spectrum of the whole device band (WideSpectrumHeader + one byte per bin)
         PACKET_TYPE_AUDIO,                      // 0x3c, server audio mode: AudioHeader + int16 mono samples
+        PACKET_TYPE_NARROW_SPECTRUM,            // 0x3d, server audio mode: spectrum of 48 kHz around the tuned station (WideSpectrumHeader + one byte per bin)
     };
 
     enum Command {

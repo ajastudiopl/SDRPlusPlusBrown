@@ -589,6 +589,15 @@ namespace server {
                     }
                 }
             }
+            else if (r_pkt_hdr->type == PACKET_TYPE_NARROW_SPECTRUM) {
+                auto payload = r_pkt_hdr->size - sizeof(PacketHeader);
+                if (payload >= sizeof(WideSpectrumHeader)) {
+                    auto wh = (WideSpectrumHeader*)r_pkt_data;
+                    if (wh->bins > 0 && payload >= sizeof(WideSpectrumHeader) + wh->bins) {
+                        wideoverview::pushNarrow(wh->centerFrequency, wh->span, r_pkt_data + sizeof(WideSpectrumHeader), wh->bins);
+                    }
+                }
+            }
             else if (r_pkt_hdr->type == PACKET_TYPE_WIDE_SPECTRUM) {
                 auto payload = r_pkt_hdr->size - sizeof(PacketHeader);
                 if (payload >= sizeof(WideSpectrumHeader)) {
@@ -674,8 +683,15 @@ namespace server {
         ds.mode = mode;
         ds.bandwidth = bw;
         ds.offset = offset;
-        memcpy(s_cmd_data, &ds, sizeof ds);
-        sendCommand(COMMAND_SET_DEMOD, sizeof ds);
+        // this runs on the receiving thread, while the user interface thread fills the shared command buffer
+        // for its own commands, so the packet is built on its own
+        uint8_t packet[sizeof(PacketHeader) + sizeof(CommandHeader) + sizeof(DemodSettings)];
+        ((PacketHeader*)packet)->type = PACKET_TYPE_COMMAND;
+        ((PacketHeader*)packet)->size = sizeof packet;
+        ((CommandHeader*)(packet + sizeof(PacketHeader)))->cmd = COMMAND_SET_DEMOD;
+        memcpy(packet + sizeof(PacketHeader) + sizeof(CommandHeader), &ds, sizeof ds);
+        sock->send(packet, sizeof packet);
+        bytes += sizeof packet;
     }
 
     void Client::idle() {

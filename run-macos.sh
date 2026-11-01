@@ -3,6 +3,7 @@
 # the same), refreshes the bundle in /Applications and starts it.
 #   ./run-macos.sh            build if needed, install, start the app
 #   ./run-macos.sh --server   same, but also restart the background server service so it gets the new code
+#   ./run-macos.sh --local    stop the background server first, so that the app can use the radio itself
 set -e
 cd "$(dirname "$0")"
 ARCH=$(uname -m)
@@ -12,6 +13,11 @@ APP="SDRpp_by_AJA.app"
 cmake --build "$BUILD" -j "$(sysctl -n hw.ncpu)" 2>&1 | grep -E "error:|\*\*\*" || true
 bash make_macos_bundle.sh "$BUILD" "$APP" > /dev/null 2>&1
 rsync -a --delete "$APP/" "/Applications/SDR++ by AJA.app/"
+
+if [ "$1" = "--local" ]; then
+    launchctl bootout "gui/$(id -u)" "$HOME/Library/LaunchAgents/pl.aja.sdrpp-server.plist" 2>/dev/null || true
+    sleep 2
+fi
 
 if [ "$1" = "--server" ]; then
     PLIST="$HOME/Library/LaunchAgents/pl.aja.sdrpp-server.plist"
