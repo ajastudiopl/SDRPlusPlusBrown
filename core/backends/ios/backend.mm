@@ -229,6 +229,36 @@ extern "C" SDRPP_EXPORT int sdrppIosRun(int argc, char* argv[]) {
     }
 }
 
+// Plain GET used by the markers backup; "#ERROR:..." in the answer means failure (same convention as on Android)
+std::string iosHttpGet(const std::string& url) {
+    NSURL* nsurl = [NSURL URLWithString:[NSString stringWithUTF8String:url.c_str()]];
+    if (!nsurl) { return "#ERROR:invalid address"; }
+    __block std::string result = "#ERROR:no answer";
+    dispatch_semaphore_t done = dispatch_semaphore_create(0);
+    NSMutableURLRequest* req = [NSMutableURLRequest requestWithURL:nsurl cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:20];
+    [[[NSURLSession sharedSession] dataTaskWithRequest:req completionHandler:^(NSData* data, NSURLResponse* resp, NSError* err) {
+        if (err) { result = std::string("#ERROR:") + [[err localizedDescription] UTF8String]; }
+        else if ([resp isKindOfClass:[NSHTTPURLResponse class]] && [(NSHTTPURLResponse*)resp statusCode] >= 400) {
+            result = "#ERROR:HTTP " + std::to_string((int)[(NSHTTPURLResponse*)resp statusCode]);
+        }
+        else if (data) { result = std::string((const char*)[data bytes], [data length]); }
+        dispatch_semaphore_signal(done);
+    }] resume];
+    dispatch_semaphore_wait(done, dispatch_time(DISPATCH_TIME_NOW, 25 * NSEC_PER_SEC));
+    return result;
+}
+
+static const char* iosGetClipboard(void*) {
+    static std::string text;
+    NSString* s = [UIPasteboard generalPasteboard].string;
+    text = s ? [s UTF8String] : "";
+    return text.c_str();
+}
+
+static void iosSetClipboard(void*, const char* text) {
+    [UIPasteboard generalPasteboard].string = [NSString stringWithUTF8String:text];
+}
+
 namespace backend {
     static void createFramebuffer() {
         if (gFbo) { glDeleteFramebuffers(1, &gFbo); }
@@ -262,6 +292,8 @@ namespace backend {
         ImPlot::CreateContext();
         ImGuiIO& io = ImGui::GetIO();
         io.IniFilename = NULL;
+        io.GetClipboardTextFn = iosGetClipboard;
+        io.SetClipboardTextFn = iosSetClipboard;
 
         // Scale the UI to the screen density on first start
         core::configManager.acquire();

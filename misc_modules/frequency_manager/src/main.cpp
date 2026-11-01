@@ -16,6 +16,10 @@
 #include "utils/wstr.h"
 #include "frequency_manager.h"
 #include "scanner.h"
+#include "marker_backup.h"
+#include <thread>
+#include <mutex>
+#include <atomic>
 #include "../../radio/src/radio_module_interface.h"
 
 SDRPP_MOD_INFO{
@@ -634,6 +638,125 @@ private:
         config.release(true);
     }
 
+    // --- backup of all markers: export to a file and the clipboard, import from a link or from pasted text
+    std::mutex backupMtx;
+    std::string backupStatus;
+    std::string backupPending;                  // fetched text waiting to be applied on the UI thread
+    std::atomic<bool> backupBusy{ false };
+    char backupUrl[1024] = "";
+    bool backupReplace = false;
+
+    std::string backupPath() {
+        return std::string(core::getRoot()) + "/markers_export.json";
+    }
+
+    void setBackupStatus(const std::string& s) {
+        std::lock_guard<std::mutex> lck(backupMtx);
+        backupStatus = s;
+    }
+
+    void exportAllMarkers() {
+        config.acquire();
+        nlohmann::json out;
+        out["format"] = "sdrpp-markers";
+        out["version"] = 1;
+        out["lists"] = config.conf["lists"];
+        config.release();
+        std::string text = out.dump(2);
+        int count = 0;
+        for (auto& [ln, l] : out["lists"].items()) { count += (int)l["bookmarks"].size(); }
+        std::string path = backupPath();
+        std::ofstream f(path);
+        bool saved = f.good();
+        if (saved) { f << text; }
+        f.close();
+        ImGui::SetClipboardText(text.c_str());
+        setBackupStatus("Exported " + std::to_string(count) + " markers in " + std::to_string(out["lists"].size()) + " lists. Copied to the clipboard" + (saved ? ", saved in " + path : ""));
+    }
+
+    void importMarkersText(const std::string& text, bool replace) {
+        nlohmann::json lists;
+        std::string err = markerbackup::parse(text, lists);
+        if (!err.empty()) { setBackupStatus("Import failed: " + err); return; }
+        int count = 0;
+        config.acquire();
+        if (replace) { config.conf["lists"] = nlohmann::json::object(); }
+        for (auto& [listName, list] : lists.items()) {
+            auto& target = config.conf["lists"][listName];
+            if (!target.contains("showOnWaterfall")) { target["showOnWaterfall"] = list.value("showOnWaterfall", true); }
+            if (!target.contains("bookmarks")) { target["bookmarks"] = nlohmann::json::object(); }
+            for (auto& [bmName, bm] : list["bookmarks"].items()) {
+                target["bookmarks"][bmName] = {
+                    { "frequency", bm["frequency"] },
+                    { "bandwidth", bm.value("bandwidth", 0.0) },
+                    { "mode", bm.value("mode", 0) },
+                    { "vfo", bm.value("vfo", std::string("")) }
+                };
+                count++;
+            }
+        }
+        config.release(true);
+        afterListsChanged();
+        setBackupStatus(std::string(replace ? "Replaced with " : "Imported ") + std::to_string(count) + " markers in " + std::to_string(lists.size()) + " lists");
+    }
+
+    void startImportFromLink() {
+        if (backupBusy) { return; }
+        std::string url = markerbackup::normalizeShareUrl(backupUrl);
+        if (url.empty()) { setBackupStatus("Paste a link first"); return; }
+        backupBusy = true;
+        setBackupStatus("Downloading...");
+        std::thread([this, url]() {
+            std::string text;
+            bool ok = markerbackup::fetchText(url, text);
+            if (!ok) { setBackupStatus("Download failed: " + text.substr(0, 200)); }
+            else {
+                std::lock_guard<std::mutex> lck(backupMtx);
+                backupPending = text;
+            }
+            backupBusy = false;
+        }).detach();
+    }
+
+    void drawBackupSection(float menuWidth) {
+        // text that arrived from the link is applied here, on the UI thread
+        std::string pending;
+        {
+            std::lock_guard<std::mutex> lck(backupMtx);
+            pending.swap(backupPending);
+        }
+        if (!pending.empty()) { importMarkersText(pending, backupReplace); }
+
+        ImGui::Spacing();
+        if (!ImGui::CollapsingHeader(("Backup and sync##_freq_mgr_backup_" + name).c_str())) { return; }
+        if (ImGui::Button(("Export all markers##_freq_mgr_exp_all_" + name).c_str(), ImVec2(menuWidth, 0))) { exportAllMarkers(); }
+        ImGui::TextDisabled("Copies the markers to the clipboard and saves them in a file, so you can put them anywhere (Drive, notes, a message).");
+        ImGui::Spacing();
+        ImGui::SetNextItemWidth(menuWidth - ImGui::CalcTextSize("Paste").x - 24);
+        ImGui::InputTextWithHint(("##_freq_mgr_backup_url_" + name).c_str(), "Link to a markers file (Drive, GitHub raw...)", backupUrl, sizeof backupUrl);
+        ImGui::SameLine();
+        if (ImGui::Button(("Paste##_freq_mgr_paste_" + name).c_str())) {
+            const char* clip = ImGui::GetClipboardText();
+            if (clip) { snprintf(backupUrl, sizeof backupUrl, "%s", clip); }
+        }
+        ImGui::Checkbox(("Replace existing markers##_freq_mgr_replace_" + name).c_str(), &backupReplace);
+        float half = (menuWidth - ImGui::GetStyle().ItemSpacing.x) / 2;
+        if (backupBusy) { style::beginDisabled(); }
+        if (ImGui::Button(("Import from link##_freq_mgr_imp_url_" + name).c_str(), ImVec2(half, 0))) { startImportFromLink(); }
+        ImGui::SameLine();
+        if (ImGui::Button(("Import from clipboard##_freq_mgr_imp_clip_" + name).c_str(), ImVec2(half, 0))) {
+            const char* clip = ImGui::GetClipboardText();
+            importMarkersText(clip ? clip : "", backupReplace);
+        }
+        if (backupBusy) { style::endDisabled(); }
+        std::string status;
+        {
+            std::lock_guard<std::mutex> lck(backupMtx);
+            status = backupStatus;
+        }
+        if (!status.empty()) { ImGui::TextWrapped("%s", status.c_str()); }
+    }
+
     static void menuHandler(void* ctx) {
         FrequencyManagerModule* _this = (FrequencyManagerModule*)ctx;
 
@@ -925,6 +1048,8 @@ private:
             }
             delete _this->exportDialog;
         }
+
+        _this->drawBackupSection(menuWidth);
     }
 
     struct Drawn {
