@@ -3,6 +3,8 @@
 This document provides guidance for AI agents working with the SDR++ Brown Fork codebase.
 
 ## Additional Docs
+- [ios/SDRRemote/README.md](./ios/SDRRemote/README.md) — build klienta iPadOS do zdalnego sterowania SDR++ Brown na Macu
+- [AGENTS-macos.md](./AGENTS-macos.md) — samodzielne budowanie aplikacji i obrazu DMG na macOS Intel oraz Apple silicon
 - [AGENTS-windows.md](./AGENTS-windows.md) — Windows build via windows-mcp (winget/vcpkg toolchain, VS2022 build, runtime assembly, procdump/cdb crash diagnosis, E2E tests)
 - [AGENTS-debugging.md](./AGENTS-debugging.md) — HTTP debug server, module/procfs commands, GUI automation, lldb crash/hang debugging, bugfix workflow
 - [AGENTS-android.md](./AGENTS-android.md) — Android APK build in Docker (`android-sdr-kit`), installing updates on the test phones via adb, wireless adb, troubleshooting

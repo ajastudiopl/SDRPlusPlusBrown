@@ -144,6 +144,7 @@ namespace ImGui {
         int getFFTHeight();
 
         void setRawFFTSize(int size);
+        int getRawFFTSize() { return rawFFTSize; }
 
         void setFullWaterfallUpdate(bool fullUpdate);
 

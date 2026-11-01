@@ -2,6 +2,7 @@
 #include <gui/gui.h>
 #include <gui/tuner.h>
 #include <string>
+#include <gui/brown/wide_overview.h>
 
 namespace tuner {
 
@@ -151,6 +152,10 @@ namespace tuner {
     void tune(int mode, std::string vfoName, double freq) {
         if (vfoName == "_current") {
             vfoName = gui::waterfall.selectedVFO;
+        }
+        // with the server doing the demodulation the whole band is on screen all the time, so move the VFO instead of the band
+        if (wideoverview::isAudioSession() && mode != TUNER_MODE_IQ_ONLY && vfoName != "") {
+            mode = TUNER_MODE_NORMAL;
         }
         switch (mode) {
         case TUNER_MODE_CENTER:

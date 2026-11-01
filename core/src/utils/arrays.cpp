@@ -1,6 +1,7 @@
 
 #include <utils/arrays.h>
 #include <fftw3.h>
+#include <utils/fftw_lock.h>
 
 #ifdef __APPLE__
 #include <Accelerate/Accelerate.h>
@@ -11,6 +12,11 @@
 #include <ctm.h>
 
 long long fftCumulativeTime = 0;
+
+std::mutex& fftwPlannerMutex() {
+    static std::mutex m;
+    return m;
+}
 bool enableAcceleratedFFT = false;
 
 namespace dsp {
@@ -519,6 +525,7 @@ namespace dsp {
                 plan->reverse = backward;
                 plan->input = npzeros_c(buckets);
                 plan->output = npzeros_c(buckets);
+                std::lock_guard<std::mutex> plannerLock(fftwPlannerMutex());
                 auto p = fftwf_plan_dft_1d(buckets, (fftwf_complex*)plan->input->data(), (fftwf_complex*)plan->output->data(), backward ? FFTW_BACKWARD : FFTW_FORWARD, FFTW_ESTIMATE);
                 plan->p = p;
             }
@@ -546,6 +553,7 @@ namespace dsp {
             }
 
             virtual ~fftwPlanImplFFTW() {
+                std::lock_guard<std::mutex> plannerLock(fftwPlannerMutex());
                 fftwf_destroy_plan(p);
             }
         };

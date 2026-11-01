@@ -10,6 +10,8 @@
 #include <utils/optionlist.h>
 #include <gui/dialogs/dialog_box.h>
 #include "sdrpp_server_client.h"
+#include <gui/brown/wide_overview.h>
+#include <algorithm>
 #include "utils/pbkdf2_sha256.h"
 #include <gui/gui.h>
 
@@ -67,6 +69,7 @@ public:
 
         rxPrebufferId = prebufferMsec.valueId(0);
         txPrebufferId = prebufferMsec.valueId(0);
+        rxResampleId = serverResample.valueId(0);
 
 
         handler.ctx = this;
@@ -85,15 +88,26 @@ public:
         port = config.conf["port"];
         config.release();
 
+        // audio of the "Server audio" mode comes in as a stream of its own
+        audioSrHandler.ctx = this;
+        audioSrHandler.handler = [](float, void*) {};
+        audioStream.init(&audioSrHandler, 48000);
+        sigpath::sinkManager.registerStream("Remote audio", &audioStream);
+        audioRegistered = true;
+
         sigpath::sourceManager.registerSource("SDR++ Server", &handler);
     }
 
     ~SDRPPServerSourceModule() {
         stop(this);
+        if (audioRegistered) { sigpath::sinkManager.unregisterStream("Remote audio"); }
         sigpath::sourceManager.unregisterSource("SDR++ Server");
     }
 
-    void postInit() {}
+    void postInit() {
+        // the sink modules are all loaded by now; the stream starts on "None" until a sink is chosen
+        if (audioRegistered) { sigpath::sinkManager.setStreamSink("Remote audio", "Audio"); }
+    }
 
     void enable() {
         enabled = true;
@@ -160,6 +174,9 @@ private:
         _this->lastStartSent = currentTimeMillis();
         _this->lastStopSent = 0;
         _this->client->start();
+        _this->audioStream.start();
+        _this->client->audioActive = true;
+        wideoverview::setAudioSession(_this->remoteMode == 2);
 
         _this->running = true;
         flog::info("SDRPPServerSourceModule '{0}': Start!", _this->name);
@@ -169,6 +186,9 @@ private:
         SDRPPServerSourceModule* _this = (SDRPPServerSourceModule*)ctx;
         if (!_this->running) { return; }
 
+        wideoverview::setAudioSession(false);
+        if (_this->client) { _this->client->audioActive = false; }
+        _this->audioStream.stop();
         if (_this->connected()) { _this->client->stop(); }
 
         _this->running = false;
@@ -274,6 +294,19 @@ private:
                     if (_this->client) {
                         _this->client->setRxResample(spsValue);
                     }
+                }
+            }
+            if (_this->client->transmitterSupported != -1) { // means sdr++ brown version
+                ImGui::LeftLabel("Remote mode");
+                ImGui::FillWidth();
+                if (ImGui::Combo("##sdrpp_srv_source_remote_mode", &_this->remoteMode, "Full IQ (whole band)\0Channel IQ\0Server audio\0")) {
+                    config.acquire();
+                    config.conf["servers"][_this->devConfName]["remoteMode"] = _this->remoteMode;
+                    config.release(true);
+                    if (_this->client) {
+                        _this->client->setRemoteMode(_this->remoteMode);
+                    }
+                    wideoverview::setAudioSession(_this->running && _this->remoteMode == 2);
                 }
             }
             ImGui::LeftLabel("RX prebuffer length");
@@ -431,6 +464,7 @@ private:
         if (cfg.contains("txPrebuffer")) {
             txPrebufferId = prebufferMsec.valueId(cfg["txPrebuffer"]);
         }
+        remoteMode = (cfg.contains("remoteMode") && cfg["remoteMode"].is_number_integer()) ? std::clamp((int)cfg["remoteMode"], 0, 2) : 2;
 
         config.release();
 
@@ -441,6 +475,8 @@ private:
         client->setRxResample(serverResample.value(rxResampleId));
         client->setRxPrebufferMsec(prebufferMsec.value(rxPrebufferId));
         client->txPrebufferMsec = prebufferMsec.value(txPrebufferId);
+        client->remoteMode = remoteMode;
+        client->audioOut = audioStream.getInput();
     }
 
     std::string name;
@@ -473,6 +509,10 @@ private:
     int rxPrebufferId;
     int rxResampleId;
     float lossFactor = 10;
+    int remoteMode = 2;
+    SinkManager::Stream audioStream;
+    EventHandler<float> audioSrHandler;
+    bool audioRegistered = false;
     float noiseMultiplerDB = 0;
     std::shared_ptr<server::Client> client;
 };

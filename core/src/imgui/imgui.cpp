@@ -6647,6 +6647,9 @@ static ImGuiWindow* ImGui_FindTouchScrollWindow(ImGuiContext& g)
     ImGuiWindow* window = g.HoveredWindow;
     if (window != NULL && strstr(window->Name, "WaterfallControls") != NULL)
         return NULL;
+    // The frequency / zoom drums turn under the finger, scrolling the page with it would keep them still
+    if (window != NULL && strstr(window->Name, "Encoder") != NULL)
+        return NULL;
     while (window != NULL && (window->ScrollMax.y <= 0.0f || (window->Flags & ImGuiWindowFlags_NoScrollWithMouse))) {
         // A dropdown never hands the gesture to the window underneath it
         if (window->Flags & ImGuiWindowFlags_Popup)

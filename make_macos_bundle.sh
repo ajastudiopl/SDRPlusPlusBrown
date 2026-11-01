@@ -19,10 +19,10 @@ bundle_create_struct $BUNDLE
 cp -R root/res/* $BUNDLE/Contents/Resources/
 
 # Create the icon file
-bundle_create_icns root/res/icons/sdrpp.macos.png $BUNDLE/Contents/Resources/sdrpp
+bundle_create_icns root/res/icons/sdrpp.aja.png $BUNDLE/Contents/Resources/sdrpp
 
 # Create the property list
-bundle_create_plist sdrpp SDR++Brown org.sdrpp.sdrppbrown 1.2.1 sdrp sdrpp sdrpp $BUNDLE/Contents/Info.plist
+bundle_create_plist "SDR++ by AJA" "SDR++ by AJA" org.sdrpp.sdrppbrown 1.2.1 sdrp sdrpp sdrpp $BUNDLE/Contents/Info.plist
 
 # ========================= Install binaries =========================
 
@@ -41,6 +41,7 @@ bundle_install_binary $BUNDLE $BUNDLE/Contents/Plugins $BUILD_DIR/source_modules
 bundle_install_binary $BUNDLE $BUNDLE/Contents/Plugins $BUILD_DIR/source_modules/hermes_source/hermes_source.dylib
 bundle_install_binary $BUNDLE $BUNDLE/Contents/Plugins $BUILD_DIR/source_modules/hydrasdr_source/hydrasdr_source.dylib
 bundle_install_binary $BUNDLE $BUNDLE/Contents/Plugins $BUILD_DIR/source_modules/limesdr_source/limesdr_source.dylib
+bundle_install_binary $BUNDLE $BUNDLE/Contents/Plugins $BUILD_DIR/source_modules/audio_source/audio_source.dylib
 bundle_install_binary $BUNDLE $BUNDLE/Contents/Plugins $BUILD_DIR/source_modules/network_source/network_source.dylib
 bundle_install_binary $BUNDLE $BUNDLE/Contents/Plugins $BUILD_DIR/source_modules/perseus_source/perseus_source.dylib
 bundle_install_binary $BUNDLE $BUNDLE/Contents/Plugins $BUILD_DIR/source_modules/plutosdr_source/plutosdr_source.dylib

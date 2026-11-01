@@ -2,6 +2,7 @@
 #include "../processor.h"
 #include "../window/nuttall.h"
 #include <fftw3.h>
+#include <utils/fftw_lock.h>
 
 namespace dsp::noise_reduction {
     class FMIF : public Processor<complex_t, complex_t> {
@@ -112,13 +113,17 @@ namespace dsp::noise_reduction {
             for (int i = 0; i < _bins; i++) { fftWin[i] = window::nuttall(i, _bins - 1); }
 
             // Plan FFTs
+            std::lock_guard<std::mutex> plannerLock(fftwPlannerMutex());
             forwardPlan = fftwf_plan_dft_1d(_bins, (fftwf_complex*)forwFFTIn, (fftwf_complex*)forwFFTOut, FFTW_FORWARD, FFTW_ESTIMATE);
             backwardPlan = fftwf_plan_dft_1d(_bins, (fftwf_complex*)backFFTIn, (fftwf_complex*)backFFTOut, FFTW_BACKWARD, FFTW_ESTIMATE);
         }
 
         void destroyBuffers() {
-            fftwf_destroy_plan(forwardPlan);
-            fftwf_destroy_plan(backwardPlan);
+            {
+                std::lock_guard<std::mutex> plannerLock(fftwPlannerMutex());
+                fftwf_destroy_plan(forwardPlan);
+                fftwf_destroy_plan(backwardPlan);
+            }
             fftwf_free(forwFFTIn);
             fftwf_free(forwFFTOut);
             fftwf_free(backFFTIn);

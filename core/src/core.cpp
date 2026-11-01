@@ -203,10 +203,43 @@ namespace core {
         return cachedPath.c_str();
     }
 
+    static std::mutex pendingSampleRateMtx;
+    static bool pendingSampleRate = false;
+    static double pendingSampleRateValue = 0.0;
+    static double pendingSampleRateBandwidth = 0.0;
+    static std::thread::id uiThreadId;
+    static bool uiThreadKnown = false;
+
+    void markUiThread() {
+        uiThreadId = std::this_thread::get_id();
+        uiThreadKnown = true;
+    }
+
+    void applyPendingSampleRate() {
+        double samplerate, bandwidth;
+        {
+            std::lock_guard<std::mutex> lck(pendingSampleRateMtx);
+            if (!pendingSampleRate) { return; }
+            pendingSampleRate = false;
+            samplerate = pendingSampleRateValue;
+            bandwidth = pendingSampleRateBandwidth;
+        }
+        setInputSampleRate(samplerate, bandwidth);
+    }
+
     void setInputSampleRate(double samplerate, double bandwidth) {
         // Forward this to the server
         if (args["server"].b()) {
             server::setInputSampleRate(samplerate);
+            return;
+        }
+
+        // Not the UI thread: let the UI thread do it between two frames
+        if (uiThreadKnown && std::this_thread::get_id() != uiThreadId) {
+            std::lock_guard<std::mutex> lck(pendingSampleRateMtx);
+            pendingSampleRate = true;
+            pendingSampleRateValue = samplerate;
+            pendingSampleRateBandwidth = bandwidth;
             return;
         }
 
@@ -820,6 +853,21 @@ int sdrpp_main(int argc, char* argv[]) {
     core::configManager.conf["modules"][modCount++] = "spectrum_analyzer.so";
 #endif
 
+#ifdef SDRPP_IOS
+    // The app container moves between installs, always point at the bundle
+    if (getenv("SDRPP_MODULES_DIR")) { core::configManager.conf["modulesDirectory"] = getenv("SDRPP_MODULES_DIR"); }
+    if (getenv("SDRPP_RES_DIR")) { core::configManager.conf["resourcesDirectory"] = getenv("SDRPP_RES_DIR"); }
+    core::configManager.conf["smallScreen"] = true;
+    core::configManager.conf["lockMenuOrder"] = true;
+    if ((int)core::configManager.conf["menuWidth"] < 500) { core::configManager.conf["menuWidth"] = 640; }
+    core::configManager.conf["moduleInstances"]["iOS Audio Sink"] = "ios_audio_sink";
+    {
+        // An old config can remember "None" from before the iOS sink existed
+        std::string radioSink = core::configManager.conf["streams"]["Radio"]["sink"];
+        if (radioSink.empty() || radioSink == "None") { core::configManager.conf["streams"]["Radio"]["sink"] = "Audio"; }
+    }
+#endif
+
     // Fix missing elements in config
     for (auto const& item : defConfig.items()) {
         if (!core::configManager.conf.contains(item.key())) {
@@ -850,6 +898,22 @@ int sdrpp_main(int argc, char* argv[]) {
         }
         core::configManager.conf["spectrumAnalyzerAdded"] = true;
     }
+
+#if defined(__APPLE__) && !defined(SDRPP_IOS)
+    // Configs from before the CoreAudio sink existed have no instance of it: the app would have no audio output
+    {
+        bool found = false;
+        for (auto [_name, inst] : core::configManager.conf["moduleInstances"].items()) {
+            if (inst.is_object() && inst.contains("module") && inst["module"] == "macos_coreaudio_sink") { found = true; }
+        }
+        if (!found && !core::configManager.conf["moduleInstances"].contains("CoreAudio Sink")) {
+            core::configManager.conf["moduleInstances"]["CoreAudio Sink"]["module"] = "macos_coreaudio_sink";
+            core::configManager.conf["moduleInstances"]["CoreAudio Sink"]["enabled"] = true;
+        }
+        std::string radioSink = core::configManager.conf["streams"]["Radio"]["sink"];
+        if (radioSink.empty() || radioSink == "None") { core::configManager.conf["streams"]["Radio"]["sink"] = "CoreAudio"; }
+    }
+#endif
 
     // Load UI scaling
     style::uiScale = core::configManager.conf["uiScale"];

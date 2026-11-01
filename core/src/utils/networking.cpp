@@ -134,7 +134,7 @@ namespace net {
 
         int beenWritten = 0;
         while (beenWritten < count) {
-            ret = send(_sock, (char*)buf, count, 0);
+            ret = send(_sock, (char*)&buf[beenWritten], count - beenWritten, 0);
             if (ret <= 0) {
                 {
                     std::lock_guard lck(connectionOpenMtx);

@@ -4,6 +4,7 @@
 #include <signal_path/signal_path.h>
 #include <utils/flog.h>
 #include <core.h>
+#include <gui/brown/wide_overview.h>
 #include "dsp/compression/experimental_fft_decompressor.h"
 #include <gui/tuner.h>
 #include "utils/pbkdf2_sha256.h"
@@ -374,6 +375,10 @@ namespace server {
         prebufferer.setSampleRate(currentSampleRate);
         prebufferer.clear();
         fftDecompressor.noiseFigure.clear();
+        s_cmd_data[0] = (uint8_t)remoteMode;
+        sendCommand(COMMAND_SET_CHANNEL_MODE, 1);
+        lastDemodMode = -1;
+        sendDemodIfChanged();
         int32_t *sr = (int32_t *)&s_cmd_data[0];
         *sr = requestedSampleRate;
         sendCommand(COMMAND_SET_SAMPLERATE, sizeof(int32_t));
@@ -567,6 +572,32 @@ namespace server {
                 };
                 updateStreamTime(this);
             }
+            else if (r_pkt_hdr->type == PACKET_TYPE_AUDIO) {
+                auto payload = r_pkt_hdr->size - sizeof(PacketHeader);
+                if (audioOut && audioActive && payload >= sizeof(AudioHeader)) {
+                    auto ah = (AudioHeader*)r_pkt_data;
+                    int16_t* pcm = (int16_t*)(r_pkt_data + sizeof(AudioHeader));
+                    int frames = std::min<int>(ah->frames, (payload - sizeof(AudioHeader)) / sizeof(int16_t));
+                    for (int done = 0; done < frames && audioActive;) {
+                        int n = std::min(frames - done, 4096);
+                        for (int i = 0; i < n; i++) {
+                            float v = pcm[done + i] / 32768.0f;
+                            audioOut->writeBuf[i] = { v, v };
+                        }
+                        if (!audioOut->swap(n)) { break; }
+                        done += n;
+                    }
+                }
+            }
+            else if (r_pkt_hdr->type == PACKET_TYPE_WIDE_SPECTRUM) {
+                auto payload = r_pkt_hdr->size - sizeof(PacketHeader);
+                if (payload >= sizeof(WideSpectrumHeader)) {
+                    auto wh = (WideSpectrumHeader*)r_pkt_data;
+                    if (wh->bins > 0 && payload >= sizeof(WideSpectrumHeader) + wh->bins) {
+                        wideoverview::push(wh->centerFrequency, wh->span, r_pkt_data + sizeof(WideSpectrumHeader), wh->bins);
+                    }
+                }
+            }
             else if (r_pkt_hdr->type == PACKET_TYPE_ERROR) {
                 flog::error("SDR++ Server Error: {0}", rbuffer[sizeof(PacketHeader)]);
             }
@@ -629,7 +660,26 @@ namespace server {
     }
 
     int prevTxStatus = 0;
+    // The modulation is picked in the radio on this side, the server needs to demodulate the same way.
+    void Client::sendDemodIfChanged() {
+        if (!isOpen() || remoteMode != 2) { return; }
+        int mode;
+        double bw, offset;
+        wideoverview::getDemod(&mode, &bw, &offset);
+        if (mode == lastDemodMode && bw == lastDemodBandwidth && offset == lastDemodOffset) { return; }
+        lastDemodMode = mode;
+        lastDemodBandwidth = bw;
+        lastDemodOffset = offset;
+        DemodSettings ds;
+        ds.mode = mode;
+        ds.bandwidth = bw;
+        ds.offset = offset;
+        memcpy(s_cmd_data, &ds, sizeof ds);
+        sendCommand(COMMAND_SET_DEMOD, sizeof ds);
+    }
+
     void Client::idle() {
+        sendDemodIfChanged();
         auto rt = ((RemoteTransmitter *)sigpath::transmitter);
         if (rt) {
             int nowStatus = rt->getTXStatus();

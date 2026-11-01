@@ -39,6 +39,9 @@ if (OPT_BACKEND_GLFW)
     file(GLOB_RECURSE BACKEND_SRC "backends/glfw/*.cpp" "backends/glfw/*.c")
 
 endif (OPT_BACKEND_GLFW)
+if (OPT_BACKEND_IOS)
+    file(GLOB_RECURSE BACKEND_SRC "backends/ios/*.mm")
+endif (OPT_BACKEND_IOS)
 if (OPT_BACKEND_ANDROID)
     file(GLOB_RECURSE BACKEND_SRC "backends/android/*.cpp" "backends/android/*.c")
     set(BACKEND_SRC ${BACKEND_SRC} ${ANDROID_NDK}/sources/android/native_app_glue/android_native_app_glue.c)
@@ -88,6 +91,10 @@ if (OPT_BACKEND_GLFW)
         target_link_libraries(sdrpp_core PUBLIC ${GLFW3_LIBRARIES})
     endif()
 endif (OPT_BACKEND_GLFW)
+if (OPT_BACKEND_IOS)
+    target_include_directories(sdrpp_core PUBLIC "backends/ios")
+    target_link_libraries(sdrpp_core PUBLIC "-framework UIKit" "-framework OpenGLES" "-framework QuartzCore" "-framework Foundation" "-framework AVFoundation")
+endif (OPT_BACKEND_IOS)
 if (OPT_BACKEND_ANDROID)
     target_include_directories(sdrpp_core PUBLIC "backends/android")
     target_include_directories(sdrpp_core PUBLIC "backends/android/imgui")
@@ -136,6 +143,17 @@ if (MSVC)
     # ZSTD
     find_package(zstd CONFIG REQUIRED)
     target_link_libraries(sdrpp_core PUBLIC zstd::libzstd_shared)
+elseif (IOS)
+    target_include_directories(sdrpp_core PUBLIC ${SDR_KIT_ROOT}/include)
+    target_link_libraries(sdrpp_core PUBLIC
+        ${SDR_KIT_ROOT}/lib/libvolk.a
+        ${SDR_KIT_ROOT}/lib/libfftw3f.a
+        ${SDR_KIT_ROOT}/lib/libzstd.a
+    )
+    # x86 (simulator) builds of volk need cpu_features
+    if (EXISTS ${SDR_KIT_ROOT}/lib/libcpu_features.a)
+        target_link_libraries(sdrpp_core PUBLIC ${SDR_KIT_ROOT}/lib/libcpu_features.a)
+    endif ()
 elseif (ANDROID)
     target_include_directories(sdrpp_core PUBLIC
         ${SDR_KIT_ROOT}/${ANDROID_ABI}/include

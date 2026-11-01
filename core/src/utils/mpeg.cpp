@@ -7,7 +7,10 @@
 #include "flog.h"
 
 #ifdef __APPLE__
+#include <TargetConditionals.h>
+#if !TARGET_OS_IOS
 #include <CoreAudio/CoreAudio.h>
+#endif
 #include <AudioToolbox/AudioToolbox.h>
 #include <CoreFoundation/CoreFoundation.h>
 #endif

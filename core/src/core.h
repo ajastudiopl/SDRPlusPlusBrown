@@ -20,6 +20,11 @@ namespace core {
 
     void setInputSampleRate(double samplerate, double bandwidth = 0.0);
 
+    // The waterfall and FFT are only safe to touch from the UI thread: a sample rate change coming from another
+    // thread (e.g. the network thread of a remote source) is kept and applied at the start of the next UI frame.
+    void markUiThread();
+    void applyPendingSampleRate();
+
     constexpr int NARGUMENTS = 20000;
     struct SpawnCommand {
         char executable[500];

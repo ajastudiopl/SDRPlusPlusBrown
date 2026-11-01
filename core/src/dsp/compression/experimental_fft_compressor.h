@@ -66,6 +66,9 @@ namespace dsp::compression {
         }
         void setSampleRate(int sampleRate) {
             if (sampleRate != this->sampleRate) {
+                // The worker thread uses the plan, the window and the history: it must not run while they are replaced
+                std::lock_guard<std::recursive_mutex> lck(ctrlMtx);
+                if (_block_init) { tempStop(); }
                 clear();
                 this->sampleRate = sampleRate;
                 fftSize = sampleRate * sliceMsec / 1000;
@@ -83,11 +86,15 @@ namespace dsp::compression {
                 sharedDataLock.lock();
                 noiseFigure.clear();
                 sharedDataLock.unlock();
+                if (_block_init) { tempStart(); }
             }
         }
 
         void clear() {
             inputBuffer.clear();
+            cleanFreqDomain.clear();
+            cleanMagnitudes.clear();
+            windowedMagnitudes.clear();
         }
 
         bool enabled = false;
@@ -199,6 +206,13 @@ namespace dsp::compression {
 
             if (inputBuffer.size() < fftSize) {
                 return 0;
+            }
+
+            // The sample rate (and fftSize with it) may have changed: history of another size must not be mixed in
+            if (!cleanFreqDomain.empty() && cleanFreqDomain[0]->size() != (size_t)fftSize) {
+                cleanFreqDomain.clear();
+                cleanMagnitudes.clear();
+                windowedMagnitudes.clear();
             }
 
             inArray->clear();

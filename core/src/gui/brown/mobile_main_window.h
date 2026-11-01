@@ -21,7 +21,7 @@ struct StatusReporter {
 struct TheEncoder {
 
     double somePosition = 0; // angle in radians
-    double speed = 0;
+    double speed = 0;        // radians per second, what is left of a flick
     double currentValue = 0;
     double delayFactor = 0.96;
 
@@ -30,6 +30,9 @@ struct TheEncoder {
     int encoderId = -1;
 
     std::vector<double> fingerMovement;
+    bool prevFingerDown[10] = {};
+    int trackedFinger = -1;
+    std::vector<std::pair<double, double>> track; // (time, somePosition) of the last moments of the finger, for the speed of a flick
 
     double draw(float currentValue);
 };

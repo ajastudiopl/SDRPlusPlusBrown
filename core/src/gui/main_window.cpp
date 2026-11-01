@@ -822,6 +822,8 @@ void MainWindow::displayVariousWindows() {
 
 
 void MainWindow::draw() {
+    core::markUiThread();
+    core::applyPendingSampleRate();
     auto ctm = currentTimeNanos();
     ImGui::WaterfallVFO* vfo;
     this->preDraw(&vfo);

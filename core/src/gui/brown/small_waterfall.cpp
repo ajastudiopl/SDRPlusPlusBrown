@@ -7,6 +7,7 @@
 #include <dsp/multirate/rational_resampler.h>
 #include <gui/widgets/waterfall.h>
 #include <fftw3.h>
+#include <utils/fftw_lock.h>
 
 struct SubWaterfall::SubWaterfallPrivate {
     SubWaterfall *pub;
@@ -125,12 +126,18 @@ SubWaterfall::SubWaterfall(int sampleRate, int wfrange, const std::string & lbl)
 
     pvt->fft_in = (fftwf_complex*)fftwf_malloc(sizeof(fftwf_complex) * pvt->fftSize);
     pvt->fft_out = (fftwf_complex*)fftwf_malloc(sizeof(fftwf_complex) * pvt->fftSize);
-    pvt->fftwPlan = fftwf_plan_dft_1d(pvt->fftSize, pvt->fft_in, pvt->fft_out, FFTW_FORWARD, FFTW_ESTIMATE);
+    {
+        std::lock_guard<std::mutex> plannerLock(fftwPlannerMutex());
+        pvt->fftwPlan = fftwf_plan_dft_1d(pvt->fftSize, pvt->fft_in, pvt->fft_out, FFTW_FORWARD, FFTW_ESTIMATE);
+    }
     pvt->spectrumLine = (float*)volk_malloc(pvt->fftSize * sizeof(float), 16);
 }
 
 SubWaterfall::~SubWaterfall() {
-    fftwf_destroy_plan(pvt->fftwPlan);
+    {
+        std::lock_guard<std::mutex> plannerLock(fftwPlannerMutex());
+        fftwf_destroy_plan(pvt->fftwPlan);
+    }
     fftwf_free(pvt->fft_in);
     fftwf_free(pvt->fft_out);
     volk_free(pvt->spectrumLine);

@@ -4,6 +4,7 @@
 #include <version.h>
 #include <config.h>
 #include <filesystem>
+#include <mutex>
 #include <dsp/types.h>
 #include <utils/wav.h>
 #include <signal_path/signal_path.h>
@@ -16,6 +17,11 @@
 #include "dsp/sink/handler_sink.h"
 #include "dsp/loop/agc.h"
 #include "dsp/multirate/rational_resampler.h"
+#include "dsp/channel/rx_vfo.h"
+#include "dsp/routing/splitter.h"
+#include "utils/fftw_lock.h"
+#include "utils/server_demod.h"
+#include <fftw3.h>
 #include <zstd.h>
 
 #ifdef __linux__
@@ -29,12 +35,51 @@
 namespace server {
     dsp::stream<dsp::complex_t> dummyInput("server::dummyInput");
     dsp::multirate::RationalResampler<dsp::complex_t> forcedResampler;
+
+    // Channel mode: the device stays on its wide band, the server cuts a narrow channel around the
+    // frequency the client tunes to and sends only that. Tuning inside the band is just a new offset.
+    static const int DEFAULT_CHANNEL_RATE = 250000;
+    dsp::stream<dsp::complex_t> channelDummyInput("server::channelDummyInput");
+    dsp::channel::RxVFO channelVfo;
+    dsp::stream<dsp::complex_t>* sourceStream = &dummyInput;
+    bool channelMode = false;
+
+    // Server audio mode: a second VFO cuts the station out of the wide band, ServerDemod makes audio of it.
+    bool audioMode = false;
+    ServerDemod serverDemod;
+    dsp::stream<dsp::complex_t> audioChanIn("server::audioChanIn");
+    dsp::channel::RxVFO audioVfo;
+    bool iqBound = false;
+    bool audioBound = false;
+    double audioVfoInRate = 0;
+    double audioVfoOutRate = 0;
+    double audioVfoBandwidth = 0;
+    double audioOffset = 0;
+
+    // Channel mode also sends a coarse spectrum of the whole device band, so the client can still show it.
+    static const int WIDE_BINS = 8192;
+    static const int WIDE_FPS = 20;
+    dsp::stream<dsp::complex_t> wideDummyInput("server::wideDummyInput");
+    dsp::stream<dsp::complex_t> wideChanIn("server::wideChanIn");
+    dsp::routing::Splitter<dsp::complex_t> wideSplit;
+    fftwf_plan widePlan = NULL;
+    fftwf_complex* wideIn = NULL;
+    fftwf_complex* wideOut = NULL;
+    std::vector<float> wideWindow;
+    std::vector<float> wideAcc;
+    std::vector<uint8_t> widePacket;
+    double wideSamplesSince = 0;
+    double chanDeviceCenter = 0;
+    double chanOffset = 0;
+    double chanStation = 0;
     dsp::compression::ExperimentalFFTCompressor fftCompressor;
     dsp::compression::SampleStreamCompressor comp;
     dsp::sink::Handler<uint8_t> hnd;
     net::Conn client;
     uint8_t* rbuf = NULL;
     uint8_t* sbuf = NULL;
+    // sbuf/s_cmd_data are shared by the network thread and the DSP thread, one packet at a time
+    std::recursive_mutex sendMtx;
     uint8_t* bbuf = NULL;
 
     PacketHeader* r_pkt_hdr = NULL;
@@ -81,6 +126,78 @@ namespace server {
     dsp::buffer::Prebuffer<dsp::complex_t> transmitPrebufferer;
     dsp::buffer::Packer<dsp::complex_t> transmitPacker;
 
+    class ServerAudioSink : public dsp::Sink<dsp::complex_t> {
+    public:
+        int run() override {
+            int count = _in->read();
+            if (count < 0) { return -1; }
+            if (audioMode && client && client->isOpen()) {
+                audio.clear();
+                serverDemod.process(_in->readBuf, count, audio);
+                int frames = (int)audio.size();
+                if (frames > 0) {
+                    pkt.resize(sizeof(PacketHeader) + sizeof(AudioHeader) + frames * sizeof(int16_t));
+                    PacketHeader* hdr = (PacketHeader*)pkt.data();
+                    AudioHeader* ah = (AudioHeader*)&pkt[sizeof(PacketHeader)];
+                    int16_t* pcm = (int16_t*)&pkt[sizeof(PacketHeader) + sizeof(AudioHeader)];
+                    hdr->type = PACKET_TYPE_AUDIO;
+                    hdr->size = (uint32_t)pkt.size();
+                    ah->sampleRate = ServerDemod::AUDIO_RATE;
+                    ah->frames = frames;
+                    for (int i = 0; i < frames; i++) { pcm[i] = (int16_t)(std::clamp)(audio[i] * 32000.0f, -32768.0f, 32767.0f); }
+                    client->write(hdr->size, pkt.data());
+                }
+            }
+            _in->flush();
+            return count;
+        }
+
+    private:
+        std::vector<float> audio;
+        std::vector<uint8_t> pkt;
+    };
+    ServerAudioSink audioSink;
+
+    // Runs on the splitter thread with a chunk of the raw device band.
+    void wideSpectrumHook(dsp::complex_t* data, int count) {
+        if (!channelMode && !audioMode) { return; }
+        wideSamplesSince += count;
+        if (wideSamplesSince < sampleRate / WIDE_FPS || count < WIDE_BINS) { return; }
+        wideSamplesSince = 0;
+
+        float winSum = 0;
+        for (int i = 0; i < WIDE_BINS; i++) { winSum += wideWindow[i]; }
+        int nseg = (std::min)(8, count / WIDE_BINS);
+        std::fill(wideAcc.begin(), wideAcc.end(), 0.0f);
+        for (int s = 0; s < nseg; s++) {
+            const dsp::complex_t* src = data + (nseg > 1 ? (size_t)s * (count - WIDE_BINS) / (nseg - 1) : 0);
+            for (int i = 0; i < WIDE_BINS; i++) {
+                wideIn[i][0] = src[i].re * wideWindow[i];
+                wideIn[i][1] = src[i].im * wideWindow[i];
+            }
+            fftwf_execute(widePlan);
+            // peak over the segments, so that short transmissions stay visible
+            for (int i = 0; i < WIDE_BINS; i++) { wideAcc[i] = (std::max)(wideAcc[i], wideOut[i][0] * wideOut[i][0] + wideOut[i][1] * wideOut[i][1]); }
+        }
+
+        widePacket.resize(sizeof(PacketHeader) + sizeof(WideSpectrumHeader) + WIDE_BINS);
+        PacketHeader* hdr = (PacketHeader*)widePacket.data();
+        WideSpectrumHeader* wh = (WideSpectrumHeader*)&widePacket[sizeof(PacketHeader)];
+        uint8_t* bins = &widePacket[sizeof(PacketHeader) + sizeof(WideSpectrumHeader)];
+        hdr->type = PACKET_TYPE_WIDE_SPECTRUM;
+        hdr->size = (uint32_t)widePacket.size();
+        wh->centerFrequency = channelMode ? chanDeviceCenter : lastTunedFrequency;
+        wh->span = sampleRate;
+        wh->bins = WIDE_BINS;
+        wh->reserved = 0;
+        for (int k = 0; k < WIDE_BINS; k++) {
+            float power = wideAcc[(k + WIDE_BINS / 2) % WIDE_BINS] / (winSum * winSum);
+            float db = 10.0f * log10f(power + 1e-20f);
+            bins[k] = (uint8_t)(std::clamp)((db + 130.0f) * 2.0f, 0.0f, 255.0f);
+        }
+        if (client && client->isOpen()) { client->write(hdr->size, widePacket.data()); }
+    }
+
     int main() {
         flog::info("=====| SERVER MODE |=====");
 #ifdef __linux__
@@ -98,6 +215,25 @@ namespace server {
 
             // Init DSP
         forcedResampler.init(&dummyInput, 1000000, 48000);
+        channelVfo.init(&channelDummyInput, 1000000, DEFAULT_CHANNEL_RATE, DEFAULT_CHANNEL_RATE * 0.9, 0);
+        channelVfo.start();
+        {
+            std::lock_guard<std::mutex> plannerLock(fftwPlannerMutex());
+            wideIn = (fftwf_complex*)fftwf_malloc(sizeof(fftwf_complex) * WIDE_BINS);
+            wideOut = (fftwf_complex*)fftwf_malloc(sizeof(fftwf_complex) * WIDE_BINS);
+            widePlan = fftwf_plan_dft_1d(WIDE_BINS, wideIn, wideOut, FFTW_FORWARD, FFTW_ESTIMATE);
+        }
+        wideWindow.resize(WIDE_BINS);
+        wideAcc.resize(WIDE_BINS);
+        for (int i = 0; i < WIDE_BINS; i++) { wideWindow[i] = 0.5f - 0.5f * cosf(2.0f * (float)M_PI * i / (WIDE_BINS - 1)); }
+        serverDemod.setMode(0, 12500);
+        audioVfo.init(&audioChanIn, 1000000, 48000, 12500, 0);
+        audioVfo.start();
+        audioSink.init(&audioVfo.out);
+        audioSink.start();
+        wideSplit.init(&wideDummyInput);
+        wideSplit.setHook(wideSpectrumHook);
+        wideSplit.start();
         fftCompressor.init(&forcedResampler.out);
         fftCompressor.setEnabled(true);
         comp.init(&fftCompressor.out, dsp::compression::PCM_TYPE_I8);
@@ -257,6 +393,7 @@ namespace server {
     }
 
     void maybeSendTransmitterState() {
+        std::lock_guard<std::recursive_mutex> sendLock(sendMtx);
         if (sigpath::transmitter) {
             auto state = transmitterStatusToString(sigpath::transmitter);
             strcpy((char*)s_cmd_data, state.c_str());
@@ -268,6 +405,7 @@ namespace server {
 
     void maybeSendChallenge() {
         if (authSigningKey.size() > 0) {
+            std::lock_guard<std::recursive_mutex> sendLock(sendMtx);
             challenge = std::to_string(currentTimeMillis());
             challenge.resize(256 / 8, ' ');
             memcpy(s_cmd_data, challenge.c_str(), challenge.size());
@@ -328,6 +466,7 @@ namespace server {
     }
 
     void sendTransmitAction() {
+        std::lock_guard<std::recursive_mutex> sendLock(sendMtx);
         auto rv = json({});
         rv["transmitStatus"] = (bool)sigpath::transmitter->getTXStatus();;
         auto str = rv.dump();
@@ -439,7 +578,7 @@ namespace server {
             StreamMetadata *sm = (StreamMetadata*)&bbuf[sizeof(PacketHeader)];
             sm->version = 1;
             sm->size = sizeof(StreamMetadata);
-            sm->frequency = lastCallbackFrequency != -1 ? lastCallbackFrequency : lastTunedFrequency; // for any driver, supporting callback frequency or not.
+            sm->frequency = channelMode ? chanDeviceCenter + chanOffset : (lastCallbackFrequency != -1 ? lastCallbackFrequency : lastTunedFrequency); // for any driver, supporting callback frequency or not.
             sm->sampleRate = lastSampleRate;
             sm->fftCompressed = fftCompressor.isEnabled();
             auto dataOffset = sizeof(PacketHeader) + sizeof(StreamMetadata);
@@ -468,6 +607,7 @@ namespace server {
             if (client->isOpen()) {
                 client->write(bb_pkt_hdr->size, bbuf);
                 if (fftCompressor.isEnabled() && frameCount % 20 == 1 && (sigpath::transmitter == nullptr || sigpath::transmitter->getTXStatus() == 0)) {
+                    std::lock_guard<std::recursive_mutex> sendLock(sendMtx);
                     fftCompressor.sharedDataLock.lock();
                     auto nbytes = fftCompressor.noiseFigure.size() * sizeof(fftCompressor.noiseFigure[0]);
                     memcpy(s_cmd_data, fftCompressor.noiseFigure.data(), nbytes);
@@ -483,8 +623,22 @@ namespace server {
         }
     }
 
+    // What the client gets: the narrow channel in channel mode, otherwise the (optionally resampled) device band.
+    double outputSampleRate() {
+        if (channelMode) { return forcedSampleRate != 0 ? forcedSampleRate : DEFAULT_CHANNEL_RATE; }
+        if (audioMode) { return sampleRate; }
+        return forcedSampleRate != 0 ? forcedSampleRate : sampleRate;
+    }
+
     void updateResampler() {
-        if (forcedSampleRate == 0) {
+        if (channelMode) {
+            double cr = outputSampleRate();
+            channelVfo.setInSamplerate(sampleRate);
+            channelVfo.setOutSamplerate(cr, cr * 0.9);
+            forcedResampler.setRates(cr, cr);
+            fftCompressor.setSampleRate(cr);
+        }
+        else if (forcedSampleRate == 0) {
             forcedResampler.setRates(sampleRate, sampleRate);
             fftCompressor.setSampleRate(sampleRate);
         } else {
@@ -493,9 +647,104 @@ namespace server {
         }
     }
 
+    void setSplitOutputs(bool iq, bool audio) {
+        if (iq != iqBound) {
+            if (iq) { wideSplit.bindStream(&wideChanIn); } else { wideSplit.unbindStream(&wideChanIn); }
+            iqBound = iq;
+        }
+        if (audio != audioBound) {
+            if (audio) { wideSplit.bindStream(&audioChanIn); } else { wideSplit.unbindStream(&audioChanIn); }
+            audioBound = audio;
+        }
+    }
+
+    // Points the audio VFO at the station: rates and bandwidth only when the modulation changed, offset every time.
+    void updateAudioVfo() {
+        double inRate = sampleRate, outRate = serverDemod.ifRate(), bw = serverDemod.vfoBandwidth();
+        if (inRate != audioVfoInRate) {
+            audioVfo.setInSamplerate(inRate);
+            audioVfoInRate = inRate;
+        }
+        if (outRate != audioVfoOutRate || bw != audioVfoBandwidth) {
+            audioVfo.setOutSamplerate(outRate, bw);
+            audioVfoOutRate = outRate;
+            audioVfoBandwidth = bw;
+        }
+        audioVfo.setOffset(audioOffset + serverDemod.vfoShift());
+    }
+
+    // A stream has one reader, so detach the old consumer before attaching the new one.
+    void applyTopology() {
+        if (channelMode) {
+            forcedResampler.setInput(&channelVfo.out);
+            channelVfo.setInput(&wideChanIn);
+            wideSplit.setInput(sourceStream);
+            setSplitOutputs(true, false);
+        }
+        else if (audioMode) {
+            // the whole device band stays the client's view, only the audio of one station and a coarse spectrum are sent
+            channelVfo.setInput(&channelDummyInput);
+            forcedResampler.setInput(&dummyInput);
+            wideSplit.setInput(sourceStream);
+            setSplitOutputs(false, true);
+        }
+        else {
+            setSplitOutputs(false, false);
+            wideSplit.setInput(&wideDummyInput);
+            channelVfo.setInput(&channelDummyInput);
+            forcedResampler.setInput(sourceStream);
+        }
+        updateResampler();
+    }
+
+    // Put the narrow channel on frequency f. Inside the device band only the offset changes,
+    // outside it the device is retuned so that the station sits a quarter of the band away from its DC spike.
+    void channelTune(double f) {
+        double cr = outputSampleRate();
+        double halfSpan = sampleRate / 2 - cr / 2 - sampleRate * 0.05;
+        bool retune = !(halfSpan > 0 && chanDeviceCenter != 0 && fabs(f - chanDeviceCenter) <= halfSpan);
+        flog::info("Channel tune {:.0f} Hz ({})", f, retune ? "retuning the device" : "inside the device band, only the offset changes");
+        if (!retune) {
+            chanOffset = f - chanDeviceCenter;
+        }
+        else {
+            chanDeviceCenter = halfSpan > 0 ? f - sampleRate / 4 : f;
+            lastTunedFrequency = chanDeviceCenter;
+            sigpath::sourceManager.tune(chanDeviceCenter);
+            chanOffset = f - chanDeviceCenter;
+        }
+        chanStation = f;
+        channelVfo.setOffset(chanOffset);
+    }
+
+    // 0 = whole device band as IQ, 1 = narrow IQ channel, 2 = whole band stays tuned like in 0, but the server
+    // demodulates one station of it and sends audio plus a coarse spectrum instead of IQ
+    void setChannelMode(int mode) {
+        bool wantChannel = mode == 1;
+        bool wantAudio = mode == 2;
+        if (wantChannel == channelMode && wantAudio == audioMode) { return; }
+        bool wasChannel = channelMode;
+        if (wantChannel && !wasChannel) {
+            chanDeviceCenter = lastTunedFrequency;
+            chanOffset = 0;
+            chanStation = chanDeviceCenter;
+        }
+        if (wasChannel && !wantChannel) { lastTunedFrequency = chanStation; }
+        channelMode = wantChannel;
+        audioMode = wantAudio;
+        applyTopology();
+        if (wantChannel && !wasChannel) { channelVfo.setOffset(0); }
+        if (audioMode) { updateAudioVfo(); }
+        if (wasChannel && !wantChannel) { sigpath::sourceManager.tune(lastTunedFrequency); }
+        flog::info("Remote mode {}: {}", mode, wantChannel ? "narrow IQ channel" : wantAudio ? "server audio" : "whole band IQ");
+        sendSampleRate(outputSampleRate());
+        sendCenterFrequency(channelMode ? chanStation : lastTunedFrequency);
+    }
+
     void setInput(dsp::stream<dsp::complex_t>* stream) {
         lastCallbackFrequency = -1;
-        forcedResampler.setInput(stream);
+        sourceStream = stream;
+        applyTopology();
     }
 
     void setInputCenterFrequencyCallback(int centerFrequency) {
@@ -580,7 +829,8 @@ namespace server {
         else if (cmd == COMMAND_SET_SAMPLERATE) {
             forcedSampleRate = *(int32_t *)data;
             updateResampler();
-            sendSampleRate(forcedSampleRate != 0 ? forcedSampleRate: sampleRate);
+            if (channelMode) { channelTune(chanStation); }
+            sendSampleRate(outputSampleRate());
         }
         else if (cmd == COMMAND_STOP) {
             sigpath::sourceManager.stop();
@@ -589,10 +839,25 @@ namespace server {
             maybeSendChallenge();
         }
         else if (cmd == COMMAND_SET_FREQUENCY && len == 8) {
+            if (channelMode) {
+                channelTune(*(double*)data);
+                sendCommandAck(COMMAND_SET_FREQUENCY, 0);
+                return;
+            }
             lastTunedFrequency = *(double*)data;
             flog::info("Setting device to frequency: {}", (double)lastTunedFrequency);
             sigpath::sourceManager.tune(*(double*)data);
             sendCommandAck(COMMAND_SET_FREQUENCY, 0);
+        }
+        else if (cmd == COMMAND_SET_CHANNEL_MODE && len == 1) {
+            setChannelMode(data[0]);
+        }
+        else if (cmd == COMMAND_SET_DEMOD && len == sizeof(DemodSettings)) {
+            DemodSettings ds;
+            memcpy(&ds, data, sizeof ds);
+            serverDemod.setMode(ds.mode, ds.bandwidth);
+            audioOffset = ds.offset;
+            if (audioMode) { updateAudioVfo(); }
         }
         else if (cmd == COMMAND_SET_SAMPLE_TYPE && len == 1) {
             dsp::compression::PCMType type = (dsp::compression::PCMType)*(uint8_t*)data;
@@ -678,6 +943,7 @@ namespace server {
     }
 
     void sendUI(Command originCmd, std::string diffId, SmGui::DrawListElem diffValue) {
+        std::lock_guard<std::recursive_mutex> sendLock(sendMtx);
         // Render UI
         SmGui::DrawList dl;
         renderUI(&dl, diffId, diffValue);
@@ -692,6 +958,7 @@ namespace server {
     }
 
     void sendUnsolicitedUI() {
+        std::lock_guard<std::recursive_mutex> sendLock(sendMtx);
         SmGui::DrawList dl;
         renderUI(&dl, "", dummyElem);
         int size = dl.getSize();
@@ -700,18 +967,21 @@ namespace server {
     }
 
     void sendError(Error err) {
+        std::lock_guard<std::recursive_mutex> sendLock(sendMtx);
         PacketHeader* hdr = (PacketHeader*)sbuf;
         s_pkt_data[0] = err;
         sendPacket(PACKET_TYPE_ERROR, 1);
     }
 
     void sendSampleRate(double sampleRate) {
+        std::lock_guard<std::recursive_mutex> sendLock(sendMtx);
         *(double*)s_cmd_data = sampleRate;
         sendCommand(COMMAND_SET_SAMPLERATE, sizeof(double));
         lastSampleRate = sampleRate;
     }
 
     void sendCenterFrequency(double freq) {
+        std::lock_guard<std::recursive_mutex> sendLock(sendMtx);
         *(double*)s_cmd_data = freq;
         sendCommand(COMMAND_SET_FREQUENCY, sizeof(double));
     }
@@ -719,8 +989,10 @@ namespace server {
     void setInputSampleRate(double samplerate) {
         sampleRate = samplerate;
         updateResampler();
+        if (channelMode) { channelTune(chanStation); }
+        if (audioMode) { updateAudioVfo(); }
         if (!client || !client->isOpen()) { return; }
-        sendSampleRate(forcedSampleRate != 0 ? forcedSampleRate: sampleRate);
+        sendSampleRate(outputSampleRate());
     }
 
     void sendPacket(PacketType type, int len) {

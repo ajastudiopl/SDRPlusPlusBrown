@@ -26,6 +26,8 @@ namespace server {
         PACKET_TYPE_TRANSMIT_PROGRESS,     // various indicators of transmitter. 0x38
         PACKET_TYPE_TRANSMIT_DATA,  // 0x39
         PACKET_TYPE_BASEBAND_EXPERIMENTAL_FFT,  // 0x3a
+        PACKET_TYPE_WIDE_SPECTRUM,              // 0x3b, channel mode: spectrum of the whole device band (WideSpectrumHeader + one byte per bin)
+        PACKET_TYPE_AUDIO,                      // 0x3c, server audio mode: AudioHeader + int16 mono samples
     };
 
     enum Command {
@@ -44,6 +46,8 @@ namespace server {
         COMMAND_SET_FFTZSTD_COMPRESSION,
         COMMAND_SET_EFFT_LOSS_RATE,
         COMMAND_SET_EFFT_MASKED_FREQUENCIES,        // set the current vfo so efft does not blank it.
+        COMMAND_SET_CHANNEL_MODE,                   // 1 byte: 0 = off, 1 = server cuts a narrow IQ channel around the tuned frequency out of the wide device band, 2 = server demodulates it and sends audio
+        COMMAND_SET_DEMOD,                          // DemodSettings: modulation (radio module numbering) and bandwidth for server audio mode
 
         // Server to client, AND client to server. Client sets desired sample rate or 0. Server responds the actual.
         COMMAND_SET_SAMPLERATE = 0x80,
@@ -66,6 +70,24 @@ namespace server {
     struct PacketHeader {
         uint32_t type;
         uint32_t size;
+    };
+
+    struct WideSpectrumHeader {
+        double centerFrequency;
+        double span;
+        int32_t bins;
+        int32_t reserved;
+    };
+
+    struct AudioHeader {
+        int32_t sampleRate;
+        int32_t frames;
+    };
+
+    struct DemodSettings {
+        int32_t mode;
+        double bandwidth;
+        double offset;      // the station relative to the device centre frequency
     };
 
     struct StreamMetadata {

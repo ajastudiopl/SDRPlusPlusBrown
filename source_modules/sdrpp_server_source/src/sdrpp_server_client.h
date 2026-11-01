@@ -123,6 +123,28 @@ namespace server {
             prebufferer.setPrebufferMsec(rxPrebufferMsec);
         }
 
+        // 0 = whole device band as IQ, 1 = the server cuts a narrow IQ channel around the tuned frequency,
+        // 2 = the server demodulates that channel and sends audio.
+        int remoteMode = 2;
+
+        // Where the audio of mode 2 goes, and whether anybody is reading it.
+        dsp::stream<dsp::stereo_t>* audioOut = nullptr;
+        std::atomic<bool> audioActive{ false };
+
+        void setRemoteMode(int mode) {
+            remoteMode = mode;
+            if (!isOpen()) { return; }
+            s_cmd_data[0] = (uint8_t)mode;
+            sendCommand(COMMAND_SET_CHANNEL_MODE, 1);
+            lastDemodMode = -1;
+            prebufferer.clear();
+        }
+
+        int lastDemodMode = -1;
+        double lastDemodBandwidth = 0;
+        double lastDemodOffset = 0;
+        void sendDemodIfChanged();
+
         void setRxResample(int freq) {
             if (requestedSampleRate != freq) {
                 requestedSampleRate = freq;

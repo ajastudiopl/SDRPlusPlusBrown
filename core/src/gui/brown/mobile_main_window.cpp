@@ -1,6 +1,7 @@
 #define IMGUI_DEFINE_MATH_OPERATORS
 #define _USE_MATH_DEFINES // NOLINT(bugprone-reserved-identifier)
 
+#include "wide_overview.h"
 #include "mobile_main_window.h"
 #include <gui/gui.h>
 #include <imgui_internal.h>
@@ -1486,19 +1487,51 @@ double TheEncoder::draw(float currentValue) {
     }
 
     if (enabled) {
-        if (ImGui::IsAnyMouseDown()) {
-            if (currentEncoderTouch != -1 && currentEncoderTouch != encoderId) {
-                return 0;
+        const double now = ImGui::GetTime();
+        const double dt = std::min<double>(ImGui::GetIO().DeltaTime, 0.1);
+        bool touching = false;
+        ImGuiIO& io = ImGui::GetIO();
+
+        // On a touch screen the finger is used directly: the system only turns horizontal drags into mouse drags,
+        // and these drums are turned vertically. A finger belongs to the drum when it went down on it.
+        bool anyFingerDown = false;
+        int newFinger = -1;
+        for (int i = 0; i < IM_ARRAYSIZE(io.FingerDown); i++) {
+            if (io.FingerDown[i]) {
+                anyFingerDown = true;
+                if (!prevFingerDown[i] && newFinger < 0) {
+                    auto fx = io.FingerPos[i].x - widgetPos.x;
+                    auto fy = io.FingerPos[i].y - widgetPos.y;
+                    if (fx >= 0 && fx < avail.x && fy >= 0 && fy < avail.y) { newFinger = i; }
+                }
             }
-            //            flog::info("currentEncoderTouch={} encoderId={}", currentEncoderTouch, encoderId);
-            auto mouseX = ImGui::GetMousePos().x - widgetPos.x;
-            auto mouseY = ImGui::GetMousePos().y - widgetPos.y;
+            prevFingerDown[i] = io.FingerDown[i];
+        }
+        if (trackedFinger >= 0 && !io.FingerDown[trackedFinger]) { trackedFinger = -1; }
+        if (trackedFinger < 0 && newFinger >= 0 && (currentEncoderTouch == -1 || currentEncoderTouch == encoderId)) { trackedFinger = newFinger; }
+
+        bool pointerDown = false;
+        ImVec2 pointerPos;
+        if (trackedFinger >= 0) {
+            pointerDown = true;
+            pointerPos = io.FingerPos[trackedFinger];
+        } else if (!anyFingerDown && ImGui::IsAnyMouseDown() && (currentEncoderTouch == -1 || currentEncoderTouch == encoderId)) {
+            pointerDown = true;
+            pointerPos = ImGui::GetMousePos();
+        }
+
+        if (pointerDown) {
+            auto mouseX = pointerPos.x - widgetPos.x;
+            auto mouseY = pointerPos.y - widgetPos.y;
             bool mouseInside = mouseX >= 0 && mouseX < avail.x && mouseY >= 0 && mouseY < avail.y;
             if (!mouseInside && isnan(lastMouseAngle)) {
                 // clicked outside
             } else {
-                // can continue everywhere
-                auto mouseAngle = (ImGui::GetMousePos().y - widgetPos.y - R) / (R * DRAW_HEIGHT_PERCENT);
+                // can continue everywhere. The marks sit on a drum (their position is sin of the angle), so the finger
+                // gives the angle of the drum under it, and the drum follows the finger exactly.
+                touching = true;
+                double fingerY = std::clamp((pointerPos.y - widgetPos.y - R) / (R * DRAW_HEIGHT_PERCENT), -1.0f, 1.0f);
+                double mouseAngle = asin(fingerY);
                 if (!isnan(lastMouseAngle)) {
                     this->somePosition += mouseAngle - lastMouseAngle;
                     retval = (float) (mouseAngle - lastMouseAngle);
@@ -1506,35 +1539,42 @@ double TheEncoder::draw(float currentValue) {
                     // first click!
                     this->currentValue = (float) currentValue;
                     currentEncoderTouch = encoderId;
+                    track.clear();
                 }
                 lastMouseAngle = mouseAngle;
                 this->speed = 0;
-                fingerMovement.emplace_back(lastMouseAngle);
-            }
-        } else {
-            // finger up
-            if (currentEncoderTouch == encoderId) {
-                currentEncoderTouch = -1;
-                auto sz = this->fingerMovement.size();
-                if (sz >= 2) {
-                    this->speed = (this->fingerMovement[sz - 1] - this->fingerMovement[sz - 2]) / 2;
+                track.emplace_back(now, this->somePosition);
+                while (track.size() > 2 && now - track.front().first > 0.1) {
+                    track.erase(track.begin());
                 }
-                this->fingerMovement.clear();
-                lastMouseAngle = nan("");
             }
+        }
+        if (!touching && currentEncoderTouch == encoderId) {
+            // finger up: the flick goes on with the speed it had in the last moments
+            currentEncoderTouch = -1;
+            lastMouseAngle = nan("");
+            if (track.size() >= 2) {
+                auto first = track.front();
+                auto last = track.back();
+                double span = last.first - first.first;
+                if (span > 0.01 && now - last.first < 0.1) {
+                    this->speed = (last.second - first.second) / span;
+                }
+            }
+            track.clear();
         }
 
-        // inertia
-        if (fabs(speed) < 0.001) {
-            if (speed != 0) {
+        // inertia, in real time so that it feels the same at any frame rate
+        if (!touching && speed != 0) {
+            if (fabs(speed) < 0.15) {
                 speed = 0;
+            } else {
+                double step = speed * dt;
+                this->somePosition += step;
+                retval = (float) step;
+                this->speed *= exp(-dt / 0.45);
             }
         }
-        this->somePosition += speed;
-        if (speed != 0) {
-            retval = (float) speed;
-        }
-        this->speed *= this->delayFactor;
         return retval;
     } else {
         this->speed = 0;
@@ -1639,12 +1679,18 @@ static TransientBookmarkManager *getTransientBookmarkManager() {
 }
 
 void MobileMainWindow::draw() {
+    core::markUiThread();
+    core::applyPendingSampleRate();
+    wideoverview::drawOverlay();
 
     auto ctm = currentTimeNanos();
     updateAudioWaterfallPipeline();
 
     if (auto radio = getRadioModule()) {
         updateModeFromRadio(radio->getSelectedDemodId());
+        auto selected = gui::waterfall.vfos.find(gui::waterfall.selectedVFO);
+        bool haveVfo = selected != gui::waterfall.vfos.end() && selected->second;
+        wideoverview::setDemod(radio->getSelectedDemodId(), haveVfo ? selected->second->bandwidth : 0, haveVfo ? selected->second->generalOffset : 0);
     }
 
     pvt->audioRecorder.updateControlState(!encoder.enabled, this->qsoPanel->transmitting);
@@ -1896,18 +1942,11 @@ void MobileMainWindow::draw() {
             // something changed! e.g. changed band when encoder was rotating
             encoder.speed = 0;
         } else {
-            double od = offsetDelta * 100;
-            double sign = od < 0 ? -1 : 1;
-            if (fabs(od) < 2) {
-                od = 0.5 * sign;
-            } else {
-                od = fabs(od) - 1; // 4 will become 1
-                od = pow(od, 1.4) * sign;
-                //                od *= 5;
-            }
-            flog::info("od={} encoder.currentFrequency={}", od, encoder.currentValue);
-            encoder.currentValue -= od;
-            auto cf = ((int) (encoder.currentValue / 10)) * 10.0;
+            // slow turning is fine tuning, fast turning goes over the band; the speed is in radians per second
+            double turnSpeed = fabs(offsetDelta) / std::max<double>(ImGui::GetIO().DeltaTime, 0.001);
+            double gain = 300.0 * (1.0 + pow(turnSpeed / 2.0, 1.6));
+            encoder.currentValue -= offsetDelta * gain;
+            auto cf = std::round(encoder.currentValue / 10) * 10.0;
             tuner::tune(tuningMode, gui::waterfall.selectedVFO, cf);
         }
     }

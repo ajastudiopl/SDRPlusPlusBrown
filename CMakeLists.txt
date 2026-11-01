@@ -15,6 +15,12 @@ endif()
 # Backends
 option(OPT_BACKEND_GLFW "Use the GLFW backend" ON)
 option(OPT_BACKEND_ANDROID "Use the Android backend" OFF)
+option(OPT_BACKEND_IOS "Use the iOS (UIKit + OpenGL ES) backend" OFF)
+
+if (OPT_BACKEND_IOS)
+    enable_language(OBJCXX)
+    add_definitions(-DSDRPP_IOS)
+endif ()
 
 # Compatibility Options
 option(OPT_OVERRIDE_STD_FILESYSTEM "Use a local version of std::filesystem on systems that don't have it yet" OFF)
@@ -298,8 +304,12 @@ if(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
     add_subdirectory("sink_modules/linux_pulseaudio_sink")
 endif ()
 
-if(APPLE)
+if(APPLE AND NOT IOS)
     add_subdirectory("sink_modules/macos_coreaudio_sink")
+endif()
+
+if(IOS)
+    add_subdirectory("sink_modules/ios_audio_sink")
 endif()
 
 
@@ -439,6 +449,8 @@ if (OPT_BUILD_NOISE_REDUCTION_LOGMMSE)
 add_subdirectory("misc_modules/noise_reduction_logmmse")
 endif (OPT_BUILD_NOISE_REDUCTION_LOGMMSE)
 
+# On iOS the app is packaged by the Xcode project, there is no sdrpp executable
+if (NOT IOS)
 set(SDRPP_SOURCES "src/main.cpp")
 
 if(WIN32)
@@ -509,6 +521,7 @@ endif ()
 if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     add_custom_target(do_always ALL cp \"$<TARGET_FILE_DIR:sdrpp_core>/libsdrpp_core.dylib\" \"$<TARGET_FILE_DIR:sdrpp>\")
 endif ()
+endif ()
 
 # cmake .. "-DCMAKE_TOOLCHAIN_FILE=C:/dev/vcpkg/scripts/buildsystems/vcpkg.cmake" -DOPT_BUILD_BLADERF_SOURCE=ON -DOPT_BUILD_LIMESDR_SOURCE=ON -DOPT_BUILD_SDRPLAY_SOURCE=ON -DOPT_BUILD_M17_DECODER=ON -DOPT_BUILD_SCANNER=ON -DOPT_BUILD_SCHEDULER=ON -DOPT_BUILD_USRP_SOURCE=ON -DOPT_BUILD_PAGER_DECODER=ON
 
@@ -516,7 +529,9 @@ endif ()
 configure_file(${CMAKE_SOURCE_DIR}/sdrpp_module.cmake ${CMAKE_CURRENT_BINARY_DIR}/sdrpp_module.cmake @ONLY)
 
 # Install directives
+if (NOT IOS)
 install(TARGETS sdrpp DESTINATION bin)
+endif ()
 install(DIRECTORY ${CMAKE_SOURCE_DIR}/root/res/bandplans DESTINATION share/sdrpp)
 install(DIRECTORY ${CMAKE_SOURCE_DIR}/root/res/colormaps DESTINATION share/sdrpp)
 install(DIRECTORY ${CMAKE_SOURCE_DIR}/root/res/fonts DESTINATION share/sdrpp)
