@@ -155,7 +155,18 @@ bool Menu::draw(bool updateStates) {
                 changed = true;
             }
 
+            // the settings of a module sit on their own lighter plate (its height is the one from the previous frame)
+            static std::map<std::string, float> plateHeights;
+            ImVec2 plateStart = ImGui::GetCursorScreenPos();
+            float plateWidth = ImGui::GetContentRegionAvail().x;
+            if (ImGuiFieldRadioSkin) {
+                float plateHeight = plateHeights[opt.name];
+                ImDrawList* pdl = ImGui::GetWindowDrawList();
+                pdl->AddRectFilled(ImVec2(plateStart.x - 2, plateStart.y - 1), ImVec2(plateStart.x + plateWidth + 2, plateStart.y + plateHeight + 3), IM_COL32(34, 36, 38, 255), 3.0f);
+                pdl->AddRect(ImVec2(plateStart.x - 2, plateStart.y - 1), ImVec2(plateStart.x + plateWidth + 2, plateStart.y + plateHeight + 3), IM_COL32(62, 65, 68, 255), 3.0f);
+            }
             item.drawHandler(item.ctx);
+            plateHeights[opt.name] = ImGui::GetCursorScreenPos().y - plateStart.y;
             ImGui::Spacing();
         }
         else if (item.inst != NULL) {
