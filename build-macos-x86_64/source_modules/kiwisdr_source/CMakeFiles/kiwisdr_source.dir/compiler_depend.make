@@ -1032,6 +1032,7 @@ source_modules/kiwisdr_source/CMakeFiles/kiwisdr_source.dir/src/main.cpp.o: /Use
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/dsp/stream.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/dsp/types.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/main_window.h \
+  /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/brown/band_panel.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/brown/geomap.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/brown/kiwisdr_map.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/brown/mobile_main_window.h \
@@ -1137,6 +1138,7 @@ source_modules/kiwisdr_source/CMakeFiles/kiwisdr_source.dir/src/main.cpp.o: /Use
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/utils/proto/websock.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/utils/strings.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/utils/usleep.h \
+  /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/misc_modules/frequency_manager/src/frequency_manager.h \
   /private/tmp/claude-501/-Users-ajastudioimacpro-Documents-GItHub-SDRPlusPlusBrown/5b91e13d-52fa-4130-bd25-c0766a4dd57b/scratchpad/volk-mac-install/include/volk/volk.h \
   /private/tmp/claude-501/-Users-ajastudioimacpro-Documents-GItHub-SDRPlusPlusBrown/5b91e13d-52fa-4130-bd25-c0766a4dd57b/scratchpad/volk-mac-install/include/volk/volk_common.h \
   /private/tmp/claude-501/-Users-ajastudioimacpro-Documents-GItHub-SDRPlusPlusBrown/5b91e13d-52fa-4130-bd25-c0766a4dd57b/scratchpad/volk-mac-install/include/volk/volk_complex.h \
@@ -1154,6 +1156,8 @@ source_modules/kiwisdr_source/CMakeFiles/kiwisdr_source.dir/src/main.cpp.o: /Use
 /private/tmp/claude-501/-Users-ajastudioimacpro-Documents-GItHub-SDRPlusPlusBrown/5b91e13d-52fa-4130-bd25-c0766a4dd57b/scratchpad/volk-mac-install/include/volk/volk_complex.h:
 
 /private/tmp/claude-501/-Users-ajastudioimacpro-Documents-GItHub-SDRPlusPlusBrown/5b91e13d-52fa-4130-bd25-c0766a4dd57b/scratchpad/volk-mac-install/include/volk/volk_common.h:
+
+/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/misc_modules/frequency_manager/src/frequency_manager.h:
 
 /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/utils/strings.h:
 
@@ -1248,6 +1252,8 @@ source_modules/kiwisdr_source/CMakeFiles/kiwisdr_source.dir/src/main.cpp.o: /Use
 /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/gui.h:
 
 /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/brown/mobile_main_window.h:
+
+/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/brown/band_panel.h:
 
 /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/main_window.h:
 

@@ -1056,6 +1056,7 @@ misc_modules/recorder/CMakeFiles/recorder.dir/src/main.cpp.o: /Users/ajastudioim
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/dsp/taps/band_pass.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/dsp/types.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/main_window.h \
+  /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/brown/band_panel.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/brown/mobile_main_window.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/dialogs/loading_screen.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/gui.h \
@@ -1167,6 +1168,7 @@ misc_modules/recorder/CMakeFiles/recorder.dir/src/main.cpp.o: /Users/ajastudioim
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/decoder_modules/radio/src/demodulators/wfm.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/decoder_modules/radio/src/radio_interface.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/decoder_modules/radio/src/radio_module_interface.h \
+  /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/misc_modules/frequency_manager/src/frequency_manager.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/misc_modules/recorder/src/recorder_interface.h \
   /private/tmp/claude-501/-Users-ajastudioimacpro-Documents-GItHub-SDRPlusPlusBrown/5b91e13d-52fa-4130-bd25-c0766a4dd57b/scratchpad/volk-mac-install/include/volk/volk.h \
   /private/tmp/claude-501/-Users-ajastudioimacpro-Documents-GItHub-SDRPlusPlusBrown/5b91e13d-52fa-4130-bd25-c0766a4dd57b/scratchpad/volk-mac-install/include/volk/volk_common.h \
@@ -1187,6 +1189,8 @@ misc_modules/recorder/CMakeFiles/recorder.dir/src/main.cpp.o: /Users/ajastudioim
 /private/tmp/claude-501/-Users-ajastudioimacpro-Documents-GItHub-SDRPlusPlusBrown/5b91e13d-52fa-4130-bd25-c0766a4dd57b/scratchpad/volk-mac-install/include/volk/volk_common.h:
 
 /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/misc_modules/recorder/src/recorder_interface.h:
+
+/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/misc_modules/frequency_manager/src/frequency_manager.h:
 
 /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/decoder_modules/radio/src/radio_module_interface.h:
 
@@ -1289,6 +1293,8 @@ misc_modules/recorder/CMakeFiles/recorder.dir/src/main.cpp.o: /Users/ajastudioim
 /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/gui.h:
 
 /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/brown/mobile_main_window.h:
+
+/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/brown/band_panel.h:
 
 /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/main_window.h:
 

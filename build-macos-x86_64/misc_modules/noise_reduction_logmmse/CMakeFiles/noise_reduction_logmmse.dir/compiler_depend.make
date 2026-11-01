@@ -975,6 +975,7 @@ misc_modules/noise_reduction_logmmse/CMakeFiles/noise_reduction_logmmse.dir/src/
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/dsp/stream.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/dsp/types.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/main_window.h \
+  /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/brown/band_panel.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/brown/mobile_main_window.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/dialogs/loading_screen.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/gui.h \
@@ -1074,6 +1075,7 @@ misc_modules/noise_reduction_logmmse/CMakeFiles/noise_reduction_logmmse.dir/src/
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/utils/stream_tracker.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/utils/usleep.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/decoder_modules/radio/src/radio_interface.h \
+  /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/misc_modules/frequency_manager/src/frequency_manager.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/misc_modules/noise_reduction_logmmse/src/af_nr.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/misc_modules/noise_reduction_logmmse/src/bgnoise.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/misc_modules/noise_reduction_logmmse/src/if_nr.h \
@@ -7502,6 +7504,8 @@ misc_modules/noise_reduction_logmmse/CMakeFiles/noise_reduction_logmmse.dir/src/
 
 /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/misc_modules/noise_reduction_logmmse/src/af_nr.h:
 
+/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/misc_modules/frequency_manager/src/frequency_manager.h:
+
 /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/decoder_modules/radio/src/radio_interface.h:
 
 /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/utils/stream_tracker.h:
@@ -7605,6 +7609,8 @@ misc_modules/noise_reduction_logmmse/CMakeFiles/noise_reduction_logmmse.dir/src/
 /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/gui.h:
 
 /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/brown/mobile_main_window.h:
+
+/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/brown/band_panel.h:
 
 /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/main_window.h:
 

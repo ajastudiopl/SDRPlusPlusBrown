@@ -977,6 +977,7 @@ misc_modules/rigctl_client/CMakeFiles/rigctl_client.dir/src/main.cpp.o: /Users/a
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/dsp/stream.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/dsp/types.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/main_window.h \
+  /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/brown/band_panel.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/brown/mobile_main_window.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/dialogs/loading_screen.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/gui.h \
@@ -1078,6 +1079,7 @@ misc_modules/rigctl_client/CMakeFiles/rigctl_client.dir/src/main.cpp.o: /Users/a
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/decoder_modules/meteor_demodulator/src/meteor_demodulator_interface.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/decoder_modules/radio/src/radio_interface.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/misc_modules/recorder/src/recorder_interface.h \
+  /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/misc_modules/frequency_manager/src/frequency_manager.h \
   /private/tmp/claude-501/-Users-ajastudioimacpro-Documents-GItHub-SDRPlusPlusBrown/5b91e13d-52fa-4130-bd25-c0766a4dd57b/scratchpad/volk-mac-install/include/volk/volk.h \
   /private/tmp/claude-501/-Users-ajastudioimacpro-Documents-GItHub-SDRPlusPlusBrown/5b91e13d-52fa-4130-bd25-c0766a4dd57b/scratchpad/volk-mac-install/include/volk/volk_common.h \
   /private/tmp/claude-501/-Users-ajastudioimacpro-Documents-GItHub-SDRPlusPlusBrown/5b91e13d-52fa-4130-bd25-c0766a4dd57b/scratchpad/volk-mac-install/include/volk/volk_complex.h \
@@ -1095,6 +1097,8 @@ misc_modules/rigctl_client/CMakeFiles/rigctl_client.dir/src/main.cpp.o: /Users/a
 /private/tmp/claude-501/-Users-ajastudioimacpro-Documents-GItHub-SDRPlusPlusBrown/5b91e13d-52fa-4130-bd25-c0766a4dd57b/scratchpad/volk-mac-install/include/volk/volk_complex.h:
 
 /private/tmp/claude-501/-Users-ajastudioimacpro-Documents-GItHub-SDRPlusPlusBrown/5b91e13d-52fa-4130-bd25-c0766a4dd57b/scratchpad/volk-mac-install/include/volk/volk_common.h:
+
+/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/misc_modules/frequency_manager/src/frequency_manager.h:
 
 /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/misc_modules/recorder/src/recorder_interface.h:
 
@@ -1197,6 +1201,8 @@ misc_modules/rigctl_client/CMakeFiles/rigctl_client.dir/src/main.cpp.o: /Users/a
 /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/gui.h:
 
 /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/brown/mobile_main_window.h:
+
+/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/brown/band_panel.h:
 
 /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/main_window.h:
 

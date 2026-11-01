@@ -945,6 +945,8 @@ misc_modules/frequency_manager/CMakeFiles/frequency_manager.dir/src/main.cpp.o: 
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/widgets/menu.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/dialogs/loading_screen.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/brown/mobile_main_window.h \
+  /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/brown/band_panel.h \
+  /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/misc_modules/frequency_manager/src/../../../misc_modules/frequency_manager/src/frequency_manager.h \
   /usr/local/Cellar/fftw/3.3.11/include/fftw3.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/dsp/types.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/dsp/math/constants.h \
@@ -1094,6 +1096,7 @@ misc_modules/frequency_manager/CMakeFiles/frequency_manager.dir/src/main.cpp.o: 
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/misc_modules/frequency_manager/src/frequency_manager.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/misc_modules/frequency_manager/src/scanner.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/widgets/snr_meter.h \
+  /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/misc_modules/frequency_manager/src/marker_backup.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/misc_modules/frequency_manager/../../decoder_modules/radio/src/../../radio/src/radio_module_interface.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/misc_modules/frequency_manager/../../decoder_modules/radio/src/../../radio/src/demod.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/misc_modules/frequency_manager/../../decoder_modules/radio/src/../../radio/src/demodulators/wfm.h \

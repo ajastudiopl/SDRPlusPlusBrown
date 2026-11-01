@@ -990,6 +990,8 @@ misc_modules/spectrum_analyzer/CMakeFiles/spectrum_analyzer.dir/src/core_receive
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/widgets/menu.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/dialogs/loading_screen.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/brown/mobile_main_window.h \
+  /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/brown/band_panel.h \
+  /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/misc_modules/spectrum_analyzer/src/../../../misc_modules/frequency_manager/src/frequency_manager.h \
   /usr/local/Cellar/fftw/3.3.11/include/fftw3.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/signal_path/vfo_manager.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/signal_path/../dsp/channel/rx_vfo.h \

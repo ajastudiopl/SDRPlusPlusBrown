@@ -1,2 +1,595 @@
 ninja: Entering directory `/work/android/app/.cxx/cmake/debug/arm64-v8a'
-ninja: no work to do.
+[1/101] Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/frequency_select.cpp.o
+[2/101] Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/tuner.cpp.o
+[3/101] Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/brown/wide_overview.cpp.o
+[4/101] Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/brown/narrow_zoom.cpp.o
+[5/101] Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/gui.cpp.o
+[6/101] Building CXX object core/CMakeFiles/sdrpp_core.dir/backends/android/backend.cpp.o
+/work/core/backends/android/backend.cpp:3:21: warning: extra tokens at end of #include directive [-Wextra-tokens]
+#include <backend.h>log
+                    ^
+                    //
+/work/core/backends/android/backend.cpp:32:38: warning: 'extern' variable has an initializer [-Wextern-initializer]
+    SDRPP_EXPORT struct android_app* app = NULL;
+                                     ^
+/work/core/backends/android/backend.cpp:702:27: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+        char* dummy[] = { "", "-r", rootpath, "-x", cacheDirPath };
+                          ^
+/work/core/backends/android/backend.cpp:702:31: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+        char* dummy[] = { "", "-r", rootpath, "-x", cacheDirPath };
+                              ^
+/work/core/backends/android/backend.cpp:702:47: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+        char* dummy[] = { "", "-r", rootpath, "-x", cacheDirPath };
+                                              ^
+5 warnings generated.
+[7/101] Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/menus/module_manager.cpp.o
+[8/101] Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/menus/bandplan.cpp.o
+[9/101] Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/dialogs/loading_screen.cpp.o
+[10/101] Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/menus/theme.cpp.o
+[11/101] Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/smgui.cpp.o
+[12/101] Building CXX object core/CMakeFiles/sdrpp_core.dir/src/signal_path/vfo_manager.cpp.o
+[13/101] Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/menus/vfo_color.cpp.o
+[14/101] Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/brown/audio_player.cpp.o
+[15/101] Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/menus/display.cpp.o
+[16/101] Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/menus/source.cpp.o
+[17/101] Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/waterfall.cpp.o
+[18/101] Building CXX object core/CMakeFiles/sdrpp_core.dir/src/signal_path/iq_frontend.cpp.o
+[19/101] Building CXX object core/CMakeFiles/sdrpp_core.dir/src/utils/proto/http.cpp.o
+[20/101] Building CXX object source_modules/airspy_source/CMakeFiles/airspy_source.dir/src/main.cpp.o
+[21/101] Building CXX object source_modules/airspyhf_source/CMakeFiles/airspyhf_source.dir/src/main.cpp.o
+[22/101] Building CXX object source_modules/hermes_source/CMakeFiles/hermes_source.dir/src/main.cpp.o
+[23/101] Building CXX object source_modules/hackrf_source/CMakeFiles/hackrf_source.dir/src/main.cpp.o
+[24/101] Building CXX object source_modules/network_source/CMakeFiles/network_source.dir/src/main.cpp.o
+[25/101] Building CXX object source_modules/rtl_sdr_source/CMakeFiles/rtl_sdr_source.dir/src/main.cpp.o
+[26/101] Building CXX object source_modules/spyserver_source/CMakeFiles/spyserver_source.dir/src/main.cpp.o
+[27/101] Building CXX object source_modules/hydrasdr_source/CMakeFiles/hydrasdr_source.dir/src/main.cpp.o
+/work/source_modules/hydrasdr_source/src/main.cpp:291:13: warning: 'hydrasdr_set_lna_agc' is deprecated: Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_LNA_AGC, value) instead [-Wdeprecated-declarations]
+            hydrasdr_set_lna_agc(_this->openDev, 0);
+            ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:1574:15: note: 'hydrasdr_set_lna_agc' has been explicitly marked deprecated here
+extern ADDAPI HYDRASDR_DEPRECATED("Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_LNA_AGC, value) instead")
+              ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:217:50: note: expanded from macro 'HYDRASDR_DEPRECATED'
+        #define HYDRASDR_DEPRECATED(msg) __attribute__((deprecated(msg)))
+                                                        ^
+/work/source_modules/hydrasdr_source/src/main.cpp:292:13: warning: 'hydrasdr_set_mixer_agc' is deprecated: Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_MIXER_AGC, value) instead [-Wdeprecated-declarations]
+            hydrasdr_set_mixer_agc(_this->openDev, 0);
+            ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:1600:15: note: 'hydrasdr_set_mixer_agc' has been explicitly marked deprecated here
+extern ADDAPI HYDRASDR_DEPRECATED("Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_MIXER_AGC, value) instead")
+              ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:217:50: note: expanded from macro 'HYDRASDR_DEPRECATED'
+        #define HYDRASDR_DEPRECATED(msg) __attribute__((deprecated(msg)))
+                                                        ^
+/work/source_modules/hydrasdr_source/src/main.cpp:293:13: warning: 'hydrasdr_set_sensitivity_gain' is deprecated: Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_SENSITIVITY, value) instead [-Wdeprecated-declarations]
+            hydrasdr_set_sensitivity_gain(_this->openDev, _this->sensitiveGain);
+            ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:1654:15: note: 'hydrasdr_set_sensitivity_gain' has been explicitly marked deprecated here
+extern ADDAPI HYDRASDR_DEPRECATED("Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_SENSITIVITY, value) instead")
+              ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:217:50: note: expanded from macro 'HYDRASDR_DEPRECATED'
+        #define HYDRASDR_DEPRECATED(msg) __attribute__((deprecated(msg)))
+                                                        ^
+/work/source_modules/hydrasdr_source/src/main.cpp:296:13: warning: 'hydrasdr_set_lna_agc' is deprecated: Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_LNA_AGC, value) instead [-Wdeprecated-declarations]
+            hydrasdr_set_lna_agc(_this->openDev, 0);
+            ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:1574:15: note: 'hydrasdr_set_lna_agc' has been explicitly marked deprecated here
+extern ADDAPI HYDRASDR_DEPRECATED("Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_LNA_AGC, value) instead")
+              ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:217:50: note: expanded from macro 'HYDRASDR_DEPRECATED'
+        #define HYDRASDR_DEPRECATED(msg) __attribute__((deprecated(msg)))
+                                                        ^
+/work/source_modules/hydrasdr_source/src/main.cpp:297:13: warning: 'hydrasdr_set_mixer_agc' is deprecated: Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_MIXER_AGC, value) instead [-Wdeprecated-declarations]
+            hydrasdr_set_mixer_agc(_this->openDev, 0);
+            ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:1600:15: note: 'hydrasdr_set_mixer_agc' has been explicitly marked deprecated here
+extern ADDAPI HYDRASDR_DEPRECATED("Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_MIXER_AGC, value) instead")
+              ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:217:50: note: expanded from macro 'HYDRASDR_DEPRECATED'
+        #define HYDRASDR_DEPRECATED(msg) __attribute__((deprecated(msg)))
+                                                        ^
+/work/source_modules/hydrasdr_source/src/main.cpp:298:13: warning: 'hydrasdr_set_linearity_gain' is deprecated: Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_LINEARITY, value) instead [-Wdeprecated-declarations]
+            hydrasdr_set_linearity_gain(_this->openDev, _this->linearGain);
+            ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:1627:15: note: 'hydrasdr_set_linearity_gain' has been explicitly marked deprecated here
+extern ADDAPI HYDRASDR_DEPRECATED("Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_LINEARITY, value) instead")
+              ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:217:50: note: expanded from macro 'HYDRASDR_DEPRECATED'
+        #define HYDRASDR_DEPRECATED(msg) __attribute__((deprecated(msg)))
+                                                        ^
+/work/source_modules/hydrasdr_source/src/main.cpp:302:17: warning: 'hydrasdr_set_lna_agc' is deprecated: Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_LNA_AGC, value) instead [-Wdeprecated-declarations]
+                hydrasdr_set_lna_agc(_this->openDev, 1);
+                ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:1574:15: note: 'hydrasdr_set_lna_agc' has been explicitly marked deprecated here
+extern ADDAPI HYDRASDR_DEPRECATED("Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_LNA_AGC, value) instead")
+              ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:217:50: note: expanded from macro 'HYDRASDR_DEPRECATED'
+        #define HYDRASDR_DEPRECATED(msg) __attribute__((deprecated(msg)))
+                                                        ^
+/work/source_modules/hydrasdr_source/src/main.cpp:305:17: warning: 'hydrasdr_set_lna_agc' is deprecated: Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_LNA_AGC, value) instead [-Wdeprecated-declarations]
+                hydrasdr_set_lna_agc(_this->openDev, 0);
+                ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:1574:15: note: 'hydrasdr_set_lna_agc' has been explicitly marked deprecated here
+extern ADDAPI HYDRASDR_DEPRECATED("Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_LNA_AGC, value) instead")
+              ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:217:50: note: expanded from macro 'HYDRASDR_DEPRECATED'
+        #define HYDRASDR_DEPRECATED(msg) __attribute__((deprecated(msg)))
+                                                        ^
+/work/source_modules/hydrasdr_source/src/main.cpp:306:17: warning: 'hydrasdr_set_lna_gain' is deprecated: Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_LNA, value) instead [-Wdeprecated-declarations]
+                hydrasdr_set_lna_gain(_this->openDev, _this->lnaGain);
+                ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:1495:15: note: 'hydrasdr_set_lna_gain' has been explicitly marked deprecated here
+extern ADDAPI HYDRASDR_DEPRECATED("Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_LNA, value) instead")
+              ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:217:50: note: expanded from macro 'HYDRASDR_DEPRECATED'
+        #define HYDRASDR_DEPRECATED(msg) __attribute__((deprecated(msg)))
+                                                        ^
+/work/source_modules/hydrasdr_source/src/main.cpp:309:17: warning: 'hydrasdr_set_mixer_agc' is deprecated: Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_MIXER_AGC, value) instead [-Wdeprecated-declarations]
+                hydrasdr_set_mixer_agc(_this->openDev, 1);
+                ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:1600:15: note: 'hydrasdr_set_mixer_agc' has been explicitly marked deprecated here
+extern ADDAPI HYDRASDR_DEPRECATED("Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_MIXER_AGC, value) instead")
+              ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:217:50: note: expanded from macro 'HYDRASDR_DEPRECATED'
+        #define HYDRASDR_DEPRECATED(msg) __attribute__((deprecated(msg)))
+                                                        ^
+/work/source_modules/hydrasdr_source/src/main.cpp:312:17: warning: 'hydrasdr_set_mixer_agc' is deprecated: Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_MIXER_AGC, value) instead [-Wdeprecated-declarations]
+                hydrasdr_set_mixer_agc(_this->openDev, 0);
+                ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:1600:15: note: 'hydrasdr_set_mixer_agc' has been explicitly marked deprecated here
+extern ADDAPI HYDRASDR_DEPRECATED("Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_MIXER_AGC, value) instead")
+              ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:217:50: note: expanded from macro 'HYDRASDR_DEPRECATED'
+        #define HYDRASDR_DEPRECATED(msg) __attribute__((deprecated(msg)))
+                                                        ^
+/work/source_modules/hydrasdr_source/src/main.cpp:313:17: warning: 'hydrasdr_set_mixer_gain' is deprecated: Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_MIXER, value) instead [-Wdeprecated-declarations]
+                hydrasdr_set_mixer_gain(_this->openDev, _this->mixerGain);
+                ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:1522:15: note: 'hydrasdr_set_mixer_gain' has been explicitly marked deprecated here
+extern ADDAPI HYDRASDR_DEPRECATED("Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_MIXER, value) instead")
+              ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:217:50: note: expanded from macro 'HYDRASDR_DEPRECATED'
+        #define HYDRASDR_DEPRECATED(msg) __attribute__((deprecated(msg)))
+                                                        ^
+/work/source_modules/hydrasdr_source/src/main.cpp:315:13: warning: 'hydrasdr_set_vga_gain' is deprecated: Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_VGA, value) instead [-Wdeprecated-declarations]
+            hydrasdr_set_vga_gain(_this->openDev, _this->vgaGain);
+            ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:1548:15: note: 'hydrasdr_set_vga_gain' has been explicitly marked deprecated here
+extern ADDAPI HYDRASDR_DEPRECATED("Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_VGA, value) instead")
+              ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:217:50: note: expanded from macro 'HYDRASDR_DEPRECATED'
+        #define HYDRASDR_DEPRECATED(msg) __attribute__((deprecated(msg)))
+                                                        ^
+/work/source_modules/hydrasdr_source/src/main.cpp:405:17: warning: 'hydrasdr_set_lna_agc' is deprecated: Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_LNA_AGC, value) instead [-Wdeprecated-declarations]
+                hydrasdr_set_lna_agc(_this->openDev, 0);
+                ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:1574:15: note: 'hydrasdr_set_lna_agc' has been explicitly marked deprecated here
+extern ADDAPI HYDRASDR_DEPRECATED("Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_LNA_AGC, value) instead")
+              ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:217:50: note: expanded from macro 'HYDRASDR_DEPRECATED'
+        #define HYDRASDR_DEPRECATED(msg) __attribute__((deprecated(msg)))
+                                                        ^
+/work/source_modules/hydrasdr_source/src/main.cpp:406:17: warning: 'hydrasdr_set_mixer_agc' is deprecated: Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_MIXER_AGC, value) instead [-Wdeprecated-declarations]
+                hydrasdr_set_mixer_agc(_this->openDev, 0);
+                ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:1600:15: note: 'hydrasdr_set_mixer_agc' has been explicitly marked deprecated here
+extern ADDAPI HYDRASDR_DEPRECATED("Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_MIXER_AGC, value) instead")
+              ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:217:50: note: expanded from macro 'HYDRASDR_DEPRECATED'
+        #define HYDRASDR_DEPRECATED(msg) __attribute__((deprecated(msg)))
+                                                        ^
+/work/source_modules/hydrasdr_source/src/main.cpp:407:17: warning: 'hydrasdr_set_sensitivity_gain' is deprecated: Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_SENSITIVITY, value) instead [-Wdeprecated-declarations]
+                hydrasdr_set_sensitivity_gain(_this->openDev, _this->sensitiveGain);
+                ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:1654:15: note: 'hydrasdr_set_sensitivity_gain' has been explicitly marked deprecated here
+extern ADDAPI HYDRASDR_DEPRECATED("Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_SENSITIVITY, value) instead")
+              ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:217:50: note: expanded from macro 'HYDRASDR_DEPRECATED'
+        #define HYDRASDR_DEPRECATED(msg) __attribute__((deprecated(msg)))
+                                                        ^
+/work/source_modules/hydrasdr_source/src/main.cpp:420:17: warning: 'hydrasdr_set_lna_agc' is deprecated: Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_LNA_AGC, value) instead [-Wdeprecated-declarations]
+                hydrasdr_set_lna_agc(_this->openDev, 0);
+                ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:1574:15: note: 'hydrasdr_set_lna_agc' has been explicitly marked deprecated here
+extern ADDAPI HYDRASDR_DEPRECATED("Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_LNA_AGC, value) instead")
+              ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:217:50: note: expanded from macro 'HYDRASDR_DEPRECATED'
+        #define HYDRASDR_DEPRECATED(msg) __attribute__((deprecated(msg)))
+                                                        ^
+/work/source_modules/hydrasdr_source/src/main.cpp:421:17: warning: 'hydrasdr_set_mixer_agc' is deprecated: Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_MIXER_AGC, value) instead [-Wdeprecated-declarations]
+                hydrasdr_set_mixer_agc(_this->openDev, 0);
+                ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:1600:15: note: 'hydrasdr_set_mixer_agc' has been explicitly marked deprecated here
+extern ADDAPI HYDRASDR_DEPRECATED("Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_MIXER_AGC, value) instead")
+              ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:217:50: note: expanded from macro 'HYDRASDR_DEPRECATED'
+        #define HYDRASDR_DEPRECATED(msg) __attribute__((deprecated(msg)))
+                                                        ^
+/work/source_modules/hydrasdr_source/src/main.cpp:422:17: warning: 'hydrasdr_set_linearity_gain' is deprecated: Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_LINEARITY, value) instead [-Wdeprecated-declarations]
+                hydrasdr_set_linearity_gain(_this->openDev, _this->linearGain);
+                ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:1627:15: note: 'hydrasdr_set_linearity_gain' has been explicitly marked deprecated here
+extern ADDAPI HYDRASDR_DEPRECATED("Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_LINEARITY, value) instead")
+              ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:217:50: note: expanded from macro 'HYDRASDR_DEPRECATED'
+        #define HYDRASDR_DEPRECATED(msg) __attribute__((deprecated(msg)))
+                                                        ^
+/work/source_modules/hydrasdr_source/src/main.cpp:436:21: warning: 'hydrasdr_set_lna_agc' is deprecated: Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_LNA_AGC, value) instead [-Wdeprecated-declarations]
+                    hydrasdr_set_lna_agc(_this->openDev, 1);
+                    ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:1574:15: note: 'hydrasdr_set_lna_agc' has been explicitly marked deprecated here
+extern ADDAPI HYDRASDR_DEPRECATED("Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_LNA_AGC, value) instead")
+              ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:217:50: note: expanded from macro 'HYDRASDR_DEPRECATED'
+        #define HYDRASDR_DEPRECATED(msg) __attribute__((deprecated(msg)))
+                                                        ^
+/work/source_modules/hydrasdr_source/src/main.cpp:439:21: warning: 'hydrasdr_set_lna_agc' is deprecated: Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_LNA_AGC, value) instead [-Wdeprecated-declarations]
+                    hydrasdr_set_lna_agc(_this->openDev, 0);
+                    ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:1574:15: note: 'hydrasdr_set_lna_agc' has been explicitly marked deprecated here
+extern ADDAPI HYDRASDR_DEPRECATED("Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_LNA_AGC, value) instead")
+              ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:217:50: note: expanded from macro 'HYDRASDR_DEPRECATED'
+        #define HYDRASDR_DEPRECATED(msg) __attribute__((deprecated(msg)))
+                                                        ^
+/work/source_modules/hydrasdr_source/src/main.cpp:440:21: warning: 'hydrasdr_set_lna_gain' is deprecated: Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_LNA, value) instead [-Wdeprecated-declarations]
+                    hydrasdr_set_lna_gain(_this->openDev, _this->lnaGain);
+                    ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:1495:15: note: 'hydrasdr_set_lna_gain' has been explicitly marked deprecated here
+extern ADDAPI HYDRASDR_DEPRECATED("Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_LNA, value) instead")
+              ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:217:50: note: expanded from macro 'HYDRASDR_DEPRECATED'
+        #define HYDRASDR_DEPRECATED(msg) __attribute__((deprecated(msg)))
+                                                        ^
+/work/source_modules/hydrasdr_source/src/main.cpp:443:21: warning: 'hydrasdr_set_mixer_agc' is deprecated: Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_MIXER_AGC, value) instead [-Wdeprecated-declarations]
+                    hydrasdr_set_mixer_agc(_this->openDev, 1);
+                    ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:1600:15: note: 'hydrasdr_set_mixer_agc' has been explicitly marked deprecated here
+extern ADDAPI HYDRASDR_DEPRECATED("Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_MIXER_AGC, value) instead")
+              ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:217:50: note: expanded from macro 'HYDRASDR_DEPRECATED'
+        #define HYDRASDR_DEPRECATED(msg) __attribute__((deprecated(msg)))
+                                                        ^
+/work/source_modules/hydrasdr_source/src/main.cpp:446:21: warning: 'hydrasdr_set_mixer_agc' is deprecated: Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_MIXER_AGC, value) instead [-Wdeprecated-declarations]
+                    hydrasdr_set_mixer_agc(_this->openDev, 0);
+                    ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:1600:15: note: 'hydrasdr_set_mixer_agc' has been explicitly marked deprecated here
+extern ADDAPI HYDRASDR_DEPRECATED("Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_MIXER_AGC, value) instead")
+              ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:217:50: note: expanded from macro 'HYDRASDR_DEPRECATED'
+        #define HYDRASDR_DEPRECATED(msg) __attribute__((deprecated(msg)))
+                                                        ^
+/work/source_modules/hydrasdr_source/src/main.cpp:447:21: warning: 'hydrasdr_set_mixer_gain' is deprecated: Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_MIXER, value) instead [-Wdeprecated-declarations]
+                    hydrasdr_set_mixer_gain(_this->openDev, _this->mixerGain);
+                    ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:1522:15: note: 'hydrasdr_set_mixer_gain' has been explicitly marked deprecated here
+extern ADDAPI HYDRASDR_DEPRECATED("Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_MIXER, value) instead")
+              ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:217:50: note: expanded from macro 'HYDRASDR_DEPRECATED'
+        #define HYDRASDR_DEPRECATED(msg) __attribute__((deprecated(msg)))
+                                                        ^
+/work/source_modules/hydrasdr_source/src/main.cpp:449:17: warning: 'hydrasdr_set_vga_gain' is deprecated: Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_VGA, value) instead [-Wdeprecated-declarations]
+                hydrasdr_set_vga_gain(_this->openDev, _this->vgaGain);
+                ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:1548:15: note: 'hydrasdr_set_vga_gain' has been explicitly marked deprecated here
+extern ADDAPI HYDRASDR_DEPRECATED("Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_VGA, value) instead")
+              ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:217:50: note: expanded from macro 'HYDRASDR_DEPRECATED'
+        #define HYDRASDR_DEPRECATED(msg) __attribute__((deprecated(msg)))
+                                                        ^
+/work/source_modules/hydrasdr_source/src/main.cpp:467:21: warning: 'hydrasdr_set_sensitivity_gain' is deprecated: Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_SENSITIVITY, value) instead [-Wdeprecated-declarations]
+                    hydrasdr_set_sensitivity_gain(_this->openDev, _this->sensitiveGain);
+                    ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:1654:15: note: 'hydrasdr_set_sensitivity_gain' has been explicitly marked deprecated here
+extern ADDAPI HYDRASDR_DEPRECATED("Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_SENSITIVITY, value) instead")
+              ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:217:50: note: expanded from macro 'HYDRASDR_DEPRECATED'
+        #define HYDRASDR_DEPRECATED(msg) __attribute__((deprecated(msg)))
+                                                        ^
+/work/source_modules/hydrasdr_source/src/main.cpp:481:21: warning: 'hydrasdr_set_linearity_gain' is deprecated: Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_LINEARITY, value) instead [-Wdeprecated-declarations]
+                    hydrasdr_set_linearity_gain(_this->openDev, _this->linearGain);
+                    ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:1627:15: note: 'hydrasdr_set_linearity_gain' has been explicitly marked deprecated here
+extern ADDAPI HYDRASDR_DEPRECATED("Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_LINEARITY, value) instead")
+              ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:217:50: note: expanded from macro 'HYDRASDR_DEPRECATED'
+        #define HYDRASDR_DEPRECATED(msg) __attribute__((deprecated(msg)))
+                                                        ^
+/work/source_modules/hydrasdr_source/src/main.cpp:497:21: warning: 'hydrasdr_set_lna_gain' is deprecated: Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_LNA, value) instead [-Wdeprecated-declarations]
+                    hydrasdr_set_lna_gain(_this->openDev, _this->lnaGain);
+                    ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:1495:15: note: 'hydrasdr_set_lna_gain' has been explicitly marked deprecated here
+extern ADDAPI HYDRASDR_DEPRECATED("Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_LNA, value) instead")
+              ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:217:50: note: expanded from macro 'HYDRASDR_DEPRECATED'
+        #define HYDRASDR_DEPRECATED(msg) __attribute__((deprecated(msg)))
+                                                        ^
+/work/source_modules/hydrasdr_source/src/main.cpp:512:21: warning: 'hydrasdr_set_mixer_gain' is deprecated: Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_MIXER, value) instead [-Wdeprecated-declarations]
+                    hydrasdr_set_mixer_gain(_this->openDev, _this->mixerGain);
+                    ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:1522:15: note: 'hydrasdr_set_mixer_gain' has been explicitly marked deprecated here
+extern ADDAPI HYDRASDR_DEPRECATED("Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_MIXER, value) instead")
+              ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:217:50: note: expanded from macro 'HYDRASDR_DEPRECATED'
+        #define HYDRASDR_DEPRECATED(msg) __attribute__((deprecated(msg)))
+                                                        ^
+/work/source_modules/hydrasdr_source/src/main.cpp:526:21: warning: 'hydrasdr_set_vga_gain' is deprecated: Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_VGA, value) instead [-Wdeprecated-declarations]
+                    hydrasdr_set_vga_gain(_this->openDev, _this->vgaGain);
+                    ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:1548:15: note: 'hydrasdr_set_vga_gain' has been explicitly marked deprecated here
+extern ADDAPI HYDRASDR_DEPRECATED("Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_VGA, value) instead")
+              ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:217:50: note: expanded from macro 'HYDRASDR_DEPRECATED'
+        #define HYDRASDR_DEPRECATED(msg) __attribute__((deprecated(msg)))
+                                                        ^
+/work/source_modules/hydrasdr_source/src/main.cpp:540:25: warning: 'hydrasdr_set_lna_agc' is deprecated: Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_LNA_AGC, value) instead [-Wdeprecated-declarations]
+                        hydrasdr_set_lna_agc(_this->openDev, 1);
+                        ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:1574:15: note: 'hydrasdr_set_lna_agc' has been explicitly marked deprecated here
+extern ADDAPI HYDRASDR_DEPRECATED("Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_LNA_AGC, value) instead")
+              ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:217:50: note: expanded from macro 'HYDRASDR_DEPRECATED'
+        #define HYDRASDR_DEPRECATED(msg) __attribute__((deprecated(msg)))
+                                                        ^
+/work/source_modules/hydrasdr_source/src/main.cpp:543:25: warning: 'hydrasdr_set_lna_agc' is deprecated: Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_LNA_AGC, value) instead [-Wdeprecated-declarations]
+                        hydrasdr_set_lna_agc(_this->openDev, 0);
+                        ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:1574:15: note: 'hydrasdr_set_lna_agc' has been explicitly marked deprecated here
+extern ADDAPI HYDRASDR_DEPRECATED("Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_LNA_AGC, value) instead")
+              ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:217:50: note: expanded from macro 'HYDRASDR_DEPRECATED'
+        #define HYDRASDR_DEPRECATED(msg) __attribute__((deprecated(msg)))
+                                                        ^
+/work/source_modules/hydrasdr_source/src/main.cpp:544:25: warning: 'hydrasdr_set_lna_gain' is deprecated: Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_LNA, value) instead [-Wdeprecated-declarations]
+                        hydrasdr_set_lna_gain(_this->openDev, _this->lnaGain);
+                        ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:1495:15: note: 'hydrasdr_set_lna_gain' has been explicitly marked deprecated here
+extern ADDAPI HYDRASDR_DEPRECATED("Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_LNA, value) instead")
+              ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:217:50: note: expanded from macro 'HYDRASDR_DEPRECATED'
+        #define HYDRASDR_DEPRECATED(msg) __attribute__((deprecated(msg)))
+                                                        ^
+/work/source_modules/hydrasdr_source/src/main.cpp:557:25: warning: 'hydrasdr_set_mixer_agc' is deprecated: Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_MIXER_AGC, value) instead [-Wdeprecated-declarations]
+                        hydrasdr_set_mixer_agc(_this->openDev, 1);
+                        ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:1600:15: note: 'hydrasdr_set_mixer_agc' has been explicitly marked deprecated here
+extern ADDAPI HYDRASDR_DEPRECATED("Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_MIXER_AGC, value) instead")
+              ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:217:50: note: expanded from macro 'HYDRASDR_DEPRECATED'
+        #define HYDRASDR_DEPRECATED(msg) __attribute__((deprecated(msg)))
+                                                        ^
+/work/source_modules/hydrasdr_source/src/main.cpp:560:25: warning: 'hydrasdr_set_mixer_agc' is deprecated: Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_MIXER_AGC, value) instead [-Wdeprecated-declarations]
+                        hydrasdr_set_mixer_agc(_this->openDev, 0);
+                        ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:1600:15: note: 'hydrasdr_set_mixer_agc' has been explicitly marked deprecated here
+extern ADDAPI HYDRASDR_DEPRECATED("Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_MIXER_AGC, value) instead")
+              ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:217:50: note: expanded from macro 'HYDRASDR_DEPRECATED'
+        #define HYDRASDR_DEPRECATED(msg) __attribute__((deprecated(msg)))
+                                                        ^
+/work/source_modules/hydrasdr_source/src/main.cpp:561:25: warning: 'hydrasdr_set_mixer_gain' is deprecated: Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_MIXER, value) instead [-Wdeprecated-declarations]
+                        hydrasdr_set_mixer_gain(_this->openDev, _this->mixerGain);
+                        ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:1522:15: note: 'hydrasdr_set_mixer_gain' has been explicitly marked deprecated here
+extern ADDAPI HYDRASDR_DEPRECATED("Use hydrasdr_set_gain(dev, HYDRASDR_GAIN_TYPE_MIXER, value) instead")
+              ^
+/sdr-kit/arm64-v8a/include/libhydrasdr/hydrasdr.h:217:50: note: expanded from macro 'HYDRASDR_DEPRECATED'
+        #define HYDRASDR_DEPRECATED(msg) __attribute__((deprecated(msg)))
+                                                        ^
+37 warnings generated.
+[28/101] Building CXX object source_modules/rfspace_source/CMakeFiles/rfspace_source.dir/src/main.cpp.o
+[29/101] Building CXX object source_modules/hl2_source/CMakeFiles/hl2_source.dir/src/bandconfig.cpp.o
+[30/101] Building CXX object source_modules/rtl_tcp_source/CMakeFiles/rtl_tcp_source.dir/src/main.cpp.o
+[31/101] Building CXX object source_modules/spectran_http_source/CMakeFiles/spectran_http_source.dir/src/main.cpp.o
+[32/101] Building CXX object source_modules/sdrpp_server_source/CMakeFiles/sdrpp_server_source.dir/src/main.cpp.o
+[33/101] Building CXX object core/CMakeFiles/sdrpp_core.dir/src/core.cpp.o
+/work/core/src/core.cpp:388:57: warning: 'open' has superfluous mode bits; missing O_CREAT or O_TMPFILE? [-Wuser-defined-warnings]
+                        open("/dev/null", O_RDONLY, 0600);                     // input
+                                                        ^
+/root/Android/ndk/25.2.9519653/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/bits/fortify/fcntl.h:76:9: note: from 'diagnose_if' attribute on 'open':
+        __clang_warning_if(!__open_modes_useful(flags) && modes,
+        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/root/Android/ndk/25.2.9519653/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/sys/cdefs.h:139:54: note: expanded from macro '__clang_warning_if'
+#define __clang_warning_if(cond, msg) __attribute__((diagnose_if(cond, msg, "warning")))
+                                                     ^           ~~~~
+1 warning generated.
+[34/101] Building CXX object sink_modules/network_sink/CMakeFiles/network_sink.dir/src/main.cpp.o
+[35/101] Building CXX object sink_modules/android_audio_sink/CMakeFiles/audio_sink.dir/src/main.cpp.o
+[36/101] Building CXX object source_modules/plutosdr_source/CMakeFiles/plutosdr_source.dir/src/main.cpp.o
+[37/101] Building CXX object source_modules/hl2_source/CMakeFiles/hl2_source.dir/src/main.cpp.o
+[38/101] Building CXX object decoder_modules/atv_decoder/CMakeFiles/atv_decoder.dir/src/main.cpp.o
+[39/101] Building CXX object source_modules/file_source/CMakeFiles/file_source.dir/src/main.cpp.o
+/work/source_modules/file_source/src/main.cpp:157:10: warning: 'postInit' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+    void postInit() {
+         ^
+/work/core/src/module.h:38:22: note: overridden virtual function is here
+        virtual void postInit() = 0;
+                     ^
+/work/source_modules/file_source/src/main.cpp:161:10: warning: 'enable' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+    void enable() {
+         ^
+/work/core/src/module.h:39:22: note: overridden virtual function is here
+        virtual void enable() = 0;
+                     ^
+/work/source_modules/file_source/src/main.cpp:165:10: warning: 'disable' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+    void disable() {
+         ^
+/work/core/src/module.h:40:22: note: overridden virtual function is here
+        virtual void disable() = 0;
+                     ^
+/work/source_modules/file_source/src/main.cpp:169:10: warning: 'isEnabled' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+    bool isEnabled() {
+         ^
+/work/core/src/module.h:41:22: note: overridden virtual function is here
+        virtual bool isEnabled() = 0;
+                     ^
+/work/source_modules/file_source/src/main.cpp:357:10: warning: 'openPath' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+    void openPath(const std::string& path) {
+         ^
+/work/source_modules/file_source/src/file_source.h:7:18: note: overridden virtual function is here
+    virtual void openPath(const std::string &path) = 0;
+                 ^
+5 warnings generated.
+[40/101] Building CXX object sink_modules/null_audio_sink/CMakeFiles/null_audio_sink.dir/src/main.cpp.o
+/work/sink_modules/null_audio_sink/src/main.cpp:172:10: warning: 'postInit' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+    void postInit() {}
+         ^
+/work/core/src/module.h:38:22: note: overridden virtual function is here
+        virtual void postInit() = 0;
+                     ^
+/work/sink_modules/null_audio_sink/src/main.cpp:174:10: warning: 'enable' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+    void enable() {
+         ^
+/work/core/src/module.h:39:22: note: overridden virtual function is here
+        virtual void enable() = 0;
+                     ^
+/work/sink_modules/null_audio_sink/src/main.cpp:178:10: warning: 'disable' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+    void disable() {
+         ^
+/work/core/src/module.h:40:22: note: overridden virtual function is here
+        virtual void disable() = 0;
+                     ^
+/work/sink_modules/null_audio_sink/src/main.cpp:182:10: warning: 'isEnabled' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+    bool isEnabled() {
+         ^
+/work/core/src/module.h:41:22: note: overridden virtual function is here
+        virtual bool isEnabled() = 0;
+                     ^
+4 warnings generated.
+[41/101] Building CXX object misc_modules/frequency_manager/CMakeFiles/frequency_manager.dir/src/scanner.cpp.o
+[42/101] Building CXX object decoder_modules/pager_decoder/CMakeFiles/pager_decoder.dir/src/main.cpp.o
+[43/101] Building CXX object decoder_modules/meteor_demodulator/CMakeFiles/meteor_demodulator.dir/src/main.cpp.o
+[44/101] Building CXX object decoder_modules/m17_decoder/CMakeFiles/m17_decoder.dir/src/main.cpp.o
+[45/101] Building CXX object misc_modules/scanner/CMakeFiles/scanner.dir/src/main.cpp.o
+[46/101] Building CXX object misc_modules/iq_exporter/CMakeFiles/iq_exporter.dir/src/main.cpp.o
+[47/101] Building CXX object misc_modules/spectrum_analyzer/CMakeFiles/spectrum_analyzer.dir/src/core_receiver_tuner.cpp.o
+[48/101] Building CXX object decoder_modules/ch_tetra_demodulator/CMakeFiles/ch_tetra_demodulator.dir/src/main.cpp.o
+/work/decoder_modules/ch_tetra_demodulator/src/main.cpp:138:10: warning: 'postInit' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+    void postInit() {}
+         ^
+/work/core/src/module.h:38:22: note: overridden virtual function is here
+        virtual void postInit() = 0;
+                     ^
+/work/decoder_modules/ch_tetra_demodulator/src/main.cpp:140:10: warning: 'enable' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+    void enable() {
+         ^
+/work/core/src/module.h:39:22: note: overridden virtual function is here
+        virtual void enable() = 0;
+                     ^
+/work/decoder_modules/ch_tetra_demodulator/src/main.cpp:173:10: warning: 'disable' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+    void disable() {
+         ^
+/work/core/src/module.h:40:22: note: overridden virtual function is here
+        virtual void disable() = 0;
+                     ^
+/work/decoder_modules/ch_tetra_demodulator/src/main.cpp:200:10: warning: 'isEnabled' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+    bool isEnabled() {
+         ^
+/work/core/src/module.h:41:22: note: overridden virtual function is here
+        virtual bool isEnabled() = 0;
+                     ^
+4 warnings generated.
+[49/101] Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/main_window.cpp.o
+[50/101] Building CXX object misc_modules/rigctl_client/CMakeFiles/rigctl_client.dir/src/main.cpp.o
+[51/101] Building CXX object misc_modules/rigctl_server/CMakeFiles/rigctl_server.dir/src/main.cpp.o
+[52/101] Building CXX object decoder_modules/ch_extravhf_decoder/CMakeFiles/ch_extravhf_decoder.dir/src/main.cpp.o
+In file included from /work/decoder_modules/ch_extravhf_decoder/src/main.cpp:25:
+/work/decoder_modules/ch_extravhf_decoder/src/../../radio/src/radio_module_interface.h:54:13: warning: 'this' pointer cannot be null in well-defined C++ code; comparison may be assumed to always evaluate to false [-Wtautological-undefined-compare]
+        if (this == nullptr || index < 0 || index >= radioModes.size()) {
+            ^~~~    ~~~~~~~
+/work/decoder_modules/ch_extravhf_decoder/src/main.cpp:165:10: warning: 'postInit' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+    void postInit() {
+         ^
+/work/core/src/module.h:38:22: note: overridden virtual function is here
+        virtual void postInit() = 0;
+                     ^
+/work/decoder_modules/ch_extravhf_decoder/src/main.cpp:169:10: warning: 'enable' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+    void enable() {
+         ^
+/work/core/src/module.h:39:22: note: overridden virtual function is here
+        virtual void enable() = 0;
+                     ^
+/work/decoder_modules/ch_extravhf_decoder/src/main.cpp:174:10: warning: 'disable' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+    void disable() {
+         ^
+/work/core/src/module.h:40:22: note: overridden virtual function is here
+        virtual void disable() = 0;
+                     ^
+/work/decoder_modules/ch_extravhf_decoder/src/main.cpp:179:10: warning: 'isEnabled' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+    bool isEnabled() {
+         ^
+/work/core/src/module.h:41:22: note: overridden virtual function is here
+        virtual bool isEnabled() = 0;
+                     ^
+5 warnings generated.
+[53/101] Building CXX object source_modules/kiwisdr_source/CMakeFiles/kiwisdr_source.dir/src/main.cpp.o
+[54/101] Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/brown/mobile_main_window.cpp.o
+In file included from /work/core/src/gui/brown/mobile_main_window.cpp:24:
+In file included from /work/core/src/imgui/../../../decoder_modules/radio/src/radio_module.h:23:
+/work/core/src/imgui/../../../decoder_modules/radio/src/radio_module_interface.h:54:13: warning: 'this' pointer cannot be null in well-defined C++ code; comparison may be assumed to always evaluate to false [-Wtautological-undefined-compare]
+        if (this == nullptr || index < 0 || index >= radioModes.size()) {
+            ^~~~    ~~~~~~~
+1 warning generated.
+[55/101] Building CXX object decoder_modules/ft8_decoder/CMakeFiles/ft8_decoder.dir/src/main.cpp.o
+[56/101] Building CXX object misc_modules/recorder/CMakeFiles/recorder.dir/src/main.cpp.o
+In file included from /work/misc_modules/recorder/src/main.cpp:25:
+/work/misc_modules/recorder/../../decoder_modules/radio/src/radio_module_interface.h:54:13: warning: 'this' pointer cannot be null in well-defined C++ code; comparison may be assumed to always evaluate to false [-Wtautological-undefined-compare]
+        if (this == nullptr || index < 0 || index >= radioModes.size()) {
+            ^~~~    ~~~~~~~
+1 warning generated.
+[57/101] Building CXX object misc_modules/noise_reduction_logmmse/CMakeFiles/noise_reduction_logmmse.dir/src/main.cpp.o
+[58/101] Linking CXX shared library ../../../../build/intermediates/cmake/debug/obj/arm64-v8a/libsdrpp_core.so
+[59/101] Linking CXX executable ../../../../build/intermediates/cmake/debug/obj/arm64-v8a/sdrpp
+[60/101] Linking CXX shared library ../../../../build/intermediates/cmake/debug/obj/arm64-v8a/airspy_source.so
+[61/101] Linking CXX shared library ../../../../build/intermediates/cmake/debug/obj/arm64-v8a/hydrasdr_source.so
+[62/101] Linking CXX shared library ../../../../build/intermediates/cmake/debug/obj/arm64-v8a/airspyhf_source.so
+[63/101] Linking CXX shared library ../../../../build/intermediates/cmake/debug/obj/arm64-v8a/spyserver_source.so
+[64/101] Linking CXX shared library ../../../../build/intermediates/cmake/debug/obj/arm64-v8a/rtl_tcp_source.so
+[65/101] Linking CXX shared library ../../../../build/intermediates/cmake/debug/obj/arm64-v8a/network_source.so
+[66/101] Linking CXX shared library ../../../../build/intermediates/cmake/debug/obj/arm64-v8a/file_source.so
+[67/101] Linking CXX shared library ../../../../build/intermediates/cmake/debug/obj/arm64-v8a/hackrf_source.so
+[68/101] Linking CXX shared library ../../../../build/intermediates/cmake/debug/obj/arm64-v8a/sdrpp_server_source.so
+[69/101] Linking CXX shared library ../../../../build/intermediates/cmake/debug/obj/arm64-v8a/rtl_sdr_source.so
+[70/101] Linking CXX shared library ../../../../build/intermediates/cmake/debug/obj/arm64-v8a/spectran_http_source.so
+[71/101] Linking CXX shared library ../../../../build/intermediates/cmake/debug/obj/arm64-v8a/rfspace_source.so
+[72/101] Linking CXX shared library ../../../../build/intermediates/cmake/debug/obj/arm64-v8a/audio_sink.so
+[73/101] Linking CXX shared library ../../../../build/intermediates/cmake/debug/obj/arm64-v8a/atv_decoder.so
+[74/101] Linking CXX shared library ../../../../build/intermediates/cmake/debug/obj/arm64-v8a/network_sink.so
+[75/101] Linking CXX shared library ../../../../build/intermediates/cmake/debug/obj/arm64-v8a/hl2_source.so
+[76/101] Linking CXX shared library ../../../../build/intermediates/cmake/debug/obj/arm64-v8a/plutosdr_source.so
+[77/101] Linking CXX shared library ../../../../build/intermediates/cmake/debug/obj/arm64-v8a/null_audio_sink.so
+[78/101] Linking CXX shared library ../../../../build/intermediates/cmake/debug/obj/arm64-v8a/iq_exporter.so
+[79/101] Linking CXX shared library ../../../../build/intermediates/cmake/debug/obj/arm64-v8a/hermes_source.so
+[80/101] Linking CXX shared library ../../../../build/intermediates/cmake/debug/obj/arm64-v8a/pager_decoder.so
+[81/101] Linking CXX shared library ../../../../build/intermediates/cmake/debug/obj/arm64-v8a/meteor_demodulator.so
+[82/101] Linking CXX shared library ../../../../build/intermediates/cmake/debug/obj/arm64-v8a/kiwisdr_source.so
+[83/101] Linking CXX shared library ../../../../build/intermediates/cmake/debug/obj/arm64-v8a/rigctl_client.so
+[84/101] Linking CXX shared library ../../../../build/intermediates/cmake/debug/obj/arm64-v8a/rigctl_server.so
+[85/101] Linking CXX shared library ../../../../build/intermediates/cmake/debug/obj/arm64-v8a/recorder.so
+[86/101] Linking CXX shared library ../../../../build/intermediates/cmake/debug/obj/arm64-v8a/scanner.so
+[87/101] Linking CXX shared library ../../../../build/intermediates/cmake/debug/obj/arm64-v8a/ch_tetra_demodulator.so
+[88/101] Linking CXX shared library ../../../../build/intermediates/cmake/debug/obj/arm64-v8a/m17_decoder.so
+[89/101] Building CXX object misc_modules/reports_monitor/CMakeFiles/reports_monitor.dir/src/main.cpp.o
+[90/101] Linking CXX shared library ../../../../build/intermediates/cmake/debug/obj/arm64-v8a/noise_reduction_logmmse.so
+[91/101] Linking CXX shared library ../../../../build/intermediates/cmake/debug/obj/arm64-v8a/ch_extravhf_decoder.so
+[92/101] Linking CXX shared library ../../../../build/intermediates/cmake/debug/obj/arm64-v8a/ft8_decoder.so
+[93/101] Building CXX object decoder_modules/radio/CMakeFiles/radio.dir/src/main.cpp.o
+In file included from /work/decoder_modules/radio/src/main.cpp:1:
+In file included from /work/decoder_modules/radio/src/radio_module.h:23:
+/work/decoder_modules/radio/src/radio_module_interface.h:54:13: warning: 'this' pointer cannot be null in well-defined C++ code; comparison may be assumed to always evaluate to false [-Wtautological-undefined-compare]
+        if (this == nullptr || index < 0 || index >= radioModes.size()) {
+            ^~~~    ~~~~~~~
+1 warning generated.
+[94/101] Linking CXX shared library ../../../../build/intermediates/cmake/debug/obj/arm64-v8a/reports_monitor.so
+[95/101] Linking CXX shared library ../../../../build/intermediates/cmake/debug/obj/arm64-v8a/radio.so
+[96/101] Building CXX object misc_modules/websdr_view/CMakeFiles/websdr_view.dir/src/main.cpp.o
+[97/101] Linking CXX shared library ../../../../build/intermediates/cmake/debug/obj/arm64-v8a/websdr_view.so
+[98/101] Building CXX object misc_modules/spectrum_analyzer/CMakeFiles/spectrum_analyzer.dir/src/main.cpp.o
+[99/101] Linking CXX shared library ../../../../build/intermediates/cmake/debug/obj/arm64-v8a/spectrum_analyzer.so
+[100/101] Building CXX object misc_modules/frequency_manager/CMakeFiles/frequency_manager.dir/src/main.cpp.o
+In file included from /work/misc_modules/frequency_manager/src/main.cpp:23:
+/work/misc_modules/frequency_manager/../../decoder_modules/radio/src/../../radio/src/radio_module_interface.h:54:13: warning: 'this' pointer cannot be null in well-defined C++ code; comparison may be assumed to always evaluate to false [-Wtautological-undefined-compare]
+        if (this == nullptr || index < 0 || index >= radioModes.size()) {
+            ^~~~    ~~~~~~~
+1 warning generated.
+[101/101] Linking CXX shared library ../../../../build/intermediates/cmake/debug/obj/arm64-v8a/frequency_manager.so

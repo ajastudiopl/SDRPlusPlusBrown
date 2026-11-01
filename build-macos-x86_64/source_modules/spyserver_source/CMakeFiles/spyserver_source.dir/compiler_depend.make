@@ -968,6 +968,7 @@ source_modules/spyserver_source/CMakeFiles/spyserver_source.dir/src/main.cpp.o: 
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/dsp/stream.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/dsp/types.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/main_window.h \
+  /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/brown/band_panel.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/brown/mobile_main_window.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/dialogs/loading_screen.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/gui.h \
@@ -1067,6 +1068,7 @@ source_modules/spyserver_source/CMakeFiles/spyserver_source.dir/src/main.cpp.o: 
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/utils/networking.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/utils/opengl_include_code.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/utils/usleep.h \
+  /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/misc_modules/frequency_manager/src/frequency_manager.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/source_modules/spyserver_source/src/spyserver_client.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/source_modules/spyserver_source/src/spyserver_protocol.h \
   /private/tmp/claude-501/-Users-ajastudioimacpro-Documents-GItHub-SDRPlusPlusBrown/5b91e13d-52fa-4130-bd25-c0766a4dd57b/scratchpad/volk-mac-install/include/volk/volk.h \
@@ -1936,6 +1938,8 @@ source_modules/spyserver_source/CMakeFiles/spyserver_source.dir/src/spyserver_cl
 
 /private/tmp/claude-501/-Users-ajastudioimacpro-Documents-GItHub-SDRPlusPlusBrown/5b91e13d-52fa-4130-bd25-c0766a4dd57b/scratchpad/volk-mac-install/include/volk/volk_common.h:
 
+/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/misc_modules/frequency_manager/src/frequency_manager.h:
+
 /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/utils/networking.h:
 
 /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/utils/flog.h:
@@ -2033,6 +2037,8 @@ source_modules/spyserver_source/CMakeFiles/spyserver_source.dir/src/spyserver_cl
 /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/gui.h:
 
 /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/brown/mobile_main_window.h:
+
+/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/brown/band_panel.h:
 
 /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/main_window.h:
 

@@ -1326,7 +1326,7 @@ CMakeFiles/sdrpp.dir/all: core/CMakeFiles/sdrpp_core.dir/all
 CMakeFiles/sdrpp.dir/all: core/libcorrect/CMakeFiles/correct_static.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdrpp.dir/build.make CMakeFiles/sdrpp.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdrpp.dir/build.make CMakeFiles/sdrpp.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=75 "Built target sdrpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num= "Built target sdrpp"
 .PHONY : CMakeFiles/sdrpp.dir/all
 
 # Build rule for subdir invocation for target.
@@ -1343,7 +1343,7 @@ sdrpp: CMakeFiles/sdrpp.dir/rule
 # codegen rule for target.
 CMakeFiles/sdrpp.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdrpp.dir/build.make CMakeFiles/sdrpp.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=75 "Finished codegen for target sdrpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num= "Finished codegen for target sdrpp"
 .PHONY : CMakeFiles/sdrpp.dir/codegen
 
 # clean rule for target.
@@ -1423,12 +1423,12 @@ CMakeFiles/uninstall.dir/clean:
 core/CMakeFiles/sdrpp_core.dir/all: core/libcorrect/CMakeFiles/correct_static.dir/all
 	$(MAKE) $(MAKESILENT) -f core/CMakeFiles/sdrpp_core.dir/build.make core/CMakeFiles/sdrpp_core.dir/depend
 	$(MAKE) $(MAKESILENT) -f core/CMakeFiles/sdrpp_core.dir/build.make core/CMakeFiles/sdrpp_core.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92 "Built target sdrpp_core"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92 "Built target sdrpp_core"
 .PHONY : core/CMakeFiles/sdrpp_core.dir/all
 
 # Build rule for subdir invocation for target.
 core/CMakeFiles/sdrpp_core.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 21
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 22
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 core/CMakeFiles/sdrpp_core.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 0
 .PHONY : core/CMakeFiles/sdrpp_core.dir/rule
@@ -1440,7 +1440,7 @@ sdrpp_core: core/CMakeFiles/sdrpp_core.dir/rule
 # codegen rule for target.
 core/CMakeFiles/sdrpp_core.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f core/CMakeFiles/sdrpp_core.dir/build.make core/CMakeFiles/sdrpp_core.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92 "Finished codegen for target sdrpp_core"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92 "Finished codegen for target sdrpp_core"
 .PHONY : core/CMakeFiles/sdrpp_core.dir/codegen
 
 # clean rule for target.
@@ -2048,12 +2048,12 @@ core/libcorrect/tests/CMakeFiles/reed_solomon_shim_interop_test_runner.dir/all: 
 core/libcorrect/tests/CMakeFiles/reed_solomon_shim_interop_test_runner.dir/all: core/libcorrect/CMakeFiles/fec_shim_static.dir/all
 	$(MAKE) $(MAKESILENT) -f core/libcorrect/tests/CMakeFiles/reed_solomon_shim_interop_test_runner.dir/build.make core/libcorrect/tests/CMakeFiles/reed_solomon_shim_interop_test_runner.dir/depend
 	$(MAKE) $(MAKESILENT) -f core/libcorrect/tests/CMakeFiles/reed_solomon_shim_interop_test_runner.dir/build.make core/libcorrect/tests/CMakeFiles/reed_solomon_shim_interop_test_runner.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num= "Built target reed_solomon_shim_interop_test_runner"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=69 "Built target reed_solomon_shim_interop_test_runner"
 .PHONY : core/libcorrect/tests/CMakeFiles/reed_solomon_shim_interop_test_runner.dir/all
 
 # Build rule for subdir invocation for target.
 core/libcorrect/tests/CMakeFiles/reed_solomon_shim_interop_test_runner.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 5
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 6
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 core/libcorrect/tests/CMakeFiles/reed_solomon_shim_interop_test_runner.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 0
 .PHONY : core/libcorrect/tests/CMakeFiles/reed_solomon_shim_interop_test_runner.dir/rule
@@ -2065,7 +2065,7 @@ reed_solomon_shim_interop_test_runner: core/libcorrect/tests/CMakeFiles/reed_sol
 # codegen rule for target.
 core/libcorrect/tests/CMakeFiles/reed_solomon_shim_interop_test_runner.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f core/libcorrect/tests/CMakeFiles/reed_solomon_shim_interop_test_runner.dir/build.make core/libcorrect/tests/CMakeFiles/reed_solomon_shim_interop_test_runner.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num= "Finished codegen for target reed_solomon_shim_interop_test_runner"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=69 "Finished codegen for target reed_solomon_shim_interop_test_runner"
 .PHONY : core/libcorrect/tests/CMakeFiles/reed_solomon_shim_interop_test_runner.dir/codegen
 
 # clean rule for target.
@@ -2089,7 +2089,7 @@ core/libcorrect/tests/CMakeFiles/test_runners.dir/all: core/libcorrect/tests/CMa
 
 # Build rule for subdir invocation for target.
 core/libcorrect/tests/CMakeFiles/test_runners.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 8
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 9
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 core/libcorrect/tests/CMakeFiles/test_runners.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 0
 .PHONY : core/libcorrect/tests/CMakeFiles/test_runners.dir/rule
@@ -2125,7 +2125,7 @@ core/libcorrect/tests/CMakeFiles/check.dir/all: core/libcorrect/tests/CMakeFiles
 
 # Build rule for subdir invocation for target.
 core/libcorrect/tests/CMakeFiles/check.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 8
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 9
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 core/libcorrect/tests/CMakeFiles/check.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 0
 .PHONY : core/libcorrect/tests/CMakeFiles/check.dir/rule
@@ -2185,12 +2185,12 @@ core/libcorrect/tools/CMakeFiles/conv_find_optim_poly.dir/all: core/libcorrect/C
 core/libcorrect/tools/CMakeFiles/conv_find_optim_poly.dir/all: core/libcorrect/util/CMakeFiles/error_sim_sse.dir/all
 	$(MAKE) $(MAKESILENT) -f core/libcorrect/tools/CMakeFiles/conv_find_optim_poly.dir/build.make core/libcorrect/tools/CMakeFiles/conv_find_optim_poly.dir/depend
 	$(MAKE) $(MAKESILENT) -f core/libcorrect/tools/CMakeFiles/conv_find_optim_poly.dir/build.make core/libcorrect/tools/CMakeFiles/conv_find_optim_poly.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=12 "Built target conv_find_optim_poly"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num= "Built target conv_find_optim_poly"
 .PHONY : core/libcorrect/tools/CMakeFiles/conv_find_optim_poly.dir/all
 
 # Build rule for subdir invocation for target.
 core/libcorrect/tools/CMakeFiles/conv_find_optim_poly.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 6
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 5
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 core/libcorrect/tools/CMakeFiles/conv_find_optim_poly.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 0
 .PHONY : core/libcorrect/tools/CMakeFiles/conv_find_optim_poly.dir/rule
@@ -2202,7 +2202,7 @@ conv_find_optim_poly: core/libcorrect/tools/CMakeFiles/conv_find_optim_poly.dir/
 # codegen rule for target.
 core/libcorrect/tools/CMakeFiles/conv_find_optim_poly.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f core/libcorrect/tools/CMakeFiles/conv_find_optim_poly.dir/build.make core/libcorrect/tools/CMakeFiles/conv_find_optim_poly.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=12 "Finished codegen for target conv_find_optim_poly"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num= "Finished codegen for target conv_find_optim_poly"
 .PHONY : core/libcorrect/tools/CMakeFiles/conv_find_optim_poly.dir/codegen
 
 # clean rule for target.
@@ -2218,12 +2218,12 @@ core/libcorrect/tools/CMakeFiles/conv_find_optim_poly_annealing.dir/all: core/li
 core/libcorrect/tools/CMakeFiles/conv_find_optim_poly_annealing.dir/all: core/libcorrect/util/CMakeFiles/error_sim_sse.dir/all
 	$(MAKE) $(MAKESILENT) -f core/libcorrect/tools/CMakeFiles/conv_find_optim_poly_annealing.dir/build.make core/libcorrect/tools/CMakeFiles/conv_find_optim_poly_annealing.dir/depend
 	$(MAKE) $(MAKESILENT) -f core/libcorrect/tools/CMakeFiles/conv_find_optim_poly_annealing.dir/build.make core/libcorrect/tools/CMakeFiles/conv_find_optim_poly_annealing.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num= "Built target conv_find_optim_poly_annealing"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=12 "Built target conv_find_optim_poly_annealing"
 .PHONY : core/libcorrect/tools/CMakeFiles/conv_find_optim_poly_annealing.dir/all
 
 # Build rule for subdir invocation for target.
 core/libcorrect/tools/CMakeFiles/conv_find_optim_poly_annealing.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 5
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 6
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 core/libcorrect/tools/CMakeFiles/conv_find_optim_poly_annealing.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 0
 .PHONY : core/libcorrect/tools/CMakeFiles/conv_find_optim_poly_annealing.dir/rule
@@ -2235,7 +2235,7 @@ conv_find_optim_poly_annealing: core/libcorrect/tools/CMakeFiles/conv_find_optim
 # codegen rule for target.
 core/libcorrect/tools/CMakeFiles/conv_find_optim_poly_annealing.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f core/libcorrect/tools/CMakeFiles/conv_find_optim_poly_annealing.dir/build.make core/libcorrect/tools/CMakeFiles/conv_find_optim_poly_annealing.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num= "Finished codegen for target conv_find_optim_poly_annealing"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=12 "Finished codegen for target conv_find_optim_poly_annealing"
 .PHONY : core/libcorrect/tools/CMakeFiles/conv_find_optim_poly_annealing.dir/codegen
 
 # clean rule for target.
@@ -2292,7 +2292,7 @@ source_modules/airspy_source/CMakeFiles/airspy_source.dir/all: core/libcorrect/C
 
 # Build rule for subdir invocation for target.
 source_modules/airspy_source/CMakeFiles/airspy_source.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 21
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 22
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 source_modules/airspy_source/CMakeFiles/airspy_source.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 0
 .PHONY : source_modules/airspy_source/CMakeFiles/airspy_source.dir/rule
@@ -2325,7 +2325,7 @@ source_modules/airspyhf_source/CMakeFiles/airspyhf_source.dir/all: core/libcorre
 
 # Build rule for subdir invocation for target.
 source_modules/airspyhf_source/CMakeFiles/airspyhf_source.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 21
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 22
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 source_modules/airspyhf_source/CMakeFiles/airspyhf_source.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 0
 .PHONY : source_modules/airspyhf_source/CMakeFiles/airspyhf_source.dir/rule
@@ -2358,7 +2358,7 @@ source_modules/audio_source/CMakeFiles/audio_source.dir/all: core/libcorrect/CMa
 
 # Build rule for subdir invocation for target.
 source_modules/audio_source/CMakeFiles/audio_source.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 21
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 22
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 source_modules/audio_source/CMakeFiles/audio_source.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 0
 .PHONY : source_modules/audio_source/CMakeFiles/audio_source.dir/rule
@@ -2391,7 +2391,7 @@ source_modules/file_source/CMakeFiles/file_source.dir/all: core/libcorrect/CMake
 
 # Build rule for subdir invocation for target.
 source_modules/file_source/CMakeFiles/file_source.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 21
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 22
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 source_modules/file_source/CMakeFiles/file_source.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 0
 .PHONY : source_modules/file_source/CMakeFiles/file_source.dir/rule
@@ -2424,7 +2424,7 @@ source_modules/hackrf_source/CMakeFiles/hackrf_source.dir/all: core/libcorrect/C
 
 # Build rule for subdir invocation for target.
 source_modules/hackrf_source/CMakeFiles/hackrf_source.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 22
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 23
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 source_modules/hackrf_source/CMakeFiles/hackrf_source.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 0
 .PHONY : source_modules/hackrf_source/CMakeFiles/hackrf_source.dir/rule
@@ -2457,7 +2457,7 @@ source_modules/hermes_source/CMakeFiles/hermes_source.dir/all: core/libcorrect/C
 
 # Build rule for subdir invocation for target.
 source_modules/hermes_source/CMakeFiles/hermes_source.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 21
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 22
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 source_modules/hermes_source/CMakeFiles/hermes_source.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 0
 .PHONY : source_modules/hermes_source/CMakeFiles/hermes_source.dir/rule
@@ -2485,7 +2485,7 @@ source_modules/network_source/CMakeFiles/network_source.dir/all: core/CMakeFiles
 source_modules/network_source/CMakeFiles/network_source.dir/all: core/libcorrect/CMakeFiles/correct_static.dir/all
 	$(MAKE) $(MAKESILENT) -f source_modules/network_source/CMakeFiles/network_source.dir/build.make source_modules/network_source/CMakeFiles/network_source.dir/depend
 	$(MAKE) $(MAKESILENT) -f source_modules/network_source/CMakeFiles/network_source.dir/build.make source_modules/network_source/CMakeFiles/network_source.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=64 "Built target network_source"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num= "Built target network_source"
 .PHONY : source_modules/network_source/CMakeFiles/network_source.dir/all
 
 # Build rule for subdir invocation for target.
@@ -2502,7 +2502,7 @@ network_source: source_modules/network_source/CMakeFiles/network_source.dir/rule
 # codegen rule for target.
 source_modules/network_source/CMakeFiles/network_source.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f source_modules/network_source/CMakeFiles/network_source.dir/build.make source_modules/network_source/CMakeFiles/network_source.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=64 "Finished codegen for target network_source"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num= "Finished codegen for target network_source"
 .PHONY : source_modules/network_source/CMakeFiles/network_source.dir/codegen
 
 # clean rule for target.
@@ -2518,12 +2518,12 @@ source_modules/rfspace_source/CMakeFiles/rfspace_source.dir/all: core/CMakeFiles
 source_modules/rfspace_source/CMakeFiles/rfspace_source.dir/all: core/libcorrect/CMakeFiles/correct_static.dir/all
 	$(MAKE) $(MAKESILENT) -f source_modules/rfspace_source/CMakeFiles/rfspace_source.dir/build.make source_modules/rfspace_source/CMakeFiles/rfspace_source.dir/depend
 	$(MAKE) $(MAKESILENT) -f source_modules/rfspace_source/CMakeFiles/rfspace_source.dir/build.make source_modules/rfspace_source/CMakeFiles/rfspace_source.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num= "Built target rfspace_source"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=71 "Built target rfspace_source"
 .PHONY : source_modules/rfspace_source/CMakeFiles/rfspace_source.dir/all
 
 # Build rule for subdir invocation for target.
 source_modules/rfspace_source/CMakeFiles/rfspace_source.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 21
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 23
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 source_modules/rfspace_source/CMakeFiles/rfspace_source.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 0
 .PHONY : source_modules/rfspace_source/CMakeFiles/rfspace_source.dir/rule
@@ -2535,7 +2535,7 @@ rfspace_source: source_modules/rfspace_source/CMakeFiles/rfspace_source.dir/rule
 # codegen rule for target.
 source_modules/rfspace_source/CMakeFiles/rfspace_source.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f source_modules/rfspace_source/CMakeFiles/rfspace_source.dir/build.make source_modules/rfspace_source/CMakeFiles/rfspace_source.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num= "Finished codegen for target rfspace_source"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=71 "Finished codegen for target rfspace_source"
 .PHONY : source_modules/rfspace_source/CMakeFiles/rfspace_source.dir/codegen
 
 # clean rule for target.
@@ -2556,7 +2556,7 @@ source_modules/rtl_sdr_source/CMakeFiles/rtl_sdr_source.dir/all: core/libcorrect
 
 # Build rule for subdir invocation for target.
 source_modules/rtl_sdr_source/CMakeFiles/rtl_sdr_source.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 22
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 23
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 source_modules/rtl_sdr_source/CMakeFiles/rtl_sdr_source.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 0
 .PHONY : source_modules/rtl_sdr_source/CMakeFiles/rtl_sdr_source.dir/rule
@@ -2584,7 +2584,7 @@ source_modules/rtl_tcp_source/CMakeFiles/rtl_tcp_source.dir/all: core/CMakeFiles
 source_modules/rtl_tcp_source/CMakeFiles/rtl_tcp_source.dir/all: core/libcorrect/CMakeFiles/correct_static.dir/all
 	$(MAKE) $(MAKESILENT) -f source_modules/rtl_tcp_source/CMakeFiles/rtl_tcp_source.dir/build.make source_modules/rtl_tcp_source/CMakeFiles/rtl_tcp_source.dir/depend
 	$(MAKE) $(MAKESILENT) -f source_modules/rtl_tcp_source/CMakeFiles/rtl_tcp_source.dir/build.make source_modules/rtl_tcp_source/CMakeFiles/rtl_tcp_source.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=74 "Built target rtl_tcp_source"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num= "Built target rtl_tcp_source"
 .PHONY : source_modules/rtl_tcp_source/CMakeFiles/rtl_tcp_source.dir/all
 
 # Build rule for subdir invocation for target.
@@ -2601,7 +2601,7 @@ rtl_tcp_source: source_modules/rtl_tcp_source/CMakeFiles/rtl_tcp_source.dir/rule
 # codegen rule for target.
 source_modules/rtl_tcp_source/CMakeFiles/rtl_tcp_source.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f source_modules/rtl_tcp_source/CMakeFiles/rtl_tcp_source.dir/build.make source_modules/rtl_tcp_source/CMakeFiles/rtl_tcp_source.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=74 "Finished codegen for target rtl_tcp_source"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num= "Finished codegen for target rtl_tcp_source"
 .PHONY : source_modules/rtl_tcp_source/CMakeFiles/rtl_tcp_source.dir/codegen
 
 # clean rule for target.
@@ -2622,7 +2622,7 @@ source_modules/sdrpp_server_source/CMakeFiles/sdrpp_server_source.dir/all: core/
 
 # Build rule for subdir invocation for target.
 source_modules/sdrpp_server_source/CMakeFiles/sdrpp_server_source.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 22
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 23
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 source_modules/sdrpp_server_source/CMakeFiles/sdrpp_server_source.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 0
 .PHONY : source_modules/sdrpp_server_source/CMakeFiles/sdrpp_server_source.dir/rule
@@ -2650,12 +2650,12 @@ source_modules/spectran_http_source/CMakeFiles/spectran_http_source.dir/all: cor
 source_modules/spectran_http_source/CMakeFiles/spectran_http_source.dir/all: core/libcorrect/CMakeFiles/correct_static.dir/all
 	$(MAKE) $(MAKESILENT) -f source_modules/spectran_http_source/CMakeFiles/spectran_http_source.dir/build.make source_modules/spectran_http_source/CMakeFiles/spectran_http_source.dir/depend
 	$(MAKE) $(MAKESILENT) -f source_modules/spectran_http_source/CMakeFiles/spectran_http_source.dir/build.make source_modules/spectran_http_source/CMakeFiles/spectran_http_source.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num= "Built target spectran_http_source"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=94 "Built target spectran_http_source"
 .PHONY : source_modules/spectran_http_source/CMakeFiles/spectran_http_source.dir/all
 
 # Build rule for subdir invocation for target.
 source_modules/spectran_http_source/CMakeFiles/spectran_http_source.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 21
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 23
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 source_modules/spectran_http_source/CMakeFiles/spectran_http_source.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 0
 .PHONY : source_modules/spectran_http_source/CMakeFiles/spectran_http_source.dir/rule
@@ -2667,7 +2667,7 @@ spectran_http_source: source_modules/spectran_http_source/CMakeFiles/spectran_ht
 # codegen rule for target.
 source_modules/spectran_http_source/CMakeFiles/spectran_http_source.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f source_modules/spectran_http_source/CMakeFiles/spectran_http_source.dir/build.make source_modules/spectran_http_source/CMakeFiles/spectran_http_source.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num= "Finished codegen for target spectran_http_source"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=94 "Finished codegen for target spectran_http_source"
 .PHONY : source_modules/spectran_http_source/CMakeFiles/spectran_http_source.dir/codegen
 
 # clean rule for target.
@@ -2688,7 +2688,7 @@ source_modules/spyserver_source/CMakeFiles/spyserver_source.dir/all: core/libcor
 
 # Build rule for subdir invocation for target.
 source_modules/spyserver_source/CMakeFiles/spyserver_source.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 22
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 23
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 source_modules/spyserver_source/CMakeFiles/spyserver_source.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 0
 .PHONY : source_modules/spyserver_source/CMakeFiles/spyserver_source.dir/rule
@@ -2716,7 +2716,7 @@ source_modules/hl2_source/CMakeFiles/hl2_source.dir/all: core/CMakeFiles/sdrpp_c
 source_modules/hl2_source/CMakeFiles/hl2_source.dir/all: core/libcorrect/CMakeFiles/correct_static.dir/all
 	$(MAKE) $(MAKESILENT) -f source_modules/hl2_source/CMakeFiles/hl2_source.dir/build.make source_modules/hl2_source/CMakeFiles/hl2_source.dir/depend
 	$(MAKE) $(MAKESILENT) -f source_modules/hl2_source/CMakeFiles/hl2_source.dir/build.make source_modules/hl2_source/CMakeFiles/hl2_source.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=32,33 "Built target hl2_source"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=32 "Built target hl2_source"
 .PHONY : source_modules/hl2_source/CMakeFiles/hl2_source.dir/all
 
 # Build rule for subdir invocation for target.
@@ -2733,7 +2733,7 @@ hl2_source: source_modules/hl2_source/CMakeFiles/hl2_source.dir/rule
 # codegen rule for target.
 source_modules/hl2_source/CMakeFiles/hl2_source.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f source_modules/hl2_source/CMakeFiles/hl2_source.dir/build.make source_modules/hl2_source/CMakeFiles/hl2_source.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=32,33 "Finished codegen for target hl2_source"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=32 "Finished codegen for target hl2_source"
 .PHONY : source_modules/hl2_source/CMakeFiles/hl2_source.dir/codegen
 
 # clean rule for target.
@@ -2749,7 +2749,7 @@ source_modules/kiwisdr_source/CMakeFiles/kiwisdr_source.dir/all: core/CMakeFiles
 source_modules/kiwisdr_source/CMakeFiles/kiwisdr_source.dir/all: core/libcorrect/CMakeFiles/correct_static.dir/all
 	$(MAKE) $(MAKESILENT) -f source_modules/kiwisdr_source/CMakeFiles/kiwisdr_source.dir/build.make source_modules/kiwisdr_source/CMakeFiles/kiwisdr_source.dir/depend
 	$(MAKE) $(MAKESILENT) -f source_modules/kiwisdr_source/CMakeFiles/kiwisdr_source.dir/build.make source_modules/kiwisdr_source/CMakeFiles/kiwisdr_source.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=59 "Built target kiwisdr_source"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num= "Built target kiwisdr_source"
 .PHONY : source_modules/kiwisdr_source/CMakeFiles/kiwisdr_source.dir/all
 
 # Build rule for subdir invocation for target.
@@ -2766,7 +2766,7 @@ kiwisdr_source: source_modules/kiwisdr_source/CMakeFiles/kiwisdr_source.dir/rule
 # codegen rule for target.
 source_modules/kiwisdr_source/CMakeFiles/kiwisdr_source.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f source_modules/kiwisdr_source/CMakeFiles/kiwisdr_source.dir/build.make source_modules/kiwisdr_source/CMakeFiles/kiwisdr_source.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=59 "Finished codegen for target kiwisdr_source"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num= "Finished codegen for target kiwisdr_source"
 .PHONY : source_modules/kiwisdr_source/CMakeFiles/kiwisdr_source.dir/codegen
 
 # clean rule for target.
@@ -2782,12 +2782,12 @@ sink_modules/macos_coreaudio_sink/CMakeFiles/macos_coreaudio_sink.dir/all: core/
 sink_modules/macos_coreaudio_sink/CMakeFiles/macos_coreaudio_sink.dir/all: core/libcorrect/CMakeFiles/correct_static.dir/all
 	$(MAKE) $(MAKESILENT) -f sink_modules/macos_coreaudio_sink/CMakeFiles/macos_coreaudio_sink.dir/build.make sink_modules/macos_coreaudio_sink/CMakeFiles/macos_coreaudio_sink.dir/depend
 	$(MAKE) $(MAKESILENT) -f sink_modules/macos_coreaudio_sink/CMakeFiles/macos_coreaudio_sink.dir/build.make sink_modules/macos_coreaudio_sink/CMakeFiles/macos_coreaudio_sink.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num= "Built target macos_coreaudio_sink"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=59 "Built target macos_coreaudio_sink"
 .PHONY : sink_modules/macos_coreaudio_sink/CMakeFiles/macos_coreaudio_sink.dir/all
 
 # Build rule for subdir invocation for target.
 sink_modules/macos_coreaudio_sink/CMakeFiles/macos_coreaudio_sink.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 21
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 23
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 sink_modules/macos_coreaudio_sink/CMakeFiles/macos_coreaudio_sink.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 0
 .PHONY : sink_modules/macos_coreaudio_sink/CMakeFiles/macos_coreaudio_sink.dir/rule
@@ -2799,7 +2799,7 @@ macos_coreaudio_sink: sink_modules/macos_coreaudio_sink/CMakeFiles/macos_coreaud
 # codegen rule for target.
 sink_modules/macos_coreaudio_sink/CMakeFiles/macos_coreaudio_sink.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f sink_modules/macos_coreaudio_sink/CMakeFiles/macos_coreaudio_sink.dir/build.make sink_modules/macos_coreaudio_sink/CMakeFiles/macos_coreaudio_sink.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num= "Finished codegen for target macos_coreaudio_sink"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=59 "Finished codegen for target macos_coreaudio_sink"
 .PHONY : sink_modules/macos_coreaudio_sink/CMakeFiles/macos_coreaudio_sink.dir/codegen
 
 # clean rule for target.
@@ -2820,7 +2820,7 @@ sink_modules/network_sink/CMakeFiles/network_sink.dir/all: core/libcorrect/CMake
 
 # Build rule for subdir invocation for target.
 sink_modules/network_sink/CMakeFiles/network_sink.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 21
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 22
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 sink_modules/network_sink/CMakeFiles/network_sink.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 0
 .PHONY : sink_modules/network_sink/CMakeFiles/network_sink.dir/rule
@@ -2853,7 +2853,7 @@ sink_modules/mpeg_adts_sink/CMakeFiles/mpeg_adts_sink.dir/all: core/libcorrect/C
 
 # Build rule for subdir invocation for target.
 sink_modules/mpeg_adts_sink/CMakeFiles/mpeg_adts_sink.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 22
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 23
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 sink_modules/mpeg_adts_sink/CMakeFiles/mpeg_adts_sink.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 0
 .PHONY : sink_modules/mpeg_adts_sink/CMakeFiles/mpeg_adts_sink.dir/rule
@@ -2881,12 +2881,12 @@ sink_modules/new_portaudio_sink/CMakeFiles/new_portaudio_sink.dir/all: core/CMak
 sink_modules/new_portaudio_sink/CMakeFiles/new_portaudio_sink.dir/all: core/libcorrect/CMakeFiles/correct_static.dir/all
 	$(MAKE) $(MAKESILENT) -f sink_modules/new_portaudio_sink/CMakeFiles/new_portaudio_sink.dir/build.make sink_modules/new_portaudio_sink/CMakeFiles/new_portaudio_sink.dir/depend
 	$(MAKE) $(MAKESILENT) -f sink_modules/new_portaudio_sink/CMakeFiles/new_portaudio_sink.dir/build.make sink_modules/new_portaudio_sink/CMakeFiles/new_portaudio_sink.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num= "Built target new_portaudio_sink"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=64 "Built target new_portaudio_sink"
 .PHONY : sink_modules/new_portaudio_sink/CMakeFiles/new_portaudio_sink.dir/all
 
 # Build rule for subdir invocation for target.
 sink_modules/new_portaudio_sink/CMakeFiles/new_portaudio_sink.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 21
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 23
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 sink_modules/new_portaudio_sink/CMakeFiles/new_portaudio_sink.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 0
 .PHONY : sink_modules/new_portaudio_sink/CMakeFiles/new_portaudio_sink.dir/rule
@@ -2898,7 +2898,7 @@ new_portaudio_sink: sink_modules/new_portaudio_sink/CMakeFiles/new_portaudio_sin
 # codegen rule for target.
 sink_modules/new_portaudio_sink/CMakeFiles/new_portaudio_sink.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f sink_modules/new_portaudio_sink/CMakeFiles/new_portaudio_sink.dir/build.make sink_modules/new_portaudio_sink/CMakeFiles/new_portaudio_sink.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num= "Finished codegen for target new_portaudio_sink"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=64 "Finished codegen for target new_portaudio_sink"
 .PHONY : sink_modules/new_portaudio_sink/CMakeFiles/new_portaudio_sink.dir/codegen
 
 # clean rule for target.
@@ -2914,7 +2914,7 @@ sink_modules/null_audio_sink/CMakeFiles/null_audio_sink.dir/all: core/CMakeFiles
 sink_modules/null_audio_sink/CMakeFiles/null_audio_sink.dir/all: core/libcorrect/CMakeFiles/correct_static.dir/all
 	$(MAKE) $(MAKESILENT) -f sink_modules/null_audio_sink/CMakeFiles/null_audio_sink.dir/build.make sink_modules/null_audio_sink/CMakeFiles/null_audio_sink.dir/depend
 	$(MAKE) $(MAKESILENT) -f sink_modules/null_audio_sink/CMakeFiles/null_audio_sink.dir/build.make sink_modules/null_audio_sink/CMakeFiles/null_audio_sink.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=67 "Built target null_audio_sink"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num= "Built target null_audio_sink"
 .PHONY : sink_modules/null_audio_sink/CMakeFiles/null_audio_sink.dir/all
 
 # Build rule for subdir invocation for target.
@@ -2931,7 +2931,7 @@ null_audio_sink: sink_modules/null_audio_sink/CMakeFiles/null_audio_sink.dir/rul
 # codegen rule for target.
 sink_modules/null_audio_sink/CMakeFiles/null_audio_sink.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f sink_modules/null_audio_sink/CMakeFiles/null_audio_sink.dir/build.make sink_modules/null_audio_sink/CMakeFiles/null_audio_sink.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=67 "Finished codegen for target null_audio_sink"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num= "Finished codegen for target null_audio_sink"
 .PHONY : sink_modules/null_audio_sink/CMakeFiles/null_audio_sink.dir/codegen
 
 # clean rule for target.
@@ -2952,7 +2952,7 @@ decoder_modules/atv_decoder/CMakeFiles/atv_decoder.dir/all: core/libcorrect/CMak
 
 # Build rule for subdir invocation for target.
 decoder_modules/atv_decoder/CMakeFiles/atv_decoder.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 22
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 23
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 decoder_modules/atv_decoder/CMakeFiles/atv_decoder.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 0
 .PHONY : decoder_modules/atv_decoder/CMakeFiles/atv_decoder.dir/rule
@@ -2987,7 +2987,7 @@ decoder_modules/ch_extravhf_decoder/CMakeFiles/ch_extravhf_decoder.dir/all: mbel
 
 # Build rule for subdir invocation for target.
 decoder_modules/ch_extravhf_decoder/CMakeFiles/ch_extravhf_decoder.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 50
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 51
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 decoder_modules/ch_extravhf_decoder/CMakeFiles/ch_extravhf_decoder.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 0
 .PHONY : decoder_modules/ch_extravhf_decoder/CMakeFiles/ch_extravhf_decoder.dir/rule
@@ -3181,7 +3181,7 @@ decoder_modules/ch_tetra_demodulator/CMakeFiles/ch_tetra_demodulator.dir/all: de
 
 # Build rule for subdir invocation for target.
 decoder_modules/ch_tetra_demodulator/CMakeFiles/ch_tetra_demodulator.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 31
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 32
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 decoder_modules/ch_tetra_demodulator/CMakeFiles/ch_tetra_demodulator.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 0
 .PHONY : decoder_modules/ch_tetra_demodulator/CMakeFiles/ch_tetra_demodulator.dir/rule
@@ -3214,7 +3214,7 @@ decoder_modules/ft8_decoder/CMakeFiles/ft8_decoder.dir/all: core/libcorrect/CMak
 
 # Build rule for subdir invocation for target.
 decoder_modules/ft8_decoder/CMakeFiles/ft8_decoder.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 27
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 28
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 decoder_modules/ft8_decoder/CMakeFiles/ft8_decoder.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 0
 .PHONY : decoder_modules/ft8_decoder/CMakeFiles/ft8_decoder.dir/rule
@@ -3247,7 +3247,7 @@ decoder_modules/meteor_demodulator/CMakeFiles/meteor_demodulator.dir/all: core/l
 
 # Build rule for subdir invocation for target.
 decoder_modules/meteor_demodulator/CMakeFiles/meteor_demodulator.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 21
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 22
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 decoder_modules/meteor_demodulator/CMakeFiles/meteor_demodulator.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 0
 .PHONY : decoder_modules/meteor_demodulator/CMakeFiles/meteor_demodulator.dir/rule
@@ -3275,12 +3275,12 @@ decoder_modules/pager_decoder/CMakeFiles/pager_decoder.dir/all: core/CMakeFiles/
 decoder_modules/pager_decoder/CMakeFiles/pager_decoder.dir/all: core/libcorrect/CMakeFiles/correct_static.dir/all
 	$(MAKE) $(MAKESILENT) -f decoder_modules/pager_decoder/CMakeFiles/pager_decoder.dir/build.make decoder_modules/pager_decoder/CMakeFiles/pager_decoder.dir/depend
 	$(MAKE) $(MAKESILENT) -f decoder_modules/pager_decoder/CMakeFiles/pager_decoder.dir/build.make decoder_modules/pager_decoder/CMakeFiles/pager_decoder.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=68 "Built target pager_decoder"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=67 "Built target pager_decoder"
 .PHONY : decoder_modules/pager_decoder/CMakeFiles/pager_decoder.dir/all
 
 # Build rule for subdir invocation for target.
 decoder_modules/pager_decoder/CMakeFiles/pager_decoder.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 22
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 23
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 decoder_modules/pager_decoder/CMakeFiles/pager_decoder.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 0
 .PHONY : decoder_modules/pager_decoder/CMakeFiles/pager_decoder.dir/rule
@@ -3292,7 +3292,7 @@ pager_decoder: decoder_modules/pager_decoder/CMakeFiles/pager_decoder.dir/rule
 # codegen rule for target.
 decoder_modules/pager_decoder/CMakeFiles/pager_decoder.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f decoder_modules/pager_decoder/CMakeFiles/pager_decoder.dir/build.make decoder_modules/pager_decoder/CMakeFiles/pager_decoder.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=68 "Finished codegen for target pager_decoder"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=67 "Finished codegen for target pager_decoder"
 .PHONY : decoder_modules/pager_decoder/CMakeFiles/pager_decoder.dir/codegen
 
 # clean rule for target.
@@ -3308,12 +3308,12 @@ decoder_modules/radio/CMakeFiles/radio.dir/all: core/CMakeFiles/sdrpp_core.dir/a
 decoder_modules/radio/CMakeFiles/radio.dir/all: core/libcorrect/CMakeFiles/correct_static.dir/all
 	$(MAKE) $(MAKESILENT) -f decoder_modules/radio/CMakeFiles/radio.dir/build.make decoder_modules/radio/CMakeFiles/radio.dir/depend
 	$(MAKE) $(MAKESILENT) -f decoder_modules/radio/CMakeFiles/radio.dir/build.make decoder_modules/radio/CMakeFiles/radio.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num= "Built target radio"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=68 "Built target radio"
 .PHONY : decoder_modules/radio/CMakeFiles/radio.dir/all
 
 # Build rule for subdir invocation for target.
 decoder_modules/radio/CMakeFiles/radio.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 21
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 23
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 decoder_modules/radio/CMakeFiles/radio.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 0
 .PHONY : decoder_modules/radio/CMakeFiles/radio.dir/rule
@@ -3325,7 +3325,7 @@ radio: decoder_modules/radio/CMakeFiles/radio.dir/rule
 # codegen rule for target.
 decoder_modules/radio/CMakeFiles/radio.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f decoder_modules/radio/CMakeFiles/radio.dir/build.make decoder_modules/radio/CMakeFiles/radio.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num= "Finished codegen for target radio"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=68 "Finished codegen for target radio"
 .PHONY : decoder_modules/radio/CMakeFiles/radio.dir/codegen
 
 # clean rule for target.
@@ -3347,7 +3347,7 @@ misc_modules/discord_integration/CMakeFiles/discord_integration.dir/all: misc_mo
 
 # Build rule for subdir invocation for target.
 misc_modules/discord_integration/CMakeFiles/discord_integration.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 23
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 24
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 misc_modules/discord_integration/CMakeFiles/discord_integration.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 0
 .PHONY : misc_modules/discord_integration/CMakeFiles/discord_integration.dir/rule
@@ -3412,7 +3412,7 @@ misc_modules/frequency_manager/CMakeFiles/frequency_manager.dir/all: core/libcor
 
 # Build rule for subdir invocation for target.
 misc_modules/frequency_manager/CMakeFiles/frequency_manager.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 22
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 23
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 misc_modules/frequency_manager/CMakeFiles/frequency_manager.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 0
 .PHONY : misc_modules/frequency_manager/CMakeFiles/frequency_manager.dir/rule
@@ -3440,12 +3440,12 @@ misc_modules/iq_exporter/CMakeFiles/iq_exporter.dir/all: core/CMakeFiles/sdrpp_c
 misc_modules/iq_exporter/CMakeFiles/iq_exporter.dir/all: core/libcorrect/CMakeFiles/correct_static.dir/all
 	$(MAKE) $(MAKESILENT) -f misc_modules/iq_exporter/CMakeFiles/iq_exporter.dir/build.make misc_modules/iq_exporter/CMakeFiles/iq_exporter.dir/depend
 	$(MAKE) $(MAKESILENT) -f misc_modules/iq_exporter/CMakeFiles/iq_exporter.dir/build.make misc_modules/iq_exporter/CMakeFiles/iq_exporter.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num= "Built target iq_exporter"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=33 "Built target iq_exporter"
 .PHONY : misc_modules/iq_exporter/CMakeFiles/iq_exporter.dir/all
 
 # Build rule for subdir invocation for target.
 misc_modules/iq_exporter/CMakeFiles/iq_exporter.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 21
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 23
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 misc_modules/iq_exporter/CMakeFiles/iq_exporter.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 0
 .PHONY : misc_modules/iq_exporter/CMakeFiles/iq_exporter.dir/rule
@@ -3457,7 +3457,7 @@ iq_exporter: misc_modules/iq_exporter/CMakeFiles/iq_exporter.dir/rule
 # codegen rule for target.
 misc_modules/iq_exporter/CMakeFiles/iq_exporter.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f misc_modules/iq_exporter/CMakeFiles/iq_exporter.dir/build.make misc_modules/iq_exporter/CMakeFiles/iq_exporter.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num= "Finished codegen for target iq_exporter"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=33 "Finished codegen for target iq_exporter"
 .PHONY : misc_modules/iq_exporter/CMakeFiles/iq_exporter.dir/codegen
 
 # clean rule for target.
@@ -3473,7 +3473,7 @@ misc_modules/recorder/CMakeFiles/recorder.dir/all: core/CMakeFiles/sdrpp_core.di
 misc_modules/recorder/CMakeFiles/recorder.dir/all: core/libcorrect/CMakeFiles/correct_static.dir/all
 	$(MAKE) $(MAKESILENT) -f misc_modules/recorder/CMakeFiles/recorder.dir/build.make misc_modules/recorder/CMakeFiles/recorder.dir/depend
 	$(MAKE) $(MAKESILENT) -f misc_modules/recorder/CMakeFiles/recorder.dir/build.make misc_modules/recorder/CMakeFiles/recorder.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=69 "Built target recorder"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num= "Built target recorder"
 .PHONY : misc_modules/recorder/CMakeFiles/recorder.dir/all
 
 # Build rule for subdir invocation for target.
@@ -3490,7 +3490,7 @@ recorder: misc_modules/recorder/CMakeFiles/recorder.dir/rule
 # codegen rule for target.
 misc_modules/recorder/CMakeFiles/recorder.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f misc_modules/recorder/CMakeFiles/recorder.dir/build.make misc_modules/recorder/CMakeFiles/recorder.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=69 "Finished codegen for target recorder"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num= "Finished codegen for target recorder"
 .PHONY : misc_modules/recorder/CMakeFiles/recorder.dir/codegen
 
 # clean rule for target.
@@ -3506,7 +3506,7 @@ misc_modules/rigctl_client/CMakeFiles/rigctl_client.dir/all: core/CMakeFiles/sdr
 misc_modules/rigctl_client/CMakeFiles/rigctl_client.dir/all: core/libcorrect/CMakeFiles/correct_static.dir/all
 	$(MAKE) $(MAKESILENT) -f misc_modules/rigctl_client/CMakeFiles/rigctl_client.dir/build.make misc_modules/rigctl_client/CMakeFiles/rigctl_client.dir/depend
 	$(MAKE) $(MAKESILENT) -f misc_modules/rigctl_client/CMakeFiles/rigctl_client.dir/build.make misc_modules/rigctl_client/CMakeFiles/rigctl_client.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=72 "Built target rigctl_client"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num= "Built target rigctl_client"
 .PHONY : misc_modules/rigctl_client/CMakeFiles/rigctl_client.dir/all
 
 # Build rule for subdir invocation for target.
@@ -3523,7 +3523,7 @@ rigctl_client: misc_modules/rigctl_client/CMakeFiles/rigctl_client.dir/rule
 # codegen rule for target.
 misc_modules/rigctl_client/CMakeFiles/rigctl_client.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f misc_modules/rigctl_client/CMakeFiles/rigctl_client.dir/build.make misc_modules/rigctl_client/CMakeFiles/rigctl_client.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=72 "Finished codegen for target rigctl_client"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num= "Finished codegen for target rigctl_client"
 .PHONY : misc_modules/rigctl_client/CMakeFiles/rigctl_client.dir/codegen
 
 # clean rule for target.
@@ -3539,12 +3539,12 @@ misc_modules/rigctl_server/CMakeFiles/rigctl_server.dir/all: core/CMakeFiles/sdr
 misc_modules/rigctl_server/CMakeFiles/rigctl_server.dir/all: core/libcorrect/CMakeFiles/correct_static.dir/all
 	$(MAKE) $(MAKESILENT) -f misc_modules/rigctl_server/CMakeFiles/rigctl_server.dir/build.make misc_modules/rigctl_server/CMakeFiles/rigctl_server.dir/depend
 	$(MAKE) $(MAKESILENT) -f misc_modules/rigctl_server/CMakeFiles/rigctl_server.dir/build.make misc_modules/rigctl_server/CMakeFiles/rigctl_server.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num= "Built target rigctl_server"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=72 "Built target rigctl_server"
 .PHONY : misc_modules/rigctl_server/CMakeFiles/rigctl_server.dir/all
 
 # Build rule for subdir invocation for target.
 misc_modules/rigctl_server/CMakeFiles/rigctl_server.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 21
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 23
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 misc_modules/rigctl_server/CMakeFiles/rigctl_server.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 0
 .PHONY : misc_modules/rigctl_server/CMakeFiles/rigctl_server.dir/rule
@@ -3556,7 +3556,7 @@ rigctl_server: misc_modules/rigctl_server/CMakeFiles/rigctl_server.dir/rule
 # codegen rule for target.
 misc_modules/rigctl_server/CMakeFiles/rigctl_server.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f misc_modules/rigctl_server/CMakeFiles/rigctl_server.dir/build.make misc_modules/rigctl_server/CMakeFiles/rigctl_server.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num= "Finished codegen for target rigctl_server"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=72 "Finished codegen for target rigctl_server"
 .PHONY : misc_modules/rigctl_server/CMakeFiles/rigctl_server.dir/codegen
 
 # clean rule for target.
@@ -3577,7 +3577,7 @@ misc_modules/tci_server/CMakeFiles/tci_server.dir/all: core/libcorrect/CMakeFile
 
 # Build rule for subdir invocation for target.
 misc_modules/tci_server/CMakeFiles/tci_server.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 21
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 22
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 misc_modules/tci_server/CMakeFiles/tci_server.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 0
 .PHONY : misc_modules/tci_server/CMakeFiles/tci_server.dir/rule
@@ -3610,7 +3610,7 @@ misc_modules/websdr_view/CMakeFiles/websdr_view.dir/all: core/libcorrect/CMakeFi
 
 # Build rule for subdir invocation for target.
 misc_modules/websdr_view/CMakeFiles/websdr_view.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 22
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 23
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 misc_modules/websdr_view/CMakeFiles/websdr_view.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 0
 .PHONY : misc_modules/websdr_view/CMakeFiles/websdr_view.dir/rule
@@ -3638,7 +3638,7 @@ misc_modules/reports_monitor/CMakeFiles/reports_monitor.dir/all: core/CMakeFiles
 misc_modules/reports_monitor/CMakeFiles/reports_monitor.dir/all: core/libcorrect/CMakeFiles/correct_static.dir/all
 	$(MAKE) $(MAKESILENT) -f misc_modules/reports_monitor/CMakeFiles/reports_monitor.dir/build.make misc_modules/reports_monitor/CMakeFiles/reports_monitor.dir/depend
 	$(MAKE) $(MAKESILENT) -f misc_modules/reports_monitor/CMakeFiles/reports_monitor.dir/build.make misc_modules/reports_monitor/CMakeFiles/reports_monitor.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=71 "Built target reports_monitor"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num= "Built target reports_monitor"
 .PHONY : misc_modules/reports_monitor/CMakeFiles/reports_monitor.dir/all
 
 # Build rule for subdir invocation for target.
@@ -3655,7 +3655,7 @@ reports_monitor: misc_modules/reports_monitor/CMakeFiles/reports_monitor.dir/rul
 # codegen rule for target.
 misc_modules/reports_monitor/CMakeFiles/reports_monitor.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f misc_modules/reports_monitor/CMakeFiles/reports_monitor.dir/build.make misc_modules/reports_monitor/CMakeFiles/reports_monitor.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=71 "Finished codegen for target reports_monitor"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num= "Finished codegen for target reports_monitor"
 .PHONY : misc_modules/reports_monitor/CMakeFiles/reports_monitor.dir/codegen
 
 # clean rule for target.
@@ -3671,12 +3671,12 @@ misc_modules/scanner/CMakeFiles/scanner.dir/all: core/CMakeFiles/sdrpp_core.dir/
 misc_modules/scanner/CMakeFiles/scanner.dir/all: core/libcorrect/CMakeFiles/correct_static.dir/all
 	$(MAKE) $(MAKESILENT) -f misc_modules/scanner/CMakeFiles/scanner.dir/build.make misc_modules/scanner/CMakeFiles/scanner.dir/depend
 	$(MAKE) $(MAKESILENT) -f misc_modules/scanner/CMakeFiles/scanner.dir/build.make misc_modules/scanner/CMakeFiles/scanner.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num= "Built target scanner"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=74 "Built target scanner"
 .PHONY : misc_modules/scanner/CMakeFiles/scanner.dir/all
 
 # Build rule for subdir invocation for target.
 misc_modules/scanner/CMakeFiles/scanner.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 21
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 23
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 misc_modules/scanner/CMakeFiles/scanner.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 0
 .PHONY : misc_modules/scanner/CMakeFiles/scanner.dir/rule
@@ -3688,7 +3688,7 @@ scanner: misc_modules/scanner/CMakeFiles/scanner.dir/rule
 # codegen rule for target.
 misc_modules/scanner/CMakeFiles/scanner.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f misc_modules/scanner/CMakeFiles/scanner.dir/build.make misc_modules/scanner/CMakeFiles/scanner.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num= "Finished codegen for target scanner"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=74 "Finished codegen for target scanner"
 .PHONY : misc_modules/scanner/CMakeFiles/scanner.dir/codegen
 
 # clean rule for target.
@@ -3704,7 +3704,7 @@ misc_modules/spectrum_analyzer/CMakeFiles/spectrum_analyzer.dir/all: core/CMakeF
 misc_modules/spectrum_analyzer/CMakeFiles/spectrum_analyzer.dir/all: core/libcorrect/CMakeFiles/correct_static.dir/all
 	$(MAKE) $(MAKESILENT) -f misc_modules/spectrum_analyzer/CMakeFiles/spectrum_analyzer.dir/build.make misc_modules/spectrum_analyzer/CMakeFiles/spectrum_analyzer.dir/depend
 	$(MAKE) $(MAKESILENT) -f misc_modules/spectrum_analyzer/CMakeFiles/spectrum_analyzer.dir/build.make misc_modules/spectrum_analyzer/CMakeFiles/spectrum_analyzer.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=94,95,96,97,98 "Built target spectrum_analyzer"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=95,96,97,98 "Built target spectrum_analyzer"
 .PHONY : misc_modules/spectrum_analyzer/CMakeFiles/spectrum_analyzer.dir/all
 
 # Build rule for subdir invocation for target.
@@ -3721,7 +3721,7 @@ spectrum_analyzer: misc_modules/spectrum_analyzer/CMakeFiles/spectrum_analyzer.d
 # codegen rule for target.
 misc_modules/spectrum_analyzer/CMakeFiles/spectrum_analyzer.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f misc_modules/spectrum_analyzer/CMakeFiles/spectrum_analyzer.dir/build.make misc_modules/spectrum_analyzer/CMakeFiles/spectrum_analyzer.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=94,95,96,97,98 "Finished codegen for target spectrum_analyzer"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=95,96,97,98 "Finished codegen for target spectrum_analyzer"
 .PHONY : misc_modules/spectrum_analyzer/CMakeFiles/spectrum_analyzer.dir/codegen
 
 # clean rule for target.
@@ -3742,7 +3742,7 @@ misc_modules/noise_reduction_logmmse/CMakeFiles/noise_reduction_logmmse.dir/all:
 
 # Build rule for subdir invocation for target.
 misc_modules/noise_reduction_logmmse/CMakeFiles/noise_reduction_logmmse.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 23
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 24
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 misc_modules/noise_reduction_logmmse/CMakeFiles/noise_reduction_logmmse.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles 0
 .PHONY : misc_modules/noise_reduction_logmmse/CMakeFiles/noise_reduction_logmmse.dir/rule

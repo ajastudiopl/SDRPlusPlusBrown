@@ -76,6 +76,11 @@
 },
 {
   "directory": "/work/android/app/.cxx/cmake/debug/arm64-v8a",
+  "command": "/root/Android/ndk/25.2.9519653/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android28 --sysroot=/root/Android/ndk/25.2.9519653/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DFLOG_ANDROID_TAG=\\\"SDR++\\\" -DINSTALL_PREFIX=\\\"/usr\\\" -DSDRPP_IS_CORE -Dsdrpp_core_EXPORTS -I/work/core/src -I/work/core/src/imgui -I/work/core/backends/android -I/work/core/backends/android/imgui -I/work/core/libcorrect/include -I/sdr-kit/arm64-v8a/include -I/root/Android/ndk/25.2.9519653/sources/android/native_app_glue -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -O3 -DNDEBUG  -fPIC -Wno-deprecated-declarations -O3 -std=c++17 -Wno-unused-command-line-argument -Wno-deprecated-register -undefined dynamic_lookup -o core/CMakeFiles/sdrpp_core.dir/src/gui/brown/band_panel.cpp.o -c /work/core/src/gui/brown/band_panel.cpp",
+  "file": "/work/core/src/gui/brown/band_panel.cpp"
+},
+{
+  "directory": "/work/android/app/.cxx/cmake/debug/arm64-v8a",
   "command": "/root/Android/ndk/25.2.9519653/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android28 --sysroot=/root/Android/ndk/25.2.9519653/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DFLOG_ANDROID_TAG=\\\"SDR++\\\" -DINSTALL_PREFIX=\\\"/usr\\\" -DSDRPP_IS_CORE -Dsdrpp_core_EXPORTS -I/work/core/src -I/work/core/src/imgui -I/work/core/backends/android -I/work/core/backends/android/imgui -I/work/core/libcorrect/include -I/sdr-kit/arm64-v8a/include -I/root/Android/ndk/25.2.9519653/sources/android/native_app_glue -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -O3 -DNDEBUG  -fPIC -Wno-deprecated-declarations -O3 -std=c++17 -Wno-unused-command-line-argument -Wno-deprecated-register -undefined dynamic_lookup -o core/CMakeFiles/sdrpp_core.dir/src/gui/brown/geomap.cpp.o -c /work/core/src/gui/brown/geomap.cpp",
   "file": "/work/core/src/gui/brown/geomap.cpp"
 },
@@ -91,8 +96,18 @@
 },
 {
   "directory": "/work/android/app/.cxx/cmake/debug/arm64-v8a",
+  "command": "/root/Android/ndk/25.2.9519653/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android28 --sysroot=/root/Android/ndk/25.2.9519653/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DFLOG_ANDROID_TAG=\\\"SDR++\\\" -DINSTALL_PREFIX=\\\"/usr\\\" -DSDRPP_IS_CORE -Dsdrpp_core_EXPORTS -I/work/core/src -I/work/core/src/imgui -I/work/core/backends/android -I/work/core/backends/android/imgui -I/work/core/libcorrect/include -I/sdr-kit/arm64-v8a/include -I/root/Android/ndk/25.2.9519653/sources/android/native_app_glue -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -O3 -DNDEBUG  -fPIC -Wno-deprecated-declarations -O3 -std=c++17 -Wno-unused-command-line-argument -Wno-deprecated-register -undefined dynamic_lookup -o core/CMakeFiles/sdrpp_core.dir/src/gui/brown/narrow_zoom.cpp.o -c /work/core/src/gui/brown/narrow_zoom.cpp",
+  "file": "/work/core/src/gui/brown/narrow_zoom.cpp"
+},
+{
+  "directory": "/work/android/app/.cxx/cmake/debug/arm64-v8a",
   "command": "/root/Android/ndk/25.2.9519653/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android28 --sysroot=/root/Android/ndk/25.2.9519653/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DFLOG_ANDROID_TAG=\\\"SDR++\\\" -DINSTALL_PREFIX=\\\"/usr\\\" -DSDRPP_IS_CORE -Dsdrpp_core_EXPORTS -I/work/core/src -I/work/core/src/imgui -I/work/core/backends/android -I/work/core/backends/android/imgui -I/work/core/libcorrect/include -I/sdr-kit/arm64-v8a/include -I/root/Android/ndk/25.2.9519653/sources/android/native_app_glue -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -O3 -DNDEBUG  -fPIC -Wno-deprecated-declarations -O3 -std=c++17 -Wno-unused-command-line-argument -Wno-deprecated-register -undefined dynamic_lookup -o core/CMakeFiles/sdrpp_core.dir/src/gui/brown/small_waterfall.cpp.o -c /work/core/src/gui/brown/small_waterfall.cpp",
   "file": "/work/core/src/gui/brown/small_waterfall.cpp"
+},
+{
+  "directory": "/work/android/app/.cxx/cmake/debug/arm64-v8a",
+  "command": "/root/Android/ndk/25.2.9519653/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android28 --sysroot=/root/Android/ndk/25.2.9519653/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DFLOG_ANDROID_TAG=\\\"SDR++\\\" -DINSTALL_PREFIX=\\\"/usr\\\" -DSDRPP_IS_CORE -Dsdrpp_core_EXPORTS -I/work/core/src -I/work/core/src/imgui -I/work/core/backends/android -I/work/core/backends/android/imgui -I/work/core/libcorrect/include -I/sdr-kit/arm64-v8a/include -I/root/Android/ndk/25.2.9519653/sources/android/native_app_glue -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -O3 -DNDEBUG  -fPIC -Wno-deprecated-declarations -O3 -std=c++17 -Wno-unused-command-line-argument -Wno-deprecated-register -undefined dynamic_lookup -o core/CMakeFiles/sdrpp_core.dir/src/gui/brown/wide_overview.cpp.o -c /work/core/src/gui/brown/wide_overview.cpp",
+  "file": "/work/core/src/gui/brown/wide_overview.cpp"
 },
 {
   "directory": "/work/android/app/.cxx/cmake/debug/arm64-v8a",

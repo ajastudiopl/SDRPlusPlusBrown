@@ -559,6 +559,30 @@ src/gui/brown/audio_player.cpp.s:
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64 && $(MAKE) $(MAKESILENT) -f core/CMakeFiles/sdrpp_core.dir/build.make core/CMakeFiles/sdrpp_core.dir/src/gui/brown/audio_player.cpp.s
 .PHONY : src/gui/brown/audio_player.cpp.s
 
+src/gui/brown/band_panel.o: src/gui/brown/band_panel.cpp.o
+.PHONY : src/gui/brown/band_panel.o
+
+# target to build an object file
+src/gui/brown/band_panel.cpp.o:
+	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64 && $(MAKE) $(MAKESILENT) -f core/CMakeFiles/sdrpp_core.dir/build.make core/CMakeFiles/sdrpp_core.dir/src/gui/brown/band_panel.cpp.o
+.PHONY : src/gui/brown/band_panel.cpp.o
+
+src/gui/brown/band_panel.i: src/gui/brown/band_panel.cpp.i
+.PHONY : src/gui/brown/band_panel.i
+
+# target to preprocess a source file
+src/gui/brown/band_panel.cpp.i:
+	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64 && $(MAKE) $(MAKESILENT) -f core/CMakeFiles/sdrpp_core.dir/build.make core/CMakeFiles/sdrpp_core.dir/src/gui/brown/band_panel.cpp.i
+.PHONY : src/gui/brown/band_panel.cpp.i
+
+src/gui/brown/band_panel.s: src/gui/brown/band_panel.cpp.s
+.PHONY : src/gui/brown/band_panel.s
+
+# target to generate assembly for a file
+src/gui/brown/band_panel.cpp.s:
+	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64 && $(MAKE) $(MAKESILENT) -f core/CMakeFiles/sdrpp_core.dir/build.make core/CMakeFiles/sdrpp_core.dir/src/gui/brown/band_panel.cpp.s
+.PHONY : src/gui/brown/band_panel.cpp.s
+
 src/gui/brown/geomap.o: src/gui/brown/geomap.cpp.o
 .PHONY : src/gui/brown/geomap.o
 
@@ -630,6 +654,30 @@ src/gui/brown/mobile_main_window.s: src/gui/brown/mobile_main_window.cpp.s
 src/gui/brown/mobile_main_window.cpp.s:
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64 && $(MAKE) $(MAKESILENT) -f core/CMakeFiles/sdrpp_core.dir/build.make core/CMakeFiles/sdrpp_core.dir/src/gui/brown/mobile_main_window.cpp.s
 .PHONY : src/gui/brown/mobile_main_window.cpp.s
+
+src/gui/brown/narrow_zoom.o: src/gui/brown/narrow_zoom.cpp.o
+.PHONY : src/gui/brown/narrow_zoom.o
+
+# target to build an object file
+src/gui/brown/narrow_zoom.cpp.o:
+	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64 && $(MAKE) $(MAKESILENT) -f core/CMakeFiles/sdrpp_core.dir/build.make core/CMakeFiles/sdrpp_core.dir/src/gui/brown/narrow_zoom.cpp.o
+.PHONY : src/gui/brown/narrow_zoom.cpp.o
+
+src/gui/brown/narrow_zoom.i: src/gui/brown/narrow_zoom.cpp.i
+.PHONY : src/gui/brown/narrow_zoom.i
+
+# target to preprocess a source file
+src/gui/brown/narrow_zoom.cpp.i:
+	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64 && $(MAKE) $(MAKESILENT) -f core/CMakeFiles/sdrpp_core.dir/build.make core/CMakeFiles/sdrpp_core.dir/src/gui/brown/narrow_zoom.cpp.i
+.PHONY : src/gui/brown/narrow_zoom.cpp.i
+
+src/gui/brown/narrow_zoom.s: src/gui/brown/narrow_zoom.cpp.s
+.PHONY : src/gui/brown/narrow_zoom.s
+
+# target to generate assembly for a file
+src/gui/brown/narrow_zoom.cpp.s:
+	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64 && $(MAKE) $(MAKESILENT) -f core/CMakeFiles/sdrpp_core.dir/build.make core/CMakeFiles/sdrpp_core.dir/src/gui/brown/narrow_zoom.cpp.s
+.PHONY : src/gui/brown/narrow_zoom.cpp.s
 
 src/gui/brown/small_waterfall.o: src/gui/brown/small_waterfall.cpp.o
 .PHONY : src/gui/brown/small_waterfall.o
@@ -2180,6 +2228,9 @@ help:
 	@echo "... src/gui/brown/audio_player.o"
 	@echo "... src/gui/brown/audio_player.i"
 	@echo "... src/gui/brown/audio_player.s"
+	@echo "... src/gui/brown/band_panel.o"
+	@echo "... src/gui/brown/band_panel.i"
+	@echo "... src/gui/brown/band_panel.s"
 	@echo "... src/gui/brown/geomap.o"
 	@echo "... src/gui/brown/geomap.i"
 	@echo "... src/gui/brown/geomap.s"
@@ -2189,6 +2240,9 @@ help:
 	@echo "... src/gui/brown/mobile_main_window.o"
 	@echo "... src/gui/brown/mobile_main_window.i"
 	@echo "... src/gui/brown/mobile_main_window.s"
+	@echo "... src/gui/brown/narrow_zoom.o"
+	@echo "... src/gui/brown/narrow_zoom.i"
+	@echo "... src/gui/brown/narrow_zoom.s"
 	@echo "... src/gui/brown/small_waterfall.o"
 	@echo "... src/gui/brown/small_waterfall.i"
 	@echo "... src/gui/brown/small_waterfall.s"

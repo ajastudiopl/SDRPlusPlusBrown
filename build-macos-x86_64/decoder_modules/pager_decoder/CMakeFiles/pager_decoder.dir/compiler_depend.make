@@ -985,6 +985,7 @@ decoder_modules/pager_decoder/CMakeFiles/pager_decoder.dir/src/main.cpp.o: /User
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/dsp/taps/tap.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/dsp/types.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/main_window.h \
+  /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/brown/band_panel.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/brown/mobile_main_window.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/dialogs/loading_screen.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/gui.h \
@@ -1085,6 +1086,7 @@ decoder_modules/pager_decoder/CMakeFiles/pager_decoder.dir/src/main.cpp.o: /User
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/utils/opengl_include_code.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/utils/optionlist.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/utils/usleep.h \
+  /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/misc_modules/frequency_manager/src/frequency_manager.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/decoder_modules/pager_decoder/src/decoder.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/decoder_modules/pager_decoder/src/decoder.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/decoder_modules/pager_decoder/src/flex/decoder.h \
@@ -1899,6 +1901,8 @@ decoder_modules/pager_decoder/CMakeFiles/pager_decoder.dir/src/pocsag/pocsag.cpp
 
 /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/decoder_modules/pager_decoder/src/decoder.h:
 
+/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/misc_modules/frequency_manager/src/frequency_manager.h:
+
 /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/utils/optionlist.h:
 
 /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/utils/flog.h:
@@ -1984,6 +1988,8 @@ decoder_modules/pager_decoder/CMakeFiles/pager_decoder.dir/src/pocsag/pocsag.cpp
 /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/gui.h:
 
 /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/brown/mobile_main_window.h:
+
+/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/brown/band_panel.h:
 
 /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/main_window.h:
 

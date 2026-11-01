@@ -12199,3 +12199,588 @@ events:
         
       exitCode: 0
 ...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/local/share/cmake/Modules/FindOpenMP.cmake:334 (try_compile)"
+      - "/usr/local/share/cmake/Modules/FindOpenMP.cmake:642 (_OPENMP_GET_FLAGS)"
+      - "build-macos-x86_64/itpp/CMakeLists.txt:86 (find_package)"
+    description: "Detecting C OpenMP compiler info"
+    directories:
+      source: "/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles/CMakeScratch/TryCompile-cY10kv"
+      binary: "/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles/CMakeScratch/TryCompile-cY10kv"
+    cmakeVariables:
+      CMAKE_CXX_STDLIB_MODULES_JSON: ""
+      CMAKE_C_FLAGS: ""
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_LINK_SEARCH_START_STATIC: "ON"
+      CMAKE_MODULE_PATH: "/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/itpp/cmake/Modules/;/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/itpp/cmake"
+      CMAKE_OSX_ARCHITECTURES: "x86_64"
+      CMAKE_OSX_DEPLOYMENT_TARGET: ""
+      CMAKE_OSX_SYSROOT: ""
+    buildResult:
+      variable: "OpenMP_COMPILE_RESULT_C_Xclang fopenmp"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles/CMakeScratch/TryCompile-cY10kv'
+        
+        Run Build Command(s): /usr/local/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_558e0/fast
+        /Applications/Xcode.app/Contents/Developer/usr/bin/make  -f CMakeFiles/cmTC_558e0.dir/build.make CMakeFiles/cmTC_558e0.dir/build
+        Building C object CMakeFiles/cmTC_558e0.dir/OpenMPTryFlag.c.o
+        /usr/bin/cc   -Xclang -fopenmp -arch x86_64 -MD -MT CMakeFiles/cmTC_558e0.dir/OpenMPTryFlag.c.o -MF CMakeFiles/cmTC_558e0.dir/OpenMPTryFlag.c.o.d -o CMakeFiles/cmTC_558e0.dir/OpenMPTryFlag.c.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles/CMakeScratch/TryCompile-cY10kv/OpenMPTryFlag.c
+        /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles/CMakeScratch/TryCompile-cY10kv/OpenMPTryFlag.c:2:10: fatal error: 'omp.h' file not found
+            2 | #include <omp.h>
+              |          ^~~~~~~
+        1 error generated.
+        make[1]: *** [CMakeFiles/cmTC_558e0.dir/OpenMPTryFlag.c.o] Error 1
+        make: *** [cmTC_558e0/fast] Error 2
+        
+      exitCode: 2
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/local/share/cmake/Modules/FindOpenMP.cmake:334 (try_compile)"
+      - "/usr/local/share/cmake/Modules/FindOpenMP.cmake:642 (_OPENMP_GET_FLAGS)"
+      - "build-macos-x86_64/itpp/CMakeLists.txt:86 (find_package)"
+    description: "Detecting CXX OpenMP compiler info"
+    directories:
+      source: "/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles/CMakeScratch/TryCompile-kshjgS"
+      binary: "/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles/CMakeScratch/TryCompile-kshjgS"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_STDLIB_MODULES_JSON: ""
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_LINK_SEARCH_START_STATIC: "ON"
+      CMAKE_MODULE_PATH: "/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/itpp/cmake/Modules/;/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/itpp/cmake"
+      CMAKE_OSX_ARCHITECTURES: "x86_64"
+      CMAKE_OSX_DEPLOYMENT_TARGET: ""
+      CMAKE_OSX_SYSROOT: ""
+    buildResult:
+      variable: "OpenMP_COMPILE_RESULT_CXX_Xclang fopenmp"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles/CMakeScratch/TryCompile-kshjgS'
+        
+        Run Build Command(s): /usr/local/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_1e764/fast
+        /Applications/Xcode.app/Contents/Developer/usr/bin/make  -f CMakeFiles/cmTC_1e764.dir/build.make CMakeFiles/cmTC_1e764.dir/build
+        Building CXX object CMakeFiles/cmTC_1e764.dir/OpenMPTryFlag.cpp.o
+        /usr/bin/c++   -Xclang -fopenmp -arch x86_64 -MD -MT CMakeFiles/cmTC_1e764.dir/OpenMPTryFlag.cpp.o -MF CMakeFiles/cmTC_1e764.dir/OpenMPTryFlag.cpp.o.d -o CMakeFiles/cmTC_1e764.dir/OpenMPTryFlag.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles/CMakeScratch/TryCompile-kshjgS/OpenMPTryFlag.cpp
+        /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles/CMakeScratch/TryCompile-kshjgS/OpenMPTryFlag.cpp:2:10: fatal error: 'omp.h' file not found
+            2 | #include <omp.h>
+              |          ^~~~~~~
+        1 error generated.
+        make[1]: *** [CMakeFiles/cmTC_1e764.dir/OpenMPTryFlag.cpp.o] Error 1
+        make: *** [cmTC_1e764/fast] Error 2
+        
+      exitCode: 2
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "build-macos-x86_64/itpp/cmake/Modules/CheckCXXFunctionExists.cmake:48 (TRY_COMPILE)"
+      - "build-macos-x86_64/itpp/CMakeLists.txt:148 (CHECK_CXX_FUNCTION_EXISTS)"
+    directories:
+      source: "/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles/CMakeTmp"
+      binary: "/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_STDLIB_MODULES_JSON: ""
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_LINK_SEARCH_START_STATIC: "ON"
+      CMAKE_MODULE_PATH: "/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/itpp/cmake/Modules/;/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/itpp/cmake"
+      CMAKE_OSX_ARCHITECTURES: "x86_64"
+      CMAKE_OSX_DEPLOYMENT_TARGET: ""
+      CMAKE_OSX_SYSROOT: ""
+    buildResult:
+      variable: "HAVE_STD_ISFINITE"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): /usr/local/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_bffa6/fast
+        /Applications/Xcode.app/Contents/Developer/usr/bin/make  -f CMakeFiles/cmTC_bffa6.dir/build.make CMakeFiles/cmTC_bffa6.dir/build
+        Building CXX object CMakeFiles/cmTC_bffa6.dir/CheckFunctionExists.cpp.o
+        /usr/bin/c++   -DCHECK_FUNCTION_EXISTS=std::isfinite -arch x86_64 -MD -MT CMakeFiles/cmTC_bffa6.dir/CheckFunctionExists.cpp.o -MF CMakeFiles/cmTC_bffa6.dir/CheckFunctionExists.cpp.o.d -o CMakeFiles/cmTC_bffa6.dir/CheckFunctionExists.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/itpp/cmake/Modules/CheckFunctionExists.cpp
+        /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/itpp/cmake/Modules/CheckFunctionExists.cpp:15:3: warning: ignoring return value of function declared with 'nodiscard' attribute [-Wunused-result]
+           15 |   CHECK_FUNCTION_EXISTS(arg);
+              |   ^~~~~~~~~~~~~~~~~~~~~ ~~~
+        <command line>:1:31: note: expanded from macro 'CHECK_FUNCTION_EXISTS'
+            1 | #define CHECK_FUNCTION_EXISTS std::isfinite
+              |                               ^~~~~~~~~~~~~
+        1 warning generated.
+        Linking CXX executable cmTC_bffa6
+        /usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_bffa6.dir/link.txt --verbose=1
+        /usr/bin/c++  -DCHECK_FUNCTION_EXISTS=std::isfinite -arch x86_64 CMakeFiles/cmTC_bffa6.dir/CheckFunctionExists.cpp.o -o cmTC_bffa6  -lm
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "build-macos-x86_64/itpp/cmake/Modules/CheckCXXFunctionExists.cmake:48 (TRY_COMPILE)"
+      - "build-macos-x86_64/itpp/CMakeLists.txt:149 (CHECK_CXX_FUNCTION_EXISTS)"
+    directories:
+      source: "/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles/CMakeTmp"
+      binary: "/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_STDLIB_MODULES_JSON: ""
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_LINK_SEARCH_START_STATIC: "ON"
+      CMAKE_MODULE_PATH: "/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/itpp/cmake/Modules/;/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/itpp/cmake"
+      CMAKE_OSX_ARCHITECTURES: "x86_64"
+      CMAKE_OSX_DEPLOYMENT_TARGET: ""
+      CMAKE_OSX_SYSROOT: ""
+    buildResult:
+      variable: "HAVE_STD_ISINF"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): /usr/local/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_6ce05/fast
+        /Applications/Xcode.app/Contents/Developer/usr/bin/make  -f CMakeFiles/cmTC_6ce05.dir/build.make CMakeFiles/cmTC_6ce05.dir/build
+        Building CXX object CMakeFiles/cmTC_6ce05.dir/CheckFunctionExists.cpp.o
+        /usr/bin/c++   -DCHECK_FUNCTION_EXISTS=std::isinf -arch x86_64 -MD -MT CMakeFiles/cmTC_6ce05.dir/CheckFunctionExists.cpp.o -MF CMakeFiles/cmTC_6ce05.dir/CheckFunctionExists.cpp.o.d -o CMakeFiles/cmTC_6ce05.dir/CheckFunctionExists.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/itpp/cmake/Modules/CheckFunctionExists.cpp
+        /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/itpp/cmake/Modules/CheckFunctionExists.cpp:15:3: warning: ignoring return value of function declared with 'nodiscard' attribute [-Wunused-result]
+           15 |   CHECK_FUNCTION_EXISTS(arg);
+              |   ^~~~~~~~~~~~~~~~~~~~~ ~~~
+        <command line>:1:31: note: expanded from macro 'CHECK_FUNCTION_EXISTS'
+            1 | #define CHECK_FUNCTION_EXISTS std::isinf
+              |                               ^~~~~~~~~~
+        1 warning generated.
+        Linking CXX executable cmTC_6ce05
+        /usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_6ce05.dir/link.txt --verbose=1
+        /usr/bin/c++  -DCHECK_FUNCTION_EXISTS=std::isinf -arch x86_64 CMakeFiles/cmTC_6ce05.dir/CheckFunctionExists.cpp.o -o cmTC_6ce05  -lm
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "build-macos-x86_64/itpp/cmake/Modules/CheckCXXFunctionExists.cmake:48 (TRY_COMPILE)"
+      - "build-macos-x86_64/itpp/CMakeLists.txt:150 (CHECK_CXX_FUNCTION_EXISTS)"
+    directories:
+      source: "/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles/CMakeTmp"
+      binary: "/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_STDLIB_MODULES_JSON: ""
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_LINK_SEARCH_START_STATIC: "ON"
+      CMAKE_MODULE_PATH: "/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/itpp/cmake/Modules/;/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/itpp/cmake"
+      CMAKE_OSX_ARCHITECTURES: "x86_64"
+      CMAKE_OSX_DEPLOYMENT_TARGET: ""
+      CMAKE_OSX_SYSROOT: ""
+    buildResult:
+      variable: "HAVE_STD_ISNAN"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): /usr/local/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_10a53/fast
+        /Applications/Xcode.app/Contents/Developer/usr/bin/make  -f CMakeFiles/cmTC_10a53.dir/build.make CMakeFiles/cmTC_10a53.dir/build
+        Building CXX object CMakeFiles/cmTC_10a53.dir/CheckFunctionExists.cpp.o
+        /usr/bin/c++   -DCHECK_FUNCTION_EXISTS=std::isnan -arch x86_64 -MD -MT CMakeFiles/cmTC_10a53.dir/CheckFunctionExists.cpp.o -MF CMakeFiles/cmTC_10a53.dir/CheckFunctionExists.cpp.o.d -o CMakeFiles/cmTC_10a53.dir/CheckFunctionExists.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/itpp/cmake/Modules/CheckFunctionExists.cpp
+        /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/itpp/cmake/Modules/CheckFunctionExists.cpp:15:3: warning: ignoring return value of function declared with 'nodiscard' attribute [-Wunused-result]
+           15 |   CHECK_FUNCTION_EXISTS(arg);
+              |   ^~~~~~~~~~~~~~~~~~~~~ ~~~
+        <command line>:1:31: note: expanded from macro 'CHECK_FUNCTION_EXISTS'
+            1 | #define CHECK_FUNCTION_EXISTS std::isnan
+              |                               ^~~~~~~~~~
+        1 warning generated.
+        Linking CXX executable cmTC_10a53
+        /usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_10a53.dir/link.txt --verbose=1
+        /usr/bin/c++  -DCHECK_FUNCTION_EXISTS=std::isnan -arch x86_64 CMakeFiles/cmTC_10a53.dir/CheckFunctionExists.cpp.o -o cmTC_10a53  -lm
+        
+      exitCode: 0
+...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/local/share/cmake/Modules/FindOpenMP.cmake:334 (try_compile)"
+      - "/usr/local/share/cmake/Modules/FindOpenMP.cmake:642 (_OPENMP_GET_FLAGS)"
+      - "build-macos-x86_64/itpp/CMakeLists.txt:86 (find_package)"
+    description: "Detecting C OpenMP compiler info"
+    directories:
+      source: "/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles/CMakeScratch/TryCompile-vJThbn"
+      binary: "/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles/CMakeScratch/TryCompile-vJThbn"
+    cmakeVariables:
+      CMAKE_CXX_STDLIB_MODULES_JSON: ""
+      CMAKE_C_FLAGS: ""
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_LINK_SEARCH_START_STATIC: "ON"
+      CMAKE_MODULE_PATH: "/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/itpp/cmake/Modules/;/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/itpp/cmake"
+      CMAKE_OSX_ARCHITECTURES: "x86_64"
+      CMAKE_OSX_DEPLOYMENT_TARGET: ""
+      CMAKE_OSX_SYSROOT: ""
+    buildResult:
+      variable: "OpenMP_COMPILE_RESULT_C_Xclang fopenmp"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles/CMakeScratch/TryCompile-vJThbn'
+        
+        Run Build Command(s): /usr/local/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_8d32e/fast
+        /Applications/Xcode.app/Contents/Developer/usr/bin/make  -f CMakeFiles/cmTC_8d32e.dir/build.make CMakeFiles/cmTC_8d32e.dir/build
+        Building C object CMakeFiles/cmTC_8d32e.dir/OpenMPTryFlag.c.o
+        /usr/bin/cc   -Xclang -fopenmp -arch x86_64 -MD -MT CMakeFiles/cmTC_8d32e.dir/OpenMPTryFlag.c.o -MF CMakeFiles/cmTC_8d32e.dir/OpenMPTryFlag.c.o.d -o CMakeFiles/cmTC_8d32e.dir/OpenMPTryFlag.c.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles/CMakeScratch/TryCompile-vJThbn/OpenMPTryFlag.c
+        /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles/CMakeScratch/TryCompile-vJThbn/OpenMPTryFlag.c:2:10: fatal error: 'omp.h' file not found
+            2 | #include <omp.h>
+              |          ^~~~~~~
+        1 error generated.
+        make[1]: *** [CMakeFiles/cmTC_8d32e.dir/OpenMPTryFlag.c.o] Error 1
+        make: *** [cmTC_8d32e/fast] Error 2
+        
+      exitCode: 2
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/local/share/cmake/Modules/FindOpenMP.cmake:334 (try_compile)"
+      - "/usr/local/share/cmake/Modules/FindOpenMP.cmake:642 (_OPENMP_GET_FLAGS)"
+      - "build-macos-x86_64/itpp/CMakeLists.txt:86 (find_package)"
+    description: "Detecting CXX OpenMP compiler info"
+    directories:
+      source: "/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles/CMakeScratch/TryCompile-EA34Wz"
+      binary: "/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles/CMakeScratch/TryCompile-EA34Wz"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_STDLIB_MODULES_JSON: ""
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_LINK_SEARCH_START_STATIC: "ON"
+      CMAKE_MODULE_PATH: "/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/itpp/cmake/Modules/;/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/itpp/cmake"
+      CMAKE_OSX_ARCHITECTURES: "x86_64"
+      CMAKE_OSX_DEPLOYMENT_TARGET: ""
+      CMAKE_OSX_SYSROOT: ""
+    buildResult:
+      variable: "OpenMP_COMPILE_RESULT_CXX_Xclang fopenmp"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles/CMakeScratch/TryCompile-EA34Wz'
+        
+        Run Build Command(s): /usr/local/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_9793f/fast
+        /Applications/Xcode.app/Contents/Developer/usr/bin/make  -f CMakeFiles/cmTC_9793f.dir/build.make CMakeFiles/cmTC_9793f.dir/build
+        Building CXX object CMakeFiles/cmTC_9793f.dir/OpenMPTryFlag.cpp.o
+        /usr/bin/c++   -Xclang -fopenmp -arch x86_64 -MD -MT CMakeFiles/cmTC_9793f.dir/OpenMPTryFlag.cpp.o -MF CMakeFiles/cmTC_9793f.dir/OpenMPTryFlag.cpp.o.d -o CMakeFiles/cmTC_9793f.dir/OpenMPTryFlag.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles/CMakeScratch/TryCompile-EA34Wz/OpenMPTryFlag.cpp
+        /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles/CMakeScratch/TryCompile-EA34Wz/OpenMPTryFlag.cpp:2:10: fatal error: 'omp.h' file not found
+            2 | #include <omp.h>
+              |          ^~~~~~~
+        1 error generated.
+        make[1]: *** [CMakeFiles/cmTC_9793f.dir/OpenMPTryFlag.cpp.o] Error 1
+        make: *** [cmTC_9793f/fast] Error 2
+        
+      exitCode: 2
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "build-macos-x86_64/itpp/cmake/Modules/CheckCXXFunctionExists.cmake:48 (TRY_COMPILE)"
+      - "build-macos-x86_64/itpp/CMakeLists.txt:148 (CHECK_CXX_FUNCTION_EXISTS)"
+    directories:
+      source: "/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles/CMakeTmp"
+      binary: "/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_STDLIB_MODULES_JSON: ""
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_LINK_SEARCH_START_STATIC: "ON"
+      CMAKE_MODULE_PATH: "/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/itpp/cmake/Modules/;/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/itpp/cmake"
+      CMAKE_OSX_ARCHITECTURES: "x86_64"
+      CMAKE_OSX_DEPLOYMENT_TARGET: ""
+      CMAKE_OSX_SYSROOT: ""
+    buildResult:
+      variable: "HAVE_STD_ISFINITE"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): /usr/local/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_d31e5/fast
+        /Applications/Xcode.app/Contents/Developer/usr/bin/make  -f CMakeFiles/cmTC_d31e5.dir/build.make CMakeFiles/cmTC_d31e5.dir/build
+        Building CXX object CMakeFiles/cmTC_d31e5.dir/CheckFunctionExists.cpp.o
+        /usr/bin/c++   -DCHECK_FUNCTION_EXISTS=std::isfinite -arch x86_64 -MD -MT CMakeFiles/cmTC_d31e5.dir/CheckFunctionExists.cpp.o -MF CMakeFiles/cmTC_d31e5.dir/CheckFunctionExists.cpp.o.d -o CMakeFiles/cmTC_d31e5.dir/CheckFunctionExists.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/itpp/cmake/Modules/CheckFunctionExists.cpp
+        /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/itpp/cmake/Modules/CheckFunctionExists.cpp:15:3: warning: ignoring return value of function declared with 'nodiscard' attribute [-Wunused-result]
+           15 |   CHECK_FUNCTION_EXISTS(arg);
+              |   ^~~~~~~~~~~~~~~~~~~~~ ~~~
+        <command line>:1:31: note: expanded from macro 'CHECK_FUNCTION_EXISTS'
+            1 | #define CHECK_FUNCTION_EXISTS std::isfinite
+              |                               ^~~~~~~~~~~~~
+        1 warning generated.
+        Linking CXX executable cmTC_d31e5
+        /usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d31e5.dir/link.txt --verbose=1
+        /usr/bin/c++  -DCHECK_FUNCTION_EXISTS=std::isfinite -arch x86_64 CMakeFiles/cmTC_d31e5.dir/CheckFunctionExists.cpp.o -o cmTC_d31e5  -lm
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "build-macos-x86_64/itpp/cmake/Modules/CheckCXXFunctionExists.cmake:48 (TRY_COMPILE)"
+      - "build-macos-x86_64/itpp/CMakeLists.txt:149 (CHECK_CXX_FUNCTION_EXISTS)"
+    directories:
+      source: "/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles/CMakeTmp"
+      binary: "/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_STDLIB_MODULES_JSON: ""
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_LINK_SEARCH_START_STATIC: "ON"
+      CMAKE_MODULE_PATH: "/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/itpp/cmake/Modules/;/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/itpp/cmake"
+      CMAKE_OSX_ARCHITECTURES: "x86_64"
+      CMAKE_OSX_DEPLOYMENT_TARGET: ""
+      CMAKE_OSX_SYSROOT: ""
+    buildResult:
+      variable: "HAVE_STD_ISINF"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): /usr/local/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_a5dde/fast
+        /Applications/Xcode.app/Contents/Developer/usr/bin/make  -f CMakeFiles/cmTC_a5dde.dir/build.make CMakeFiles/cmTC_a5dde.dir/build
+        Building CXX object CMakeFiles/cmTC_a5dde.dir/CheckFunctionExists.cpp.o
+        /usr/bin/c++   -DCHECK_FUNCTION_EXISTS=std::isinf -arch x86_64 -MD -MT CMakeFiles/cmTC_a5dde.dir/CheckFunctionExists.cpp.o -MF CMakeFiles/cmTC_a5dde.dir/CheckFunctionExists.cpp.o.d -o CMakeFiles/cmTC_a5dde.dir/CheckFunctionExists.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/itpp/cmake/Modules/CheckFunctionExists.cpp
+        /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/itpp/cmake/Modules/CheckFunctionExists.cpp:15:3: warning: ignoring return value of function declared with 'nodiscard' attribute [-Wunused-result]
+           15 |   CHECK_FUNCTION_EXISTS(arg);
+              |   ^~~~~~~~~~~~~~~~~~~~~ ~~~
+        <command line>:1:31: note: expanded from macro 'CHECK_FUNCTION_EXISTS'
+            1 | #define CHECK_FUNCTION_EXISTS std::isinf
+              |                               ^~~~~~~~~~
+        1 warning generated.
+        Linking CXX executable cmTC_a5dde
+        /usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_a5dde.dir/link.txt --verbose=1
+        /usr/bin/c++  -DCHECK_FUNCTION_EXISTS=std::isinf -arch x86_64 CMakeFiles/cmTC_a5dde.dir/CheckFunctionExists.cpp.o -o cmTC_a5dde  -lm
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "build-macos-x86_64/itpp/cmake/Modules/CheckCXXFunctionExists.cmake:48 (TRY_COMPILE)"
+      - "build-macos-x86_64/itpp/CMakeLists.txt:150 (CHECK_CXX_FUNCTION_EXISTS)"
+    directories:
+      source: "/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles/CMakeTmp"
+      binary: "/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_STDLIB_MODULES_JSON: ""
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_LINK_SEARCH_START_STATIC: "ON"
+      CMAKE_MODULE_PATH: "/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/itpp/cmake/Modules/;/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/itpp/cmake"
+      CMAKE_OSX_ARCHITECTURES: "x86_64"
+      CMAKE_OSX_DEPLOYMENT_TARGET: ""
+      CMAKE_OSX_SYSROOT: ""
+    buildResult:
+      variable: "HAVE_STD_ISNAN"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): /usr/local/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_b399a/fast
+        /Applications/Xcode.app/Contents/Developer/usr/bin/make  -f CMakeFiles/cmTC_b399a.dir/build.make CMakeFiles/cmTC_b399a.dir/build
+        Building CXX object CMakeFiles/cmTC_b399a.dir/CheckFunctionExists.cpp.o
+        /usr/bin/c++   -DCHECK_FUNCTION_EXISTS=std::isnan -arch x86_64 -MD -MT CMakeFiles/cmTC_b399a.dir/CheckFunctionExists.cpp.o -MF CMakeFiles/cmTC_b399a.dir/CheckFunctionExists.cpp.o.d -o CMakeFiles/cmTC_b399a.dir/CheckFunctionExists.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/itpp/cmake/Modules/CheckFunctionExists.cpp
+        /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/itpp/cmake/Modules/CheckFunctionExists.cpp:15:3: warning: ignoring return value of function declared with 'nodiscard' attribute [-Wunused-result]
+           15 |   CHECK_FUNCTION_EXISTS(arg);
+              |   ^~~~~~~~~~~~~~~~~~~~~ ~~~
+        <command line>:1:31: note: expanded from macro 'CHECK_FUNCTION_EXISTS'
+            1 | #define CHECK_FUNCTION_EXISTS std::isnan
+              |                               ^~~~~~~~~~
+        1 warning generated.
+        Linking CXX executable cmTC_b399a
+        /usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b399a.dir/link.txt --verbose=1
+        /usr/bin/c++  -DCHECK_FUNCTION_EXISTS=std::isnan -arch x86_64 CMakeFiles/cmTC_b399a.dir/CheckFunctionExists.cpp.o -o cmTC_b399a  -lm
+        
+      exitCode: 0
+...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/local/share/cmake/Modules/FindOpenMP.cmake:334 (try_compile)"
+      - "/usr/local/share/cmake/Modules/FindOpenMP.cmake:642 (_OPENMP_GET_FLAGS)"
+      - "build-macos-x86_64/itpp/CMakeLists.txt:86 (find_package)"
+    description: "Detecting C OpenMP compiler info"
+    directories:
+      source: "/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles/CMakeScratch/TryCompile-Y8nRTH"
+      binary: "/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles/CMakeScratch/TryCompile-Y8nRTH"
+    cmakeVariables:
+      CMAKE_CXX_STDLIB_MODULES_JSON: ""
+      CMAKE_C_FLAGS: ""
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_LINK_SEARCH_START_STATIC: "ON"
+      CMAKE_MODULE_PATH: "/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/itpp/cmake/Modules/;/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/itpp/cmake"
+      CMAKE_OSX_ARCHITECTURES: "x86_64"
+      CMAKE_OSX_DEPLOYMENT_TARGET: ""
+      CMAKE_OSX_SYSROOT: ""
+    buildResult:
+      variable: "OpenMP_COMPILE_RESULT_C_Xclang fopenmp"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles/CMakeScratch/TryCompile-Y8nRTH'
+        
+        Run Build Command(s): /usr/local/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_d977a/fast
+        /Applications/Xcode.app/Contents/Developer/usr/bin/make  -f CMakeFiles/cmTC_d977a.dir/build.make CMakeFiles/cmTC_d977a.dir/build
+        Building C object CMakeFiles/cmTC_d977a.dir/OpenMPTryFlag.c.o
+        /usr/bin/cc   -Xclang -fopenmp -arch x86_64 -MD -MT CMakeFiles/cmTC_d977a.dir/OpenMPTryFlag.c.o -MF CMakeFiles/cmTC_d977a.dir/OpenMPTryFlag.c.o.d -o CMakeFiles/cmTC_d977a.dir/OpenMPTryFlag.c.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles/CMakeScratch/TryCompile-Y8nRTH/OpenMPTryFlag.c
+        /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles/CMakeScratch/TryCompile-Y8nRTH/OpenMPTryFlag.c:2:10: fatal error: 'omp.h' file not found
+            2 | #include <omp.h>
+              |          ^~~~~~~
+        1 error generated.
+        make[1]: *** [CMakeFiles/cmTC_d977a.dir/OpenMPTryFlag.c.o] Error 1
+        make: *** [cmTC_d977a/fast] Error 2
+        
+      exitCode: 2
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/local/share/cmake/Modules/FindOpenMP.cmake:334 (try_compile)"
+      - "/usr/local/share/cmake/Modules/FindOpenMP.cmake:642 (_OPENMP_GET_FLAGS)"
+      - "build-macos-x86_64/itpp/CMakeLists.txt:86 (find_package)"
+    description: "Detecting CXX OpenMP compiler info"
+    directories:
+      source: "/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles/CMakeScratch/TryCompile-awGqrb"
+      binary: "/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles/CMakeScratch/TryCompile-awGqrb"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_STDLIB_MODULES_JSON: ""
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_LINK_SEARCH_START_STATIC: "ON"
+      CMAKE_MODULE_PATH: "/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/itpp/cmake/Modules/;/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/itpp/cmake"
+      CMAKE_OSX_ARCHITECTURES: "x86_64"
+      CMAKE_OSX_DEPLOYMENT_TARGET: ""
+      CMAKE_OSX_SYSROOT: ""
+    buildResult:
+      variable: "OpenMP_COMPILE_RESULT_CXX_Xclang fopenmp"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles/CMakeScratch/TryCompile-awGqrb'
+        
+        Run Build Command(s): /usr/local/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_08643/fast
+        /Applications/Xcode.app/Contents/Developer/usr/bin/make  -f CMakeFiles/cmTC_08643.dir/build.make CMakeFiles/cmTC_08643.dir/build
+        Building CXX object CMakeFiles/cmTC_08643.dir/OpenMPTryFlag.cpp.o
+        /usr/bin/c++   -Xclang -fopenmp -arch x86_64 -MD -MT CMakeFiles/cmTC_08643.dir/OpenMPTryFlag.cpp.o -MF CMakeFiles/cmTC_08643.dir/OpenMPTryFlag.cpp.o.d -o CMakeFiles/cmTC_08643.dir/OpenMPTryFlag.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles/CMakeScratch/TryCompile-awGqrb/OpenMPTryFlag.cpp
+        /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles/CMakeScratch/TryCompile-awGqrb/OpenMPTryFlag.cpp:2:10: fatal error: 'omp.h' file not found
+            2 | #include <omp.h>
+              |          ^~~~~~~
+        1 error generated.
+        make[1]: *** [CMakeFiles/cmTC_08643.dir/OpenMPTryFlag.cpp.o] Error 1
+        make: *** [cmTC_08643/fast] Error 2
+        
+      exitCode: 2
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "build-macos-x86_64/itpp/cmake/Modules/CheckCXXFunctionExists.cmake:48 (TRY_COMPILE)"
+      - "build-macos-x86_64/itpp/CMakeLists.txt:148 (CHECK_CXX_FUNCTION_EXISTS)"
+    directories:
+      source: "/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles/CMakeTmp"
+      binary: "/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_STDLIB_MODULES_JSON: ""
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_LINK_SEARCH_START_STATIC: "ON"
+      CMAKE_MODULE_PATH: "/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/itpp/cmake/Modules/;/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/itpp/cmake"
+      CMAKE_OSX_ARCHITECTURES: "x86_64"
+      CMAKE_OSX_DEPLOYMENT_TARGET: ""
+      CMAKE_OSX_SYSROOT: ""
+    buildResult:
+      variable: "HAVE_STD_ISFINITE"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): /usr/local/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_7c5e9/fast
+        /Applications/Xcode.app/Contents/Developer/usr/bin/make  -f CMakeFiles/cmTC_7c5e9.dir/build.make CMakeFiles/cmTC_7c5e9.dir/build
+        Building CXX object CMakeFiles/cmTC_7c5e9.dir/CheckFunctionExists.cpp.o
+        /usr/bin/c++   -DCHECK_FUNCTION_EXISTS=std::isfinite -arch x86_64 -MD -MT CMakeFiles/cmTC_7c5e9.dir/CheckFunctionExists.cpp.o -MF CMakeFiles/cmTC_7c5e9.dir/CheckFunctionExists.cpp.o.d -o CMakeFiles/cmTC_7c5e9.dir/CheckFunctionExists.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/itpp/cmake/Modules/CheckFunctionExists.cpp
+        /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/itpp/cmake/Modules/CheckFunctionExists.cpp:15:3: warning: ignoring return value of function declared with 'nodiscard' attribute [-Wunused-result]
+           15 |   CHECK_FUNCTION_EXISTS(arg);
+              |   ^~~~~~~~~~~~~~~~~~~~~ ~~~
+        <command line>:1:31: note: expanded from macro 'CHECK_FUNCTION_EXISTS'
+            1 | #define CHECK_FUNCTION_EXISTS std::isfinite
+              |                               ^~~~~~~~~~~~~
+        1 warning generated.
+        Linking CXX executable cmTC_7c5e9
+        /usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_7c5e9.dir/link.txt --verbose=1
+        /usr/bin/c++  -DCHECK_FUNCTION_EXISTS=std::isfinite -arch x86_64 CMakeFiles/cmTC_7c5e9.dir/CheckFunctionExists.cpp.o -o cmTC_7c5e9  -lm
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "build-macos-x86_64/itpp/cmake/Modules/CheckCXXFunctionExists.cmake:48 (TRY_COMPILE)"
+      - "build-macos-x86_64/itpp/CMakeLists.txt:149 (CHECK_CXX_FUNCTION_EXISTS)"
+    directories:
+      source: "/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles/CMakeTmp"
+      binary: "/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_STDLIB_MODULES_JSON: ""
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_LINK_SEARCH_START_STATIC: "ON"
+      CMAKE_MODULE_PATH: "/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/itpp/cmake/Modules/;/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/itpp/cmake"
+      CMAKE_OSX_ARCHITECTURES: "x86_64"
+      CMAKE_OSX_DEPLOYMENT_TARGET: ""
+      CMAKE_OSX_SYSROOT: ""
+    buildResult:
+      variable: "HAVE_STD_ISINF"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): /usr/local/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_8117f/fast
+        /Applications/Xcode.app/Contents/Developer/usr/bin/make  -f CMakeFiles/cmTC_8117f.dir/build.make CMakeFiles/cmTC_8117f.dir/build
+        Building CXX object CMakeFiles/cmTC_8117f.dir/CheckFunctionExists.cpp.o
+        /usr/bin/c++   -DCHECK_FUNCTION_EXISTS=std::isinf -arch x86_64 -MD -MT CMakeFiles/cmTC_8117f.dir/CheckFunctionExists.cpp.o -MF CMakeFiles/cmTC_8117f.dir/CheckFunctionExists.cpp.o.d -o CMakeFiles/cmTC_8117f.dir/CheckFunctionExists.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/itpp/cmake/Modules/CheckFunctionExists.cpp
+        /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/itpp/cmake/Modules/CheckFunctionExists.cpp:15:3: warning: ignoring return value of function declared with 'nodiscard' attribute [-Wunused-result]
+           15 |   CHECK_FUNCTION_EXISTS(arg);
+              |   ^~~~~~~~~~~~~~~~~~~~~ ~~~
+        <command line>:1:31: note: expanded from macro 'CHECK_FUNCTION_EXISTS'
+            1 | #define CHECK_FUNCTION_EXISTS std::isinf
+              |                               ^~~~~~~~~~
+        1 warning generated.
+        Linking CXX executable cmTC_8117f
+        /usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_8117f.dir/link.txt --verbose=1
+        /usr/bin/c++  -DCHECK_FUNCTION_EXISTS=std::isinf -arch x86_64 CMakeFiles/cmTC_8117f.dir/CheckFunctionExists.cpp.o -o cmTC_8117f  -lm
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "build-macos-x86_64/itpp/cmake/Modules/CheckCXXFunctionExists.cmake:48 (TRY_COMPILE)"
+      - "build-macos-x86_64/itpp/CMakeLists.txt:150 (CHECK_CXX_FUNCTION_EXISTS)"
+    directories:
+      source: "/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles/CMakeTmp"
+      binary: "/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_STDLIB_MODULES_JSON: ""
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_LINK_SEARCH_START_STATIC: "ON"
+      CMAKE_MODULE_PATH: "/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/itpp/cmake/Modules/;/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/itpp/cmake"
+      CMAKE_OSX_ARCHITECTURES: "x86_64"
+      CMAKE_OSX_DEPLOYMENT_TARGET: ""
+      CMAKE_OSX_SYSROOT: ""
+    buildResult:
+      variable: "HAVE_STD_ISNAN"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): /usr/local/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_22115/fast
+        /Applications/Xcode.app/Contents/Developer/usr/bin/make  -f CMakeFiles/cmTC_22115.dir/build.make CMakeFiles/cmTC_22115.dir/build
+        Building CXX object CMakeFiles/cmTC_22115.dir/CheckFunctionExists.cpp.o
+        /usr/bin/c++   -DCHECK_FUNCTION_EXISTS=std::isnan -arch x86_64 -MD -MT CMakeFiles/cmTC_22115.dir/CheckFunctionExists.cpp.o -MF CMakeFiles/cmTC_22115.dir/CheckFunctionExists.cpp.o.d -o CMakeFiles/cmTC_22115.dir/CheckFunctionExists.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/itpp/cmake/Modules/CheckFunctionExists.cpp
+        /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/itpp/cmake/Modules/CheckFunctionExists.cpp:15:3: warning: ignoring return value of function declared with 'nodiscard' attribute [-Wunused-result]
+           15 |   CHECK_FUNCTION_EXISTS(arg);
+              |   ^~~~~~~~~~~~~~~~~~~~~ ~~~
+        <command line>:1:31: note: expanded from macro 'CHECK_FUNCTION_EXISTS'
+            1 | #define CHECK_FUNCTION_EXISTS std::isnan
+              |                               ^~~~~~~~~~
+        1 warning generated.
+        Linking CXX executable cmTC_22115
+        /usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_22115.dir/link.txt --verbose=1
+        /usr/bin/c++  -DCHECK_FUNCTION_EXISTS=std::isnan -arch x86_64 CMakeFiles/cmTC_22115.dir/CheckFunctionExists.cpp.o -o cmTC_22115  -lm
+        
+      exitCode: 0
+...

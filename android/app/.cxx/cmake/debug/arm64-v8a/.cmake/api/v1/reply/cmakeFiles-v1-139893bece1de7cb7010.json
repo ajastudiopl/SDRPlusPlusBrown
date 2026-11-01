@@ -1,0 +1,835 @@
+{
+	"inputs" : 
+	[
+		{
+			"path" : "CMakeLists.txt"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "android/app/.cxx/cmake/debug/arm64-v8a/CMakeFiles/3.22.1/CMakeSystem.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/root/Android/ndk/25.2.9519653/build/cmake/android.toolchain.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/root/Android/ndk/25.2.9519653/build/cmake/android-legacy.toolchain.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/root/Android/ndk/25.2.9519653/build/cmake/platforms.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/CMakeSystemSpecificInitialize.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/Platform/Android-Initialize.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/root/Android/ndk/25.2.9519653/build/cmake/hooks/pre/Android-Initialize.cmake"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "android/app/.cxx/cmake/debug/arm64-v8a/CMakeFiles/3.22.1/CMakeCCompiler.cmake"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "android/app/.cxx/cmake/debug/arm64-v8a/CMakeFiles/3.22.1/CMakeCXXCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/CMakeSystemSpecificInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/CMakeGenericSystem.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/CMakeInitializeConfigs.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/Platform/Android.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/root/Android/ndk/25.2.9519653/build/cmake/hooks/pre/Android.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/Platform/Linux.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/Platform/UnixPaths.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/CMakeCInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/CMakeLanguageInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/Compiler/Clang-C.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/Compiler/Clang.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/Compiler/CMakeCommonCompilerMacros.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/Compiler/GNU.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/Compiler/CMakeCommonCompilerMacros.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/Platform/Android-Clang-C.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/Platform/Android-Clang.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/root/Android/ndk/25.2.9519653/build/cmake/hooks/pre/Android-Clang.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/root/Android/ndk/25.2.9519653/build/cmake/flags.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/CMakeCommonLanguageInclude.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/CMakeCXXInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/CMakeLanguageInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/Compiler/Clang-CXX.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/Compiler/Clang.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/Platform/Android-Clang-CXX.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/Platform/Android-Clang.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/CMakeCommonLanguageInclude.cmake"
+		},
+		{
+			"path" : "sdrpp_module.cmake"
+		},
+		{
+			"path" : "sdrpp.desktop"
+		},
+		{
+			"path" : "cmake_uninstall.cmake"
+		},
+		{
+			"path" : "core/CMakeLists.txt"
+		},
+		{
+			"path" : "core/libcorrect/CMakeLists.txt"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/CheckLibraryExists.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/CheckIncludeFiles.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/CheckCSourceCompiles.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/Internal/CheckSourceCompiles.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/CMakePushCheckState.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/CheckCCompilerFlag.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/CheckCSourceCompiles.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/Internal/CheckCompilerFlag.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/Internal/CheckSourceCompiles.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/CMakeCheckCompilerFlagCommonPatterns.cmake"
+		},
+		{
+			"path" : "core/libcorrect/src/CMakeLists.txt"
+		},
+		{
+			"path" : "core/libcorrect/src/convolutional/CMakeLists.txt"
+		},
+		{
+			"path" : "core/libcorrect/src/reed-solomon/CMakeLists.txt"
+		},
+		{
+			"path" : "core/libcorrect/util/CMakeLists.txt"
+		},
+		{
+			"path" : "core/libcorrect/tests/CMakeLists.txt"
+		},
+		{
+			"path" : "core/libcorrect/tools/CMakeLists.txt"
+		},
+		{
+			"path" : "source_modules/airspy_source/CMakeLists.txt"
+		},
+		{
+			"path" : "sdrpp_module.cmake"
+		},
+		{
+			"path" : "source_modules/airspyhf_source/CMakeLists.txt"
+		},
+		{
+			"path" : "sdrpp_module.cmake"
+		},
+		{
+			"path" : "source_modules/file_source/CMakeLists.txt"
+		},
+		{
+			"path" : "sdrpp_module.cmake"
+		},
+		{
+			"path" : "source_modules/hackrf_source/CMakeLists.txt"
+		},
+		{
+			"path" : "sdrpp_module.cmake"
+		},
+		{
+			"path" : "source_modules/hermes_source/CMakeLists.txt"
+		},
+		{
+			"path" : "sdrpp_module.cmake"
+		},
+		{
+			"path" : "source_modules/hydrasdr_source/CMakeLists.txt"
+		},
+		{
+			"path" : "sdrpp_module.cmake"
+		},
+		{
+			"path" : "source_modules/network_source/CMakeLists.txt"
+		},
+		{
+			"path" : "sdrpp_module.cmake"
+		},
+		{
+			"path" : "source_modules/plutosdr_source/CMakeLists.txt"
+		},
+		{
+			"path" : "sdrpp_module.cmake"
+		},
+		{
+			"path" : "source_modules/rfspace_source/CMakeLists.txt"
+		},
+		{
+			"path" : "sdrpp_module.cmake"
+		},
+		{
+			"path" : "source_modules/rtl_sdr_source/CMakeLists.txt"
+		},
+		{
+			"path" : "sdrpp_module.cmake"
+		},
+		{
+			"path" : "source_modules/rtl_tcp_source/CMakeLists.txt"
+		},
+		{
+			"path" : "sdrpp_module.cmake"
+		},
+		{
+			"path" : "source_modules/sdrpp_server_source/CMakeLists.txt"
+		},
+		{
+			"path" : "sdrpp_module.cmake"
+		},
+		{
+			"path" : "source_modules/spectran_http_source/CMakeLists.txt"
+		},
+		{
+			"path" : "sdrpp_module.cmake"
+		},
+		{
+			"path" : "source_modules/spyserver_source/CMakeLists.txt"
+		},
+		{
+			"path" : "sdrpp_module.cmake"
+		},
+		{
+			"path" : "source_modules/hl2_source/CMakeLists.txt"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/FindPkgConfig.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/FindPackageHandleStandardArgs.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/FindPackageMessage.cmake"
+		},
+		{
+			"path" : "source_modules/kiwisdr_source/CMakeLists.txt"
+		},
+		{
+			"path" : "sdrpp_module.cmake"
+		},
+		{
+			"path" : "sink_modules/android_audio_sink/CMakeLists.txt"
+		},
+		{
+			"path" : "sdrpp_module.cmake"
+		},
+		{
+			"path" : "sink_modules/network_sink/CMakeLists.txt"
+		},
+		{
+			"path" : "sdrpp_module.cmake"
+		},
+		{
+			"path" : "sink_modules/null_audio_sink/CMakeLists.txt"
+		},
+		{
+			"path" : "sdrpp_module.cmake"
+		},
+		{
+			"path" : "decoder_modules/atv_decoder/CMakeLists.txt"
+		},
+		{
+			"path" : "sdrpp_module.cmake"
+		},
+		{
+			"path" : "decoder_modules/m17_decoder/CMakeLists.txt"
+		},
+		{
+			"path" : "sdrpp_module.cmake"
+		},
+		{
+			"path" : "decoder_modules/ch_extravhf_decoder/CMakeLists.txt"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/FindBLAS.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/CheckFunctionExists.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/FindPackageHandleStandardArgs.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/FindPackageMessage.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/FindThreads.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/CheckLibraryExists.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/CheckIncludeFile.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/CheckCSourceCompiles.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/FindPackageHandleStandardArgs.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/FindPackageMessage.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/FindThreads.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/CheckLibraryExists.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/CheckIncludeFile.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/CheckCSourceCompiles.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/FindPackageHandleStandardArgs.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/FindPackageMessage.cmake"
+		},
+		{
+			"path" : "sdrpp_module.cmake"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "android/app/.cxx/cmake/debug/arm64-v8a/itpp/CMakeLists.txt"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "android/app/.cxx/cmake/debug/arm64-v8a/itpp/cmake/Modules/FindBLAS.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/CheckFunctionExists.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/CheckFortranFunctionExists.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/FindThreads.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/CheckLibraryExists.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/CheckIncludeFile.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/CheckCSourceCompiles.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/FindPackageHandleStandardArgs.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/FindPackageMessage.cmake"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "android/app/.cxx/cmake/debug/arm64-v8a/itpp/cmake/Modules/FindLAPACK.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/CheckFunctionExists.cmake"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "android/app/.cxx/cmake/debug/arm64-v8a/itpp/cmake/Modules/FindBLAS.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/CheckFunctionExists.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/CheckFortranFunctionExists.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/FindThreads.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/CheckLibraryExists.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/CheckIncludeFile.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/CheckCSourceCompiles.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/FindPackageHandleStandardArgs.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/FindPackageMessage.cmake"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "android/app/.cxx/cmake/debug/arm64-v8a/itpp/cmake/Modules/FindFFT.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/FindPackageHandleStandardArgs.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/FindPackageMessage.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/FindOpenMP.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/CMakeParseImplicitLinkInfo.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/FindPackageHandleStandardArgs.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/FindPackageMessage.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/FindDoxygen.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/FindPackageHandleStandardArgs.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/FindPackageMessage.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/FindLATEX.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/FindPackageHandleStandardArgs.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/FindPackageMessage.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/CheckIncludeFile.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/CheckIncludeFiles.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/CheckIncludeFileCXX.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/CheckCXXSymbolExists.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/CheckSymbolExists.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/CheckFunctionExists.cmake"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "android/app/.cxx/cmake/debug/arm64-v8a/itpp/cmake/Modules/CheckCXXFunctionExists.cmake"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "android/app/.cxx/cmake/debug/arm64-v8a/itpp/cmake/Modules/CheckFunctionExists.cpp"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "android/app/.cxx/cmake/debug/arm64-v8a/itpp/cmake/Modules/CheckFunctionExists.cpp"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "android/app/.cxx/cmake/debug/arm64-v8a/itpp/cmake/Modules/CheckFunctionExists.cpp"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "android/app/.cxx/cmake/debug/arm64-v8a/itpp/itpp/config.h.cmake"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "android/app/.cxx/cmake/debug/arm64-v8a/itpp/itpp/itexports.h.cmake"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "android/app/.cxx/cmake/debug/arm64-v8a/itpp/itpp/CMakeLists.txt"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "android/app/.cxx/cmake/debug/arm64-v8a/itpp/itpp-config.cmake.in"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "android/app/.cxx/cmake/debug/arm64-v8a/itpp/itpp-config.1.cmake.in"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "android/app/.cxx/cmake/debug/arm64-v8a/itpp/itpp.pc.cmake.in"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "android/app/.cxx/cmake/debug/arm64-v8a/mbelib/CMakeLists.txt"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/GNUInstallDirs.cmake"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "android/app/.cxx/cmake/debug/arm64-v8a/mbelib/libmbe.pc.in"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "android/app/.cxx/cmake/debug/arm64-v8a/mbelib/cmake_uninstall.cmake.in"
+		},
+		{
+			"path" : "decoder_modules/ch_tetra_demodulator/CMakeLists.txt"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/usr/share/cmake-3.22/Modules/GNUInstallDirs.cmake"
+		},
+		{
+			"path" : "sdrpp_module.cmake"
+		},
+		{
+			"path" : "decoder_modules/ft8_decoder/CMakeLists.txt"
+		},
+		{
+			"path" : "decoder_modules/meteor_demodulator/CMakeLists.txt"
+		},
+		{
+			"path" : "sdrpp_module.cmake"
+		},
+		{
+			"path" : "decoder_modules/pager_decoder/CMakeLists.txt"
+		},
+		{
+			"path" : "sdrpp_module.cmake"
+		},
+		{
+			"path" : "decoder_modules/radio/CMakeLists.txt"
+		},
+		{
+			"path" : "sdrpp_module.cmake"
+		},
+		{
+			"path" : "misc_modules/frequency_manager/CMakeLists.txt"
+		},
+		{
+			"path" : "sdrpp_module.cmake"
+		},
+		{
+			"path" : "misc_modules/iq_exporter/CMakeLists.txt"
+		},
+		{
+			"path" : "sdrpp_module.cmake"
+		},
+		{
+			"path" : "misc_modules/recorder/CMakeLists.txt"
+		},
+		{
+			"path" : "sdrpp_module.cmake"
+		},
+		{
+			"path" : "misc_modules/rigctl_client/CMakeLists.txt"
+		},
+		{
+			"path" : "sdrpp_module.cmake"
+		},
+		{
+			"path" : "misc_modules/rigctl_server/CMakeLists.txt"
+		},
+		{
+			"path" : "sdrpp_module.cmake"
+		},
+		{
+			"path" : "misc_modules/websdr_view/CMakeLists.txt"
+		},
+		{
+			"path" : "sdrpp_module.cmake"
+		},
+		{
+			"path" : "misc_modules/reports_monitor/CMakeLists.txt"
+		},
+		{
+			"path" : "sdrpp_module.cmake"
+		},
+		{
+			"path" : "misc_modules/scanner/CMakeLists.txt"
+		},
+		{
+			"path" : "sdrpp_module.cmake"
+		},
+		{
+			"path" : "misc_modules/spectrum_analyzer/CMakeLists.txt"
+		},
+		{
+			"path" : "sdrpp_module.cmake"
+		},
+		{
+			"path" : "misc_modules/noise_reduction_logmmse/CMakeLists.txt"
+		},
+		{
+			"path" : "sdrpp_module.cmake"
+		}
+	],
+	"kind" : "cmakeFiles",
+	"paths" : 
+	{
+		"build" : "/work/android/app/.cxx/cmake/debug/arm64-v8a",
+		"source" : "/work"
+	},
+	"version" : 
+	{
+		"major" : 1,
+		"minor" : 0
+	}
+}

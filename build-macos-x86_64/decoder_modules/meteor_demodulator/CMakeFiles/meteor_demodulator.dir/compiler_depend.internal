@@ -999,6 +999,7 @@ decoder_modules/meteor_demodulator/CMakeFiles/meteor_demodulator.dir/src/main.cp
  /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/dsp/taps/tap.h
  /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/dsp/types.h
  /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/main_window.h
+ /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/brown/band_panel.h
  /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/brown/mobile_main_window.h
  /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/dialogs/loading_screen.h
  /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/gui.h
@@ -1098,6 +1099,7 @@ decoder_modules/meteor_demodulator/CMakeFiles/meteor_demodulator.dir/src/main.cp
  /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/utils/opengl_include_code.h
  /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/utils/usleep.h
  /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/utils/wstr.h
+ /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/misc_modules/frequency_manager/src/frequency_manager.h
  /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/decoder_modules/meteor_demodulator/src/meteor_costas.h
  /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/decoder_modules/meteor_demodulator/src/meteor_demod.h
  /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/decoder_modules/meteor_demodulator/src/meteor_demodulator_interface.h

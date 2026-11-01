@@ -8826,6 +8826,7 @@ decoder_modules/ch_tetra_demodulator/CMakeFiles/ch_tetra_demodulator.dir/src/mai
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/dsp/taps/windowed_sinc.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/dsp/types.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/main_window.h \
+  /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/brown/band_panel.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/brown/mobile_main_window.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/dialogs/loading_screen.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/gui.h \
@@ -8926,6 +8927,7 @@ decoder_modules/ch_tetra_demodulator/CMakeFiles/ch_tetra_demodulator.dir/src/mai
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/utils/net.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/utils/opengl_include_code.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/utils/usleep.h \
+  /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/misc_modules/frequency_manager/src/frequency_manager.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/decoder_modules/ch_tetra_demodulator/src/decoder/src/tetra_common.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/decoder_modules/ch_tetra_demodulator/src/decoder/src/tetra_mac_pdu.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/decoder_modules/ch_tetra_demodulator/src/decoder/src/tetra_prim.h \
@@ -8960,6 +8962,8 @@ decoder_modules/ch_tetra_demodulator/CMakeFiles/ch_tetra_demodulator.dir/src/mai
 /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/decoder_modules/ch_tetra_demodulator/src/gui_widgets.h:
 
 /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/decoder_modules/ch_tetra_demodulator/src/dsp/osmotetra_dec.h:
+
+/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/misc_modules/frequency_manager/src/frequency_manager.h:
 
 /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/utils/arrays.h:
 
@@ -9026,6 +9030,8 @@ decoder_modules/ch_tetra_demodulator/CMakeFiles/ch_tetra_demodulator.dir/src/mai
 /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/gui.h:
 
 /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/brown/mobile_main_window.h:
+
+/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/brown/band_panel.h:
 
 /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/main_window.h:
 

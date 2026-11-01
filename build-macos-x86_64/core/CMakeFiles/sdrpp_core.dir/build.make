@@ -268,10 +268,24 @@ core/CMakeFiles/sdrpp_core.dir/src/gui/brown/audio_player.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/sdrpp_core.dir/src/gui/brown/audio_player.cpp.s"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/brown/audio_player.cpp -o CMakeFiles/sdrpp_core.dir/src/gui/brown/audio_player.cpp.s
 
+core/CMakeFiles/sdrpp_core.dir/src/gui/brown/band_panel.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
+core/CMakeFiles/sdrpp_core.dir/src/gui/brown/band_panel.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/brown/band_panel.cpp
+core/CMakeFiles/sdrpp_core.dir/src/gui/brown/band_panel.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/brown/band_panel.cpp.o"
+	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/gui/brown/band_panel.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/gui/brown/band_panel.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/gui/brown/band_panel.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/brown/band_panel.cpp
+
+core/CMakeFiles/sdrpp_core.dir/src/gui/brown/band_panel.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/sdrpp_core.dir/src/gui/brown/band_panel.cpp.i"
+	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/brown/band_panel.cpp > CMakeFiles/sdrpp_core.dir/src/gui/brown/band_panel.cpp.i
+
+core/CMakeFiles/sdrpp_core.dir/src/gui/brown/band_panel.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/sdrpp_core.dir/src/gui/brown/band_panel.cpp.s"
+	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/brown/band_panel.cpp -o CMakeFiles/sdrpp_core.dir/src/gui/brown/band_panel.cpp.s
+
 core/CMakeFiles/sdrpp_core.dir/src/gui/brown/geomap.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/gui/brown/geomap.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/brown/geomap.cpp
 core/CMakeFiles/sdrpp_core.dir/src/gui/brown/geomap.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/brown/geomap.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/brown/geomap.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/gui/brown/geomap.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/gui/brown/geomap.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/gui/brown/geomap.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/brown/geomap.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/gui/brown/geomap.cpp.i: cmake_force
@@ -285,7 +299,7 @@ core/CMakeFiles/sdrpp_core.dir/src/gui/brown/geomap.cpp.s: cmake_force
 core/CMakeFiles/sdrpp_core.dir/src/gui/brown/kiwisdr_map.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/gui/brown/kiwisdr_map.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/brown/kiwisdr_map.cpp
 core/CMakeFiles/sdrpp_core.dir/src/gui/brown/kiwisdr_map.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/brown/kiwisdr_map.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/brown/kiwisdr_map.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/gui/brown/kiwisdr_map.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/gui/brown/kiwisdr_map.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/gui/brown/kiwisdr_map.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/brown/kiwisdr_map.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/gui/brown/kiwisdr_map.cpp.i: cmake_force
@@ -299,7 +313,7 @@ core/CMakeFiles/sdrpp_core.dir/src/gui/brown/kiwisdr_map.cpp.s: cmake_force
 core/CMakeFiles/sdrpp_core.dir/src/gui/brown/mobile_main_window.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/gui/brown/mobile_main_window.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/brown/mobile_main_window.cpp
 core/CMakeFiles/sdrpp_core.dir/src/gui/brown/mobile_main_window.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/brown/mobile_main_window.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/brown/mobile_main_window.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/gui/brown/mobile_main_window.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/gui/brown/mobile_main_window.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/gui/brown/mobile_main_window.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/brown/mobile_main_window.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/gui/brown/mobile_main_window.cpp.i: cmake_force
@@ -310,10 +324,24 @@ core/CMakeFiles/sdrpp_core.dir/src/gui/brown/mobile_main_window.cpp.s: cmake_for
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/sdrpp_core.dir/src/gui/brown/mobile_main_window.cpp.s"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/brown/mobile_main_window.cpp -o CMakeFiles/sdrpp_core.dir/src/gui/brown/mobile_main_window.cpp.s
 
+core/CMakeFiles/sdrpp_core.dir/src/gui/brown/narrow_zoom.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
+core/CMakeFiles/sdrpp_core.dir/src/gui/brown/narrow_zoom.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/brown/narrow_zoom.cpp
+core/CMakeFiles/sdrpp_core.dir/src/gui/brown/narrow_zoom.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/brown/narrow_zoom.cpp.o"
+	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/gui/brown/narrow_zoom.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/gui/brown/narrow_zoom.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/gui/brown/narrow_zoom.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/brown/narrow_zoom.cpp
+
+core/CMakeFiles/sdrpp_core.dir/src/gui/brown/narrow_zoom.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/sdrpp_core.dir/src/gui/brown/narrow_zoom.cpp.i"
+	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/brown/narrow_zoom.cpp > CMakeFiles/sdrpp_core.dir/src/gui/brown/narrow_zoom.cpp.i
+
+core/CMakeFiles/sdrpp_core.dir/src/gui/brown/narrow_zoom.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/sdrpp_core.dir/src/gui/brown/narrow_zoom.cpp.s"
+	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/brown/narrow_zoom.cpp -o CMakeFiles/sdrpp_core.dir/src/gui/brown/narrow_zoom.cpp.s
+
 core/CMakeFiles/sdrpp_core.dir/src/gui/brown/small_waterfall.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/gui/brown/small_waterfall.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/brown/small_waterfall.cpp
 core/CMakeFiles/sdrpp_core.dir/src/gui/brown/small_waterfall.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/brown/small_waterfall.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/brown/small_waterfall.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/gui/brown/small_waterfall.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/gui/brown/small_waterfall.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/gui/brown/small_waterfall.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/brown/small_waterfall.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/gui/brown/small_waterfall.cpp.i: cmake_force
@@ -327,7 +355,7 @@ core/CMakeFiles/sdrpp_core.dir/src/gui/brown/small_waterfall.cpp.s: cmake_force
 core/CMakeFiles/sdrpp_core.dir/src/gui/brown/wide_overview.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/gui/brown/wide_overview.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/brown/wide_overview.cpp
 core/CMakeFiles/sdrpp_core.dir/src/gui/brown/wide_overview.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/brown/wide_overview.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/brown/wide_overview.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/gui/brown/wide_overview.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/gui/brown/wide_overview.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/gui/brown/wide_overview.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/brown/wide_overview.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/gui/brown/wide_overview.cpp.i: cmake_force
@@ -341,7 +369,7 @@ core/CMakeFiles/sdrpp_core.dir/src/gui/brown/wide_overview.cpp.s: cmake_force
 core/CMakeFiles/sdrpp_core.dir/src/gui/colormaps.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/gui/colormaps.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/colormaps.cpp
 core/CMakeFiles/sdrpp_core.dir/src/gui/colormaps.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/colormaps.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/colormaps.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/gui/colormaps.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/gui/colormaps.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/gui/colormaps.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/colormaps.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/gui/colormaps.cpp.i: cmake_force
@@ -355,7 +383,7 @@ core/CMakeFiles/sdrpp_core.dir/src/gui/colormaps.cpp.s: cmake_force
 core/CMakeFiles/sdrpp_core.dir/src/gui/dialogs/credits.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/gui/dialogs/credits.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/dialogs/credits.cpp
 core/CMakeFiles/sdrpp_core.dir/src/gui/dialogs/credits.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/dialogs/credits.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/dialogs/credits.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/gui/dialogs/credits.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/gui/dialogs/credits.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/gui/dialogs/credits.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/dialogs/credits.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/gui/dialogs/credits.cpp.i: cmake_force
@@ -369,7 +397,7 @@ core/CMakeFiles/sdrpp_core.dir/src/gui/dialogs/credits.cpp.s: cmake_force
 core/CMakeFiles/sdrpp_core.dir/src/gui/dialogs/loading_screen.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/gui/dialogs/loading_screen.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/dialogs/loading_screen.cpp
 core/CMakeFiles/sdrpp_core.dir/src/gui/dialogs/loading_screen.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/dialogs/loading_screen.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/dialogs/loading_screen.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/gui/dialogs/loading_screen.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/gui/dialogs/loading_screen.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/gui/dialogs/loading_screen.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/dialogs/loading_screen.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/gui/dialogs/loading_screen.cpp.i: cmake_force
@@ -383,7 +411,7 @@ core/CMakeFiles/sdrpp_core.dir/src/gui/dialogs/loading_screen.cpp.s: cmake_force
 core/CMakeFiles/sdrpp_core.dir/src/gui/gui.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/gui/gui.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/gui.cpp
 core/CMakeFiles/sdrpp_core.dir/src/gui/gui.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/gui.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/gui.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/gui/gui.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/gui/gui.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/gui/gui.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/gui.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/gui/gui.cpp.i: cmake_force
@@ -397,7 +425,7 @@ core/CMakeFiles/sdrpp_core.dir/src/gui/gui.cpp.s: cmake_force
 core/CMakeFiles/sdrpp_core.dir/src/gui/icons.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/gui/icons.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/icons.cpp
 core/CMakeFiles/sdrpp_core.dir/src/gui/icons.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/icons.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/icons.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/gui/icons.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/gui/icons.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/gui/icons.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/icons.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/gui/icons.cpp.i: cmake_force
@@ -411,7 +439,7 @@ core/CMakeFiles/sdrpp_core.dir/src/gui/icons.cpp.s: cmake_force
 core/CMakeFiles/sdrpp_core.dir/src/gui/main_window.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/gui/main_window.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/main_window.cpp
 core/CMakeFiles/sdrpp_core.dir/src/gui/main_window.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/main_window.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/main_window.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/gui/main_window.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/gui/main_window.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/gui/main_window.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/main_window.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/gui/main_window.cpp.i: cmake_force
@@ -425,7 +453,7 @@ core/CMakeFiles/sdrpp_core.dir/src/gui/main_window.cpp.s: cmake_force
 core/CMakeFiles/sdrpp_core.dir/src/gui/menus/bandplan.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/gui/menus/bandplan.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/menus/bandplan.cpp
 core/CMakeFiles/sdrpp_core.dir/src/gui/menus/bandplan.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/menus/bandplan.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/menus/bandplan.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/gui/menus/bandplan.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/gui/menus/bandplan.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/gui/menus/bandplan.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/menus/bandplan.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/gui/menus/bandplan.cpp.i: cmake_force
@@ -439,7 +467,7 @@ core/CMakeFiles/sdrpp_core.dir/src/gui/menus/bandplan.cpp.s: cmake_force
 core/CMakeFiles/sdrpp_core.dir/src/gui/menus/display.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/gui/menus/display.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/menus/display.cpp
 core/CMakeFiles/sdrpp_core.dir/src/gui/menus/display.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/menus/display.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_29) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/menus/display.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/gui/menus/display.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/gui/menus/display.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/gui/menus/display.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/menus/display.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/gui/menus/display.cpp.i: cmake_force
@@ -453,7 +481,7 @@ core/CMakeFiles/sdrpp_core.dir/src/gui/menus/display.cpp.s: cmake_force
 core/CMakeFiles/sdrpp_core.dir/src/gui/menus/module_manager.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/gui/menus/module_manager.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/menus/module_manager.cpp
 core/CMakeFiles/sdrpp_core.dir/src/gui/menus/module_manager.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/menus/module_manager.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_30) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/menus/module_manager.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/gui/menus/module_manager.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/gui/menus/module_manager.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/gui/menus/module_manager.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/menus/module_manager.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/gui/menus/module_manager.cpp.i: cmake_force
@@ -467,7 +495,7 @@ core/CMakeFiles/sdrpp_core.dir/src/gui/menus/module_manager.cpp.s: cmake_force
 core/CMakeFiles/sdrpp_core.dir/src/gui/menus/sink.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/gui/menus/sink.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/menus/sink.cpp
 core/CMakeFiles/sdrpp_core.dir/src/gui/menus/sink.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_29) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/menus/sink.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/menus/sink.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/gui/menus/sink.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/gui/menus/sink.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/gui/menus/sink.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/menus/sink.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/gui/menus/sink.cpp.i: cmake_force
@@ -481,7 +509,7 @@ core/CMakeFiles/sdrpp_core.dir/src/gui/menus/sink.cpp.s: cmake_force
 core/CMakeFiles/sdrpp_core.dir/src/gui/menus/source.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/gui/menus/source.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/menus/source.cpp
 core/CMakeFiles/sdrpp_core.dir/src/gui/menus/source.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_30) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/menus/source.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_32) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/menus/source.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/gui/menus/source.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/gui/menus/source.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/gui/menus/source.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/menus/source.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/gui/menus/source.cpp.i: cmake_force
@@ -495,7 +523,7 @@ core/CMakeFiles/sdrpp_core.dir/src/gui/menus/source.cpp.s: cmake_force
 core/CMakeFiles/sdrpp_core.dir/src/gui/menus/theme.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/gui/menus/theme.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/menus/theme.cpp
 core/CMakeFiles/sdrpp_core.dir/src/gui/menus/theme.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/menus/theme.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_33) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/menus/theme.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/gui/menus/theme.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/gui/menus/theme.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/gui/menus/theme.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/menus/theme.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/gui/menus/theme.cpp.i: cmake_force
@@ -509,7 +537,7 @@ core/CMakeFiles/sdrpp_core.dir/src/gui/menus/theme.cpp.s: cmake_force
 core/CMakeFiles/sdrpp_core.dir/src/gui/menus/vfo_color.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/gui/menus/vfo_color.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/menus/vfo_color.cpp
 core/CMakeFiles/sdrpp_core.dir/src/gui/menus/vfo_color.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_32) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/menus/vfo_color.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_34) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/menus/vfo_color.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/gui/menus/vfo_color.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/gui/menus/vfo_color.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/gui/menus/vfo_color.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/menus/vfo_color.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/gui/menus/vfo_color.cpp.i: cmake_force
@@ -523,7 +551,7 @@ core/CMakeFiles/sdrpp_core.dir/src/gui/menus/vfo_color.cpp.s: cmake_force
 core/CMakeFiles/sdrpp_core.dir/src/gui/smgui.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/gui/smgui.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/smgui.cpp
 core/CMakeFiles/sdrpp_core.dir/src/gui/smgui.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_33) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/smgui.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_35) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/smgui.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/gui/smgui.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/gui/smgui.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/gui/smgui.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/smgui.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/gui/smgui.cpp.i: cmake_force
@@ -537,7 +565,7 @@ core/CMakeFiles/sdrpp_core.dir/src/gui/smgui.cpp.s: cmake_force
 core/CMakeFiles/sdrpp_core.dir/src/gui/style.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/gui/style.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/style.cpp
 core/CMakeFiles/sdrpp_core.dir/src/gui/style.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_34) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/style.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_36) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/style.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/gui/style.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/gui/style.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/gui/style.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/style.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/gui/style.cpp.i: cmake_force
@@ -551,7 +579,7 @@ core/CMakeFiles/sdrpp_core.dir/src/gui/style.cpp.s: cmake_force
 core/CMakeFiles/sdrpp_core.dir/src/gui/theme_manager.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/gui/theme_manager.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/theme_manager.cpp
 core/CMakeFiles/sdrpp_core.dir/src/gui/theme_manager.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_35) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/theme_manager.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_37) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/theme_manager.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/gui/theme_manager.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/gui/theme_manager.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/gui/theme_manager.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/theme_manager.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/gui/theme_manager.cpp.i: cmake_force
@@ -565,7 +593,7 @@ core/CMakeFiles/sdrpp_core.dir/src/gui/theme_manager.cpp.s: cmake_force
 core/CMakeFiles/sdrpp_core.dir/src/gui/tuner.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/gui/tuner.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/tuner.cpp
 core/CMakeFiles/sdrpp_core.dir/src/gui/tuner.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_36) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/tuner.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_38) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/tuner.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/gui/tuner.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/gui/tuner.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/gui/tuner.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/tuner.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/gui/tuner.cpp.i: cmake_force
@@ -579,7 +607,7 @@ core/CMakeFiles/sdrpp_core.dir/src/gui/tuner.cpp.s: cmake_force
 core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/bandplan.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/bandplan.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/widgets/bandplan.cpp
 core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/bandplan.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_37) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/bandplan.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_39) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/bandplan.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/bandplan.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/gui/widgets/bandplan.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/gui/widgets/bandplan.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/widgets/bandplan.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/bandplan.cpp.i: cmake_force
@@ -593,7 +621,7 @@ core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/bandplan.cpp.s: cmake_force
 core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/constellation_diagram.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/constellation_diagram.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/widgets/constellation_diagram.cpp
 core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/constellation_diagram.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_38) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/constellation_diagram.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_40) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/constellation_diagram.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/constellation_diagram.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/gui/widgets/constellation_diagram.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/gui/widgets/constellation_diagram.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/widgets/constellation_diagram.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/constellation_diagram.cpp.i: cmake_force
@@ -607,7 +635,7 @@ core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/constellation_diagram.cpp.s: cmak
 core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/file_select.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/file_select.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/widgets/file_select.cpp
 core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/file_select.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_39) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/file_select.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_41) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/file_select.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/file_select.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/gui/widgets/file_select.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/gui/widgets/file_select.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/widgets/file_select.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/file_select.cpp.i: cmake_force
@@ -621,7 +649,7 @@ core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/file_select.cpp.s: cmake_force
 core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/folder_select.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/folder_select.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/widgets/folder_select.cpp
 core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/folder_select.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_40) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/folder_select.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_42) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/folder_select.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/folder_select.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/gui/widgets/folder_select.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/gui/widgets/folder_select.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/widgets/folder_select.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/folder_select.cpp.i: cmake_force
@@ -635,7 +663,7 @@ core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/folder_select.cpp.s: cmake_force
 core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/frequency_select.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/frequency_select.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/widgets/frequency_select.cpp
 core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/frequency_select.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_41) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/frequency_select.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_43) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/frequency_select.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/frequency_select.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/gui/widgets/frequency_select.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/gui/widgets/frequency_select.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/widgets/frequency_select.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/frequency_select.cpp.i: cmake_force
@@ -649,7 +677,7 @@ core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/frequency_select.cpp.s: cmake_for
 core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/image.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/image.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/widgets/image.cpp
 core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/image.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_42) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/image.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_44) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/image.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/image.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/gui/widgets/image.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/gui/widgets/image.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/widgets/image.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/image.cpp.i: cmake_force
@@ -663,7 +691,7 @@ core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/image.cpp.s: cmake_force
 core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/line_push_image.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/line_push_image.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/widgets/line_push_image.cpp
 core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/line_push_image.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_43) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/line_push_image.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_45) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/line_push_image.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/line_push_image.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/gui/widgets/line_push_image.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/gui/widgets/line_push_image.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/widgets/line_push_image.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/line_push_image.cpp.i: cmake_force
@@ -677,7 +705,7 @@ core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/line_push_image.cpp.s: cmake_forc
 core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/menu.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/menu.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/widgets/menu.cpp
 core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/menu.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_44) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/menu.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_46) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/menu.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/menu.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/gui/widgets/menu.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/gui/widgets/menu.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/widgets/menu.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/menu.cpp.i: cmake_force
@@ -691,7 +719,7 @@ core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/menu.cpp.s: cmake_force
 core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/snr_meter.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/snr_meter.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/widgets/snr_meter.cpp
 core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/snr_meter.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_45) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/snr_meter.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_47) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/snr_meter.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/snr_meter.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/gui/widgets/snr_meter.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/gui/widgets/snr_meter.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/widgets/snr_meter.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/snr_meter.cpp.i: cmake_force
@@ -705,7 +733,7 @@ core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/snr_meter.cpp.s: cmake_force
 core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/stepped_slider.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/stepped_slider.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/widgets/stepped_slider.cpp
 core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/stepped_slider.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_46) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/stepped_slider.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_48) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/stepped_slider.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/stepped_slider.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/gui/widgets/stepped_slider.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/gui/widgets/stepped_slider.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/widgets/stepped_slider.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/stepped_slider.cpp.i: cmake_force
@@ -719,7 +747,7 @@ core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/stepped_slider.cpp.s: cmake_force
 core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/symbol_diagram.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/symbol_diagram.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/widgets/symbol_diagram.cpp
 core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/symbol_diagram.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_47) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/symbol_diagram.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_49) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/symbol_diagram.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/symbol_diagram.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/gui/widgets/symbol_diagram.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/gui/widgets/symbol_diagram.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/widgets/symbol_diagram.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/symbol_diagram.cpp.i: cmake_force
@@ -733,7 +761,7 @@ core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/symbol_diagram.cpp.s: cmake_force
 core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/volume_meter.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/volume_meter.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/widgets/volume_meter.cpp
 core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/volume_meter.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_48) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/volume_meter.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_50) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/volume_meter.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/volume_meter.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/gui/widgets/volume_meter.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/gui/widgets/volume_meter.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/widgets/volume_meter.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/volume_meter.cpp.i: cmake_force
@@ -747,7 +775,7 @@ core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/volume_meter.cpp.s: cmake_force
 core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/waterfall.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/waterfall.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/widgets/waterfall.cpp
 core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/waterfall.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_49) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/waterfall.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_51) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/waterfall.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/waterfall.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/gui/widgets/waterfall.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/gui/widgets/waterfall.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/widgets/waterfall.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/waterfall.cpp.i: cmake_force
@@ -761,7 +789,7 @@ core/CMakeFiles/sdrpp_core.dir/src/gui/widgets/waterfall.cpp.s: cmake_force
 core/CMakeFiles/sdrpp_core.dir/src/http_debug_server_impl.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/http_debug_server_impl.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/http_debug_server_impl.cpp
 core/CMakeFiles/sdrpp_core.dir/src/http_debug_server_impl.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_50) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/http_debug_server_impl.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_52) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/http_debug_server_impl.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/http_debug_server_impl.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/http_debug_server_impl.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/http_debug_server_impl.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/http_debug_server_impl.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/http_debug_server_impl.cpp.i: cmake_force
@@ -775,7 +803,7 @@ core/CMakeFiles/sdrpp_core.dir/src/http_debug_server_impl.cpp.s: cmake_force
 core/CMakeFiles/sdrpp_core.dir/src/imgui/imgui.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/imgui/imgui.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/imgui/imgui.cpp
 core/CMakeFiles/sdrpp_core.dir/src/imgui/imgui.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_51) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/imgui/imgui.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_53) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/imgui/imgui.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/imgui/imgui.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/imgui/imgui.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/imgui/imgui.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/imgui/imgui.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/imgui/imgui.cpp.i: cmake_force
@@ -789,7 +817,7 @@ core/CMakeFiles/sdrpp_core.dir/src/imgui/imgui.cpp.s: cmake_force
 core/CMakeFiles/sdrpp_core.dir/src/imgui/imgui_demo.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/imgui/imgui_demo.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/imgui/imgui_demo.cpp
 core/CMakeFiles/sdrpp_core.dir/src/imgui/imgui_demo.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_52) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/imgui/imgui_demo.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_54) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/imgui/imgui_demo.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/imgui/imgui_demo.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/imgui/imgui_demo.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/imgui/imgui_demo.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/imgui/imgui_demo.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/imgui/imgui_demo.cpp.i: cmake_force
@@ -803,7 +831,7 @@ core/CMakeFiles/sdrpp_core.dir/src/imgui/imgui_demo.cpp.s: cmake_force
 core/CMakeFiles/sdrpp_core.dir/src/imgui/imgui_draw.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/imgui/imgui_draw.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/imgui/imgui_draw.cpp
 core/CMakeFiles/sdrpp_core.dir/src/imgui/imgui_draw.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_53) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/imgui/imgui_draw.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_55) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/imgui/imgui_draw.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/imgui/imgui_draw.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/imgui/imgui_draw.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/imgui/imgui_draw.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/imgui/imgui_draw.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/imgui/imgui_draw.cpp.i: cmake_force
@@ -817,7 +845,7 @@ core/CMakeFiles/sdrpp_core.dir/src/imgui/imgui_draw.cpp.s: cmake_force
 core/CMakeFiles/sdrpp_core.dir/src/imgui/imgui_impl_opengl3.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/imgui/imgui_impl_opengl3.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/imgui/imgui_impl_opengl3.cpp
 core/CMakeFiles/sdrpp_core.dir/src/imgui/imgui_impl_opengl3.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_54) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/imgui/imgui_impl_opengl3.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_56) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/imgui/imgui_impl_opengl3.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/imgui/imgui_impl_opengl3.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/imgui/imgui_impl_opengl3.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/imgui/imgui_impl_opengl3.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/imgui/imgui_impl_opengl3.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/imgui/imgui_impl_opengl3.cpp.i: cmake_force
@@ -831,7 +859,7 @@ core/CMakeFiles/sdrpp_core.dir/src/imgui/imgui_impl_opengl3.cpp.s: cmake_force
 core/CMakeFiles/sdrpp_core.dir/src/imgui/imgui_tables.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/imgui/imgui_tables.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/imgui/imgui_tables.cpp
 core/CMakeFiles/sdrpp_core.dir/src/imgui/imgui_tables.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_55) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/imgui/imgui_tables.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_57) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/imgui/imgui_tables.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/imgui/imgui_tables.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/imgui/imgui_tables.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/imgui/imgui_tables.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/imgui/imgui_tables.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/imgui/imgui_tables.cpp.i: cmake_force
@@ -845,7 +873,7 @@ core/CMakeFiles/sdrpp_core.dir/src/imgui/imgui_tables.cpp.s: cmake_force
 core/CMakeFiles/sdrpp_core.dir/src/imgui/imgui_widgets.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/imgui/imgui_widgets.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/imgui/imgui_widgets.cpp
 core/CMakeFiles/sdrpp_core.dir/src/imgui/imgui_widgets.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_56) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/imgui/imgui_widgets.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_58) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/imgui/imgui_widgets.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/imgui/imgui_widgets.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/imgui/imgui_widgets.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/imgui/imgui_widgets.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/imgui/imgui_widgets.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/imgui/imgui_widgets.cpp.i: cmake_force
@@ -859,7 +887,7 @@ core/CMakeFiles/sdrpp_core.dir/src/imgui/imgui_widgets.cpp.s: cmake_force
 core/CMakeFiles/sdrpp_core.dir/src/implot/implot.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/implot/implot.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/implot/implot.cpp
 core/CMakeFiles/sdrpp_core.dir/src/implot/implot.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_57) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/implot/implot.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_59) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/implot/implot.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/implot/implot.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/implot/implot.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/implot/implot.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/implot/implot.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/implot/implot.cpp.i: cmake_force
@@ -873,7 +901,7 @@ core/CMakeFiles/sdrpp_core.dir/src/implot/implot.cpp.s: cmake_force
 core/CMakeFiles/sdrpp_core.dir/src/implot/implot_items.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/implot/implot_items.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/implot/implot_items.cpp
 core/CMakeFiles/sdrpp_core.dir/src/implot/implot_items.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_58) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/implot/implot_items.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_60) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/implot/implot_items.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/implot/implot_items.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/implot/implot_items.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/implot/implot_items.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/implot/implot_items.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/implot/implot_items.cpp.i: cmake_force
@@ -887,7 +915,7 @@ core/CMakeFiles/sdrpp_core.dir/src/implot/implot_items.cpp.s: cmake_force
 core/CMakeFiles/sdrpp_core.dir/src/module.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/module.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/module.cpp
 core/CMakeFiles/sdrpp_core.dir/src/module.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_59) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/module.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_61) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/module.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/module.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/module.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/module.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/module.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/module.cpp.i: cmake_force
@@ -901,7 +929,7 @@ core/CMakeFiles/sdrpp_core.dir/src/module.cpp.s: cmake_force
 core/CMakeFiles/sdrpp_core.dir/src/module_com.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/module_com.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/module_com.cpp
 core/CMakeFiles/sdrpp_core.dir/src/module_com.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_60) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/module_com.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_62) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/module_com.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/module_com.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/module_com.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/module_com.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/module_com.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/module_com.cpp.i: cmake_force
@@ -915,7 +943,7 @@ core/CMakeFiles/sdrpp_core.dir/src/module_com.cpp.s: cmake_force
 core/CMakeFiles/sdrpp_core.dir/src/server.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/server.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/server.cpp
 core/CMakeFiles/sdrpp_core.dir/src/server.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_61) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/server.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_63) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/server.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/server.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/server.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/server.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/server.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/server.cpp.i: cmake_force
@@ -929,7 +957,7 @@ core/CMakeFiles/sdrpp_core.dir/src/server.cpp.s: cmake_force
 core/CMakeFiles/sdrpp_core.dir/src/signal_path/iq_frontend.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/signal_path/iq_frontend.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/signal_path/iq_frontend.cpp
 core/CMakeFiles/sdrpp_core.dir/src/signal_path/iq_frontend.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_62) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/signal_path/iq_frontend.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_64) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/signal_path/iq_frontend.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/signal_path/iq_frontend.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/signal_path/iq_frontend.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/signal_path/iq_frontend.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/signal_path/iq_frontend.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/signal_path/iq_frontend.cpp.i: cmake_force
@@ -943,7 +971,7 @@ core/CMakeFiles/sdrpp_core.dir/src/signal_path/iq_frontend.cpp.s: cmake_force
 core/CMakeFiles/sdrpp_core.dir/src/signal_path/signal_path.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/signal_path/signal_path.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/signal_path/signal_path.cpp
 core/CMakeFiles/sdrpp_core.dir/src/signal_path/signal_path.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_63) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/signal_path/signal_path.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_65) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/signal_path/signal_path.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/signal_path/signal_path.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/signal_path/signal_path.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/signal_path/signal_path.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/signal_path/signal_path.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/signal_path/signal_path.cpp.i: cmake_force
@@ -957,7 +985,7 @@ core/CMakeFiles/sdrpp_core.dir/src/signal_path/signal_path.cpp.s: cmake_force
 core/CMakeFiles/sdrpp_core.dir/src/signal_path/sink.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/signal_path/sink.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/signal_path/sink.cpp
 core/CMakeFiles/sdrpp_core.dir/src/signal_path/sink.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_64) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/signal_path/sink.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_66) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/signal_path/sink.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/signal_path/sink.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/signal_path/sink.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/signal_path/sink.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/signal_path/sink.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/signal_path/sink.cpp.i: cmake_force
@@ -971,7 +999,7 @@ core/CMakeFiles/sdrpp_core.dir/src/signal_path/sink.cpp.s: cmake_force
 core/CMakeFiles/sdrpp_core.dir/src/signal_path/source.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/signal_path/source.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/signal_path/source.cpp
 core/CMakeFiles/sdrpp_core.dir/src/signal_path/source.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_65) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/signal_path/source.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_67) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/signal_path/source.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/signal_path/source.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/signal_path/source.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/signal_path/source.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/signal_path/source.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/signal_path/source.cpp.i: cmake_force
@@ -985,7 +1013,7 @@ core/CMakeFiles/sdrpp_core.dir/src/signal_path/source.cpp.s: cmake_force
 core/CMakeFiles/sdrpp_core.dir/src/signal_path/vfo_manager.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/signal_path/vfo_manager.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/signal_path/vfo_manager.cpp
 core/CMakeFiles/sdrpp_core.dir/src/signal_path/vfo_manager.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_66) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/signal_path/vfo_manager.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_68) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/signal_path/vfo_manager.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/signal_path/vfo_manager.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/signal_path/vfo_manager.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/signal_path/vfo_manager.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/signal_path/vfo_manager.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/signal_path/vfo_manager.cpp.i: cmake_force
@@ -999,7 +1027,7 @@ core/CMakeFiles/sdrpp_core.dir/src/signal_path/vfo_manager.cpp.s: cmake_force
 core/CMakeFiles/sdrpp_core.dir/src/utils/arrays.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/utils/arrays.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/utils/arrays.cpp
 core/CMakeFiles/sdrpp_core.dir/src/utils/arrays.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_67) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/utils/arrays.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_69) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/utils/arrays.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/utils/arrays.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/utils/arrays.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/utils/arrays.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/utils/arrays.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/utils/arrays.cpp.i: cmake_force
@@ -1013,7 +1041,7 @@ core/CMakeFiles/sdrpp_core.dir/src/utils/arrays.cpp.s: cmake_force
 core/CMakeFiles/sdrpp_core.dir/src/utils/cty.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/utils/cty.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/utils/cty.cpp
 core/CMakeFiles/sdrpp_core.dir/src/utils/cty.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_68) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/utils/cty.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_70) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/utils/cty.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/utils/cty.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/utils/cty.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/utils/cty.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/utils/cty.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/utils/cty.cpp.i: cmake_force
@@ -1027,7 +1055,7 @@ core/CMakeFiles/sdrpp_core.dir/src/utils/cty.cpp.s: cmake_force
 core/CMakeFiles/sdrpp_core.dir/src/utils/flog.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/utils/flog.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/utils/flog.cpp
 core/CMakeFiles/sdrpp_core.dir/src/utils/flog.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_69) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/utils/flog.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_71) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/utils/flog.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/utils/flog.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/utils/flog.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/utils/flog.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/utils/flog.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/utils/flog.cpp.i: cmake_force
@@ -1041,7 +1069,7 @@ core/CMakeFiles/sdrpp_core.dir/src/utils/flog.cpp.s: cmake_force
 core/CMakeFiles/sdrpp_core.dir/src/utils/hrfreq.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/utils/hrfreq.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/utils/hrfreq.cpp
 core/CMakeFiles/sdrpp_core.dir/src/utils/hrfreq.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_70) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/utils/hrfreq.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_72) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/utils/hrfreq.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/utils/hrfreq.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/utils/hrfreq.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/utils/hrfreq.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/utils/hrfreq.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/utils/hrfreq.cpp.i: cmake_force
@@ -1055,7 +1083,7 @@ core/CMakeFiles/sdrpp_core.dir/src/utils/hrfreq.cpp.s: cmake_force
 core/CMakeFiles/sdrpp_core.dir/src/utils/mpeg.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/utils/mpeg.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/utils/mpeg.cpp
 core/CMakeFiles/sdrpp_core.dir/src/utils/mpeg.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_71) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/utils/mpeg.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_73) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/utils/mpeg.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/utils/mpeg.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/utils/mpeg.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/utils/mpeg.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/utils/mpeg.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/utils/mpeg.cpp.i: cmake_force
@@ -1069,7 +1097,7 @@ core/CMakeFiles/sdrpp_core.dir/src/utils/mpeg.cpp.s: cmake_force
 core/CMakeFiles/sdrpp_core.dir/src/utils/net.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/utils/net.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/utils/net.cpp
 core/CMakeFiles/sdrpp_core.dir/src/utils/net.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_72) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/utils/net.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_74) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/utils/net.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/utils/net.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/utils/net.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/utils/net.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/utils/net.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/utils/net.cpp.i: cmake_force
@@ -1083,7 +1111,7 @@ core/CMakeFiles/sdrpp_core.dir/src/utils/net.cpp.s: cmake_force
 core/CMakeFiles/sdrpp_core.dir/src/utils/networking.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/utils/networking.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/utils/networking.cpp
 core/CMakeFiles/sdrpp_core.dir/src/utils/networking.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_73) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/utils/networking.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_75) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/utils/networking.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/utils/networking.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/utils/networking.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/utils/networking.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/utils/networking.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/utils/networking.cpp.i: cmake_force
@@ -1097,7 +1125,7 @@ core/CMakeFiles/sdrpp_core.dir/src/utils/networking.cpp.s: cmake_force
 core/CMakeFiles/sdrpp_core.dir/src/utils/proto/http.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/utils/proto/http.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/utils/proto/http.cpp
 core/CMakeFiles/sdrpp_core.dir/src/utils/proto/http.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_74) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/utils/proto/http.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_76) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/utils/proto/http.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/utils/proto/http.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/utils/proto/http.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/utils/proto/http.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/utils/proto/http.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/utils/proto/http.cpp.i: cmake_force
@@ -1111,7 +1139,7 @@ core/CMakeFiles/sdrpp_core.dir/src/utils/proto/http.cpp.s: cmake_force
 core/CMakeFiles/sdrpp_core.dir/src/utils/proto/reporter_services.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/utils/proto/reporter_services.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/utils/proto/reporter_services.cpp
 core/CMakeFiles/sdrpp_core.dir/src/utils/proto/reporter_services.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_75) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/utils/proto/reporter_services.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_77) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/utils/proto/reporter_services.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/utils/proto/reporter_services.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/utils/proto/reporter_services.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/utils/proto/reporter_services.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/utils/proto/reporter_services.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/utils/proto/reporter_services.cpp.i: cmake_force
@@ -1125,7 +1153,7 @@ core/CMakeFiles/sdrpp_core.dir/src/utils/proto/reporter_services.cpp.s: cmake_fo
 core/CMakeFiles/sdrpp_core.dir/src/utils/proto/rigctl.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/utils/proto/rigctl.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/utils/proto/rigctl.cpp
 core/CMakeFiles/sdrpp_core.dir/src/utils/proto/rigctl.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_76) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/utils/proto/rigctl.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_78) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/utils/proto/rigctl.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/utils/proto/rigctl.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/utils/proto/rigctl.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/utils/proto/rigctl.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/utils/proto/rigctl.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/utils/proto/rigctl.cpp.i: cmake_force
@@ -1139,7 +1167,7 @@ core/CMakeFiles/sdrpp_core.dir/src/utils/proto/rigctl.cpp.s: cmake_force
 core/CMakeFiles/sdrpp_core.dir/src/utils/proto/websock.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/utils/proto/websock.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/utils/proto/websock.cpp
 core/CMakeFiles/sdrpp_core.dir/src/utils/proto/websock.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_77) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/utils/proto/websock.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_79) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/utils/proto/websock.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/utils/proto/websock.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/utils/proto/websock.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/utils/proto/websock.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/utils/proto/websock.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/utils/proto/websock.cpp.i: cmake_force
@@ -1153,7 +1181,7 @@ core/CMakeFiles/sdrpp_core.dir/src/utils/proto/websock.cpp.s: cmake_force
 core/CMakeFiles/sdrpp_core.dir/src/utils/riff.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/utils/riff.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/utils/riff.cpp
 core/CMakeFiles/sdrpp_core.dir/src/utils/riff.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_78) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/utils/riff.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_80) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/utils/riff.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/utils/riff.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/utils/riff.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/utils/riff.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/utils/riff.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/utils/riff.cpp.i: cmake_force
@@ -1167,7 +1195,7 @@ core/CMakeFiles/sdrpp_core.dir/src/utils/riff.cpp.s: cmake_force
 core/CMakeFiles/sdrpp_core.dir/src/utils/wav.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/src/utils/wav.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/utils/wav.cpp
 core/CMakeFiles/sdrpp_core.dir/src/utils/wav.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_79) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/utils/wav.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_81) "Building CXX object core/CMakeFiles/sdrpp_core.dir/src/utils/wav.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/src/utils/wav.cpp.o -MF CMakeFiles/sdrpp_core.dir/src/utils/wav.cpp.o.d -o CMakeFiles/sdrpp_core.dir/src/utils/wav.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/utils/wav.cpp
 
 core/CMakeFiles/sdrpp_core.dir/src/utils/wav.cpp.i: cmake_force
@@ -1181,7 +1209,7 @@ core/CMakeFiles/sdrpp_core.dir/src/utils/wav.cpp.s: cmake_force
 core/CMakeFiles/sdrpp_core.dir/backends/glfw/backend.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/backends/glfw/backend.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/backends/glfw/backend.cpp
 core/CMakeFiles/sdrpp_core.dir/backends/glfw/backend.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_80) "Building CXX object core/CMakeFiles/sdrpp_core.dir/backends/glfw/backend.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_82) "Building CXX object core/CMakeFiles/sdrpp_core.dir/backends/glfw/backend.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/backends/glfw/backend.cpp.o -MF CMakeFiles/sdrpp_core.dir/backends/glfw/backend.cpp.o.d -o CMakeFiles/sdrpp_core.dir/backends/glfw/backend.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/backends/glfw/backend.cpp
 
 core/CMakeFiles/sdrpp_core.dir/backends/glfw/backend.cpp.i: cmake_force
@@ -1195,7 +1223,7 @@ core/CMakeFiles/sdrpp_core.dir/backends/glfw/backend.cpp.s: cmake_force
 core/CMakeFiles/sdrpp_core.dir/backends/glfw/imgui/imgui_impl_glfw.cpp.o: core/CMakeFiles/sdrpp_core.dir/flags.make
 core/CMakeFiles/sdrpp_core.dir/backends/glfw/imgui/imgui_impl_glfw.cpp.o: /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/backends/glfw/imgui/imgui_impl_glfw.cpp
 core/CMakeFiles/sdrpp_core.dir/backends/glfw/imgui/imgui_impl_glfw.cpp.o: core/CMakeFiles/sdrpp_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_81) "Building CXX object core/CMakeFiles/sdrpp_core.dir/backends/glfw/imgui/imgui_impl_glfw.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_83) "Building CXX object core/CMakeFiles/sdrpp_core.dir/backends/glfw/imgui/imgui_impl_glfw.cpp.o"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT core/CMakeFiles/sdrpp_core.dir/backends/glfw/imgui/imgui_impl_glfw.cpp.o -MF CMakeFiles/sdrpp_core.dir/backends/glfw/imgui/imgui_impl_glfw.cpp.o.d -o CMakeFiles/sdrpp_core.dir/backends/glfw/imgui/imgui_impl_glfw.cpp.o -c /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/backends/glfw/imgui/imgui_impl_glfw.cpp
 
 core/CMakeFiles/sdrpp_core.dir/backends/glfw/imgui/imgui_impl_glfw.cpp.i: cmake_force
@@ -1222,9 +1250,11 @@ sdrpp_core_OBJECTS = \
 "CMakeFiles/sdrpp_core.dir/src/credits.cpp.o" \
 "CMakeFiles/sdrpp_core.dir/src/dsp/detector/signal_detector.cpp.o" \
 "CMakeFiles/sdrpp_core.dir/src/gui/brown/audio_player.cpp.o" \
+"CMakeFiles/sdrpp_core.dir/src/gui/brown/band_panel.cpp.o" \
 "CMakeFiles/sdrpp_core.dir/src/gui/brown/geomap.cpp.o" \
 "CMakeFiles/sdrpp_core.dir/src/gui/brown/kiwisdr_map.cpp.o" \
 "CMakeFiles/sdrpp_core.dir/src/gui/brown/mobile_main_window.cpp.o" \
+"CMakeFiles/sdrpp_core.dir/src/gui/brown/narrow_zoom.cpp.o" \
 "CMakeFiles/sdrpp_core.dir/src/gui/brown/small_waterfall.cpp.o" \
 "CMakeFiles/sdrpp_core.dir/src/gui/brown/wide_overview.cpp.o" \
 "CMakeFiles/sdrpp_core.dir/src/gui/colormaps.cpp.o" \
@@ -1307,9 +1337,11 @@ core/libsdrpp_core.dylib: core/CMakeFiles/sdrpp_core.dir/src/core.cpp.o
 core/libsdrpp_core.dylib: core/CMakeFiles/sdrpp_core.dir/src/credits.cpp.o
 core/libsdrpp_core.dylib: core/CMakeFiles/sdrpp_core.dir/src/dsp/detector/signal_detector.cpp.o
 core/libsdrpp_core.dylib: core/CMakeFiles/sdrpp_core.dir/src/gui/brown/audio_player.cpp.o
+core/libsdrpp_core.dylib: core/CMakeFiles/sdrpp_core.dir/src/gui/brown/band_panel.cpp.o
 core/libsdrpp_core.dylib: core/CMakeFiles/sdrpp_core.dir/src/gui/brown/geomap.cpp.o
 core/libsdrpp_core.dylib: core/CMakeFiles/sdrpp_core.dir/src/gui/brown/kiwisdr_map.cpp.o
 core/libsdrpp_core.dylib: core/CMakeFiles/sdrpp_core.dir/src/gui/brown/mobile_main_window.cpp.o
+core/libsdrpp_core.dylib: core/CMakeFiles/sdrpp_core.dir/src/gui/brown/narrow_zoom.cpp.o
 core/libsdrpp_core.dylib: core/CMakeFiles/sdrpp_core.dir/src/gui/brown/small_waterfall.cpp.o
 core/libsdrpp_core.dylib: core/CMakeFiles/sdrpp_core.dir/src/gui/brown/wide_overview.cpp.o
 core/libsdrpp_core.dylib: core/CMakeFiles/sdrpp_core.dir/src/gui/colormaps.cpp.o
@@ -1377,7 +1409,7 @@ core/libsdrpp_core.dylib: core/CMakeFiles/sdrpp_core.dir/backends/glfw/imgui/img
 core/libsdrpp_core.dylib: core/CMakeFiles/sdrpp_core.dir/build.make
 core/libsdrpp_core.dylib: core/libcorrect/lib/libcorrect_static.a
 core/libsdrpp_core.dylib: core/CMakeFiles/sdrpp_core.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_82) "Linking CXX shared library libsdrpp_core.dylib"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/CMakeFiles --progress-num=$(CMAKE_PROGRESS_84) "Linking CXX shared library libsdrpp_core.dylib"
 	cd /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/build-macos-x86_64/core && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/sdrpp_core.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

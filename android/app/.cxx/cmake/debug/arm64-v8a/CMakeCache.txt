@@ -410,8 +410,8 @@ CMAKE_SYSTEM_NAME:UNINITIALIZED=Android
 //No help, variable specified on the command line.
 CMAKE_SYSTEM_VERSION:UNINITIALIZED=28
 
-//The CMake toolchain file
-CMAKE_TOOLCHAIN_FILE:FILEPATH=/root/Android/ndk/25.2.9519653/build/cmake/android.toolchain.cmake
+//No help, variable specified on the command line.
+CMAKE_TOOLCHAIN_FILE:UNINITIALIZED=/root/Android/ndk/25.2.9519653/build/cmake/android.toolchain.cmake
 
 //If this value is on, makefiles will be generated without the
 // .SILENT directive, and all commands will be echoed to the console
@@ -500,6 +500,9 @@ OPT_BACKEND_ANDROID:BOOL=ON
 
 //Use the GLFW backend
 OPT_BACKEND_GLFW:BOOL=OFF
+
+//Use the iOS (UIKit + OpenGL ES) backend
+OPT_BACKEND_IOS:BOOL=OFF
 
 //Build Airspy HF+ Source Module (Dependencies: libairspyhf)
 OPT_BUILD_AIRSPYHF_SOURCE:BOOL=ON

@@ -1002,6 +1002,8 @@ source_modules/spectran_http_source/CMakeFiles/spectran_http_source.dir/src/main
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/widgets/menu.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/dialogs/loading_screen.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/brown/mobile_main_window.h \
+  /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/gui/brown/band_panel.h \
+  /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/source_modules/spectran_http_source/src/../../../misc_modules/frequency_manager/src/frequency_manager.h \
   /usr/local/Cellar/fftw/3.3.11/include/fftw3.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/signal_path/vfo_manager.h \
   /Users/ajastudioimacpro/Documents/GItHub/SDRPlusPlusBrown/core/src/signal_path/../dsp/channel/rx_vfo.h \

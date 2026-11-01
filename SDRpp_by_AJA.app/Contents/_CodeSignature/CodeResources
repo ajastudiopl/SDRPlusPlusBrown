@@ -361,10 +361,10 @@
 		<dict>
 			<key>cdhash</key>
 			<data>
-			ElpA3Ywkw/8fvWVV3RyZXb6KoR0=
+			up6TgkjzWWpxSL+m/H+zahNex2g=
 			</data>
 			<key>requirement</key>
-			<string>cdhash H"125a40dd8c24c3ff1fbd6555dd1c995dbe8aa11d"</string>
+			<string>cdhash H"ba9e938248f3596a7148bfa6fc7fb36a135ec768"</string>
 		</dict>
 		<key>Frameworks/libusb-1.0.0.dylib</key>
 		<dict>
@@ -453,7 +453,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			mLtsaapPqVmlXTMnfT/OS3y19k+VdAzYdnanxQB0P1k=
+			5FjQ2c8k7d6yaxWkbt0yWUweSnajWTgTb4s4ZZXsQXg=
 			</data>
 		</dict>
 		<key>Plugins/ft8_decoder.dylib</key>
@@ -551,7 +551,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			415zzvKW2bjPhuThWfkouIXxE5hVK9rWZE3Cs3EP2qI=
+			QOWh/hVVcMzdLjic1DrCppPuFa5tTK5Dn+ynK+qkGNQ=
 			</data>
 		</dict>
 		<key>Plugins/rfspace_source.dylib</key>
@@ -600,7 +600,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			t8x0a45aPrPdB80ceF5CDOO9sfCbIEw7+CwVoEoJwF4=
+			iODvCdM+TgNKZLD5SsoUSPvuSbyd/yfF8YELWxLQCbA=
 			</data>
 		</dict>
 		<key>Plugins/spectrum_analyzer.dylib</key>
