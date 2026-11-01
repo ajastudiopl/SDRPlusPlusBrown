@@ -671,7 +671,8 @@ private:
         if (saved) { f << text; }
         f.close();
         ImGui::SetClipboardText(text.c_str());
-        setBackupStatus("Exported " + std::to_string(count) + " markers in " + std::to_string(out["lists"].size()) + " lists. Copied to the clipboard" + (saved ? ", saved in " + path : ""));
+        std::string where = saved ? markerbackup::deliverFile(path, "markers_export.json", text) : "Could not write " + path;
+        setBackupStatus("Exported " + std::to_string(count) + " markers in " + std::to_string(out["lists"].size()) + " lists (also copied to the clipboard). " + where);
     }
 
     void importMarkersText(const std::string& text, bool replace) {
@@ -730,7 +731,7 @@ private:
         ImGui::Spacing();
         if (!ImGui::CollapsingHeader(("Backup and sync##_freq_mgr_backup_" + name).c_str())) { return; }
         if (ImGui::Button(("Export all markers##_freq_mgr_exp_all_" + name).c_str(), ImVec2(menuWidth, 0))) { exportAllMarkers(); }
-        ImGui::TextDisabled("Copies the markers to the clipboard and saves them in a file, so you can put them anywhere (Drive, notes, a message).");
+        ImGui::TextDisabled("Saves the markers as markers_export.json (to upload to Drive or anywhere else) and copies the same text to the clipboard.");
         ImGui::Spacing();
         ImGui::SetNextItemWidth(menuWidth - ImGui::CalcTextSize("Paste").x - 24);
         ImGui::InputTextWithHint(("##_freq_mgr_backup_url_" + name).c_str(), "Link to a markers file (Drive, GitHub raw...)", backupUrl, sizeof backupUrl);

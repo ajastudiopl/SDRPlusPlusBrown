@@ -10,6 +10,7 @@
 #include <TargetConditionals.h>
 #if TARGET_OS_IOS
 std::string iosHttpGet(const std::string& url);   // NSURLSession, in the iOS backend
+void iosShareFile(const std::string& path);       // share sheet, in the iOS backend
 #endif
 #endif
 
@@ -67,6 +68,22 @@ namespace markerbackup {
         if (rc != 0 || out.empty()) { text = out.empty() ? "No answer from the server" : out.substr(0, 200); return false; }
         text = out;
         return true;
+#endif
+    }
+
+    // Hands the exported file to the user in the way the platform offers; returns what to tell them
+    inline std::string deliverFile(const std::string& path, const std::string& name, const std::string& text) {
+#if defined(__ANDROID__)
+        std::string err = ::backend::saveToDownloads(name, text);
+        return err.empty() ? "Saved in the Downloads folder as " + name : "Could not save to Downloads: " + err;
+#elif defined(__APPLE__) && TARGET_OS_IOS
+        iosShareFile(path);
+        return "Choose where to put the file (Save to Files, Google Drive, Mail...)";
+#elif defined(__APPLE__)
+        system(("open -R '" + path + "'").c_str());
+        return "Saved in " + path + " (shown in Finder)";
+#else
+        return "Saved in " + path;
 #endif
     }
 

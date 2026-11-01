@@ -22,6 +22,8 @@ namespace backend {
     void retryUsbPermission();
 
     std::string httpGet(const std::string& url);
+    // "" = saved in the public Downloads folder, otherwise the reason it failed
+    std::string saveToDownloads(const std::string& name, const std::string& text);
 
     std::string getAudioSinkIds();
     std::string getAudioSourceIds();

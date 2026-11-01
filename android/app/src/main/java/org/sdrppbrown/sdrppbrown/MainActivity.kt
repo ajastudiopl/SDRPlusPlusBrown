@@ -410,6 +410,31 @@ class MainActivity : NativeActivity(), SensorEventListener {
         }
     }
 
+    // Puts a text file in the public Downloads folder (visible in Files and in the Drive upload picker); "" = done, otherwise the reason
+    public fun saveToDownloads(name: String, text: String): String {
+        try {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) { return "Saving to Downloads needs Android 10 or newer" }
+            val resolver = contentResolver
+            val collection = android.provider.MediaStore.Downloads.EXTERNAL_CONTENT_URI
+            var uri: Uri? = null
+            resolver.query(collection, arrayOf(android.provider.MediaStore.Downloads._ID), android.provider.MediaStore.Downloads.DISPLAY_NAME + "=?", arrayOf(name), null)?.use { c ->
+                if (c.moveToFirst()) { uri = android.content.ContentUris.withAppendedId(collection, c.getLong(0)) }
+            }
+            if (uri == null) {
+                val values = android.content.ContentValues()
+                values.put(android.provider.MediaStore.Downloads.DISPLAY_NAME, name)
+                values.put(android.provider.MediaStore.Downloads.MIME_TYPE, "application/json")
+                values.put(android.provider.MediaStore.Downloads.RELATIVE_PATH, "Download")
+                uri = resolver.insert(collection, values)
+            }
+            if (uri == null) { return "Could not create the file" }
+            resolver.openOutputStream(uri!!, "wt")?.use { it.write(text.toByteArray(Charsets.UTF_8)) }
+            return ""
+        } catch (e: Exception) {
+            return e.toString()
+        }
+    }
+
     public fun httpGet(url: String): String {
         var response = ""
         var connection : HttpURLConnection? = null

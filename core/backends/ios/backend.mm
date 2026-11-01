@@ -248,6 +248,19 @@ std::string iosHttpGet(const std::string& url) {
     return result;
 }
 
+// Opens the share sheet for a file so it can go to Files, Drive, Mail...
+void iosShareFile(const std::string& path) {
+    NSString* p = [NSString stringWithUTF8String:path.c_str()];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIViewController* vc = gView.window.rootViewController;
+        if (!vc) { return; }
+        UIActivityViewController* share = [[UIActivityViewController alloc] initWithActivityItems:@[[NSURL fileURLWithPath:p]] applicationActivities:nil];
+        share.popoverPresentationController.sourceView = gView;
+        share.popoverPresentationController.sourceRect = CGRectMake(gView.bounds.size.width / 2, gView.bounds.size.height / 2, 1, 1);
+        [vc presentViewController:share animated:YES completion:nil];
+    });
+}
+
 static const char* iosGetClipboard(void*) {
     static std::string text;
     NSString* s = [UIPasteboard generalPasteboard].string;

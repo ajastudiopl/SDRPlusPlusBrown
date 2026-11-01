@@ -85,6 +85,25 @@ namespace backend {
     }
 
 
+    std::string saveToDownloads(const std::string& name, const std::string& text) {
+        JNIEnv* java_env;
+        JavaVM* java_vm = backend::app->activity->vm;
+        if (java_vm->AttachCurrentThread(&java_env, NULL) != JNI_OK) { return "JNI: could not attach to thread"; }
+        jclass cls = java_env->GetObjectClass(app->activity->clazz);
+        jmethodID m = cls ? java_env->GetMethodID(cls, "saveToDownloads", "(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;") : nullptr;
+        if (!m) { return "JNI: saveToDownloads not found"; }
+        jstring jname = java_env->NewStringUTF(name.c_str());
+        jstring jtext = java_env->NewStringUTF(text.c_str());
+        jstring res = (jstring)java_env->CallObjectMethod(app->activity->clazz, m, jname, jtext);
+        std::string out;
+        if (res) {
+            const char* c = java_env->GetStringUTFChars(res, NULL);
+            out = c;
+            java_env->ReleaseStringUTFChars(res, c);
+        }
+        return out;
+    }
+
     void androidHapticFeedback() {
         JavaVM* java_vm = app->activity->vm;
         JNIEnv* java_env = NULL;
