@@ -1,0 +1,57 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"install",
+			"include"
+		],
+		"files" : 
+		[
+			"sdrpp_module.cmake",
+			"decoder_modules/ch_tetra_demodulator/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 1
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 251,
+				"parent" : 0
+			},
+			{
+				"file" : 0,
+				"parent" : 1
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 28,
+				"parent" : 2
+			}
+		]
+	},
+	"installers" : 
+	[
+		{
+			"backtrace" : 3,
+			"component" : "Unspecified",
+			"destination" : "lib/sdrpp/plugins",
+			"paths" : 
+			[
+				"/work/android/app/build/intermediates/cmake/debug/obj/arm64-v8a/ch_tetra_demodulator.so"
+			],
+			"targetId" : "ch_tetra_demodulator::@7e871cb6b17ebd999ab5",
+			"targetIndex" : 5,
+			"type" : "target"
+		}
+	],
+	"paths" : 
+	{
+		"build" : "decoder_modules/ch_tetra_demodulator",
+		"source" : "decoder_modules/ch_tetra_demodulator"
+	}
+}

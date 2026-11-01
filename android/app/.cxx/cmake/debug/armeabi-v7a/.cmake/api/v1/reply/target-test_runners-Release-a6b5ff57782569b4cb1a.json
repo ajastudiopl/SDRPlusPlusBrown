@@ -1,0 +1,81 @@
+{
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_custom_target"
+		],
+		"files" : 
+		[
+			"core/libcorrect/tests/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 52,
+				"parent" : 0
+			}
+		]
+	},
+	"dependencies" : 
+	[
+		{
+			"id" : "convolutional_test_runner::@6f5bfa37fb45f03573f2"
+		},
+		{
+			"id" : "convolutional_shim_test_runner::@6f5bfa37fb45f03573f2"
+		},
+		{
+			"id" : "reed_solomon_test_runner::@6f5bfa37fb45f03573f2"
+		},
+		{
+			"id" : "reed_solomon_shim_interop_test_runner::@6f5bfa37fb45f03573f2"
+		}
+	],
+	"id" : "test_runners::@6f5bfa37fb45f03573f2",
+	"name" : "test_runners",
+	"paths" : 
+	{
+		"build" : "core/libcorrect/tests",
+		"source" : "core/libcorrect/tests"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		},
+		{
+			"name" : "CMake Rules",
+			"sourceIndexes" : 
+			[
+				1
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 1,
+			"isGenerated" : true,
+			"path" : "android/app/.cxx/cmake/debug/armeabi-v7a/core/libcorrect/tests/CMakeFiles/test_runners",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "android/app/.cxx/cmake/debug/armeabi-v7a/core/libcorrect/tests/CMakeFiles/test_runners.rule",
+			"sourceGroupIndex" : 1
+		}
+	],
+	"type" : "UTILITY"
+}

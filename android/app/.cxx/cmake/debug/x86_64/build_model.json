@@ -1,0 +1,287 @@
+{
+  "abi": "X86_64",
+  "info": {
+    "abi": "X86_64",
+    "bitness": 64,
+    "deprecated": false,
+    "default": true
+  },
+  "originalCxxBuildFolder": "/work/android/app/.cxx/cmake/debug/x86_64",
+  "cxxBuildFolder": "/work/android/app/.cxx/cmake/debug/x86_64",
+  "abiPlatformVersion": 28,
+  "cmake": {
+    "cmakeWrappingBaseFolder": "/work/android/app/.cxx/cxx/debug/x86_64",
+    "cmakeArtifactsBaseFolder": "/work/android/app/.cxx/cmake/debug/x86_64",
+    "effectiveConfiguration": {
+      "name": "traditional-android-studio-cmake-environment",
+      "description": "Composite reified CMakeSettings configuration",
+      "generator": "Ninja",
+      "inheritEnvironments": [
+        "ndk"
+      ],
+      "buildRoot": "/work/android/app/.cxx/cmake/debug/x86_64",
+      "cmakeToolchain": "/root/Android/ndk/25.2.9519653/build/cmake/android.toolchain.cmake",
+      "cmakeExecutable": "/usr/bin/cmake",
+      "variables": [
+        {
+          "name": "CMAKE_FIND_ROOT_PATH",
+          "value": "/work/android/app/.cxx/cmake/debug/prefab/x86_64/prefab"
+        },
+        {
+          "name": "CMAKE_TOOLCHAIN_FILE",
+          "value": "/root/Android/ndk/25.2.9519653/build/cmake/android.toolchain.cmake"
+        },
+        {
+          "name": "ANDROID_ABI",
+          "value": "x86_64"
+        },
+        {
+          "name": "ANDROID_NDK",
+          "value": "/root/Android/ndk/25.2.9519653"
+        },
+        {
+          "name": "ANDROID_PLATFORM",
+          "value": "android-28"
+        },
+        {
+          "name": "CMAKE_ANDROID_ARCH_ABI",
+          "value": "x86_64"
+        },
+        {
+          "name": "CMAKE_ANDROID_NDK",
+          "value": "/root/Android/ndk/25.2.9519653"
+        },
+        {
+          "name": "CMAKE_EXPORT_COMPILE_COMMANDS",
+          "value": "ON"
+        },
+        {
+          "name": "CMAKE_LIBRARY_OUTPUT_DIRECTORY",
+          "value": "/work/android/app/build/intermediates/cmake/debug/obj/x86_64"
+        },
+        {
+          "name": "CMAKE_RUNTIME_OUTPUT_DIRECTORY",
+          "value": "/work/android/app/build/intermediates/cmake/debug/obj/x86_64"
+        },
+        {
+          "name": "CMAKE_MAKE_PROGRAM",
+          "value": "/usr/bin/ninja"
+        },
+        {
+          "name": "CMAKE_SYSTEM_NAME",
+          "value": "Android"
+        },
+        {
+          "name": "CMAKE_SYSTEM_VERSION",
+          "value": "28"
+        },
+        {
+          "name": "CMAKE_BUILD_TYPE",
+          "value": "Release"
+        },
+        {
+          "name": "SDR_KIT_ROOT",
+          "value": "/sdr-kit"
+        },
+        {
+          "name": "OPT_BACKEND_GLFW",
+          "value": "OFF"
+        },
+        {
+          "name": "OPT_BACKEND_ANDROID",
+          "value": "ON"
+        },
+        {
+          "name": "OPT_BUILD_SOAPY_SOURCE",
+          "value": "OFF"
+        },
+        {
+          "name": "OPT_BUILD_ANDROID_AUDIO_SINK",
+          "value": "ON"
+        },
+        {
+          "name": "OPT_BUILD_AUDIO_SINK",
+          "value": "OFF"
+        },
+        {
+          "name": "OPT_BUILD_DISCORD_PRESENCE",
+          "value": "OFF"
+        },
+        {
+          "name": "OPT_BUILD_M17_DECODER",
+          "value": "ON"
+        },
+        {
+          "name": "OPT_BUILD_PLUTOSDR_SOURCE",
+          "value": "ON"
+        },
+        {
+          "name": "OPT_BUILD_AUDIO_SOURCE",
+          "value": "OFF"
+        },
+        {
+          "name": "OPT_BUILD_CH_EXTRAVHF_DECODER",
+          "value": "ON"
+        },
+        {
+          "name": "OPT_BUILD_CH_TETRA_DEMODULATOR",
+          "value": "ON"
+        },
+        {
+          "name": "OPT_BUILD_MPEG_ADTS_SINK",
+          "value": "OFF"
+        },
+        {
+          "name": "OPT_BUILD_HYDRASDR_SOURCE",
+          "value": "ON"
+        }
+      ]
+    },
+    "cmakeServerLogFile": "/work/android/app/.cxx/cmake/debug/x86_64/cmake_server_log.txt"
+  },
+  "variant": {
+    "buildSystemArgumentList": [
+      "-DCMAKE_BUILD_TYPE\u003dRelease",
+      "-DSDR_KIT_ROOT\u003d/sdr-kit",
+      "-DOPT_BACKEND_GLFW\u003dOFF",
+      "-DOPT_BACKEND_ANDROID\u003dON",
+      "-DOPT_BUILD_SOAPY_SOURCE\u003dOFF",
+      "-DOPT_BUILD_ANDROID_AUDIO_SINK\u003dON",
+      "-DOPT_BUILD_AUDIO_SINK\u003dOFF",
+      "-DOPT_BUILD_DISCORD_PRESENCE\u003dOFF",
+      "-DOPT_BUILD_M17_DECODER\u003dON",
+      "-DOPT_BUILD_PLUTOSDR_SOURCE\u003dON",
+      "-DOPT_BUILD_AUDIO_SOURCE\u003dOFF",
+      "-DOPT_BUILD_CH_EXTRAVHF_DECODER\u003dON",
+      "-DOPT_BUILD_CH_TETRA_DEMODULATOR\u003dON",
+      "-DOPT_BUILD_MPEG_ADTS_SINK\u003dOFF",
+      "-DOPT_BUILD_HYDRASDR_SOURCE\u003dON"
+    ],
+    "cFlagsList": [],
+    "cppFlagsList": [],
+    "variantName": "debug",
+    "objFolder": "/work/android/app/build/intermediates/cmake/debug/obj",
+    "soFolder": "/work/android/app/build/intermediates/cmake/debug/lib",
+    "isDebuggableEnabled": true,
+    "validAbiList": [
+      "X86_64"
+    ],
+    "buildTargetSet": [],
+    "implicitBuildTargetSet": [],
+    "cmakeSettingsConfiguration": "android-gradle-plugin-predetermined-name",
+    "module": {
+      "cxxFolder": "/work/android/app/.cxx",
+      "splitsAbiFilterSet": [],
+      "intermediatesFolder": "/work/android/app/build/intermediates",
+      "gradleModulePathName": ":app",
+      "moduleRootFolder": "/work/android/app",
+      "moduleBuildFile": "/work/android/app/build.gradle",
+      "makeFile": "/work/CMakeLists.txt",
+      "buildSystem": "CMAKE",
+      "ndkFolder": "/root/Android/ndk/25.2.9519653",
+      "ndkVersion": "25.2.9519653",
+      "ndkSupportedAbiList": [
+        "ARMEABI_V7A",
+        "ARM64_V8A",
+        "X86",
+        "X86_64"
+      ],
+      "ndkDefaultAbiList": [
+        "ARMEABI_V7A",
+        "ARM64_V8A",
+        "X86",
+        "X86_64"
+      ],
+      "ndkDefaultStl": "LIBCXX_STATIC",
+      "ndkMetaPlatforms": {
+        "min": 19,
+        "max": 33,
+        "aliases": {
+          "20": 19,
+          "25": 24,
+          "J": 16,
+          "J-MR1": 17,
+          "J-MR2": 18,
+          "K": 19,
+          "L": 21,
+          "L-MR1": 22,
+          "M": 23,
+          "N": 24,
+          "N-MR1": 24,
+          "O": 26,
+          "O-MR1": 27,
+          "P": 28,
+          "Q": 29,
+          "R": 30,
+          "S": 31,
+          "Sv2": 32,
+          "Tiramisu": 33
+        }
+      },
+      "ndkMetaAbiList": [
+        {
+          "abi": "ARMEABI_V7A",
+          "bitness": 32,
+          "deprecated": false,
+          "default": true
+        },
+        {
+          "abi": "ARM64_V8A",
+          "bitness": 64,
+          "deprecated": false,
+          "default": true
+        },
+        {
+          "abi": "X86",
+          "bitness": 32,
+          "deprecated": false,
+          "default": true
+        },
+        {
+          "abi": "X86_64",
+          "bitness": 64,
+          "deprecated": false,
+          "default": true
+        }
+      ],
+      "originalCmakeToolchainFile": "/root/Android/ndk/25.2.9519653/build/cmake/android.toolchain.cmake",
+      "cmakeToolchainFile": "/root/Android/ndk/25.2.9519653/build/cmake/android.toolchain.cmake",
+      "cmake": {
+        "isValidCmakeAvailable": true,
+        "cmakeExe": "/usr/bin/cmake",
+        "minimumCmakeVersion": "3.22.1",
+        "ninjaExe": "/usr/bin/ninja",
+        "isPreferCmakeFileApiEnabled": true
+      },
+      "stlSharedObjectMap": {
+        "LIBCXX_SHARED": {
+          "ARMEABI_V7A": "/root/Android/ndk/25.2.9519653/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/libc++_shared.so",
+          "ARM64_V8A": "/root/Android/ndk/25.2.9519653/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/libc++_shared.so",
+          "X86": "/root/Android/ndk/25.2.9519653/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/i686-linux-android/libc++_shared.so",
+          "X86_64": "/root/Android/ndk/25.2.9519653/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/x86_64-linux-android/libc++_shared.so"
+        },
+        "LIBCXX_STATIC": {},
+        "NONE": {},
+        "SYSTEM": {}
+      },
+      "project": {
+        "rootBuildGradleFolder": "/work/android",
+        "cxxFolder": "/work/android/.cxx",
+        "compilerSettingsCacheFolder": "/work/android/.cxx",
+        "sdkFolder": "/root/Android",
+        "isNativeCompilerSettingsCacheEnabled": false,
+        "isBuildOnlyTargetAbiEnabled": true,
+        "ideBuildTargetAbi": "x86_64",
+        "isCmakeBuildCohabitationEnabled": false,
+        "isPrefabEnabled": false,
+        "isV2NativeModelEnabled": true
+      },
+      "nativeBuildOutputLevel": "QUIET"
+    },
+    "prefabDirectory": "/work/android/app/.cxx/cmake/debug/prefab"
+  },
+  "buildSettings": {
+    "environmentVariables": []
+  },
+  "prefabFolder": "/work/android/app/.cxx/cmake/debug/prefab/x86_64"
+}

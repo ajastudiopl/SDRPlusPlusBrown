@@ -1,0 +1,707 @@
+{
+	"artifacts" : 
+	[
+		{
+			"path" : "/work/android/app/build/intermediates/cmake/debug/obj/arm64-v8a/ch_tetra_demodulator.so"
+		}
+	],
+	"backtrace" : 3,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_library",
+			"include",
+			"install",
+			"target_link_libraries",
+			"target_compile_options",
+			"target_include_directories"
+		],
+		"files" : 
+		[
+			"sdrpp_module.cmake",
+			"decoder_modules/ch_tetra_demodulator/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 1
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 251,
+				"parent" : 0
+			},
+			{
+				"file" : 0,
+				"parent" : 1
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 10,
+				"parent" : 2
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 28,
+				"parent" : 2
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 11,
+				"parent" : 2
+			},
+			{
+				"command" : 3,
+				"file" : 1,
+				"line" : 255,
+				"parent" : 0
+			},
+			{
+				"command" : 4,
+				"file" : 0,
+				"line" : 22,
+				"parent" : 2
+			},
+			{
+				"command" : 5,
+				"file" : 0,
+				"line" : 12,
+				"parent" : 2
+			},
+			{
+				"command" : 5,
+				"file" : 1,
+				"line" : 253,
+				"parent" : 0
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "-g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -O3 -DNDEBUG  -fPIC"
+				},
+				{
+					"backtrace" : 7,
+					"fragment" : "-O3"
+				},
+				{
+					"backtrace" : 7,
+					"fragment" : "-Wno-unused-command-line-argument"
+				},
+				{
+					"backtrace" : 7,
+					"fragment" : "-Wno-deprecated-register"
+				},
+				{
+					"backtrace" : 7,
+					"fragment" : "-undefined"
+				},
+				{
+					"backtrace" : 7,
+					"fragment" : "dynamic_lookup"
+				},
+				{
+					"fragment" : "-std=gnu11"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"backtrace" : 5,
+					"define" : "INSTALL_PREFIX=\"/usr\""
+				},
+				{
+					"define" : "ch_tetra_demodulator_EXPORTS"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 8,
+					"path" : "/work/core/src/src"
+				},
+				{
+					"backtrace" : 9,
+					"path" : "/work/decoder_modules/ch_tetra_demodulator/BEFORE"
+				},
+				{
+					"backtrace" : 9,
+					"path" : "/work/decoder_modules/ch_tetra_demodulator/src"
+				},
+				{
+					"backtrace" : 9,
+					"path" : "/work/decoder_modules/ch_tetra_demodulator/src/decoder/src"
+				},
+				{
+					"backtrace" : 9,
+					"path" : "/work/android/app/.cxx/cmake/debug/arm64-v8a/decoder_modules/ch_tetra_demodulator/etsi_codec"
+				},
+				{
+					"backtrace" : 9,
+					"path" : "/work/android/app/.cxx/cmake/debug/arm64-v8a/decoder_modules/ch_tetra_demodulator/etsi_codec/c-code"
+				},
+				{
+					"backtrace" : 5,
+					"path" : "/work/core/src"
+				},
+				{
+					"backtrace" : 5,
+					"path" : "/work/core/src/imgui"
+				},
+				{
+					"backtrace" : 5,
+					"path" : "/work/core/backends/android"
+				},
+				{
+					"backtrace" : 5,
+					"path" : "/work/core/backends/android/imgui"
+				},
+				{
+					"backtrace" : 5,
+					"path" : "/work/core/libcorrect/include"
+				},
+				{
+					"backtrace" : 5,
+					"path" : "/sdr-kit/arm64-v8a/include"
+				},
+				{
+					"backtrace" : 5,
+					"path" : "/root/Android/ndk/25.2.9519653/sources/android/native_app_glue"
+				}
+			],
+			"language" : "C",
+			"languageStandard" : 
+			{
+				"backtraces" : 
+				[
+					3
+				],
+				"standard" : "11"
+			},
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				11,
+				12,
+				13,
+				14,
+				15,
+				16,
+				17,
+				18,
+				19,
+				20,
+				21,
+				22,
+				23,
+				24,
+				25,
+				26,
+				27
+			],
+			"sysroot" : 
+			{
+				"path" : "/root/Android/ndk/25.2.9519653/toolchains/llvm/prebuilt/linux-x86_64/sysroot"
+			}
+		},
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "-g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -O3 -DNDEBUG  -fPIC"
+				},
+				{
+					"backtrace" : 7,
+					"fragment" : "-O3"
+				},
+				{
+					"backtrace" : 7,
+					"fragment" : "-std=c++17"
+				},
+				{
+					"backtrace" : 7,
+					"fragment" : "-Wno-unused-command-line-argument"
+				},
+				{
+					"backtrace" : 7,
+					"fragment" : "-Wno-deprecated-register"
+				},
+				{
+					"backtrace" : 7,
+					"fragment" : "-undefined"
+				},
+				{
+					"backtrace" : 7,
+					"fragment" : "dynamic_lookup"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"backtrace" : 5,
+					"define" : "INSTALL_PREFIX=\"/usr\""
+				},
+				{
+					"define" : "ch_tetra_demodulator_EXPORTS"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 8,
+					"path" : "/work/core/src/src"
+				},
+				{
+					"backtrace" : 9,
+					"path" : "/work/decoder_modules/ch_tetra_demodulator/BEFORE"
+				},
+				{
+					"backtrace" : 9,
+					"path" : "/work/decoder_modules/ch_tetra_demodulator/src"
+				},
+				{
+					"backtrace" : 9,
+					"path" : "/work/decoder_modules/ch_tetra_demodulator/src/decoder/src"
+				},
+				{
+					"backtrace" : 9,
+					"path" : "/work/android/app/.cxx/cmake/debug/arm64-v8a/decoder_modules/ch_tetra_demodulator/etsi_codec"
+				},
+				{
+					"backtrace" : 9,
+					"path" : "/work/android/app/.cxx/cmake/debug/arm64-v8a/decoder_modules/ch_tetra_demodulator/etsi_codec/c-code"
+				},
+				{
+					"backtrace" : 5,
+					"path" : "/work/core/src"
+				},
+				{
+					"backtrace" : 5,
+					"path" : "/work/core/src/imgui"
+				},
+				{
+					"backtrace" : 5,
+					"path" : "/work/core/backends/android"
+				},
+				{
+					"backtrace" : 5,
+					"path" : "/work/core/backends/android/imgui"
+				},
+				{
+					"backtrace" : 5,
+					"path" : "/work/core/libcorrect/include"
+				},
+				{
+					"backtrace" : 5,
+					"path" : "/sdr-kit/arm64-v8a/include"
+				},
+				{
+					"backtrace" : 5,
+					"path" : "/root/Android/ndk/25.2.9519653/sources/android/native_app_glue"
+				}
+			],
+			"language" : "CXX",
+			"languageStandard" : 
+			{
+				"backtraces" : 
+				[
+					3
+				],
+				"standard" : "14"
+			},
+			"sourceIndexes" : 
+			[
+				28,
+				29,
+				30,
+				31,
+				32,
+				33,
+				34
+			],
+			"sysroot" : 
+			{
+				"path" : "/root/Android/ndk/25.2.9519653/toolchains/llvm/prebuilt/linux-x86_64/sysroot"
+			}
+		}
+	],
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 5,
+			"id" : "sdrpp_core::@57760688d1f824db5d9c"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "correct_static::@b382305addd3f0620113"
+		},
+		{
+			"backtrace" : 6,
+			"id" : "etsi_codec::@7e871cb6b17ebd999ab5"
+		}
+	],
+	"id" : "ch_tetra_demodulator::@7e871cb6b17ebd999ab5",
+	"install" : 
+	{
+		"destinations" : 
+		[
+			{
+				"backtrace" : 4,
+				"path" : "lib/sdrpp/plugins"
+			},
+			{
+				"backtrace" : 4,
+				"path" : "lib/sdrpp/plugins"
+			}
+		],
+		"prefix" : 
+		{
+			"path" : "/usr"
+		}
+	},
+	"link" : 
+	{
+		"commandFragments" : 
+		[
+			{
+				"fragment" : "-static-libstdc++ -Wl,--build-id=sha1 -Wl,--no-rosegment -Wl,--fatal-warnings -Wl,--no-undefined -Qunused-arguments  -u ANativeActivity_onCreate -Wl,--gc-sections",
+				"role" : "flags"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "../../../../build/intermediates/cmake/debug/obj/arm64-v8a/libsdrpp_core.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 6,
+				"fragment" : "decoder_modules/ch_tetra_demodulator/libetsi_codec.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "core/libcorrect/lib/libcorrect_static.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/sdr-kit/arm64-v8a/lib/libvolk.so",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/sdr-kit/arm64-v8a/lib/libfftw3f.so",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/sdr-kit/arm64-v8a/lib/libzstd.so",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-landroid",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-lEGL",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-lGLESv3",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-llog",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-latomic -lm",
+				"role" : "libraries"
+			}
+		],
+		"language" : "CXX",
+		"sysroot" : 
+		{
+			"path" : "/root/Android/ndk/25.2.9519653/toolchains/llvm/prebuilt/linux-x86_64/sysroot"
+		}
+	},
+	"name" : "ch_tetra_demodulator",
+	"nameOnDisk" : "ch_tetra_demodulator.so",
+	"paths" : 
+	{
+		"build" : "decoder_modules/ch_tetra_demodulator",
+		"source" : "decoder_modules/ch_tetra_demodulator"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				11,
+				12,
+				13,
+				14,
+				15,
+				16,
+				17,
+				18,
+				19,
+				20,
+				21,
+				22,
+				23,
+				24,
+				25,
+				26,
+				27,
+				28,
+				29,
+				30,
+				31,
+				32,
+				33,
+				34
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "decoder_modules/ch_tetra_demodulator/src/decoder/src/crypto/hurdle.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "decoder_modules/ch_tetra_demodulator/src/decoder/src/crypto/taa1.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "decoder_modules/ch_tetra_demodulator/src/decoder/src/crypto/tea1.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "decoder_modules/ch_tetra_demodulator/src/decoder/src/crypto/tea2.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "decoder_modules/ch_tetra_demodulator/src/decoder/src/crypto/tea3.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "decoder_modules/ch_tetra_demodulator/src/decoder/src/crypto/tetra_crypto.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "decoder_modules/ch_tetra_demodulator/src/decoder/src/lower_mac/crc_simple.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "decoder_modules/ch_tetra_demodulator/src/decoder/src/lower_mac/osmo_conv.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "decoder_modules/ch_tetra_demodulator/src/decoder/src/lower_mac/tch_reordering.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "decoder_modules/ch_tetra_demodulator/src/decoder/src/lower_mac/tetra_conv_enc.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "decoder_modules/ch_tetra_demodulator/src/decoder/src/lower_mac/tetra_interleave.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "decoder_modules/ch_tetra_demodulator/src/decoder/src/lower_mac/tetra_lower_mac.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "decoder_modules/ch_tetra_demodulator/src/decoder/src/lower_mac/tetra_rm3014.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "decoder_modules/ch_tetra_demodulator/src/decoder/src/lower_mac/tetra_scramb.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "decoder_modules/ch_tetra_demodulator/src/decoder/src/lower_mac/viterbi.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "decoder_modules/ch_tetra_demodulator/src/decoder/src/lower_mac/viterbi_cch.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "decoder_modules/ch_tetra_demodulator/src/decoder/src/lower_mac/viterbi_tch.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "decoder_modules/ch_tetra_demodulator/src/decoder/src/phy/tetra_burst.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "decoder_modules/ch_tetra_demodulator/src/decoder/src/phy/tetra_burst_sync.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "decoder_modules/ch_tetra_demodulator/src/decoder/src/tetra_cmce_pdu.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "decoder_modules/ch_tetra_demodulator/src/decoder/src/tetra_common.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "decoder_modules/ch_tetra_demodulator/src/decoder/src/tetra_mac_pdu.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "decoder_modules/ch_tetra_demodulator/src/decoder/src/tetra_mle.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "decoder_modules/ch_tetra_demodulator/src/decoder/src/tetra_mle_pdu.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "decoder_modules/ch_tetra_demodulator/src/decoder/src/tetra_mm_pdu.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "decoder_modules/ch_tetra_demodulator/src/decoder/src/tetra_sndcp_pdu.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "decoder_modules/ch_tetra_demodulator/src/decoder/src/tetra_tdma.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "decoder_modules/ch_tetra_demodulator/src/decoder/src/tetra_upper_mac.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 1,
+			"path" : "decoder_modules/ch_tetra_demodulator/src/dsp/bit_unpacker.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 1,
+			"path" : "decoder_modules/ch_tetra_demodulator/src/dsp/complex_fd.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 1,
+			"path" : "decoder_modules/ch_tetra_demodulator/src/dsp/dqpsk_sym_extr.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 1,
+			"path" : "decoder_modules/ch_tetra_demodulator/src/dsp/fll.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 1,
+			"path" : "decoder_modules/ch_tetra_demodulator/src/dsp/pi4dqpsk.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 1,
+			"path" : "decoder_modules/ch_tetra_demodulator/src/dsp/pi4dqpsk_costas.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 1,
+			"path" : "decoder_modules/ch_tetra_demodulator/src/main.cpp",
+			"sourceGroupIndex" : 0
+		}
+	],
+	"type" : "SHARED_LIBRARY"
+}

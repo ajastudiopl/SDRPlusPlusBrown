@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "core/libcorrect/src/reed-solomon",
+		"source" : "core/libcorrect/src/reed-solomon"
+	}
+}

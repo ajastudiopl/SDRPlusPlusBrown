@@ -1,0 +1,57 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"install",
+			"include"
+		],
+		"files" : 
+		[
+			"sdrpp_module.cmake",
+			"source_modules/hermes_source/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 1
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 6,
+				"parent" : 0
+			},
+			{
+				"file" : 0,
+				"parent" : 1
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 28,
+				"parent" : 2
+			}
+		]
+	},
+	"installers" : 
+	[
+		{
+			"backtrace" : 3,
+			"component" : "Unspecified",
+			"destination" : "lib/sdrpp/plugins",
+			"paths" : 
+			[
+				"/work/android/app/build/intermediates/cmake/debug/obj/arm64-v8a/hermes_source.so"
+			],
+			"targetId" : "hermes_source::@170e9fc91f62863859c0",
+			"targetIndex" : 26,
+			"type" : "target"
+		}
+	],
+	"paths" : 
+	{
+		"build" : "source_modules/hermes_source",
+		"source" : "source_modules/hermes_source"
+	}
+}

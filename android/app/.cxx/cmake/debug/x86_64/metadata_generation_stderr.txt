@@ -1,0 +1,26 @@
+Will build OPT_BUILD_PLUTOSDR_SOURCE
+HERE in ch_extravhf_decoder: VCPKG_INSTALLED_DIR=
+Downloading mbelib
+Downloading itpp
+CMake Warning at android/app/.cxx/cmake/debug/x86_64/itpp/CMakeLists.txt:200 (message):
+  BLAS library not found.
+
+
+CMake Warning at android/app/.cxx/cmake/debug/x86_64/itpp/CMakeLists.txt:204 (message):
+  LAPACK library not found.
+
+
+CMake Warning at android/app/.cxx/cmake/debug/x86_64/itpp/CMakeLists.txt:208 (message):
+  FFT library not found.
+
+
+CMake Warning at android/app/.cxx/cmake/debug/x86_64/itpp/CMakeLists.txt:212 (message):
+  You can still compile IT++ but the functionality will be reduced.
+
+
+BLAS_LIBRARIES to use in itpp (for  mbelib deps) = FALSE
+Final listing ETSI codec files (for case/structure diagnostics).
+CMake Warning at CMakeLists.txt:415 (message):
+  TCI Server is not supported on android, skipping
+
+

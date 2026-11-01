@@ -1,0 +1,57 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"install",
+			"include"
+		],
+		"files" : 
+		[
+			"sdrpp_module.cmake",
+			"misc_modules/spectrum_analyzer/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 1
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 6,
+				"parent" : 0
+			},
+			{
+				"file" : 0,
+				"parent" : 1
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 28,
+				"parent" : 2
+			}
+		]
+	},
+	"installers" : 
+	[
+		{
+			"backtrace" : 3,
+			"component" : "Unspecified",
+			"destination" : "lib/sdrpp/plugins",
+			"paths" : 
+			[
+				"/work/android/app/build/intermediates/cmake/debug/obj/x86_64/spectrum_analyzer.so"
+			],
+			"targetId" : "spectrum_analyzer::@7e32ff9e434e867111f1",
+			"targetIndex" : 60,
+			"type" : "target"
+		}
+	],
+	"paths" : 
+	{
+		"build" : "misc_modules/spectrum_analyzer",
+		"source" : "misc_modules/spectrum_analyzer"
+	}
+}

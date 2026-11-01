@@ -1,0 +1,1927 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						9,
+						10,
+						11,
+						12,
+						13,
+						14,
+						15,
+						16,
+						17,
+						18,
+						19,
+						20,
+						21,
+						22,
+						23,
+						24,
+						25,
+						26,
+						27,
+						28,
+						29,
+						30,
+						34,
+						35,
+						36,
+						37,
+						38,
+						39,
+						40,
+						41,
+						42,
+						43,
+						44,
+						45,
+						46,
+						47,
+						48
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Release-0cb69a81401e86fa4f7f.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.6.0"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						55,
+						64
+					]
+				},
+				{
+					"build" : "core",
+					"childIndexes" : 
+					[
+						2
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-core-Release-8e3b7d1780a6b21e608b.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 1,
+					"source" : "core",
+					"targetIndexes" : 
+					[
+						56
+					]
+				},
+				{
+					"build" : "core/libcorrect",
+					"childIndexes" : 
+					[
+						3,
+						6,
+						7,
+						8
+					],
+					"jsonFile" : "directory-core.libcorrect-Release-d4c03016285d88db7055.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 2,
+					"source" : "core/libcorrect",
+					"targetIndexes" : 
+					[
+						11,
+						13,
+						15,
+						19,
+						20,
+						21,
+						58
+					]
+				},
+				{
+					"build" : "core/libcorrect/src",
+					"childIndexes" : 
+					[
+						4,
+						5
+					],
+					"jsonFile" : "directory-core.libcorrect.src-Release-f78fc0623f964d520fce.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 2,
+					"projectIndex" : 2,
+					"source" : "core/libcorrect/src"
+				},
+				{
+					"build" : "core/libcorrect/src/convolutional",
+					"jsonFile" : "directory-core.libcorrect.src.convolutional-Release-725c11953446c45ce1df.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 3,
+					"projectIndex" : 2,
+					"source" : "core/libcorrect/src/convolutional",
+					"targetIndexes" : 
+					[
+						12
+					]
+				},
+				{
+					"build" : "core/libcorrect/src/reed-solomon",
+					"jsonFile" : "directory-core.libcorrect.src.reed-solomon-Release-846234078dccfcfb2953.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 3,
+					"projectIndex" : 2,
+					"source" : "core/libcorrect/src/reed-solomon",
+					"targetIndexes" : 
+					[
+						14
+					]
+				},
+				{
+					"build" : "core/libcorrect/util",
+					"jsonFile" : "directory-core.libcorrect.util-Release-20bcd6e885ff32f92a20.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 2,
+					"projectIndex" : 2,
+					"source" : "core/libcorrect/util",
+					"targetIndexes" : 
+					[
+						16,
+						17
+					]
+				},
+				{
+					"build" : "core/libcorrect/tests",
+					"jsonFile" : "directory-core.libcorrect.tests-Release-5a55190d4b63ea378ba5.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 2,
+					"projectIndex" : 2,
+					"source" : "core/libcorrect/tests",
+					"targetIndexes" : 
+					[
+						6,
+						9,
+						10,
+						45,
+						46,
+						62
+					]
+				},
+				{
+					"build" : "core/libcorrect/tools",
+					"jsonFile" : "directory-core.libcorrect.tools-Release-54f4a5c804ee91dcffd7.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 2,
+					"projectIndex" : 2,
+					"source" : "core/libcorrect/tools",
+					"targetIndexes" : 
+					[
+						7,
+						8,
+						51,
+						63
+					]
+				},
+				{
+					"build" : "source_modules/airspy_source",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-source_modules.airspy_source-Release-aeaaa28dcdfa0953871a.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 3,
+					"source" : "source_modules/airspy_source",
+					"targetIndexes" : 
+					[
+						0
+					]
+				},
+				{
+					"build" : "source_modules/airspyhf_source",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-source_modules.airspyhf_source-Release-edc5727538e0730747a8.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 4,
+					"source" : "source_modules/airspyhf_source",
+					"targetIndexes" : 
+					[
+						1
+					]
+				},
+				{
+					"build" : "source_modules/file_source",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-source_modules.file_source-Release-3c7db9c1fb25f29f7bf6.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 5,
+					"source" : "source_modules/file_source",
+					"targetIndexes" : 
+					[
+						22
+					]
+				},
+				{
+					"build" : "source_modules/hackrf_source",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-source_modules.hackrf_source-Release-012cba70acb4b4a54d28.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 6,
+					"source" : "source_modules/hackrf_source",
+					"targetIndexes" : 
+					[
+						25
+					]
+				},
+				{
+					"build" : "source_modules/hermes_source",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-source_modules.hermes_source-Release-aea67ebf70043a832ae7.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 7,
+					"source" : "source_modules/hermes_source",
+					"targetIndexes" : 
+					[
+						26
+					]
+				},
+				{
+					"build" : "source_modules/hydrasdr_source",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-source_modules.hydrasdr_source-Release-64d07205d74fd36d71b8.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 8,
+					"source" : "source_modules/hydrasdr_source",
+					"targetIndexes" : 
+					[
+						28
+					]
+				},
+				{
+					"build" : "source_modules/network_source",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-source_modules.network_source-Release-d06b4eec992d64c2aa74.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 9,
+					"source" : "source_modules/network_source",
+					"targetIndexes" : 
+					[
+						38
+					]
+				},
+				{
+					"build" : "source_modules/plutosdr_source",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-source_modules.plutosdr_source-Release-19d41532b43d7d6bcf94.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 10,
+					"source" : "source_modules/plutosdr_source",
+					"targetIndexes" : 
+					[
+						42
+					]
+				},
+				{
+					"build" : "source_modules/rfspace_source",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-source_modules.rfspace_source-Release-85e61da58159473b2831.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 11,
+					"source" : "source_modules/rfspace_source",
+					"targetIndexes" : 
+					[
+						48
+					]
+				},
+				{
+					"build" : "source_modules/rtl_sdr_source",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-source_modules.rtl_sdr_source-Release-cd8ac4b3bf38297a38eb.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 12,
+					"source" : "source_modules/rtl_sdr_source",
+					"targetIndexes" : 
+					[
+						52
+					]
+				},
+				{
+					"build" : "source_modules/rtl_tcp_source",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-source_modules.rtl_tcp_source-Release-bf2272610bd84e9bcdf7.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 13,
+					"source" : "source_modules/rtl_tcp_source",
+					"targetIndexes" : 
+					[
+						53
+					]
+				},
+				{
+					"build" : "source_modules/sdrpp_server_source",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-source_modules.sdrpp_server_source-Release-126699fab0a0b7540605.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 14,
+					"source" : "source_modules/sdrpp_server_source",
+					"targetIndexes" : 
+					[
+						57
+					]
+				},
+				{
+					"build" : "source_modules/spectran_http_source",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-source_modules.spectran_http_source-Release-848ccb8d0e407dba5287.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 15,
+					"source" : "source_modules/spectran_http_source",
+					"targetIndexes" : 
+					[
+						59
+					]
+				},
+				{
+					"build" : "source_modules/spyserver_source",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-source_modules.spyserver_source-Release-96482f19441719875bca.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 16,
+					"source" : "source_modules/spyserver_source",
+					"targetIndexes" : 
+					[
+						61
+					]
+				},
+				{
+					"build" : "source_modules/hl2_source",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-source_modules.hl2_source-Release-8b65321a9435a99fcf94.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 17,
+					"source" : "source_modules/hl2_source",
+					"targetIndexes" : 
+					[
+						27
+					]
+				},
+				{
+					"build" : "source_modules/kiwisdr_source",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-source_modules.kiwisdr_source-Release-3a52d72a3c4269d4d134.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 18,
+					"source" : "source_modules/kiwisdr_source",
+					"targetIndexes" : 
+					[
+						31
+					]
+				},
+				{
+					"build" : "sink_modules/android_audio_sink",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-sink_modules.android_audio_sink-Release-707dde8d13690c566d7b.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 19,
+					"source" : "sink_modules/android_audio_sink",
+					"targetIndexes" : 
+					[
+						3
+					]
+				},
+				{
+					"build" : "sink_modules/network_sink",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-sink_modules.network_sink-Release-eaf9a04e1998e94b2895.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 20,
+					"source" : "sink_modules/network_sink",
+					"targetIndexes" : 
+					[
+						37
+					]
+				},
+				{
+					"build" : "sink_modules/null_audio_sink",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-sink_modules.null_audio_sink-Release-5baa9c994302ce4d2df0.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 21,
+					"source" : "sink_modules/null_audio_sink",
+					"targetIndexes" : 
+					[
+						40
+					]
+				},
+				{
+					"build" : "decoder_modules/atv_decoder",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-decoder_modules.atv_decoder-Release-6e0e022a20689a4bb7cc.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 22,
+					"source" : "decoder_modules/atv_decoder",
+					"targetIndexes" : 
+					[
+						2
+					]
+				},
+				{
+					"build" : "decoder_modules/m17_decoder",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-decoder_modules.m17_decoder-Release-a0dbf777cb33e246e060.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 23,
+					"source" : "decoder_modules/m17_decoder",
+					"targetIndexes" : 
+					[
+						32
+					]
+				},
+				{
+					"build" : "decoder_modules/ch_extravhf_decoder",
+					"childIndexes" : 
+					[
+						31,
+						33
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-decoder_modules.ch_extravhf_decoder-Release-0d14420ce8837027006d.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 24,
+					"source" : "decoder_modules/ch_extravhf_decoder",
+					"targetIndexes" : 
+					[
+						4
+					]
+				},
+				{
+					"build" : "itpp-build",
+					"childIndexes" : 
+					[
+						32
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-itpp-build-Release-9876cebb9119d574ca1a.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5"
+					},
+					"parentIndex" : 30,
+					"projectIndex" : 25,
+					"source" : "android/app/.cxx/cmake/debug/armeabi-v7a/itpp"
+				},
+				{
+					"build" : "itpp-build/itpp",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-itpp-build.itpp-Release-6da44001f8923e9d5fa9.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5"
+					},
+					"parentIndex" : 31,
+					"projectIndex" : 25,
+					"source" : "android/app/.cxx/cmake/debug/armeabi-v7a/itpp/itpp",
+					"targetIndexes" : 
+					[
+						30
+					]
+				},
+				{
+					"build" : "mbelib-build",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-mbelib-build-Release-f3181712470bb2b7d2a1.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5"
+					},
+					"parentIndex" : 30,
+					"projectIndex" : 26,
+					"source" : "android/app/.cxx/cmake/debug/armeabi-v7a/mbelib",
+					"targetIndexes" : 
+					[
+						33,
+						34,
+						35
+					]
+				},
+				{
+					"build" : "decoder_modules/ch_tetra_demodulator",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-decoder_modules.ch_tetra_demodulator-Release-3d506f9973cee163d9f6.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 27,
+					"source" : "decoder_modules/ch_tetra_demodulator",
+					"targetIndexes" : 
+					[
+						5,
+						18
+					]
+				},
+				{
+					"build" : "decoder_modules/ft8_decoder",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-decoder_modules.ft8_decoder-Release-d4117a63b12967a2d518.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 28,
+					"source" : "decoder_modules/ft8_decoder",
+					"targetIndexes" : 
+					[
+						24
+					]
+				},
+				{
+					"build" : "decoder_modules/meteor_demodulator",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-decoder_modules.meteor_demodulator-Release-388e16052d2a365a4b27.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 29,
+					"source" : "decoder_modules/meteor_demodulator",
+					"targetIndexes" : 
+					[
+						36
+					]
+				},
+				{
+					"build" : "decoder_modules/pager_decoder",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-decoder_modules.pager_decoder-Release-a6eafe2adc4e97c9efb3.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 30,
+					"source" : "decoder_modules/pager_decoder",
+					"targetIndexes" : 
+					[
+						41
+					]
+				},
+				{
+					"build" : "decoder_modules/radio",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-decoder_modules.radio-Release-ee53d8bb1f868610d345.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 31,
+					"source" : "decoder_modules/radio",
+					"targetIndexes" : 
+					[
+						43
+					]
+				},
+				{
+					"build" : "misc_modules/frequency_manager",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-misc_modules.frequency_manager-Release-b299e5ce124ac8bd4460.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 32,
+					"source" : "misc_modules/frequency_manager",
+					"targetIndexes" : 
+					[
+						23
+					]
+				},
+				{
+					"build" : "misc_modules/iq_exporter",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-misc_modules.iq_exporter-Release-297b17dd91f6301f44b4.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 33,
+					"source" : "misc_modules/iq_exporter",
+					"targetIndexes" : 
+					[
+						29
+					]
+				},
+				{
+					"build" : "misc_modules/recorder",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-misc_modules.recorder-Release-67bd779d9a17fa3708a1.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 34,
+					"source" : "misc_modules/recorder",
+					"targetIndexes" : 
+					[
+						44
+					]
+				},
+				{
+					"build" : "misc_modules/rigctl_client",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-misc_modules.rigctl_client-Release-f20b59020e90ecdc1015.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 35,
+					"source" : "misc_modules/rigctl_client",
+					"targetIndexes" : 
+					[
+						49
+					]
+				},
+				{
+					"build" : "misc_modules/rigctl_server",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-misc_modules.rigctl_server-Release-9039e2f31393ba91604c.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 36,
+					"source" : "misc_modules/rigctl_server",
+					"targetIndexes" : 
+					[
+						50
+					]
+				},
+				{
+					"build" : "misc_modules/websdr_view",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-misc_modules.websdr_view-Release-a78cf1a7029b205e6d0a.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 37,
+					"source" : "misc_modules/websdr_view",
+					"targetIndexes" : 
+					[
+						65
+					]
+				},
+				{
+					"build" : "misc_modules/reports_monitor",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-misc_modules.reports_monitor-Release-1acdcdb17e8d9ae7adb6.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 38,
+					"source" : "misc_modules/reports_monitor",
+					"targetIndexes" : 
+					[
+						47
+					]
+				},
+				{
+					"build" : "misc_modules/scanner",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-misc_modules.scanner-Release-d0418bda3596baded5cd.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 39,
+					"source" : "misc_modules/scanner",
+					"targetIndexes" : 
+					[
+						54
+					]
+				},
+				{
+					"build" : "misc_modules/spectrum_analyzer",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-misc_modules.spectrum_analyzer-Release-5ccc1844e4ba5c1cc8f7.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 40,
+					"source" : "misc_modules/spectrum_analyzer",
+					"targetIndexes" : 
+					[
+						60
+					]
+				},
+				{
+					"build" : "misc_modules/noise_reduction_logmmse",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-misc_modules.noise_reduction_logmmse-Release-758193c4f12b0c0c1f4d.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 41,
+					"source" : "misc_modules/noise_reduction_logmmse",
+					"targetIndexes" : 
+					[
+						39
+					]
+				}
+			],
+			"name" : "Release",
+			"projects" : 
+			[
+				{
+					"childIndexes" : 
+					[
+						1,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12,
+						13,
+						14,
+						15,
+						16,
+						17,
+						18,
+						19,
+						20,
+						21,
+						22,
+						23,
+						24,
+						27,
+						28,
+						29,
+						30,
+						31,
+						32,
+						33,
+						34,
+						35,
+						36,
+						37,
+						38,
+						39,
+						40,
+						41
+					],
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "sdrpp",
+					"targetIndexes" : 
+					[
+						55,
+						64
+					]
+				},
+				{
+					"childIndexes" : 
+					[
+						2
+					],
+					"directoryIndexes" : 
+					[
+						1
+					],
+					"name" : "sdrpp_core",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						56
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8
+					],
+					"name" : "Correct",
+					"parentIndex" : 1,
+					"targetIndexes" : 
+					[
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12,
+						13,
+						14,
+						15,
+						16,
+						17,
+						19,
+						20,
+						21,
+						45,
+						46,
+						51,
+						58,
+						62,
+						63
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						9
+					],
+					"name" : "airspy_source",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						0
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						10
+					],
+					"name" : "airspyhf_source",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						1
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						11
+					],
+					"name" : "file_source",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						22
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						12
+					],
+					"name" : "hackrf_source",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						25
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						13
+					],
+					"name" : "hermes_source",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						26
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						14
+					],
+					"name" : "hydrasdr_source",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						28
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						15
+					],
+					"name" : "network_source",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						38
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						16
+					],
+					"name" : "plutosdr_source",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						42
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						17
+					],
+					"name" : "rfspace_source",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						48
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						18
+					],
+					"name" : "rtl_sdr_source",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						52
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						19
+					],
+					"name" : "rtl_tcp_source",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						53
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						20
+					],
+					"name" : "sdrpp_server_source",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						57
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						21
+					],
+					"name" : "spectran_http_source",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						59
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						22
+					],
+					"name" : "spyserver_source",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						61
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						23
+					],
+					"name" : "hl2_source",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						27
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						24
+					],
+					"name" : "kiwisdr_source",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						31
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						25
+					],
+					"name" : "audio_sink",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						3
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						26
+					],
+					"name" : "network_sink",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						37
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						27
+					],
+					"name" : "null_audio_sink",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						40
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						28
+					],
+					"name" : "atv_decoder",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						2
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						29
+					],
+					"name" : "m17_decoder",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						32
+					]
+				},
+				{
+					"childIndexes" : 
+					[
+						25,
+						26
+					],
+					"directoryIndexes" : 
+					[
+						30
+					],
+					"name" : "ch_extravhf_decoder",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						4
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						31,
+						32
+					],
+					"name" : "ITPP",
+					"parentIndex" : 24,
+					"targetIndexes" : 
+					[
+						30
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						33
+					],
+					"name" : "mbe",
+					"parentIndex" : 24,
+					"targetIndexes" : 
+					[
+						33,
+						34,
+						35
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						34
+					],
+					"name" : "ch_tetra_demodulator",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						5,
+						18
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						35
+					],
+					"name" : "ft8_decoder",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						24
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						36
+					],
+					"name" : "meteor_demodulator",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						36
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						37
+					],
+					"name" : "pager_decoder",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						41
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						38
+					],
+					"name" : "radio",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						43
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						39
+					],
+					"name" : "frequency_manager",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						23
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						40
+					],
+					"name" : "iq_exporter",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						29
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						41
+					],
+					"name" : "recorder",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						44
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						42
+					],
+					"name" : "rigctl_client",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						49
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						43
+					],
+					"name" : "rigctl_server",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						50
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						44
+					],
+					"name" : "websdr_view",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						65
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						45
+					],
+					"name" : "reports_monitor",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						47
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						46
+					],
+					"name" : "scanner",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						54
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						47
+					],
+					"name" : "spectrum_analyzer",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						60
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						48
+					],
+					"name" : "noise_reduction_logmmse",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						39
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 9,
+					"id" : "airspy_source::@ab405fa41e4ff1bba59b",
+					"jsonFile" : "target-airspy_source-Release-b5412fc85bcbc5cffaeb.json",
+					"name" : "airspy_source",
+					"projectIndex" : 3
+				},
+				{
+					"directoryIndex" : 10,
+					"id" : "airspyhf_source::@d8696a64f3b19e049873",
+					"jsonFile" : "target-airspyhf_source-Release-e9cda475edd64bbefd86.json",
+					"name" : "airspyhf_source",
+					"projectIndex" : 4
+				},
+				{
+					"directoryIndex" : 28,
+					"id" : "atv_decoder::@948ec8ac5b8f2c27a0ae",
+					"jsonFile" : "target-atv_decoder-Release-e195ce6bd52c8592f4d4.json",
+					"name" : "atv_decoder",
+					"projectIndex" : 22
+				},
+				{
+					"directoryIndex" : 25,
+					"id" : "audio_sink::@b2d3ace8820a37027734",
+					"jsonFile" : "target-audio_sink-Release-4089b4395b83e0c10cc1.json",
+					"name" : "audio_sink",
+					"projectIndex" : 19
+				},
+				{
+					"directoryIndex" : 30,
+					"id" : "ch_extravhf_decoder::@57d51ef1a013ef8a481f",
+					"jsonFile" : "target-ch_extravhf_decoder-Release-a40a46cbada511683a68.json",
+					"name" : "ch_extravhf_decoder",
+					"projectIndex" : 24
+				},
+				{
+					"directoryIndex" : 34,
+					"id" : "ch_tetra_demodulator::@7e871cb6b17ebd999ab5",
+					"jsonFile" : "target-ch_tetra_demodulator-Release-ed0a856fac3abe3c2862.json",
+					"name" : "ch_tetra_demodulator",
+					"projectIndex" : 27
+				},
+				{
+					"directoryIndex" : 7,
+					"id" : "check::@6f5bfa37fb45f03573f2",
+					"jsonFile" : "target-check-Release-7ca27f66dea56d2045d6.json",
+					"name" : "check",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 8,
+					"id" : "conv_find_optim_poly::@ee5bcefdea2f3d01cd61",
+					"jsonFile" : "target-conv_find_optim_poly-Release-0739c314d624f81a6359.json",
+					"name" : "conv_find_optim_poly",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 8,
+					"id" : "conv_find_optim_poly_annealing::@ee5bcefdea2f3d01cd61",
+					"jsonFile" : "target-conv_find_optim_poly_annealing-Release-5a8f2e12e91c1d4b3153.json",
+					"name" : "conv_find_optim_poly_annealing",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 7,
+					"id" : "convolutional_shim_test_runner::@6f5bfa37fb45f03573f2",
+					"jsonFile" : "target-convolutional_shim_test_runner-Release-25896690000b5e09716f.json",
+					"name" : "convolutional_shim_test_runner",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 7,
+					"id" : "convolutional_test_runner::@6f5bfa37fb45f03573f2",
+					"jsonFile" : "target-convolutional_test_runner-Release-95b92b3fd58460f423ba.json",
+					"name" : "convolutional_test_runner",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "correct::@b382305addd3f0620113",
+					"jsonFile" : "target-correct-Release-0f7e71e36090e2921bfb.json",
+					"name" : "correct",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 4,
+					"id" : "correct-convolutional::@4cbddeaa0449543ba9cc",
+					"jsonFile" : "target-correct-convolutional-Release-1362f34f08c50e352e80.json",
+					"name" : "correct-convolutional",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "correct-h::@b382305addd3f0620113",
+					"jsonFile" : "target-correct-h-Release-66168f608a17c3cb8ee8.json",
+					"name" : "correct-h",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 5,
+					"id" : "correct-reed-solomon::@5a1c57eeb52127d26294",
+					"jsonFile" : "target-correct-reed-solomon-Release-3d06c057b4acc74e027e.json",
+					"name" : "correct-reed-solomon",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "correct_static::@b382305addd3f0620113",
+					"jsonFile" : "target-correct_static-Release-0ac1f81016798ec84b1c.json",
+					"name" : "correct_static",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 6,
+					"id" : "error_sim::@3b4c1525f827bb21e9c9",
+					"jsonFile" : "target-error_sim-Release-b732a7b9feba2f84a04f.json",
+					"name" : "error_sim",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 6,
+					"id" : "error_sim_shim::@3b4c1525f827bb21e9c9",
+					"jsonFile" : "target-error_sim_shim-Release-be64b7d5086b7fe7e5c8.json",
+					"name" : "error_sim_shim",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 34,
+					"id" : "etsi_codec::@7e871cb6b17ebd999ab5",
+					"jsonFile" : "target-etsi_codec-Release-b0f1ee6b07403091817b.json",
+					"name" : "etsi_codec",
+					"projectIndex" : 27
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "fec-shim-h::@b382305addd3f0620113",
+					"jsonFile" : "target-fec-shim-h-Release-27d90fc573768cc99df6.json",
+					"name" : "fec-shim-h",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "fec_shim_shared::@b382305addd3f0620113",
+					"jsonFile" : "target-fec_shim_shared-Release-d0295470cdd448cd4a30.json",
+					"name" : "fec_shim_shared",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "fec_shim_static::@b382305addd3f0620113",
+					"jsonFile" : "target-fec_shim_static-Release-c820e7a249bc470a7bf3.json",
+					"name" : "fec_shim_static",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 11,
+					"id" : "file_source::@0762eb4230273feb82e3",
+					"jsonFile" : "target-file_source-Release-111b031d0a5b8fe1b4eb.json",
+					"name" : "file_source",
+					"projectIndex" : 5
+				},
+				{
+					"directoryIndex" : 39,
+					"id" : "frequency_manager::@15d183876113ee52e5c7",
+					"jsonFile" : "target-frequency_manager-Release-3a2bffebea53de00e097.json",
+					"name" : "frequency_manager",
+					"projectIndex" : 32
+				},
+				{
+					"directoryIndex" : 35,
+					"id" : "ft8_decoder::@f8dd04c733727715531a",
+					"jsonFile" : "target-ft8_decoder-Release-86f770b5b55389605126.json",
+					"name" : "ft8_decoder",
+					"projectIndex" : 28
+				},
+				{
+					"directoryIndex" : 12,
+					"id" : "hackrf_source::@45d1991a3c799481eab1",
+					"jsonFile" : "target-hackrf_source-Release-d0e983479c51c8c66cde.json",
+					"name" : "hackrf_source",
+					"projectIndex" : 6
+				},
+				{
+					"directoryIndex" : 13,
+					"id" : "hermes_source::@170e9fc91f62863859c0",
+					"jsonFile" : "target-hermes_source-Release-004a97f783cfb12cca84.json",
+					"name" : "hermes_source",
+					"projectIndex" : 7
+				},
+				{
+					"directoryIndex" : 23,
+					"id" : "hl2_source::@b00c77a279ec48105676",
+					"jsonFile" : "target-hl2_source-Release-f264d0b6ff4aff51e60e.json",
+					"name" : "hl2_source",
+					"projectIndex" : 17
+				},
+				{
+					"directoryIndex" : 14,
+					"id" : "hydrasdr_source::@6570b5feab05b4fb0777",
+					"jsonFile" : "target-hydrasdr_source-Release-9636a9245e6fdc70f959.json",
+					"name" : "hydrasdr_source",
+					"projectIndex" : 8
+				},
+				{
+					"directoryIndex" : 40,
+					"id" : "iq_exporter::@a91f0481a9e2bd7a2f5c",
+					"jsonFile" : "target-iq_exporter-Release-5e8c2ca85bab3c07ea66.json",
+					"name" : "iq_exporter",
+					"projectIndex" : 33
+				},
+				{
+					"directoryIndex" : 32,
+					"id" : "itpp_static::@6bac9b783dc72ca5e09b",
+					"jsonFile" : "target-itpp_static-Release-b42a1b810b8a88ff8575.json",
+					"name" : "itpp_static",
+					"projectIndex" : 25
+				},
+				{
+					"directoryIndex" : 24,
+					"id" : "kiwisdr_source::@b369d826f8072ebff1e0",
+					"jsonFile" : "target-kiwisdr_source-Release-fb8bb5d646fe408e788c.json",
+					"name" : "kiwisdr_source",
+					"projectIndex" : 18
+				},
+				{
+					"directoryIndex" : 29,
+					"id" : "m17_decoder::@3d1504cacb116ff28bc3",
+					"jsonFile" : "target-m17_decoder-Release-2e21a74a3bf3f6a5cf76.json",
+					"name" : "m17_decoder",
+					"projectIndex" : 23
+				},
+				{
+					"directoryIndex" : 33,
+					"id" : "mbe-shared::@75e4e1aef470fd614dd9",
+					"jsonFile" : "target-mbe-shared-Release-a9a9bef6500d6a493237.json",
+					"name" : "mbe-shared",
+					"projectIndex" : 26
+				},
+				{
+					"directoryIndex" : 33,
+					"id" : "mbe-static::@75e4e1aef470fd614dd9",
+					"jsonFile" : "target-mbe-static-Release-8fd1ebffbfae1dc43ccf.json",
+					"name" : "mbe-static",
+					"projectIndex" : 26
+				},
+				{
+					"directoryIndex" : 33,
+					"id" : "mbelib_uninstall::@75e4e1aef470fd614dd9",
+					"jsonFile" : "target-mbelib_uninstall-Release-f316cb9a4308f5bd4c83.json",
+					"name" : "mbelib_uninstall",
+					"projectIndex" : 26
+				},
+				{
+					"directoryIndex" : 36,
+					"id" : "meteor_demodulator::@36c0ff09d1f5e2387030",
+					"jsonFile" : "target-meteor_demodulator-Release-540ced90cb41ef720354.json",
+					"name" : "meteor_demodulator",
+					"projectIndex" : 29
+				},
+				{
+					"directoryIndex" : 26,
+					"id" : "network_sink::@b4838116f4bb05b6dba8",
+					"jsonFile" : "target-network_sink-Release-0ffa1b0ffaec8fee84d3.json",
+					"name" : "network_sink",
+					"projectIndex" : 20
+				},
+				{
+					"directoryIndex" : 15,
+					"id" : "network_source::@301f1352d04cb97fda0b",
+					"jsonFile" : "target-network_source-Release-c51672e1675cff47d1ee.json",
+					"name" : "network_source",
+					"projectIndex" : 9
+				},
+				{
+					"directoryIndex" : 48,
+					"id" : "noise_reduction_logmmse::@2075d6298343a67e15d4",
+					"jsonFile" : "target-noise_reduction_logmmse-Release-ad6a5c39efb57265f4f4.json",
+					"name" : "noise_reduction_logmmse",
+					"projectIndex" : 41
+				},
+				{
+					"directoryIndex" : 27,
+					"id" : "null_audio_sink::@e535f34e5a0b57c2ab66",
+					"jsonFile" : "target-null_audio_sink-Release-8cbadf79e482acf1ad38.json",
+					"name" : "null_audio_sink",
+					"projectIndex" : 21
+				},
+				{
+					"directoryIndex" : 37,
+					"id" : "pager_decoder::@a20681acab2e5747a92e",
+					"jsonFile" : "target-pager_decoder-Release-30d04b1ae2dbfe8fa484.json",
+					"name" : "pager_decoder",
+					"projectIndex" : 30
+				},
+				{
+					"directoryIndex" : 16,
+					"id" : "plutosdr_source::@a4c4416630925d9e457b",
+					"jsonFile" : "target-plutosdr_source-Release-552f9f790515e9f6ac03.json",
+					"name" : "plutosdr_source",
+					"projectIndex" : 10
+				},
+				{
+					"directoryIndex" : 38,
+					"id" : "radio::@b703f25a55575478ae84",
+					"jsonFile" : "target-radio-Release-91ac52ea85074bf17213.json",
+					"name" : "radio",
+					"projectIndex" : 31
+				},
+				{
+					"directoryIndex" : 41,
+					"id" : "recorder::@91c2171f5e8ddb097151",
+					"jsonFile" : "target-recorder-Release-506efe885871f002f5cd.json",
+					"name" : "recorder",
+					"projectIndex" : 34
+				},
+				{
+					"directoryIndex" : 7,
+					"id" : "reed_solomon_shim_interop_test_runner::@6f5bfa37fb45f03573f2",
+					"jsonFile" : "target-reed_solomon_shim_interop_test_runner-Release-325ee3174f583b22f2ed.json",
+					"name" : "reed_solomon_shim_interop_test_runner",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 7,
+					"id" : "reed_solomon_test_runner::@6f5bfa37fb45f03573f2",
+					"jsonFile" : "target-reed_solomon_test_runner-Release-d34ed4974f647d9ecf1e.json",
+					"name" : "reed_solomon_test_runner",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 45,
+					"id" : "reports_monitor::@4e53bba02091edebe1b8",
+					"jsonFile" : "target-reports_monitor-Release-02236c2578f260346de8.json",
+					"name" : "reports_monitor",
+					"projectIndex" : 38
+				},
+				{
+					"directoryIndex" : 17,
+					"id" : "rfspace_source::@a5a75f333816ce798799",
+					"jsonFile" : "target-rfspace_source-Release-2b1862bd3c9699fbedd0.json",
+					"name" : "rfspace_source",
+					"projectIndex" : 11
+				},
+				{
+					"directoryIndex" : 42,
+					"id" : "rigctl_client::@a4d9d2becf46d04b3289",
+					"jsonFile" : "target-rigctl_client-Release-6ba4e51348ce0ec4a003.json",
+					"name" : "rigctl_client",
+					"projectIndex" : 35
+				},
+				{
+					"directoryIndex" : 43,
+					"id" : "rigctl_server::@c7c56effbd8be449bc67",
+					"jsonFile" : "target-rigctl_server-Release-e05c4d775ed6b5b8eeab.json",
+					"name" : "rigctl_server",
+					"projectIndex" : 36
+				},
+				{
+					"directoryIndex" : 8,
+					"id" : "rs_find_primitive_poly::@ee5bcefdea2f3d01cd61",
+					"jsonFile" : "target-rs_find_primitive_poly-Release-906f9b5d3c88ece0d9f9.json",
+					"name" : "rs_find_primitive_poly",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 18,
+					"id" : "rtl_sdr_source::@8027adb381924ceed7f4",
+					"jsonFile" : "target-rtl_sdr_source-Release-bf97be0170455aaf32e6.json",
+					"name" : "rtl_sdr_source",
+					"projectIndex" : 12
+				},
+				{
+					"directoryIndex" : 19,
+					"id" : "rtl_tcp_source::@710fddccdb1115400c6c",
+					"jsonFile" : "target-rtl_tcp_source-Release-87f8a33565d894ab3c8c.json",
+					"name" : "rtl_tcp_source",
+					"projectIndex" : 13
+				},
+				{
+					"directoryIndex" : 46,
+					"id" : "scanner::@d99510aa0757fe8f2c41",
+					"jsonFile" : "target-scanner-Release-a336b089aee7bb464fd2.json",
+					"name" : "scanner",
+					"projectIndex" : 39
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "sdrpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-sdrpp-Release-ae8f3140d980e9250f31.json",
+					"name" : "sdrpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "sdrpp_core::@57760688d1f824db5d9c",
+					"jsonFile" : "target-sdrpp_core-Release-f8ad6f70d6fcd3cb8a3d.json",
+					"name" : "sdrpp_core",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 20,
+					"id" : "sdrpp_server_source::@7c0487953348e1db1bdd",
+					"jsonFile" : "target-sdrpp_server_source-Release-a8ea5b4ff1ae196514b8.json",
+					"name" : "sdrpp_server_source",
+					"projectIndex" : 14
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "shim::@b382305addd3f0620113",
+					"jsonFile" : "target-shim-Release-2f543641faf1c926d684.json",
+					"name" : "shim",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 21,
+					"id" : "spectran_http_source::@6c83c3f511c1fca41aea",
+					"jsonFile" : "target-spectran_http_source-Release-caebf287767539ed3f2e.json",
+					"name" : "spectran_http_source",
+					"projectIndex" : 15
+				},
+				{
+					"directoryIndex" : 47,
+					"id" : "spectrum_analyzer::@7e32ff9e434e867111f1",
+					"jsonFile" : "target-spectrum_analyzer-Release-c83ff19e322294529224.json",
+					"name" : "spectrum_analyzer",
+					"projectIndex" : 40
+				},
+				{
+					"directoryIndex" : 22,
+					"id" : "spyserver_source::@2b0788dd6fe810c32802",
+					"jsonFile" : "target-spyserver_source-Release-dde84fa7f916d1d027cd.json",
+					"name" : "spyserver_source",
+					"projectIndex" : 16
+				},
+				{
+					"directoryIndex" : 7,
+					"id" : "test_runners::@6f5bfa37fb45f03573f2",
+					"jsonFile" : "target-test_runners-Release-a6b5ff57782569b4cb1a.json",
+					"name" : "test_runners",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 8,
+					"id" : "tools::@ee5bcefdea2f3d01cd61",
+					"jsonFile" : "target-tools-Release-68f48278ad91f5ab0488.json",
+					"name" : "tools",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-uninstall-Release-b3dea3dcf5b8ecdda393.json",
+					"name" : "uninstall",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 44,
+					"id" : "websdr_view::@c135e3ce65c90ed132a0",
+					"jsonFile" : "target-websdr_view-Release-5fb81d37659d51f1d43e.json",
+					"name" : "websdr_view",
+					"projectIndex" : 37
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/work/android/app/.cxx/cmake/debug/armeabi-v7a",
+		"source" : "/work"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}

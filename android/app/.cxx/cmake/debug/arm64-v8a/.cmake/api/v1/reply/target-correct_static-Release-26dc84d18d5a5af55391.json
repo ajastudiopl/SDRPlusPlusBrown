@@ -1,0 +1,154 @@
+{
+	"archive" : {},
+	"artifacts" : 
+	[
+		{
+			"path" : "core/libcorrect/lib/libcorrect_static.a"
+		}
+	],
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_library",
+			"include_directories"
+		],
+		"files" : 
+		[
+			"core/libcorrect/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 82,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 67,
+				"parent" : 0
+			}
+		]
+	},
+	"dependencies" : 
+	[
+		{
+			"id" : "correct-convolutional::@4cbddeaa0449543ba9cc"
+		},
+		{
+			"id" : "correct-reed-solomon::@5a1c57eeb52127d26294"
+		}
+	],
+	"id" : "correct_static::@b382305addd3f0620113",
+	"name" : "correct_static",
+	"nameOnDisk" : "libcorrect_static.a",
+	"paths" : 
+	{
+		"build" : "core/libcorrect",
+		"source" : "core/libcorrect"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Object Libraries",
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				11
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 1,
+			"isGenerated" : true,
+			"path" : "android/app/.cxx/cmake/debug/arm64-v8a/core/libcorrect/src/reed-solomon/CMakeFiles/correct-reed-solomon.dir/polynomial.c.o",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"isGenerated" : true,
+			"path" : "android/app/.cxx/cmake/debug/arm64-v8a/core/libcorrect/src/reed-solomon/CMakeFiles/correct-reed-solomon.dir/reed-solomon.c.o",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"isGenerated" : true,
+			"path" : "android/app/.cxx/cmake/debug/arm64-v8a/core/libcorrect/src/reed-solomon/CMakeFiles/correct-reed-solomon.dir/encode.c.o",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"isGenerated" : true,
+			"path" : "android/app/.cxx/cmake/debug/arm64-v8a/core/libcorrect/src/reed-solomon/CMakeFiles/correct-reed-solomon.dir/decode.c.o",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"isGenerated" : true,
+			"path" : "android/app/.cxx/cmake/debug/arm64-v8a/core/libcorrect/src/convolutional/CMakeFiles/correct-convolutional.dir/bit.c.o",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"isGenerated" : true,
+			"path" : "android/app/.cxx/cmake/debug/arm64-v8a/core/libcorrect/src/convolutional/CMakeFiles/correct-convolutional.dir/metric.c.o",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"isGenerated" : true,
+			"path" : "android/app/.cxx/cmake/debug/arm64-v8a/core/libcorrect/src/convolutional/CMakeFiles/correct-convolutional.dir/history_buffer.c.o",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"isGenerated" : true,
+			"path" : "android/app/.cxx/cmake/debug/arm64-v8a/core/libcorrect/src/convolutional/CMakeFiles/correct-convolutional.dir/error_buffer.c.o",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"isGenerated" : true,
+			"path" : "android/app/.cxx/cmake/debug/arm64-v8a/core/libcorrect/src/convolutional/CMakeFiles/correct-convolutional.dir/lookup.c.o",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"isGenerated" : true,
+			"path" : "android/app/.cxx/cmake/debug/arm64-v8a/core/libcorrect/src/convolutional/CMakeFiles/correct-convolutional.dir/convolutional.c.o",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"isGenerated" : true,
+			"path" : "android/app/.cxx/cmake/debug/arm64-v8a/core/libcorrect/src/convolutional/CMakeFiles/correct-convolutional.dir/encode.c.o",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"isGenerated" : true,
+			"path" : "android/app/.cxx/cmake/debug/arm64-v8a/core/libcorrect/src/convolutional/CMakeFiles/correct-convolutional.dir/decode.c.o",
+			"sourceGroupIndex" : 0
+		}
+	],
+	"type" : "STATIC_LIBRARY"
+}

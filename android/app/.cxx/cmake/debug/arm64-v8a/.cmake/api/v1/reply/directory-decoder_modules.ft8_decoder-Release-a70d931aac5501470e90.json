@@ -1,0 +1,45 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"install"
+		],
+		"files" : 
+		[
+			"decoder_modules/ft8_decoder/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 27,
+				"parent" : 0
+			}
+		]
+	},
+	"installers" : 
+	[
+		{
+			"backtrace" : 1,
+			"component" : "Unspecified",
+			"destination" : "lib/sdrpp/plugins",
+			"paths" : 
+			[
+				"/work/android/app/build/intermediates/cmake/debug/obj/arm64-v8a/ft8_decoder.so"
+			],
+			"targetId" : "ft8_decoder::@f8dd04c733727715531a",
+			"targetIndex" : 24,
+			"type" : "target"
+		}
+	],
+	"paths" : 
+	{
+		"build" : "decoder_modules/ft8_decoder",
+		"source" : "decoder_modules/ft8_decoder"
+	}
+}

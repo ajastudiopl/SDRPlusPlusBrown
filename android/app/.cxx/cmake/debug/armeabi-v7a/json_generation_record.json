@@ -1,0 +1,86 @@
+[
+  {
+    "level": "INFO",
+    "message": "Start JSON generation. Platform version: 28 min SDK version: armeabi-v7a",
+    "file": "/work/CMakeLists.txt",
+    "tag": "debug|armeabi-v7a",
+    "diagnosticCode": "UNKNOWN"
+  },
+  {
+    "level": "INFO",
+    "message": "rebuilding JSON /work/android/app/.cxx/cmake/debug/armeabi-v7a/android_gradle_build.json due to:",
+    "file": "/work/CMakeLists.txt",
+    "tag": "debug|armeabi-v7a",
+    "diagnosticCode": "UNKNOWN"
+  },
+  {
+    "level": "INFO",
+    "message": "- expected json /work/android/app/.cxx/cmake/debug/armeabi-v7a/android_gradle_build.json file is not present, will remove stale json folder",
+    "file": "/work/CMakeLists.txt",
+    "tag": "debug|armeabi-v7a",
+    "diagnosticCode": "UNKNOWN"
+  },
+  {
+    "level": "INFO",
+    "message": "- missing previous command file /work/android/app/.cxx/cmake/debug/armeabi-v7a/build_command.txt, will remove stale json folder",
+    "file": "/work/CMakeLists.txt",
+    "tag": "debug|armeabi-v7a",
+    "diagnosticCode": "UNKNOWN"
+  },
+  {
+    "level": "INFO",
+    "message": "- command changed from previous, will remove stale json folder",
+    "file": "/work/CMakeLists.txt",
+    "tag": "debug|armeabi-v7a",
+    "diagnosticCode": "UNKNOWN"
+  },
+  {
+    "level": "INFO",
+    "message": "removing stale contents from \u0027/work/android/app/.cxx/cmake/debug/armeabi-v7a\u0027",
+    "file": "/work/CMakeLists.txt",
+    "tag": "debug|armeabi-v7a",
+    "diagnosticCode": "UNKNOWN"
+  },
+  {
+    "level": "INFO",
+    "message": "created folder \u0027/work/android/app/.cxx/cmake/debug/armeabi-v7a\u0027",
+    "file": "/work/CMakeLists.txt",
+    "tag": "debug|armeabi-v7a",
+    "diagnosticCode": "UNKNOWN"
+  },
+  {
+    "level": "INFO",
+    "message": "executing cmake Executable : /usr/bin/cmake\narguments : \n-H/work\n-DCMAKE_FIND_ROOT_PATH\u003d/work/android/app/.cxx/cmake/debug/prefab/armeabi-v7a/prefab\n-DCMAKE_TOOLCHAIN_FILE\u003d/root/Android/ndk/25.2.9519653/build/cmake/android.toolchain.cmake\n-DANDROID_ABI\u003darmeabi-v7a\n-DANDROID_NDK\u003d/root/Android/ndk/25.2.9519653\n-DANDROID_PLATFORM\u003dandroid-28\n-DCMAKE_ANDROID_ARCH_ABI\u003darmeabi-v7a\n-DCMAKE_ANDROID_NDK\u003d/root/Android/ndk/25.2.9519653\n-DCMAKE_EXPORT_COMPILE_COMMANDS\u003dON\n-DCMAKE_LIBRARY_OUTPUT_DIRECTORY\u003d/work/android/app/build/intermediates/cmake/debug/obj/armeabi-v7a\n-DCMAKE_RUNTIME_OUTPUT_DIRECTORY\u003d/work/android/app/build/intermediates/cmake/debug/obj/armeabi-v7a\n-DCMAKE_MAKE_PROGRAM\u003d/usr/bin/ninja\n-DCMAKE_SYSTEM_NAME\u003dAndroid\n-DCMAKE_SYSTEM_VERSION\u003d28\n-DCMAKE_BUILD_TYPE\u003dRelease\n-DSDR_KIT_ROOT\u003d/sdr-kit\n-DOPT_BACKEND_GLFW\u003dOFF\n-DOPT_BACKEND_ANDROID\u003dON\n-DOPT_BUILD_SOAPY_SOURCE\u003dOFF\n-DOPT_BUILD_ANDROID_AUDIO_SINK\u003dON\n-DOPT_BUILD_AUDIO_SINK\u003dOFF\n-DOPT_BUILD_DISCORD_PRESENCE\u003dOFF\n-DOPT_BUILD_M17_DECODER\u003dON\n-DOPT_BUILD_PLUTOSDR_SOURCE\u003dON\n-DOPT_BUILD_AUDIO_SOURCE\u003dOFF\n-DOPT_BUILD_CH_EXTRAVHF_DECODER\u003dON\n-DOPT_BUILD_CH_TETRA_DEMODULATOR\u003dON\n-DOPT_BUILD_MPEG_ADTS_SINK\u003dOFF\n-DOPT_BUILD_HYDRASDR_SOURCE\u003dON\n-B/work/android/app/.cxx/cmake/debug/armeabi-v7a\n-GNinja\njvmArgs : \n\n",
+    "file": "/work/CMakeLists.txt",
+    "tag": "debug|armeabi-v7a",
+    "diagnosticCode": "UNKNOWN"
+  },
+  {
+    "level": "INFO",
+    "message": "Executable : /usr/bin/cmake\narguments : \n-H/work\n-DCMAKE_FIND_ROOT_PATH\u003d/work/android/app/.cxx/cmake/debug/prefab/armeabi-v7a/prefab\n-DCMAKE_TOOLCHAIN_FILE\u003d/root/Android/ndk/25.2.9519653/build/cmake/android.toolchain.cmake\n-DANDROID_ABI\u003darmeabi-v7a\n-DANDROID_NDK\u003d/root/Android/ndk/25.2.9519653\n-DANDROID_PLATFORM\u003dandroid-28\n-DCMAKE_ANDROID_ARCH_ABI\u003darmeabi-v7a\n-DCMAKE_ANDROID_NDK\u003d/root/Android/ndk/25.2.9519653\n-DCMAKE_EXPORT_COMPILE_COMMANDS\u003dON\n-DCMAKE_LIBRARY_OUTPUT_DIRECTORY\u003d/work/android/app/build/intermediates/cmake/debug/obj/armeabi-v7a\n-DCMAKE_RUNTIME_OUTPUT_DIRECTORY\u003d/work/android/app/build/intermediates/cmake/debug/obj/armeabi-v7a\n-DCMAKE_MAKE_PROGRAM\u003d/usr/bin/ninja\n-DCMAKE_SYSTEM_NAME\u003dAndroid\n-DCMAKE_SYSTEM_VERSION\u003d28\n-DCMAKE_BUILD_TYPE\u003dRelease\n-DSDR_KIT_ROOT\u003d/sdr-kit\n-DOPT_BACKEND_GLFW\u003dOFF\n-DOPT_BACKEND_ANDROID\u003dON\n-DOPT_BUILD_SOAPY_SOURCE\u003dOFF\n-DOPT_BUILD_ANDROID_AUDIO_SINK\u003dON\n-DOPT_BUILD_AUDIO_SINK\u003dOFF\n-DOPT_BUILD_DISCORD_PRESENCE\u003dOFF\n-DOPT_BUILD_M17_DECODER\u003dON\n-DOPT_BUILD_PLUTOSDR_SOURCE\u003dON\n-DOPT_BUILD_AUDIO_SOURCE\u003dOFF\n-DOPT_BUILD_CH_EXTRAVHF_DECODER\u003dON\n-DOPT_BUILD_CH_TETRA_DEMODULATOR\u003dON\n-DOPT_BUILD_MPEG_ADTS_SINK\u003dOFF\n-DOPT_BUILD_HYDRASDR_SOURCE\u003dON\n-B/work/android/app/.cxx/cmake/debug/armeabi-v7a\n-GNinja\njvmArgs : \n\n",
+    "file": "/work/CMakeLists.txt",
+    "tag": "debug|armeabi-v7a",
+    "diagnosticCode": "UNKNOWN"
+  },
+  {
+    "level": "INFO",
+    "message": "done executing cmake",
+    "file": "/work/CMakeLists.txt",
+    "tag": "debug|armeabi-v7a",
+    "diagnosticCode": "UNKNOWN"
+  },
+  {
+    "level": "INFO",
+    "message": "write command file /work/android/app/.cxx/cmake/debug/armeabi-v7a/build_command.txt",
+    "file": "/work/CMakeLists.txt",
+    "tag": "debug|armeabi-v7a",
+    "diagnosticCode": "UNKNOWN"
+  },
+  {
+    "level": "INFO",
+    "message": "JSON generation completed without problems",
+    "file": "/work/CMakeLists.txt",
+    "tag": "debug|armeabi-v7a",
+    "diagnosticCode": "UNKNOWN"
+  }
+]

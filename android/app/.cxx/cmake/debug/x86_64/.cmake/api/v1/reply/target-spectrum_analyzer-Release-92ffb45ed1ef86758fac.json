@@ -1,0 +1,448 @@
+{
+	"artifacts" : 
+	[
+		{
+			"path" : "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/spectrum_analyzer.so"
+		}
+	],
+	"backtrace" : 3,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_library",
+			"include",
+			"install",
+			"target_link_libraries",
+			"target_compile_options",
+			"target_include_directories"
+		],
+		"files" : 
+		[
+			"sdrpp_module.cmake",
+			"misc_modules/spectrum_analyzer/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 1
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 6,
+				"parent" : 0
+			},
+			{
+				"file" : 0,
+				"parent" : 1
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 10,
+				"parent" : 2
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 28,
+				"parent" : 2
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 11,
+				"parent" : 2
+			},
+			{
+				"command" : 4,
+				"file" : 0,
+				"line" : 22,
+				"parent" : 2
+			},
+			{
+				"command" : 5,
+				"file" : 0,
+				"line" : 12,
+				"parent" : 2
+			},
+			{
+				"command" : 5,
+				"file" : 1,
+				"line" : 8,
+				"parent" : 0
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "-g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -O3 -DNDEBUG  -fPIC"
+				},
+				{
+					"backtrace" : 6,
+					"fragment" : "-O3"
+				},
+				{
+					"backtrace" : 6,
+					"fragment" : "-std=c++17"
+				},
+				{
+					"backtrace" : 6,
+					"fragment" : "-Wno-unused-command-line-argument"
+				},
+				{
+					"backtrace" : 6,
+					"fragment" : "-Wno-deprecated-register"
+				},
+				{
+					"backtrace" : 6,
+					"fragment" : "-undefined"
+				},
+				{
+					"backtrace" : 6,
+					"fragment" : "dynamic_lookup"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"backtrace" : 5,
+					"define" : "INSTALL_PREFIX=\"/usr\""
+				},
+				{
+					"define" : "spectrum_analyzer_EXPORTS"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 7,
+					"path" : "/work/core/src/src"
+				},
+				{
+					"backtrace" : 8,
+					"path" : "/work/misc_modules/spectrum_analyzer/src"
+				},
+				{
+					"backtrace" : 5,
+					"path" : "/work/core/src"
+				},
+				{
+					"backtrace" : 5,
+					"path" : "/work/core/src/imgui"
+				},
+				{
+					"backtrace" : 5,
+					"path" : "/work/core/backends/android"
+				},
+				{
+					"backtrace" : 5,
+					"path" : "/work/core/backends/android/imgui"
+				},
+				{
+					"backtrace" : 5,
+					"path" : "/work/core/libcorrect/include"
+				},
+				{
+					"backtrace" : 5,
+					"path" : "/sdr-kit/x86_64/include"
+				},
+				{
+					"backtrace" : 5,
+					"path" : "/root/Android/ndk/25.2.9519653/sources/android/native_app_glue"
+				}
+			],
+			"language" : "CXX",
+			"languageStandard" : 
+			{
+				"backtraces" : 
+				[
+					3
+				],
+				"standard" : "14"
+			},
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				11,
+				12,
+				13,
+				14,
+				15,
+				16,
+				17,
+				18,
+				19
+			],
+			"sysroot" : 
+			{
+				"path" : "/root/Android/ndk/25.2.9519653/toolchains/llvm/prebuilt/linux-x86_64/sysroot"
+			}
+		}
+	],
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 5,
+			"id" : "sdrpp_core::@57760688d1f824db5d9c"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "correct_static::@b382305addd3f0620113"
+		}
+	],
+	"id" : "spectrum_analyzer::@7e32ff9e434e867111f1",
+	"install" : 
+	{
+		"destinations" : 
+		[
+			{
+				"backtrace" : 4,
+				"path" : "lib/sdrpp/plugins"
+			},
+			{
+				"backtrace" : 4,
+				"path" : "lib/sdrpp/plugins"
+			}
+		],
+		"prefix" : 
+		{
+			"path" : "/usr"
+		}
+	},
+	"link" : 
+	{
+		"commandFragments" : 
+		[
+			{
+				"fragment" : "-static-libstdc++ -Wl,--build-id=sha1 -Wl,--no-rosegment -Wl,--fatal-warnings -Wl,--no-undefined -Qunused-arguments  -u ANativeActivity_onCreate -Wl,--gc-sections",
+				"role" : "flags"
+			},
+			{
+				"fragment" : "-L/sdr-kit/x86_64/lib",
+				"role" : "libraryPath"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "../../../../build/intermediates/cmake/debug/obj/x86_64/libsdrpp_core.so",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "core/libcorrect/lib/libcorrect_static.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-lvolk",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-lfftw3f",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-lzstd",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-landroid",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-lEGL",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-lGLESv3",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-llog",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-latomic -lm",
+				"role" : "libraries"
+			}
+		],
+		"language" : "CXX",
+		"sysroot" : 
+		{
+			"path" : "/root/Android/ndk/25.2.9519653/toolchains/llvm/prebuilt/linux-x86_64/sysroot"
+		}
+	},
+	"name" : "spectrum_analyzer",
+	"nameOnDisk" : "spectrum_analyzer.so",
+	"paths" : 
+	{
+		"build" : "misc_modules/spectrum_analyzer",
+		"source" : "misc_modules/spectrum_analyzer"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				11,
+				12,
+				13,
+				14,
+				15,
+				16,
+				17,
+				18,
+				19
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "misc_modules/spectrum_analyzer/src/core_receiver_tuner.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "misc_modules/spectrum_analyzer/src/engine/analyzer_settings.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "misc_modules/spectrum_analyzer/src/engine/band_plan.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "misc_modules/spectrum_analyzer/src/engine/display_processor.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "misc_modules/spectrum_analyzer/src/engine/export.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "misc_modules/spectrum_analyzer/src/engine/generic_backend.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "misc_modules/spectrum_analyzer/src/engine/native_backend.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "misc_modules/spectrum_analyzer/src/engine/peak_detector.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "misc_modules/spectrum_analyzer/src/engine/segment_processor.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "misc_modules/spectrum_analyzer/src/engine/spectrum_assembler.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "misc_modules/spectrum_analyzer/src/engine/sweep_controller.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "misc_modules/spectrum_analyzer/src/engine/sweep_engine.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "misc_modules/spectrum_analyzer/src/engine/sweep_planner.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "misc_modules/spectrum_analyzer/src/engine/sweep_types.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "misc_modules/spectrum_analyzer/src/engine/synthetic_source.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "misc_modules/spectrum_analyzer/src/engine/synthetic_tuner.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "misc_modules/spectrum_analyzer/src/engine/view_model.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "misc_modules/spectrum_analyzer/src/engine/waterfall_history.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "misc_modules/spectrum_analyzer/src/main.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "misc_modules/spectrum_analyzer/src/spectrum_view.cpp",
+			"sourceGroupIndex" : 0
+		}
+	],
+	"type" : "SHARED_LIBRARY"
+}

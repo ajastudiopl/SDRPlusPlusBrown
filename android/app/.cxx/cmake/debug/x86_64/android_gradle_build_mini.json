@@ -1,0 +1,535 @@
+{
+  "buildFiles": [
+    "/work/CMakeLists.txt",
+    "/work/android/app/.cxx/cmake/debug/x86_64/itpp/CMakeLists.txt",
+    "/work/android/app/.cxx/cmake/debug/x86_64/itpp/itpp/CMakeLists.txt",
+    "/work/android/app/.cxx/cmake/debug/x86_64/mbelib/CMakeLists.txt",
+    "/work/cmake_uninstall.cmake",
+    "/work/core/CMakeLists.txt",
+    "/work/core/libcorrect/CMakeLists.txt",
+    "/work/core/libcorrect/src/CMakeLists.txt",
+    "/work/core/libcorrect/src/convolutional/CMakeLists.txt",
+    "/work/core/libcorrect/src/reed-solomon/CMakeLists.txt",
+    "/work/core/libcorrect/tests/CMakeLists.txt",
+    "/work/core/libcorrect/tools/CMakeLists.txt",
+    "/work/core/libcorrect/util/CMakeLists.txt",
+    "/work/decoder_modules/atv_decoder/CMakeLists.txt",
+    "/work/decoder_modules/ch_extravhf_decoder/CMakeLists.txt",
+    "/work/decoder_modules/ch_tetra_demodulator/CMakeLists.txt",
+    "/work/decoder_modules/ft8_decoder/CMakeLists.txt",
+    "/work/decoder_modules/m17_decoder/CMakeLists.txt",
+    "/work/decoder_modules/meteor_demodulator/CMakeLists.txt",
+    "/work/decoder_modules/pager_decoder/CMakeLists.txt",
+    "/work/decoder_modules/radio/CMakeLists.txt",
+    "/work/misc_modules/frequency_manager/CMakeLists.txt",
+    "/work/misc_modules/iq_exporter/CMakeLists.txt",
+    "/work/misc_modules/noise_reduction_logmmse/CMakeLists.txt",
+    "/work/misc_modules/recorder/CMakeLists.txt",
+    "/work/misc_modules/reports_monitor/CMakeLists.txt",
+    "/work/misc_modules/rigctl_client/CMakeLists.txt",
+    "/work/misc_modules/rigctl_server/CMakeLists.txt",
+    "/work/misc_modules/scanner/CMakeLists.txt",
+    "/work/misc_modules/spectrum_analyzer/CMakeLists.txt",
+    "/work/misc_modules/websdr_view/CMakeLists.txt",
+    "/work/sdrpp_module.cmake",
+    "/work/sink_modules/android_audio_sink/CMakeLists.txt",
+    "/work/sink_modules/network_sink/CMakeLists.txt",
+    "/work/sink_modules/null_audio_sink/CMakeLists.txt",
+    "/work/source_modules/airspy_source/CMakeLists.txt",
+    "/work/source_modules/airspyhf_source/CMakeLists.txt",
+    "/work/source_modules/file_source/CMakeLists.txt",
+    "/work/source_modules/hackrf_source/CMakeLists.txt",
+    "/work/source_modules/hermes_source/CMakeLists.txt",
+    "/work/source_modules/hl2_source/CMakeLists.txt",
+    "/work/source_modules/hydrasdr_source/CMakeLists.txt",
+    "/work/source_modules/kiwisdr_source/CMakeLists.txt",
+    "/work/source_modules/network_source/CMakeLists.txt",
+    "/work/source_modules/plutosdr_source/CMakeLists.txt",
+    "/work/source_modules/rfspace_source/CMakeLists.txt",
+    "/work/source_modules/rtl_sdr_source/CMakeLists.txt",
+    "/work/source_modules/rtl_tcp_source/CMakeLists.txt",
+    "/work/source_modules/sdrpp_server_source/CMakeLists.txt",
+    "/work/source_modules/spectran_http_source/CMakeLists.txt",
+    "/work/source_modules/spyserver_source/CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "/usr/bin/ninja",
+      "-C",
+      "/work/android/app/.cxx/cmake/debug/x86_64",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "/usr/bin/ninja",
+    "-C",
+    "/work/android/app/.cxx/cmake/debug/x86_64",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {
+    "conv_find_optim_poly_annealing::@ee5bcefdea2f3d01cd61": {
+      "artifactName": "conv_find_optim_poly_annealing",
+      "abi": "x86_64",
+      "output": "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/conv_find_optim_poly_annealing",
+      "runtimeFiles": []
+    },
+    "spectran_http_source::@6c83c3f511c1fca41aea": {
+      "artifactName": "spectran_http_source",
+      "abi": "x86_64",
+      "output": "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/spectran_http_source.so",
+      "runtimeFiles": [
+        "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/libsdrpp_core.so"
+      ]
+    },
+    "rs_find_primitive_poly::@ee5bcefdea2f3d01cd61": {
+      "artifactName": "rs_find_primitive_poly",
+      "abi": "x86_64",
+      "output": "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/rs_find_primitive_poly",
+      "runtimeFiles": []
+    },
+    "sdrpp_server_source::@7c0487953348e1db1bdd": {
+      "artifactName": "sdrpp_server_source",
+      "abi": "x86_64",
+      "output": "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/sdrpp_server_source.so",
+      "runtimeFiles": [
+        "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/libsdrpp_core.so"
+      ]
+    },
+    "ch_extravhf_decoder::@57d51ef1a013ef8a481f": {
+      "artifactName": "ch_extravhf_decoder",
+      "abi": "x86_64",
+      "output": "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/ch_extravhf_decoder.so",
+      "runtimeFiles": [
+        "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/libsdrpp_core.so"
+      ]
+    },
+    "plutosdr_source::@a4c4416630925d9e457b": {
+      "artifactName": "plutosdr_source",
+      "abi": "x86_64",
+      "output": "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/plutosdr_source.so",
+      "runtimeFiles": [
+        "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/libsdrpp_core.so"
+      ]
+    },
+    "hackrf_source::@45d1991a3c799481eab1": {
+      "artifactName": "hackrf_source",
+      "abi": "x86_64",
+      "output": "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/hackrf_source.so",
+      "runtimeFiles": [
+        "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/libsdrpp_core.so"
+      ]
+    },
+    "convolutional_shim_test_runner::@6f5bfa37fb45f03573f2": {
+      "artifactName": "convolutional_shim_test_runner",
+      "abi": "x86_64",
+      "output": "/work/android/app/.cxx/cmake/debug/x86_64/tests/convolutional_shim_test_runner",
+      "runtimeFiles": []
+    },
+    "frequency_manager::@15d183876113ee52e5c7": {
+      "artifactName": "frequency_manager",
+      "abi": "x86_64",
+      "output": "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/frequency_manager.so",
+      "runtimeFiles": [
+        "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/libsdrpp_core.so"
+      ]
+    },
+    "kiwisdr_source::@b369d826f8072ebff1e0": {
+      "artifactName": "kiwisdr_source",
+      "abi": "x86_64",
+      "output": "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/kiwisdr_source.so",
+      "runtimeFiles": [
+        "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/libsdrpp_core.so"
+      ]
+    },
+    "fec_shim_static::@b382305addd3f0620113": {
+      "artifactName": "fec_shim_static",
+      "abi": "x86_64",
+      "output": "/work/android/app/.cxx/cmake/debug/x86_64/core/libcorrect/lib/libfec_shim_static.a",
+      "runtimeFiles": []
+    },
+    "rtl_tcp_source::@710fddccdb1115400c6c": {
+      "artifactName": "rtl_tcp_source",
+      "abi": "x86_64",
+      "output": "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/rtl_tcp_source.so",
+      "runtimeFiles": [
+        "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/libsdrpp_core.so"
+      ]
+    },
+    "correct_static::@b382305addd3f0620113": {
+      "artifactName": "correct_static",
+      "abi": "x86_64",
+      "output": "/work/android/app/.cxx/cmake/debug/x86_64/core/libcorrect/lib/libcorrect_static.a",
+      "runtimeFiles": []
+    },
+    "rigctl_client::@a4d9d2becf46d04b3289": {
+      "artifactName": "rigctl_client",
+      "abi": "x86_64",
+      "output": "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/rigctl_client.so",
+      "runtimeFiles": [
+        "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/libsdrpp_core.so"
+      ]
+    },
+    "ch_tetra_demodulator::@7e871cb6b17ebd999ab5": {
+      "artifactName": "ch_tetra_demodulator",
+      "abi": "x86_64",
+      "output": "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/ch_tetra_demodulator.so",
+      "runtimeFiles": [
+        "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/libsdrpp_core.so"
+      ]
+    },
+    "m17_decoder::@3d1504cacb116ff28bc3": {
+      "artifactName": "m17_decoder",
+      "abi": "x86_64",
+      "output": "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/m17_decoder.so",
+      "runtimeFiles": [
+        "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/libsdrpp_core.so"
+      ]
+    },
+    "mbe-static::@75e4e1aef470fd614dd9": {
+      "artifactName": "mbe-static",
+      "abi": "x86_64",
+      "output": "/work/android/app/.cxx/cmake/debug/x86_64/mbelib-build/libmbe-static.a",
+      "runtimeFiles": []
+    },
+    "pager_decoder::@a20681acab2e5747a92e": {
+      "artifactName": "pager_decoder",
+      "abi": "x86_64",
+      "output": "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/pager_decoder.so",
+      "runtimeFiles": [
+        "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/libsdrpp_core.so"
+      ]
+    },
+    "tools::@ee5bcefdea2f3d01cd61": {
+      "artifactName": "tools",
+      "abi": "x86_64",
+      "runtimeFiles": []
+    },
+    "scanner::@d99510aa0757fe8f2c41": {
+      "artifactName": "scanner",
+      "abi": "x86_64",
+      "output": "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/scanner.so",
+      "runtimeFiles": [
+        "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/libsdrpp_core.so"
+      ]
+    },
+    "correct-h::@b382305addd3f0620113": {
+      "artifactName": "correct-h",
+      "abi": "x86_64",
+      "runtimeFiles": []
+    },
+    "correct::@b382305addd3f0620113": {
+      "artifactName": "correct",
+      "abi": "x86_64",
+      "output": "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/libcorrect.so",
+      "runtimeFiles": []
+    },
+    "radio::@b703f25a55575478ae84": {
+      "artifactName": "radio",
+      "abi": "x86_64",
+      "output": "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/radio.so",
+      "runtimeFiles": [
+        "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/libsdrpp_core.so"
+      ]
+    },
+    "mbe-shared::@75e4e1aef470fd614dd9": {
+      "artifactName": "mbe-shared",
+      "abi": "x86_64",
+      "output": "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/libmbe-shared.so",
+      "runtimeFiles": []
+    },
+    "airspyhf_source::@d8696a64f3b19e049873": {
+      "artifactName": "airspyhf_source",
+      "abi": "x86_64",
+      "output": "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/airspyhf_source.so",
+      "runtimeFiles": [
+        "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/libsdrpp_core.so"
+      ]
+    },
+    "rtl_sdr_source::@8027adb381924ceed7f4": {
+      "artifactName": "rtl_sdr_source",
+      "abi": "x86_64",
+      "output": "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/rtl_sdr_source.so",
+      "runtimeFiles": [
+        "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/libsdrpp_core.so"
+      ]
+    },
+    "file_source::@0762eb4230273feb82e3": {
+      "artifactName": "file_source",
+      "abi": "x86_64",
+      "output": "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/file_source.so",
+      "runtimeFiles": [
+        "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/libsdrpp_core.so"
+      ]
+    },
+    "test_runners::@6f5bfa37fb45f03573f2": {
+      "artifactName": "test_runners",
+      "abi": "x86_64",
+      "runtimeFiles": []
+    },
+    "network_source::@301f1352d04cb97fda0b": {
+      "artifactName": "network_source",
+      "abi": "x86_64",
+      "output": "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/network_source.so",
+      "runtimeFiles": [
+        "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/libsdrpp_core.so"
+      ]
+    },
+    "noise_reduction_logmmse::@2075d6298343a67e15d4": {
+      "artifactName": "noise_reduction_logmmse",
+      "abi": "x86_64",
+      "output": "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/noise_reduction_logmmse.so",
+      "runtimeFiles": [
+        "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/libsdrpp_core.so"
+      ]
+    },
+    "rfspace_source::@a5a75f333816ce798799": {
+      "artifactName": "rfspace_source",
+      "abi": "x86_64",
+      "output": "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/rfspace_source.so",
+      "runtimeFiles": [
+        "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/libsdrpp_core.so"
+      ]
+    },
+    "airspy_source::@ab405fa41e4ff1bba59b": {
+      "artifactName": "airspy_source",
+      "abi": "x86_64",
+      "output": "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/airspy_source.so",
+      "runtimeFiles": [
+        "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/libsdrpp_core.so"
+      ]
+    },
+    "fec-shim-h::@b382305addd3f0620113": {
+      "artifactName": "fec-shim-h",
+      "abi": "x86_64",
+      "runtimeFiles": []
+    },
+    "correct-reed-solomon::@5a1c57eeb52127d26294": {
+      "artifactName": "correct-reed-solomon",
+      "abi": "x86_64",
+      "output": "/work/android/app/.cxx/cmake/debug/x86_64/core/libcorrect/lib/libcorrect-reed-solomon.a",
+      "runtimeFiles": []
+    },
+    "etsi_codec::@7e871cb6b17ebd999ab5": {
+      "artifactName": "etsi_codec",
+      "abi": "x86_64",
+      "output": "/work/android/app/.cxx/cmake/debug/x86_64/decoder_modules/ch_tetra_demodulator/libetsi_codec.a",
+      "runtimeFiles": []
+    },
+    "audio_sink::@b2d3ace8820a37027734": {
+      "artifactName": "audio_sink",
+      "abi": "x86_64",
+      "output": "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/audio_sink.so",
+      "runtimeFiles": [
+        "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/libsdrpp_core.so"
+      ]
+    },
+    "atv_decoder::@948ec8ac5b8f2c27a0ae": {
+      "artifactName": "atv_decoder",
+      "abi": "x86_64",
+      "output": "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/atv_decoder.so",
+      "runtimeFiles": [
+        "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/libsdrpp_core.so"
+      ]
+    },
+    "conv_find_optim_poly::@ee5bcefdea2f3d01cd61": {
+      "artifactName": "conv_find_optim_poly",
+      "abi": "x86_64",
+      "output": "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/conv_find_optim_poly",
+      "runtimeFiles": []
+    },
+    "ft8_decoder::@f8dd04c733727715531a": {
+      "artifactName": "ft8_decoder",
+      "abi": "x86_64",
+      "output": "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/ft8_decoder.so",
+      "runtimeFiles": [
+        "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/libsdrpp_core.so"
+      ]
+    },
+    "hermes_source::@170e9fc91f62863859c0": {
+      "artifactName": "hermes_source",
+      "abi": "x86_64",
+      "output": "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/hermes_source.so",
+      "runtimeFiles": [
+        "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/libsdrpp_core.so"
+      ]
+    },
+    "hl2_source::@b00c77a279ec48105676": {
+      "artifactName": "hl2_source",
+      "abi": "x86_64",
+      "output": "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/hl2_source.so",
+      "runtimeFiles": [
+        "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/libsdrpp_core.so"
+      ]
+    },
+    "mbelib_uninstall::@75e4e1aef470fd614dd9": {
+      "artifactName": "mbelib_uninstall",
+      "abi": "x86_64",
+      "runtimeFiles": []
+    },
+    "sdrpp_core::@57760688d1f824db5d9c": {
+      "artifactName": "sdrpp_core",
+      "abi": "x86_64",
+      "output": "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/libsdrpp_core.so",
+      "runtimeFiles": []
+    },
+    "spyserver_source::@2b0788dd6fe810c32802": {
+      "artifactName": "spyserver_source",
+      "abi": "x86_64",
+      "output": "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/spyserver_source.so",
+      "runtimeFiles": [
+        "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/libsdrpp_core.so"
+      ]
+    },
+    "iq_exporter::@a91f0481a9e2bd7a2f5c": {
+      "artifactName": "iq_exporter",
+      "abi": "x86_64",
+      "output": "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/iq_exporter.so",
+      "runtimeFiles": [
+        "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/libsdrpp_core.so"
+      ]
+    },
+    "rigctl_server::@c7c56effbd8be449bc67": {
+      "artifactName": "rigctl_server",
+      "abi": "x86_64",
+      "output": "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/rigctl_server.so",
+      "runtimeFiles": [
+        "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/libsdrpp_core.so"
+      ]
+    },
+    "websdr_view::@c135e3ce65c90ed132a0": {
+      "artifactName": "websdr_view",
+      "abi": "x86_64",
+      "output": "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/websdr_view.so",
+      "runtimeFiles": [
+        "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/libsdrpp_core.so"
+      ]
+    },
+    "hydrasdr_source::@6570b5feab05b4fb0777": {
+      "artifactName": "hydrasdr_source",
+      "abi": "x86_64",
+      "output": "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/hydrasdr_source.so",
+      "runtimeFiles": [
+        "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/libsdrpp_core.so"
+      ]
+    },
+    "meteor_demodulator::@36c0ff09d1f5e2387030": {
+      "artifactName": "meteor_demodulator",
+      "abi": "x86_64",
+      "output": "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/meteor_demodulator.so",
+      "runtimeFiles": [
+        "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/libsdrpp_core.so"
+      ]
+    },
+    "sdrpp::@6890427a1f51a3e7e1df": {
+      "artifactName": "sdrpp",
+      "abi": "x86_64",
+      "output": "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/sdrpp",
+      "runtimeFiles": [
+        "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/libsdrpp_core.so"
+      ]
+    },
+    "error_sim_shim::@3b4c1525f827bb21e9c9": {
+      "artifactName": "error_sim_shim",
+      "abi": "x86_64",
+      "output": "/work/android/app/.cxx/cmake/debug/x86_64/core/libcorrect/lib/liberror_sim_shim.a",
+      "runtimeFiles": []
+    },
+    "convolutional_test_runner::@6f5bfa37fb45f03573f2": {
+      "artifactName": "convolutional_test_runner",
+      "abi": "x86_64",
+      "output": "/work/android/app/.cxx/cmake/debug/x86_64/tests/convolutional_test_runner",
+      "runtimeFiles": []
+    },
+    "correct-convolutional::@4cbddeaa0449543ba9cc": {
+      "artifactName": "correct-convolutional",
+      "abi": "x86_64",
+      "output": "/work/android/app/.cxx/cmake/debug/x86_64/core/libcorrect/lib/libcorrect-convolutional.a",
+      "runtimeFiles": []
+    },
+    "recorder::@91c2171f5e8ddb097151": {
+      "artifactName": "recorder",
+      "abi": "x86_64",
+      "output": "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/recorder.so",
+      "runtimeFiles": [
+        "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/libsdrpp_core.so"
+      ]
+    },
+    "reed_solomon_shim_interop_test_runner::@6f5bfa37fb45f03573f2": {
+      "artifactName": "reed_solomon_shim_interop_test_runner",
+      "abi": "x86_64",
+      "output": "/work/android/app/.cxx/cmake/debug/x86_64/tests/reed_solomon_shim_interop_test_runner",
+      "runtimeFiles": []
+    },
+    "reed_solomon_test_runner::@6f5bfa37fb45f03573f2": {
+      "artifactName": "reed_solomon_test_runner",
+      "abi": "x86_64",
+      "output": "/work/android/app/.cxx/cmake/debug/x86_64/tests/reed_solomon_test_runner",
+      "runtimeFiles": []
+    },
+    "check::@6f5bfa37fb45f03573f2": {
+      "artifactName": "check",
+      "abi": "x86_64",
+      "runtimeFiles": []
+    },
+    "spectrum_analyzer::@7e32ff9e434e867111f1": {
+      "artifactName": "spectrum_analyzer",
+      "abi": "x86_64",
+      "output": "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/spectrum_analyzer.so",
+      "runtimeFiles": [
+        "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/libsdrpp_core.so"
+      ]
+    },
+    "fec_shim_shared::@b382305addd3f0620113": {
+      "artifactName": "fec_shim_shared",
+      "abi": "x86_64",
+      "output": "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/libfec.so",
+      "runtimeFiles": []
+    },
+    "null_audio_sink::@e535f34e5a0b57c2ab66": {
+      "artifactName": "null_audio_sink",
+      "abi": "x86_64",
+      "output": "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/null_audio_sink.so",
+      "runtimeFiles": [
+        "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/libsdrpp_core.so"
+      ]
+    },
+    "shim::@b382305addd3f0620113": {
+      "artifactName": "shim",
+      "abi": "x86_64",
+      "runtimeFiles": []
+    },
+    "itpp_static::@6bac9b783dc72ca5e09b": {
+      "artifactName": "itpp_static",
+      "abi": "x86_64",
+      "output": "/work/android/app/.cxx/cmake/debug/x86_64/itpp-build/itpp/libitpp_static.a",
+      "runtimeFiles": []
+    },
+    "uninstall::@6890427a1f51a3e7e1df": {
+      "artifactName": "uninstall",
+      "abi": "x86_64",
+      "runtimeFiles": []
+    },
+    "error_sim::@3b4c1525f827bb21e9c9": {
+      "artifactName": "error_sim",
+      "abi": "x86_64",
+      "output": "/work/android/app/.cxx/cmake/debug/x86_64/core/libcorrect/lib/liberror_sim.a",
+      "runtimeFiles": []
+    },
+    "network_sink::@b4838116f4bb05b6dba8": {
+      "artifactName": "network_sink",
+      "abi": "x86_64",
+      "output": "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/network_sink.so",
+      "runtimeFiles": [
+        "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/libsdrpp_core.so"
+      ]
+    },
+    "reports_monitor::@4e53bba02091edebe1b8": {
+      "artifactName": "reports_monitor",
+      "abi": "x86_64",
+      "output": "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/reports_monitor.so",
+      "runtimeFiles": [
+        "/work/android/app/build/intermediates/cmake/debug/obj/x86_64/libsdrpp_core.so"
+      ]
+    }
+  }
+}

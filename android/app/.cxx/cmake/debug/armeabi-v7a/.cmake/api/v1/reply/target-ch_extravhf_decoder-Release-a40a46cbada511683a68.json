@@ -1,0 +1,500 @@
+{
+	"artifacts" : 
+	[
+		{
+			"path" : "/work/android/app/build/intermediates/cmake/debug/obj/armeabi-v7a/ch_extravhf_decoder.so"
+		}
+	],
+	"backtrace" : 3,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_library",
+			"include",
+			"install",
+			"target_link_libraries",
+			"target_compile_options",
+			"target_include_directories"
+		],
+		"files" : 
+		[
+			"sdrpp_module.cmake",
+			"decoder_modules/ch_extravhf_decoder/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 1
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 66,
+				"parent" : 0
+			},
+			{
+				"file" : 0,
+				"parent" : 1
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 10,
+				"parent" : 2
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 28,
+				"parent" : 2
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 11,
+				"parent" : 2
+			},
+			{
+				"command" : 3,
+				"file" : 1,
+				"line" : 87,
+				"parent" : 0
+			},
+			{
+				"command" : 4,
+				"file" : 0,
+				"line" : 22,
+				"parent" : 2
+			},
+			{
+				"command" : 5,
+				"file" : 0,
+				"line" : 12,
+				"parent" : 2
+			},
+			{
+				"command" : 5,
+				"file" : 1,
+				"line" : 71,
+				"parent" : 0
+			},
+			{
+				"command" : 5,
+				"file" : 1,
+				"line" : 88,
+				"parent" : 0
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "-g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security   -O3 -DNDEBUG  -fPIC"
+				},
+				{
+					"backtrace" : 7,
+					"fragment" : "-O3"
+				},
+				{
+					"backtrace" : 7,
+					"fragment" : "-std=c++17"
+				},
+				{
+					"backtrace" : 7,
+					"fragment" : "-Wno-unused-command-line-argument"
+				},
+				{
+					"backtrace" : 7,
+					"fragment" : "-Wno-deprecated-register"
+				},
+				{
+					"backtrace" : 7,
+					"fragment" : "-undefined"
+				},
+				{
+					"backtrace" : 7,
+					"fragment" : "dynamic_lookup"
+				},
+				{
+					"backtrace" : 6,
+					"fragment" : "-fPIC"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"backtrace" : 5,
+					"define" : "INSTALL_PREFIX=\"/usr\""
+				},
+				{
+					"backtrace" : 6,
+					"define" : "TIME_WITH_SYS_TIME"
+				},
+				{
+					"define" : "ch_extravhf_decoder_EXPORTS"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 8,
+					"path" : "/work/core/src/src"
+				},
+				{
+					"backtrace" : 9,
+					"path" : "/work/android/app/.cxx/cmake/debug/armeabi-v7a/itpp"
+				},
+				{
+					"backtrace" : 9,
+					"path" : "/work/android/app/.cxx/cmake/debug/armeabi-v7a"
+				},
+				{
+					"backtrace" : 10,
+					"path" : "/work/decoder_modules/ch_extravhf_decoder/src"
+				},
+				{
+					"backtrace" : 10,
+					"path" : "/work/decoder_modules/ch_extravhf_decoder/../../core/src"
+				},
+				{
+					"backtrace" : 10,
+					"path" : "/work/android/app/.cxx/cmake/debug/armeabi-v7a/mbelib"
+				},
+				{
+					"backtrace" : 5,
+					"path" : "/work/core/src"
+				},
+				{
+					"backtrace" : 5,
+					"path" : "/work/core/src/imgui"
+				},
+				{
+					"backtrace" : 5,
+					"path" : "/work/core/backends/android"
+				},
+				{
+					"backtrace" : 5,
+					"path" : "/work/core/backends/android/imgui"
+				},
+				{
+					"backtrace" : 5,
+					"path" : "/work/core/libcorrect/include"
+				},
+				{
+					"backtrace" : 5,
+					"path" : "/sdr-kit/armeabi-v7a/include"
+				},
+				{
+					"backtrace" : 5,
+					"path" : "/root/Android/ndk/25.2.9519653/sources/android/native_app_glue"
+				}
+			],
+			"language" : "CXX",
+			"languageStandard" : 
+			{
+				"backtraces" : 
+				[
+					3
+				],
+				"standard" : "14"
+			},
+			"sourceIndexes" : 
+			[
+				4,
+				11,
+				12,
+				13,
+				14,
+				15,
+				17,
+				18,
+				20
+			],
+			"sysroot" : 
+			{
+				"path" : "/root/Android/ndk/25.2.9519653/toolchains/llvm/prebuilt/linux-x86_64/sysroot"
+			}
+		}
+	],
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 5,
+			"id" : "sdrpp_core::@57760688d1f824db5d9c"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "correct_static::@b382305addd3f0620113"
+		},
+		{
+			"backtrace" : 6,
+			"id" : "itpp_static::@6bac9b783dc72ca5e09b"
+		},
+		{
+			"backtrace" : 6,
+			"id" : "mbe-static::@75e4e1aef470fd614dd9"
+		}
+	],
+	"id" : "ch_extravhf_decoder::@57d51ef1a013ef8a481f",
+	"install" : 
+	{
+		"destinations" : 
+		[
+			{
+				"backtrace" : 4,
+				"path" : "lib/sdrpp/plugins"
+			},
+			{
+				"backtrace" : 4,
+				"path" : "lib/sdrpp/plugins"
+			}
+		],
+		"prefix" : 
+		{
+			"path" : "/usr"
+		}
+	},
+	"link" : 
+	{
+		"commandFragments" : 
+		[
+			{
+				"fragment" : "-static-libstdc++ -Wl,--build-id=sha1 -Wl,--no-rosegment -Wl,--fatal-warnings -Wl,--no-undefined -Qunused-arguments  -u ANativeActivity_onCreate -Wl,--gc-sections",
+				"role" : "flags"
+			},
+			{
+				"fragment" : "-L/sdr-kit/armeabi-v7a/lib",
+				"role" : "libraryPath"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "../../../../build/intermediates/cmake/debug/obj/armeabi-v7a/libsdrpp_core.so",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-lfftw3f",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 6,
+				"fragment" : "itpp-build/itpp/libitpp_static.a",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 6,
+				"fragment" : "mbelib-build/libmbe-static.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "core/libcorrect/lib/libcorrect_static.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-lvolk",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-lfftw3f",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-lzstd",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-landroid",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-lEGL",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-lGLESv3",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-llog",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-lm",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-latomic -lm",
+				"role" : "libraries"
+			}
+		],
+		"language" : "CXX",
+		"sysroot" : 
+		{
+			"path" : "/root/Android/ndk/25.2.9519653/toolchains/llvm/prebuilt/linux-x86_64/sysroot"
+		}
+	},
+	"name" : "ch_extravhf_decoder",
+	"nameOnDisk" : "ch_extravhf_decoder.so",
+	"paths" : 
+	{
+		"build" : "decoder_modules/ch_extravhf_decoder",
+		"source" : "decoder_modules/ch_extravhf_decoder"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Header Files",
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2,
+				3,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				16,
+				19
+			]
+		},
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				4,
+				11,
+				12,
+				13,
+				14,
+				15,
+				17,
+				18,
+				20
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 3,
+			"path" : "decoder_modules/ch_extravhf_decoder/src/demod.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "decoder_modules/ch_extravhf_decoder/src/demodulators/dsd.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "decoder_modules/ch_extravhf_decoder/src/demodulators/olddsd.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "decoder_modules/ch_extravhf_decoder/src/dsp/Golay24.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "decoder_modules/ch_extravhf_decoder/src/dsp/Hamming.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 3,
+			"path" : "decoder_modules/ch_extravhf_decoder/src/dsp/Hamming.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "decoder_modules/ch_extravhf_decoder/src/dsp/ReedSolomon.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "decoder_modules/ch_extravhf_decoder/src/dsp/common.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "decoder_modules/ch_extravhf_decoder/src/dsp/ctcss.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "decoder_modules/ch_extravhf_decoder/src/dsp/dcs.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "decoder_modules/ch_extravhf_decoder/src/dsp/dsd.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "decoder_modules/ch_extravhf_decoder/src/dsp/dsd_demod.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "decoder_modules/ch_extravhf_decoder/src/dsp/dsd_dmr.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "decoder_modules/ch_extravhf_decoder/src/dsp/dsd_dstar.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "decoder_modules/ch_extravhf_decoder/src/dsp/dsd_nxdn.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "decoder_modules/ch_extravhf_decoder/src/dsp/dsd_p25.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 3,
+			"path" : "decoder_modules/ch_extravhf_decoder/src/dsp/dsd_p25_utils.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "decoder_modules/ch_extravhf_decoder/src/dsp/dsd_provoice.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "decoder_modules/ch_extravhf_decoder/src/dsp/dsd_x2tdma.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 3,
+			"path" : "decoder_modules/ch_extravhf_decoder/src/dsp/slicer.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "decoder_modules/ch_extravhf_decoder/src/main.cpp",
+			"sourceGroupIndex" : 1
+		}
+	],
+	"type" : "SHARED_LIBRARY"
+}

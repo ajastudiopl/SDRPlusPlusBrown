@@ -1,0 +1,174 @@
+{
+	"archive" : {},
+	"artifacts" : 
+	[
+		{
+			"path" : "decoder_modules/ch_tetra_demodulator/libetsi_codec.a"
+		}
+	],
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_library",
+			"target_include_directories"
+		],
+		"files" : 
+		[
+			"decoder_modules/ch_tetra_demodulator/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 198,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 213,
+				"parent" : 0
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "-g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -O3 -DNDEBUG  -fPIC"
+				},
+				{
+					"fragment" : "-std=gnu11"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 2,
+					"path" : "/work/android/app/.cxx/cmake/debug/arm64-v8a/decoder_modules/ch_tetra_demodulator/etsi_codec/c-code"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/work/android/app/.cxx/cmake/debug/arm64-v8a/decoder_modules/ch_tetra_demodulator/etsi_codec/amr-code"
+				}
+			],
+			"language" : "C",
+			"languageStandard" : 
+			{
+				"backtraces" : 
+				[
+					1
+				],
+				"standard" : "11"
+			},
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8
+			],
+			"sysroot" : 
+			{
+				"path" : "/root/Android/ndk/25.2.9519653/toolchains/llvm/prebuilt/linux-x86_64/sysroot"
+			}
+		}
+	],
+	"id" : "etsi_codec::@7e871cb6b17ebd999ab5",
+	"name" : "etsi_codec",
+	"nameOnDisk" : "libetsi_codec.a",
+	"paths" : 
+	{
+		"build" : "decoder_modules/ch_tetra_demodulator",
+		"source" : "decoder_modules/ch_tetra_demodulator"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "android/app/.cxx/cmake/debug/arm64-v8a/decoder_modules/ch_tetra_demodulator/etsi_codec/c-code/cdec_tet.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "android/app/.cxx/cmake/debug/arm64-v8a/decoder_modules/ch_tetra_demodulator/etsi_codec/c-code/sub_cd.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "android/app/.cxx/cmake/debug/arm64-v8a/decoder_modules/ch_tetra_demodulator/etsi_codec/c-code/tetra_op.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "android/app/.cxx/cmake/debug/arm64-v8a/decoder_modules/ch_tetra_demodulator/etsi_codec/c-code/sdec_tet.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "android/app/.cxx/cmake/debug/arm64-v8a/decoder_modules/ch_tetra_demodulator/etsi_codec/c-code/sub_sc_d.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "android/app/.cxx/cmake/debug/arm64-v8a/decoder_modules/ch_tetra_demodulator/etsi_codec/c-code/sub_dsp.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "android/app/.cxx/cmake/debug/arm64-v8a/decoder_modules/ch_tetra_demodulator/etsi_codec/c-code/fbas_tet.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "android/app/.cxx/cmake/debug/arm64-v8a/decoder_modules/ch_tetra_demodulator/etsi_codec/c-code/fexp_tet.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "android/app/.cxx/cmake/debug/arm64-v8a/decoder_modules/ch_tetra_demodulator/etsi_codec/c-code/fmat_tet.c",
+			"sourceGroupIndex" : 0
+		}
+	],
+	"type" : "STATIC_LIBRARY"
+}

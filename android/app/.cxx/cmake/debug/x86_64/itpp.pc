@@ -1,0 +1,12 @@
+prefix=/usr
+exec_prefix=/usr
+libdir=/usr/lib
+includedir=/usr/include
+
+Name: IT++
+Description: IT++ is a C++ library of mathematical, signal processing, speech processing, and communications classes and functions
+Version: 4.3.1
+URL: http://itpp.sourceforge.net/
+Libs: -L${libdir} -litpp_static
+Libs.private:
+Cflags: -I${includedir} -O3 -DNDEBUG 

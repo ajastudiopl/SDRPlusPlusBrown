@@ -1549,6 +1549,18 @@ double TheEncoder::draw(float currentValue) {
                 }
             }
         }
+        // mouse wheel or trackpad scrolling over the drum turns it, like a real one
+        if (!anyFingerDown && !touching && io.MouseWheel != 0 && currentEncoderTouch == -1) {
+            auto wx = ImGui::GetMousePos().x - widgetPos.x;
+            auto wy = ImGui::GetMousePos().y - widgetPos.y;
+            if (wx >= 0 && wx < avail.x && wy >= 0 && wy < avail.y) {
+                double step = -io.MouseWheel * 0.25;
+                this->somePosition += step;
+                retval += (float) step;
+                this->speed = 0;
+                this->currentValue = (float) currentValue;
+            }
+        }
         if (!touching && currentEncoderTouch == encoderId) {
             // finger up: the flick goes on with the speed it had in the last moments
             currentEncoderTouch = -1;

@@ -1,0 +1,1 @@
+ninja: Entering directory `/work/android/app/.cxx/cmake/debug/x86_64'
